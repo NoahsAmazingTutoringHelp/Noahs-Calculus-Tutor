@@ -2639,14 +2639,11 @@
             }, 500);
         }
 
-        // Improved fullscreen function
         function toggleFullscreen() {
             const gameFrame = document.getElementById('gameFrame');
             
-            // Check if we're already in fullscreen mode
             if (document.fullscreenElement || document.webkitFullscreenElement || 
                 document.msFullscreenElement || document.mozFullScreenElement) {
-                // Exit fullscreen
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 } else if (document.webkitExitFullscreen) {
@@ -2657,7 +2654,6 @@
                     document.mozCancelFullScreen();
                 }
             } else {
-                // Enter fullscreen on the iframe
                 if (gameFrame.requestFullscreen) {
                     gameFrame.requestFullscreen();
                 } else if (gameFrame.webkitRequestFullscreen) {
@@ -2670,7 +2666,6 @@
             }
         }
 
-        // Listen for fullscreen change events
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
         document.addEventListener('mozfullscreenchange', handleFullscreenChange);
@@ -2688,7 +2683,6 @@
             }
         }
 
-        // Listen for ESC key to exit fullscreen
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 const gameFrame = document.getElementById('gameFrame');
