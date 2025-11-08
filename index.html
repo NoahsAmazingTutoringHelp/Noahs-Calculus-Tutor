@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QPXKLD48W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-4QPXKLD48W', {
+            page_title: document.title,
+            page_location: window.location.href
+        });
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas | College Courses</title>
@@ -2497,7 +2508,7 @@
                     <p class="lesson-desc">Word guessing puzzle</p>
                     <span class="launch-command">[LAUNCH: WORDLE]</span>
                 </div>
-
+<head></head>
                 <div class="lesson-card" onclick="openLesson('Noahs Tutoring Hub', 'https://noahsamazingtutoringhelp.github.io/AmazingAlgebraHelper/')">
                     <img src="images/184.jpg" alt="Noahs Tutoring Hub" class="lesson-image">
                     <h3 class="lesson-title">Monkey Mart</h3>
@@ -2599,7 +2610,25 @@
             <iframe id="gameFrame" class="game-frame" frameborder="0" src=""></iframe>
         </div>
     </div>
-    <script>
+        <script>
+        function trackEvent(category, action, label, value) {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label,
+                    'value': value
+                });
+            }
+        }
+
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                'page_title': document.title,
+                'page_location': window.location.href,
+                'page_path': window.location.pathname
+            });
+        }
+
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -2634,6 +2663,17 @@
         });
 
         function openLesson(title, url) {
+            trackEvent('game_interaction', 'game_launch', title, 1);
+            
+            const timeOnSite = Math.round((Date.now() - window.pageLoadTime) / 1000);
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'timing_complete', {
+                    'name': 'time_to_first_game',
+                    'value': timeOnSite,
+                    'event_category': 'engagement'
+                });
+            }
+            
             document.getElementById('gameTitle').textContent = title;
             document.getElementById('gameFrame').src = url;
             document.getElementById('gamePage').classList.add('active');
@@ -2641,6 +2681,7 @@
         }
 
         function closeLesson() {
+            trackEvent('game_interaction', 'game_exit', document.getElementById('gameTitle').textContent, 1);
             document.getElementById('gamePage').classList.add('slide-down');
             document.getElementById('main-container').classList.remove('slide-down');
             setTimeout(function() {
@@ -2652,6 +2693,10 @@
 
         function toggleFullscreen() {
             const gameFrame = document.getElementById('gameFrame');
+            const isEnteringFullscreen = !gameFrame.classList.contains('fullscreen');
+            
+            trackEvent('game_interaction', isEnteringFullscreen ? 'fullscreen_enter' : 'fullscreen_exit', 
+                       document.getElementById('gameTitle').textContent, 1);
             
             if (document.fullscreenElement || document.webkitFullscreenElement || 
                 document.msFullscreenElement || document.mozFullScreenElement) {
@@ -2676,6 +2721,118 @@
                 }
             }
         }
+
+        let searchTimer;
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const lessonCards = document.querySelectorAll('#allLessonsGrid .lesson-card');
+            let visibleCount = 0;
+            
+            lessonCards.forEach(card => {
+                const title = card.querySelector('.lesson-title').textContent.toLowerCase();
+                const desc = card.querySelector('.lesson-desc').textContent.toLowerCase();
+                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            const searchStats = document.getElementById('searchStats');
+            if (searchTerm.length > 0) {
+                searchStats.textContent = `Found ${visibleCount} lesson${visibleCount !== 1 ? 's' : ''} matching "${searchTerm}"`;
+                
+                clearTimeout(searchTimer);
+                searchTimer = setTimeout(() => {
+                    trackEvent('search', 'search_performed', searchTerm, visibleCount);
+                }, 1000);
+            } else {
+                searchStats.textContent = '';
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.lesson-card')) {
+                const card = e.target.closest('.lesson-card');
+                const title = card.querySelector('.lesson-title').textContent;
+                const wasFromSearch = document.getElementById('searchInput').value.length > 0;
+                
+                if (wasFromSearch) {
+                    trackEvent('search', 'search_result_click', title, 1);
+                }
+            }
+        });
+
+        function hideWarning() {
+            trackEvent('ui_interaction', 'warning_acknowledged', 'comments_warning', 1);
+            document.getElementById('warningOverlay').classList.add('hidden');
+        }
+
+        function switchTab(tabName) {
+            trackEvent('navigation', 'tab_switch', tabName, 1);
+            document.getElementById('lessonsTab').classList.toggle('active', tabName === 'lessons');
+            document.getElementById('partnersTab').classList.toggle('active', tabName === 'partners');
+            document.getElementById('lessons-section').style.display = tabName === 'lessons' ? 'block' : 'none';
+            document.getElementById('all-lessons').style.display = tabName === 'lessons' ? 'block' : 'none';
+            document.getElementById('partners-section').style.display = tabName === 'partners' ? 'block' : 'none';
+        }
+
+        const themes = ['theme-amber', 'theme-rainbow', 'theme-cyber-green', 'theme-ice-blue', 'theme-solarized', 'theme-purple-haze'];
+        let currentThemeIndex = 0;
+
+        function cycleTheme() {
+            trackEvent('ui_interaction', 'theme_change', themes[currentThemeIndex], 1);
+            
+            document.body.classList.remove(themes[currentThemeIndex]);
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            document.body.classList.add(themes[currentThemeIndex]);
+            const themeNames = ['Amber', 'Rainbow', 'Cyber Green', 'Ice Blue', 'Solarized', 'Purple Haze'];
+            document.getElementById('themeToggle').title = `Current: ${themeNames[currentThemeIndex]} - Click to cycle`;
+            updateMatrixColor();
+        }
+
+        function updateMatrixColor() {
+            const matrixColors = {
+                'theme-amber': '#c27c15',
+                'theme-rainbow': '#ff0080',
+                'theme-cyber-green': '#00ff00',
+                'theme-ice-blue': '#00ccff',
+                'theme-solarized': '#2aa198',
+                'theme-purple-haze': '#9b59b6'
+            };
+            window.matrixColor = matrixColors[themes[currentThemeIndex]];
+        }
+
+        document.querySelectorAll('.social-icons a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const platform = this.querySelector('i').className.split(' ')[1].replace('fa-', '');
+                trackEvent('social', 'social_click', platform, 1);
+            });
+        });
+
+        let scrollDepthTracked = [25, 50, 75, 90];
+        window.addEventListener('scroll', function() {
+            const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            
+            scrollDepthTracked.forEach(depth => {
+                if (scrollPercent >= depth) {
+                    trackEvent('engagement', 'scroll_depth', `${depth}%`, 1);
+                    scrollDepthTracked = scrollDepthTracked.filter(d => d !== depth);
+                }
+            });
+        }, { passive: true });
+
+        window.pageLoadTime = Date.now();
+        window.addEventListener('beforeunload', function() {
+            const sessionDuration = Math.round((Date.now() - window.pageLoadTime) / 1000);
+            trackEvent('engagement', 'session_duration', 'session_end', sessionDuration);
+        });
+
+        document.getElementById('themeToggle').addEventListener('click', cycleTheme);
+        document.body.classList.add('theme-amber');
+        document.getElementById('themeToggle').title = 'Current: Amber - Click to cycle';
+        updateMatrixColor();
 
         document.addEventListener('fullscreenchange', handleFullscreenChange);
         document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
@@ -2702,67 +2859,6 @@
                 }
             }
         });
-
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const lessonCards = document.querySelectorAll('#allLessonsGrid .lesson-card');
-            let visibleCount = 0;
-            lessonCards.forEach(card => {
-                const title = card.querySelector('.lesson-title').textContent.toLowerCase();
-                const desc = card.querySelector('.lesson-desc').textContent.toLowerCase();
-                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            const searchStats = document.getElementById('searchStats');
-            if (searchTerm.length > 0) {
-                searchStats.textContent = `Found ${visibleCount} lesson${visibleCount !== 1 ? 's' : ''} matching "${searchTerm}"`;
-            } else {
-                searchStats.textContent = '';
-            }
-        });
-
-        function hideWarning() {
-            document.getElementById('warningOverlay').classList.add('hidden');
-        }
-
-        function switchTab(tabName) {
-            document.getElementById('lessonsTab').classList.toggle('active', tabName === 'lessons');
-            document.getElementById('partnersTab').classList.toggle('active', tabName === 'partners');
-            document.getElementById('lessons-section').style.display = tabName === 'lessons' ? 'block' : 'none';
-            document.getElementById('all-lessons').style.display = tabName === 'lessons' ? 'block' : 'none';
-            document.getElementById('partners-section').style.display = tabName === 'partners' ? 'block' : 'none';
-        }
-        const themes = ['theme-amber', 'theme-rainbow', 'theme-cyber-green', 'theme-ice-blue', 'theme-solarized', 'theme-purple-haze'];
-        let currentThemeIndex = 0;
-
-        function cycleTheme() {
-            document.body.classList.remove(themes[currentThemeIndex]);
-            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-            document.body.classList.add(themes[currentThemeIndex]);
-            const themeNames = ['Amber', 'Rainbow', 'Cyber Green', 'Ice Blue', 'Solarized', 'Purple Haze'];
-            document.getElementById('themeToggle').title = `Current: ${themeNames[currentThemeIndex]} - Click to cycle`;
-            updateMatrixColor();
-        }
-
-        function updateMatrixColor() {
-            const matrixColors = {
-                'theme-amber': '#c27c15',
-                'theme-rainbow': '#ff0080',
-                'theme-cyber-green': '#00ff00',
-                'theme-ice-blue': '#00ccff',
-                'theme-solarized': '#2aa198',
-                'theme-purple-haze': '#9b59b6'
-            };
-            window.matrixColor = matrixColors[themes[currentThemeIndex]];
-        }
-        document.getElementById('themeToggle').addEventListener('click', cycleTheme);
-        document.body.classList.add('theme-amber');
-        document.getElementById('themeToggle').title = 'Current: Amber - Click to cycle';
-        updateMatrixColor();
     </script>
 </body>
 </html>
