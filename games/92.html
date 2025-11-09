@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PvZ2 Gardenless</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+        }
+        #gameFrame {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Loading Plants vs Zombies 2 Gardenless...</div>
+    <iframe id="gameFrame" src="about:blank"></iframe>
+
+    <script>
+        alert("This may be blocked unless you are using the proxy method, my bad ALSO THANK U Gzh0821 FOR THE AMAZING PORT");
+        
+        const gameUrl = "https://rawcdn.githack.com/Gzh0821/pvzge_web/master/docs/index.html";
+        
+        // Load the game after the alert
+        window.addEventListener('load', function() {
+            document.getElementById('gameFrame').src = gameUrl;
+            document.getElementById('loading').style.display = 'none';
+        });
+
+        // Handle iframe errors
+        document.getElementById('gameFrame').addEventListener('load', function() {
+            try {
+                // Check if iframe loaded successfully
+                const iframe = document.getElementById('gameFrame');
+                if (iframe.contentWindow.location.href === 'about:blank') {
+                    document.getElementById('loading').innerHTML = 
+                        'Game blocked by CORS.<br>Try using a different method.';
+                }
+            } catch (e) {
+                // CORS error - can't access iframe content
+                document.getElementById('loading').innerHTML = 
+                    'Game loaded but may have CORS restrictions.<br>Check browser console for errors.';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
