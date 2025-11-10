@@ -25,17 +25,14 @@
                 .then(htmlContent => {
                     document.documentElement.innerHTML = htmlContent;
                     
-                    // Reinitialize all script elements
                     const scriptElements = document.documentElement.querySelectorAll('script');
                     scriptElements.forEach(originalScript => {
                         const newScriptElement = document.createElement('script');
                         
-                        // Copy all attributes
                         Array.from(originalScript.attributes).forEach(attr => {
                             newScriptElement.setAttribute(attr.name, attr.value);
                         });
                         
-                        // Handle inline scripts
                         if (!originalScript.src && originalScript.textContent) {
                             newScriptElement.textContent = originalScript.textContent;
                         }
@@ -52,4 +49,5 @@
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5521219086088837" crossorigin="anonymous"></script>
 </body>
+
 </html>
