@@ -271,12 +271,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Add click event listener to the entire document
             document.addEventListener('click', function() {
-                // Open the new page in about:blank
                 const newWindow = window.open('about:blank', '_blank');
                 
-                // Fetch the content and write it to the new window
                 fetch("https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/blahblahblah.html?t=" + Date.now())
                     .then(response => {
                         if (!response.ok) {
@@ -291,7 +288,6 @@
                     })
                     .catch(error => {
                         console.error('Error fetching content:', error);
-                        // Fallback content if fetch fails
                         newWindow.document.open();
                         newWindow.document.write(`
                             <!DOCTYPE html>
