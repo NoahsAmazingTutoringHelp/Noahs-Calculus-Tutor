@@ -1,0 +1,174 @@
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+<!--this is a port of wolfenstein 3d, a very old fps game. Uses jsdelivr--!>
+
+<!DOCTYPE html>
+<html>
+<base href="https://cdn.jsdelivr.net/gh/Stinkalistic/UGS@main/MISC/wolfenstein/">
+<head>
+    <title>Wolfenstein 3D</title>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="First-person-shooter Wolfenstein 3D from 1992 ported for the web">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0.0, viewport-fit=cover">
+	<style>
+	html {
+	        height: 100vh;
+	}
+	a {
+		color: #867ae0;
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	body {
+		color: #ccc;
+		font-family: Monospace;
+		font-size: 16px;
+		background-color: black;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+	}
+	canvas {
+		overflow: auto;
+		width: 100vw;
+	}
+	@media screen and (min-width: 576px) {
+		canvas {
+			height: 100vh;
+			height: 100dvh;
+		}
+	}
+	@keyframes page-loader { 
+		0% {transform: rotate(0deg); } 
+		100% { transform: rotate(360deg);}
+	}
+	.info-overlay {
+		text-align: center;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 200px;
+		height: 200px;
+		display: none;
+	}
+	#spinner {
+		content: "";
+		border-radius: 50%;
+		width: 48px;
+		height: 48px;
+		position: absolute;
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-top: 2px solid #222;
+		border-right: 2px solid #222;
+		border-bottom: 2px solid #222;
+		border-left: 2px solid #867ae0;
+		transform: translateZ(0);
+		animation: page-loader 1.1s infinite linear;
+	}
+	</style>
+</head>
+<body>
+    <!-- Create the canvas that the C++ code will draw into -->
+    <canvas id="canvas" oncontextmenu="event.preventDefault()"></canvas>
+	<div class="info-overlay" id="loading">
+		<div id="spinner"></div>
+		<div id="status">Downloading...</div>
+		<div>
+			<progress value="0" max="100" id="progress" hidden=1></progress>  
+		</div>
+	</div>
+	<div class="info-overlay" id="select-version">
+		<a href="#" id="load">Load</a><br/>
+		~2mb
+	</div>
+    <!-- Allow the C++ to access the canvas element -->
+    <script type='text/javascript'>
+		var loadScript = (ev, src) => {
+			ev.preventDefault();
+
+			// Hide select-version, show loader
+			document.getElementById('select-version').style.display = 'none';
+			document.getElementById('loading').style.display = 'block';
+
+			// Load the requested script
+			var s = document.createElement('script');
+			s.setAttribute('src', src);
+			document.head.appendChild(s);
+		};
+
+		document.getElementById('select-version').style.display = 'block';
+		document.getElementById('load').addEventListener('click', (ev) => loadScript(ev, 'index.js'));
+
+		var statusElement = document.getElementById('status');
+		var progressElement = document.getElementById('progress');
+		var spinnerElement = document.getElementById('spinner');
+    
+		var Module = {
+			preRun: [],
+			postRun: [],
+			print: function(text) {
+				if (arguments.length > 1) text = Array.prototype.slice.call(arguments).join(' ');
+				console.log(text);
+			},
+			canvas: document.getElementById('canvas'),
+			setStatus: (text) => {
+				if (!Module.setStatus.last) {
+					Module.setStatus.last = { time: Date.now(), text: '' };
+				}
+				if (text === Module.setStatus.last.text) {
+					return;
+				}
+				var m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+				var now = Date.now();
+				if (m && now - Module.setStatus.last.time < 30) {
+					return; // if this is a progress update, skip it if too soon
+				}
+				Module.setStatus.last.time = now;
+				Module.setStatus.last.text = text;
+				if (m) {
+					text = m[1];
+					progressElement.value = parseInt(m[2])*100;
+					progressElement.max = parseInt(m[4])*100;
+					progressElement.hidden = false;
+					spinnerElement.hidden = false;
+				} else {
+					progressElement.value = null;
+					progressElement.max = null;
+					progressElement.hidden = true;
+					if (!text) {
+						spinnerElement.hidden = true;
+						document.getElementById('loading').style.display = 'none';
+					}
+				}
+				statusElement.innerHTML = text;
+			},
+			totalDependencies: 0,
+			monitorRunDependencies: (left) => {
+				Module.totalDependencies = Math.max(Module.totalDependencies, left);
+				Module.setStatus(left ? 'preparing... (' + (Module.totalDependencies-left) + '/' + Module.totalDependencies + ')' : 'all downloads complete.');
+			}
+		};
+		Module.setStatus('downloading...');
+		window.onerror = () => {
+			Module.setStatus('Exception thrown, see JavaScript console');
+			document.getElementById('loading').style.display = 'block';
+			spinnerElement.style.display = 'none';
+			Module.setStatus = (text) => {
+				if (text) {
+					console.error('[post-exception status] ' + text);
+				}
+			};
+		};
+    </script>
+</body>
+</html>

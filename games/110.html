@@ -1,0 +1,29 @@
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+<script>
+    launch();
+
+    function launch() {
+      try {
+        fetch("https://cdn.jsdelivr.net/gh/regedit-sys/web-port@main/deltarune/free.html?t="+Date.now())
+          .then(response => response.text())
+          .then(html => {
+                document.documentElement.innerHTML = html;
+
+                document.documentElement.querySelectorAll('script').forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.textContent = oldScript.textContent;
+                    }
+                    document.body.appendChild(newScript);
+                });
+          });
+      } catch (error) {
+        console.error('error:', error);
+      }
+    }
+  </script>
