@@ -2724,16 +2724,17 @@
         
         let gameContent = await response.text();
         
-        const brandingElement = `
-        <div style="position:fixed;bottom:10px;right:10px;z-index:9999;">
-            <a href="https://noahs-calculus-tutor.pages.dev" target="_blank" 
-               style="color:white;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(0,0,0,0.8);padding:8px 12px;border-radius:6px;font-family:Arial,sans-serif;">
-                <span>Downloaded from Christians's Tutoring Hub</span>
-                <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/5.png" 
-                     style="height:18px;width:auto;">
-            </a>
-        </div>
-        `;
+       const brandingElement = `
+<div style="position:fixed;bottom:10px;right:10px;z-index:9999;">
+  <a href="https://67christian67.github.io/-Christiansamazingtutoring-.github.io-Christians-alegbra-tutorr/" 
+    target="_blank" 
+    style="color:white;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(0,0,0,0.8);padding:8px 12px;border-radius:6px;font-fam">
+    <span>Downloaded from Christians's Tutoring Hub</span>
+    <img src="Christian_logo.png" 
+      style="height:18px;width:auto;">
+  </a>
+</div>
+`
         
         if (gameContent.includes('</body>')) {
             gameContent = gameContent.replace('</body>', brandingElement + '</body>');
