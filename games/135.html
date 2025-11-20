@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="//www.google.com/jsapi"></script>
+    <style>
+        body {
+            overflow: hidden;
+            background: #000000;
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+        }
+
+        #game {
+            width: 100%;
+            height: 100vh;
+        }
+
+        #loading {
+            color: #4CAF50;
+            text-align: center;
+            margin-top: 20px;
+            font-family: Arial, sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Loading Portal...</div>
+    <div id="game"></div>
+
+    <script>
+        alert("The camera controls are a little weird - make sure you look over them/edit them");
+
+        EJS_player = "#game";
+        EJS_core = "n64";
+        EJS_color = "#000000";
+        EJS_startOnLoaded = true;
+        EJS_pathtodata = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data";
+        EJS_gameUrl = "https://cdn.jsdelivr.net/gh/Stinkalistic/junk@main/Portal%2064%20v0.90.z64";
+        
+        var script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/gh/a456pur/seraph@81f551ca0aa8e3d6018d32d8ac5904ac9bc78f76/storage/emulatorjs/data/loader.js";
+        document.body.appendChild(script);
+        
+        setTimeout(function() {
+            document.getElementById("loading").style.display = "none";
+        }, 2000);
+    </script>
+</body>
+</html>
