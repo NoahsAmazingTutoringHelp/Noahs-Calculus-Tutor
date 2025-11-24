@@ -1,207 +1,161 @@
 <!DOCTYPE html>
-<html lang="en-us">
-	<head>
-		<base href="https://cdn.jsdelivr.net/gh/genizy/web-port@main/fears-to-fathom/home-alone/">
-		<meta charset="utf-8" />
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-		/>
-		<title>Unity WebGL Player | Fears To Fathom: Home Alone</title>
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				border: 0;
-				overflow: hidden;
-			}
 
-			body {
-				background: #000;
-				position: fixed;
-				width: 100%;
-				height: 100%;
-			}
 
-			.webgl-content {
-				position: absolute;
-				width: 100%;
-				height: 100%;
-			}
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
 
-			#unityContainer {
-				position: absolute;
-				width: 100%;
-				height: 100%;
-			}
 
-			.footer {
-				position: absolute;
-				bottom: 0;
-				width: 100%;
-				text-align: center;
-				padding: 10px 0;
-				background: rgba(0, 0, 0, 0.5);
-				z-index: 100;
-			}
 
-			.fullscreen {
-				cursor: pointer;
-				display: inline-block;
-				width: 24px;
-				height: 24px;
-			}
+<html lang="en">
+<base href="https://cdn.jsdelivr.net/gh/bubbls/dosbox/">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
-			/* Simple Loading Bar Styles */
-			#simple-loading {
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: #000;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				z-index: 1000;
-			}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: #fedb1d;
+            overflow: hidden;
+        }
+        
+        #canvas {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: auto;
+            height: 100%;
+            background: black;
+            padding: 0;
+            margin: 0;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            /*pointer-events:none;*/
+        }
+        
+        .emularity-splash-screen {
+            text-align: center;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 50%;
+            margin: 0;
+            box-sizing: border-box;
+            color: #000;
+        }
+    </style>
+</head>
 
-			#game-title {
-				color: white;
-				font-size: 32px;
-				font-family: Arial, sans-serif;
-				margin-bottom: 30px;
-			}
+<body>
+    <canvas id="canvas" style="width: 50%; height: 50%; display: block; margin: 0 auto;" onClick="window.focus();" />
+    <script type="text/javascript" src="js/es6-promise.js"></script>
+    <script type="text/javascript" src="js/browserfs.min.js"></script>
+    <script type="text/javascript" src="js/loader.js"></script>
+    <!--<script src="../../../c/libs/jquery.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-			#simple-loading-bar {
-				width: 300px;
-				height: 20px;
-				background: white;
-				border: 2px solid black;
-				overflow: hidden;
-			}
+    <script type="text/javascript">
+        function $_GET(param) {
+            var vars = {};
+            window.location.href.replace(location.hash, '').replace(
+                /[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
+                function(m, key, value) { // callback
+                    vars[key] = value !== undefined ? value : '';
+                }
+            );
+            if (param) {
+                return vars[param] ? vars[param] : null;
+            }
+            return vars;
+        }
 
-			#simple-loading-progress {
-				width: 0%;
-				height: 100%;
-				background: black;
-				transition: width 0.3s ease;
-			}
-		</style>
-		<script src="Build/UnityLoader.js"></script>
-		<script>
-			// Add the alert message
-			alert("This port was made possible by Bread and the rest of the gn-math team ty sm! <3 Make sure to join their discord server https://discord.gg/gn-math");
-			
-			let max = 0;
-			let done = 0;
-			function mergeFiles(fileParts) {
-				return new Promise((resolve, reject) => {
-					let buffers = [];
+        var softs = {
 
-					function fetchPart(index) {
-						if (index >= fileParts.length) {
-							let mergedBlob = new Blob(buffers);
-							let mergedFileUrl = URL.createObjectURL(mergedBlob);
-							resolve(mergedFileUrl);
-							return;
-						}
-						fetch(fileParts[index])
-							.then((response) => response.arrayBuffer())
-							.then((data) => {
-								buffers.push(data);
-								done = done+1;
-								// Update simple loading bar
-								const progress = (done / max) * 100;
-								if (document.getElementById('simple-loading-progress')) {
-									document.getElementById('simple-loading-progress').style.width = progress + '%';
-								}
-								fetchPart(index + 1);
-							})
-							.catch(reject);
-					}
-					fetchPart(0);
-				});
-			}
+            DOOM: {
+                file: 'softs/DOOM.zip',
+                cmd: 'DOOM/DOOM.EXE',
+                pointer: true
+            },
 
-			function getParts(file, start, end) {
-				let parts = [];
-				for (let i = start; i <= end; i++) {
-					parts.push(file + ".part" + i);
-				}
-				max = max+end;
-				return parts;
-			}
 
-			function resizeUnityContainer() {
-				var container = document.getElementById("unityContainer");
-				container.style.width = window.innerWidth + "px";
-				container.style.height = window.innerHeight + "px";
-			}
-			Promise.all([
-				mergeFiles(getParts("Build/FTFHAPort.data.unityweb", 1, 39)),
-			]).then(([dataUrl]) => {
-				window.dataUrll = dataUrl;
-				var json = {
-					companyName: "Rayll",
-					productName: "Fears To Fathom",
-					dataUrl: "FTFHAPort.data.unityweb",
-					wasmCodeUrl: "FTFHAPort.wasm.code.unityweb",
-					wasmFrameworkUrl: "FTFHAPort.wasm.framework.unityweb",
-					TOTAL_MEMORY: 536870912,
-					graphicsAPI: ["WebGL 2.0", "WebGL 1.0"],
-					webglContextAttributes: { preserveDrawingBuffer: false },
-					splashScreenStyle: "Dark",
-					backgroundColor: "#231F20",
-					cacheControl: { default: "must-revalidate" },
-				};
-				let blob = new Blob([JSON.stringify(json)], {
-					type: "application/json",
-				});
-				let blobUrl = URL.createObjectURL(blob);
-				window.addEventListener("resize", resizeUnityContainer);
-				UnityLoader.instantiate("unityContainer", json, {
-					url: blobUrl,
-					Module: {
-						onRuntimeInitialized: function () {
-							resizeUnityContainer();
-							document.querySelector("#loading-text").remove();
-							// Remove simple loading bar when game starts
-							if (document.getElementById('simple-loading')) {
-								document.getElementById('simple-loading').remove();
-							}
-						},
-					},
-				});
-			});
-		</script>
-	</head>
 
-	<body>
-		<!-- Simple Loading Bar -->
-		<div id="simple-loading">
-			<div id="game-title">FEARS TO FATHOM: HOME ALONE</div>
-			<div id="simple-loading-bar">
-				<div id="simple-loading-progress"></div>
-			</div>
-		</div>
+        }
+        var file = "DOOM";
+        if ($_GET('soft') != null) {
+            if (softs[$_GET('soft')] != undefined) {
+                file = $_GET('soft')
+                    //parent.$notif('Loading '+$_GET('soft').replace(/_/g," ")+'.')
+            };
+        };
+        //
+        // DOS FILES
+        if (softs[file].machine == undefined) {
+            var dosbox = new Emulator(document.querySelector("#canvas"),
+                null,
+                new DosBoxLoader(DosBoxLoader.emulatorJS("js/dosbox-sync.js"),
+                    DosBoxLoader.locateAdditionalEmulatorJS(locateAdditionalFiles),
+                    DosBoxLoader.nativeResolution(640, 400),
+                    DosBoxLoader.mountZip("c",
+                        //DosBoxLoader.fetchFile("Software", "softs/" + softs[file].file)),
+                        DosBoxLoader.fetchFile("Software", softs[file].file)),
+                    DosBoxLoader.startExe(softs[file].cmd)));
+            dosbox.start({
+                waitAfterDownloading: false
+            });
 
-		<div class="webgl-content">
-			<div
-				id="loading-text"
-				style="
-					color: white;
-					font-size: 48px;
-					font-family: cursive;
-					text-align: center;
-					margin-top: 20px;
-				"
-			>
-				LOADING...
-			</div>
-			<div id="unityContainer"></div>
-		</div>
-	</body>
+            function locateAdditionalFiles(filename) {
+                if (filename === "dosbox.html.mem") {
+                    return "js/dosbox-sync.mem";
+                }
+                return "js/" + filename;
+            }
+
+        }
+        //
+        // PC98 DOS FILES
+        if (softs[file].machine == 'PC98') {
+            var dosbox = new Emulator(document.querySelector("#canvas"),
+                null,
+                new PC98DosBoxLoader(PC98DosBoxLoader.emulatorJS("js/dosbox-x.js"),
+                    PC98DosBoxLoader.emulatorWASM("js/dosbox-x.wasm"),
+                    PC98DosBoxLoader.locateAdditionalEmulatorJS(locateAdditionalFiles),
+                    PC98DosBoxLoader.nativeResolution(640, 480),
+                    PC98DosBoxLoader.mountZip("c",
+                        PC98DosBoxLoader.fetchFile("Game File",
+                            "softs/" + softs[file].file)),
+                    PC98DosBoxLoader.mountZip("y",
+                        PC98DosBoxLoader.fetchFile("ROM File",
+                            "js/font.zip")),
+
+                    PC98DosBoxLoader.startExe(softs[file].cmd)))
+            dosbox.start({
+                waitAfterDownloading: true
+            });
+
+            function locateAdditionalFiles(filename) {
+                if (filename === "dosbox.html.mem") {
+                    return "js/dosbox-sync.mem";
+                }
+                return "js/" + filename;
+            }
+
+
+        }
+
+        if (softs[file].pointer == false) {
+            c = document.getElementById("canvas")
+            c.style.cursor = "none"
+        };
+    </script>
+</body>
+
 </html>
