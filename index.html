@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QPXKLD48W"></script>
     <script>
@@ -156,6 +157,15 @@
         .lesson-card:hover ~ #custom-cursor,#custom-cursor.hover{
             width:28px;height:28px;background:var(--cursor-hover-bg);border-color:var(--cursor-hover-border)
         }
+
+        #custom-cursor {
+    transition: opacity 0.3s ease, transform 0.12s, width 0.15s, height 0.15s;
+}
+
+#custom-cursor.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
         @media (hover:none) and (pointer:coarse){
             #custom-cursor{display:none!important}
             body,body *{cursor:auto!important}
@@ -166,6 +176,7 @@
         }
     </style>
 </head>
+
 <body>
     <div id="custom-cursor"></div>
     <canvas id="matrix-bg"></canvas>
@@ -222,7 +233,7 @@
                         <button class="visit-btn" onclick="window.open('https://bloxcraft-ubg.pages.dev/', '_blank')">VISIT SITE</button>
                     </div>
                 </div>
-                 <div class="partner-card">
+                <div class="partner-card">
                     <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/2.jpg" alt="Partner Logo" class="partner-image">
                     <h3 class="partner-title">Glacier Arcade</h3>
                     <p class="partner-desc">Premium unblocked games with 400+ titles including Buckshot Roulette, Ultrakill, All FNAF games, and Minecraft. Smooth design, instant play.</p>
@@ -272,7 +283,8 @@
             <div class="blur-overlay" id="warningOverlay">
                 <div class="warning-content">
                     <h2 class="warning-title">⚠️ WARNING</h2>
-                    <p class="warning-text">This comments section may contain unmoderated content.<br>Proceed at your own discretion.</p>
+                    <p class="warning-text">This comments section may contain unmoderated content.
+                        <br>Proceed at your own discretion.</p>
                     <button class="acknowledge-btn" onclick="hideWarning()">I UNDERSTAND</button>
                 </div>
             </div>
@@ -302,30 +314,22 @@
             <iframe id="gameFrame" class="game-frame" frameborder="0" src=""></iframe>
         </div>
     </div>
-    
+
     <script>
         const games = [
-            {
-                title: "Plants Vs Zombies 2",
-                desc: "Defend your lawn with crazy plants against fun-loving zombies across time",
-                url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html",
-                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg",
-                popular: true
-            },
-            {
-                title: "Hotline Miami",
-                desc: "Fast-paced top-down action combat",
-                url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html",
-                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg",
-                popular: true
-            },
-            {
-                title: "Balatro",
-                desc: "Build insane poker hands with special Joker cards",
-                url: "https://thirstygithub.github.io/cool-math/",
-                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg",
-                popular: true
-            },
+            { title: "Terraria", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/148.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/271.jpg" },
+            { title: "Celeste", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/147.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/270.jpg" },
+            { title: "Burrito Bison", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://noahsamazingtutoringhelp.github.io/cautious-rotary-phone/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/130.jpg" },
+            { title: "Tanuki Sunset", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/146.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/269.jpg" },
+            { title: "SwordFight!!", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/145.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/268.jpg" },  
+            { title: "Station Saturn", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/144.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/267.jpg" },
+            { title: "Spelunky Classic HD", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/143.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/266.jpg" },
+            { title: "Sonic.EXE", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/142.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/265.jpg" },  
+            { title: "Minesweeper Plus", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/141.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/264.jpg" },
+            { title: "Kitty Toy", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/140.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/263.jpg" },
+            { title: "Happy Wheels", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/139.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/174.jpg" },
+            { title: "Google Feud", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/138.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/262.jpg" },  
+            { title: "Basketball Stars", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/137.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/261.jpg" },
             { title: "Daggerfall", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/136.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/252.jpg" },
             { title: "Portal", desc: "Mind-bending puzzle game with portal gun mechanics and dark humor", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/135.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/253.jpg" },
             { title: "Ice Dodo", desc: "3D obstacle course game with simple controls but complex challenging maps", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/134.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/254.jpg" },
@@ -366,6 +370,27 @@
             { title: "Super Liquid Soccer", desc: "Arcade soccer game with fluid physics and exaggerated gameplay mechanics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/98.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/222.jpg" },
             { title: "Tempoverdose", desc: "Rhythm game with intense tempo-based challenges and electronic music", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/97.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/221.jpg" },
             { title: "Abandoned", desc: "Escape room type game where you need to figure out how to get out of each", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/96.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/220.jpg" },
+            {
+                title: "Plants Vs Zombies 2",
+                desc: "Defend your lawn with crazy plants against fun-loving zombies across time",
+                url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html",
+                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg",
+                popular: true
+            },
+            {
+                title: "Hotline Miami",
+                desc: "Fast-paced top-down action combat",
+                url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html",
+                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg",
+                popular: true
+            },
+            {
+                title: "Balatro",
+                desc: "Build insane poker hands with special Joker cards",
+                url: "https://thirstygithub.github.io/cool-math/",
+                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg",
+                popular: true
+            },
             { title: "Wolfenstein 3D", desc: "The pioneer FPS game where you battle Nazis as Allied spy B.J. Blazkowicz", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/95.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/219.jpg" },
             { title: "Zombotron Reboot", desc: "Action-packed platform shooter with physics-based combat in zombie-infested world", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/94.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/218.jpg" },
             { title: "Mortal Kombat 4", desc: "Classic fighting game with brutal fatalities and iconic characters in fourth installment", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/93.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/fuckthis.jpg" },
@@ -524,7 +549,6 @@
             { title: "Blocky Snakes", desc: "Block-based snake game", url: "https://noahsamazingtutoringhelp.github.io/AnatomyStudyAid/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/127.jpg" },
             { title: "Crossy Road", desc: "Endless road crossing", url: "https://noahsamazingtutoringhelp.github.io/EconomicsExamExpert/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/128.jpg" },
             { title: "Happy Room", desc: "Weapons testing sandbox", url: "https://noahsamazingtutoringhelp.github.io/OrganicChemHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/129.jpg" },
-            { title: "Burrito Bison", desc: "Launching wrestling game", url: "https://noahsamazingtutoringhelp.github.io/verbose-doodle/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/130.jpg" },
             { title: "Zombocalypse", desc: "Zombie survival shooter", url: "https://noahsamazingtutoringhelp.github.io/GermanGrammarGuide/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/131.jpg" },
             { title: "Pou", desc: "Virtual pet care game", url: "https://noahsamazingtutoringhelp.github.io/FrenchTutoringPro/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/133.jpg" },
             { title: "Backrooms", desc: "Liminal space exploration", url: "https://noahsamazingtutoringhelp.github.io/SpanishStudySupport/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/134.jpg" },
@@ -783,25 +807,144 @@
         });
         
         (function(){
-            const c=document.getElementById('custom-cursor');if(!c)return;
-            let mx=0,my=0,cx=0,cy=0;
-            function lerp(s,e,a){return(1-a)*s+a*e}
-            document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-            function animate(){cx=lerp(cx,mx,0.25);cy=lerp(cy,my,0.25);c.style.left=cx+'px';c.style.top=cy+'px';requestAnimationFrame(animate)}
-            animate();
-            document.addEventListener('mousedown',()=>c.classList.add('click'));
-            document.addEventListener('mouseup',()=>c.classList.remove('click'));
-            
-            const interactive=document.querySelectorAll('button,a,.partner-card,.nav-tab,.btn,.search-box,input');
-            interactive.forEach(el=>{
-                el.addEventListener('mouseenter',()=>c.classList.add('hover'));
-                el.addEventListener('mouseleave',()=>c.classList.remove('hover'));
+    const c = document.getElementById('custom-cursor');
+    if (!c) return;
+    
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    let cursorHidden = false;
+    let cursorTimeout;
+    
+    const style = document.createElement('style');
+    style.textContent = `
+        #custom-cursor {
+            transition: opacity 0.3s ease, transform 0.12s, width 0.15s, height 0.15s;
+        }
+        #custom-cursor.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    function lerp(s, e, a) {
+        return (1 - a) * s + a * e;
+    }
+    
+    function hideCursor() {
+        if (!cursorHidden) {
+            c.classList.add('hidden');
+            cursorHidden = true;
+        }
+    }
+    
+    function showCursor() {
+        if (cursorHidden) {
+            c.classList.remove('hidden');
+            cursorHidden = false;
+        }
+    }
+    
+    function resetCursorTimeout() {
+        clearTimeout(cursorTimeout);
+        cursorTimeout = setTimeout(() => {
+            if (!cursorHidden) {
+                hideCursor();
+            }
+        }, 3000);
+    }
+    
+    document.addEventListener('mousemove', (e) => {
+        mx = e.clientX;
+        my = e.clientY;
+        showCursor();
+        resetCursorTimeout();
+        
+        const element = document.elementFromPoint(mx, my);
+        if (element && (element.tagName === 'IFRAME' || element.closest('iframe'))) {
+            hideCursor();
+        } else {
+            showCursor();
+        }
+    });
+    
+    function animate() {
+        if (!cursorHidden) {
+            cx = lerp(cx, mx, 0.25);
+            cy = lerp(cy, my, 0.25);
+            c.style.left = cx + 'px';
+            c.style.top = cy + 'px';
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+    
+    document.addEventListener('mousedown', () => {
+        showCursor();
+        c.classList.add('click');
+    });
+    
+    document.addEventListener('mouseup', () => {
+        showCursor();
+        c.classList.remove('click');
+    });
+    
+    document.addEventListener('mouseleave', () => {
+        hideCursor();
+    });
+    
+    document.addEventListener('mouseenter', () => {
+        showCursor();
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        const elements = document.elementsFromPoint(e.clientX, e.clientY);
+        const isOverIframe = elements.some(el => 
+            el.tagName === 'IFRAME' || 
+            (el.closest && el.closest('iframe'))
+        );
+        
+        if (isOverIframe) {
+            hideCursor();
+        } else {
+            showCursor();
+        }
+    });
+    
+    const observer = new MutationObserver(() => {
+        const gameFrame = document.getElementById('gameFrame');
+        if (gameFrame) {
+            gameFrame.addEventListener('mouseenter', () => {
+                hideCursor();
             });
-        })();
+            
+            gameFrame.addEventListener('mouseleave', () => {
+                showCursor();
+            });
+        }
+    });
+    
+    observer.observe(document.body, { childList: true, subtree: true });
+    
+    const interactive = document.querySelectorAll('button, a, .partner-card, .nav-tab, .btn, .search-box, input, .lesson-card');
+    interactive.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            showCursor();
+            c.classList.add('hover');
+        });
+        el.addEventListener('mouseleave', () => {
+            showCursor();
+            c.classList.remove('hover');
+        });
+    });
+    
+
+    resetCursorTimeout();
+})();
         
         document.addEventListener('DOMContentLoaded', function() {
             generateGameCards();
         });
     </script>
 </body>
+
 </html>
