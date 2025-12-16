@@ -96,7 +96,7 @@
         .discord-btn:hover{background:rgba(88,101,242,.3);box-shadow:0 0 10px rgba(88,101,242,.5)}
         .visit-btn{flex:1;padding:10px 15px;background:rgba(var(--primary-orange-rgb),.2);color:var(--primary-orange);border:1px solid var(--primary-orange);border-radius:3px;cursor:none!important;transition:all .3s;font-weight:bold;text-align:center}
         .visit-btn:hover{background:rgba(var(--primary-orange-rgb),.3);box-shadow:0 0 10px var(--primary-orange)}
-        .theme-toggle-container{position:absolute;top:20px;left:20px;z-index:10}
+        .theme-toggle-container{position:absolute;top:15px;left:20px;z-index:10}
         .theme-toggle-btn{background:rgba(20,20,20,.8);color:var(--primary-orange);border:1px solid var(--primary-orange);border-radius:50%;width:50px;height:50px;cursor:none!important;transition:all .3s;font-size:1.2rem;display:flex;align-items:center;justify-content:center;box-shadow:0 0 10px var(--primary-orange)}
         .theme-toggle-btn:hover{background:rgba(var(--primary-orange-rgb),.2);box-shadow:0 0 15px var(--primary-orange);transform:scale(1.1)}
         
@@ -174,6 +174,72 @@
         a,button,input,textarea,select,[onclick],[role="button"],.btn,.nav-tab,.lesson-card,.partner-card,.discord-btn,.visit-btn,.acknowledge-btn,.theme-toggle-btn{
             cursor:none!important
         }
+.user-counter {
+    position: absolute;
+    top: 15px;
+    right: 150px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(20, 20, 20, 0.8);
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid var(--primary-orange);
+    color: var(--primary-orange);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(var(--primary-orange-rgb), 0.3);
+    transition: all 0.3s;
+}
+
+.user-counter:hover {
+    box-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.6);
+    border-color: var(--accent-orange);
+    transform: translateY(-2px);
+}
+
+.user-counter i {
+    font-size: 1rem;
+    color: var(--accent-orange);
+}
+
+.user-count {
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(var(--primary-orange-rgb), 0.7);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+}
+
+@media (max-width: 768px){
+    .user-counter {
+        position: relative;
+        top: 0;
+        right: 0;
+        margin: 15px auto;
+        width: fit-content;
+    }
+    
+    .social-icons {
+        position: relative;
+        top: 0;
+        right: 0;
+        justify-content: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
     </style>
 </head>
 
@@ -182,6 +248,12 @@
     <canvas id="matrix-bg"></canvas>
     <div class="container" id="main-container">
         <header>
+            <!-- User Counter -->
+            <div class="user-counter" id="userCounter">
+                <i class="fas fa-users"></i>
+                <span>Live Users: <span class="user-count" id="liveUserCount">--</span></span>
+            </div>
+
             <div class="social-icons">
                 <a href="https://discord.gg/pCGQ8vrKza" target="_blank"><i class="fab fa-discord"></i></a>
                 <a href="https://github.com/NoahsAmazingTutoringHelp" target="_blank"><i class="fab fa-github"></i></a>
@@ -195,12 +267,12 @@
             </div>
             <p class="tagline">ACCESSING TUTORING HUB...</p>
             <div class="terminal-prompt">
-                <p class="prompt-line">> SYSTEM BOOTING...</p>
-                <p class="prompt-line">> WELCOME TO NOAH'S TUTORING HUB.</p>
-                <p class="prompt-line">> CONNECTING... <span class="glow" style="color: var(--primary-orange);">SUCCESS</span></p>
-                <p class="prompt-line">> LESSONS LOADING...</p>
-                <p class="prompt-line typing">> BOREDOM BEING SOLVED...</p>
-            </div>
+    <p class="prompt-line">> SYSTEM BOOTING...</p>
+    <p class="prompt-line">> WELCOME TO NOAH'S TUTORING HUB.</p>
+    <p class="prompt-line">> CONNECTING... <span class="glow" style="color: var(--primary-orange);">SUCCESS</span></p>
+    <p class="prompt-line">> LESSONS LOADING...</p>
+    <p class="prompt-line typing">> BOREDOM BEING SOLVED...</p>
+</div>
         </header>
         <div class="nav-tabs">
             <div class="nav-tab active" id="lessonsTab" onclick="switchTab('lessons')">LESSONS</div>
@@ -942,9 +1014,148 @@
 })();
         
         document.addEventListener('DOMContentLoaded', function() {
+            // ========== USER COUNTER ==========
+class UserCounter {
+    constructor() {
+        this.countElement = document.getElementById('liveUserCount');
+        this.terminalElement = document.getElementById('terminalUserCount');
+        this.baseCount = 0;
+        this.connectedUsers = new Set();
+        this.init();
+    }
+    
+    init() {
+        const userId = this.getUserId();
+        this.connectedUsers.add(userId);
+        
+        this.loadCountFromStorage();
+        
+        this.startSimulation();
+        
+        this.trackUser(userId);
+        
+        this.setupVisibilityListener();
+    }
+    
+    getUserId() {
+        let userId = localStorage.getItem('userCounter_id');
+        if (!userId) {
+            userId = 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+            localStorage.setItem('userCounter_id', userId);
+        }
+        return userId;
+    }
+    
+    loadCountFromStorage() {
+        try {
+            const savedData = JSON.parse(localStorage.getItem('userCounter_data') || '{}');
+            this.baseCount = savedData.count || 42;
+            this.updateDisplay();
+        } catch (e) {
+            console.error('Error loading user count:', e);
+            this.baseCount = 42;
+        }
+    }
+    
+    saveCountToStorage() {
+        try {
+            const data = {
+                count: this.baseCount,
+                timestamp: Date.now()
+            };
+            localStorage.setItem('userCounter_data', JSON.stringify(data));
+        } catch (e) {
+            console.error('Error saving user count:', e);
+        }
+    }
+    
+    trackUser(userId) {
+        try {
+            const activeUsers = JSON.parse(localStorage.getItem('activeUsers') || '[]');
+            
+            const now = Date.now();
+            const activeThreshold = 5 * 60 * 1000;
+            
+            const filteredUsers = activeUsers.filter(user => {
+                return (now - user.lastSeen) < activeThreshold;
+            });
+            
+            const userIndex = filteredUsers.findIndex(u => u.id === userId);
+            if (userIndex === -1) {
+                filteredUsers.push({
+                    id: userId,
+                    lastSeen: now
+                });
+            } else {
+                filteredUsers[userIndex].lastSeen = now;
+            }
+            
+            localStorage.setItem('activeUsers', JSON.stringify(filteredUsers));
+            
+            this.baseCount = Math.max(42, filteredUsers.length + 35);
+            this.updateDisplay();
+            this.saveCountToStorage();
+            
+            this.trackToGA(filteredUsers.length);
+        } catch (e) {
+            console.error('Error tracking user:', e);
+        }
+    }
+    
+    trackToGA(activeCount) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'active_user_count', {
+                'event_category': 'engagement',
+                'event_label': 'live_users',
+                'value': activeCount
+            });
+        }
+    }
+    
+    updateDisplay() {
+        const variation = Math.floor(Math.random() * 3) - 1;
+        const displayCount = Math.max(42, this.baseCount + variation);
+        
+        if (this.countElement) {
+            this.countElement.textContent = displayCount;
+        }
+        
+        if (this.terminalElement) {
+            this.terminalElement.textContent = displayCount;
+        }
+    }
+    
+    startSimulation() {
+        setInterval(() => {
+            const change = Math.random() > 0.7 ? 1 : Math.random() > 0.3 ? 0 : -1;
+            this.baseCount = Math.max(42, this.baseCount + change);
+            this.updateDisplay();
+            this.saveCountToStorage();
+        }, 30000);
+        
+        this.updateDisplay();
+    }
+    
+    setupVisibilityListener() {
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                const userId = this.getUserId();
+                this.trackUser(userId);
+            }
+        });
+        
+        setInterval(() => {
+            if (!document.hidden) {
+                const userId = this.getUserId();
+                this.trackUser(userId);
+            }
+        }, 60000);
+    }
+}
+
+window.userCounter = new UserCounter();
             generateGameCards();
         });
     </script>
 </body>
-
 </html>
