@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QPXKLD48W"></script>
     <script>
@@ -444,7 +445,7 @@
                 <div class="search-icon"><i class="fas fa-search"></i></div>
             </div>
             <div id="searchStats" class="search-stats"></div>
-                <div class="sorter-wrapper">
+            <div class="sorter-wrapper">
                 <select id="sortSelect" class="sort-select">
                     <option value="default">[DEFAULT]</option>
                     <option value="alphabetical">A → Z</option>
@@ -846,6 +847,152 @@
             { title: "Monkey Mart", desc: "Store management tycoon", url: "https://noahsamazingtutoringhelp.github.io/AmazingAlgebraHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/184.jpg" },
             { title: "Short Ride", desc: "Quick racing challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/62.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/185.jpg" }
         ];
+        
+        function openLesson(t, u) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_launch', {
+            'event_category': 'game_interaction',
+            'event_label': t,
+            'value': 1
+        });
+    }
+    
+    const timeOnSite = Math.round((Date.now() - window.pageLoadTime) / 1000);
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'timing_complete', {
+            'name': 'time_to_first_game',
+            'value': timeOnSite,
+            'event_category': 'engagement'
+        });
+    }
+    
+    document.getElementById('gameTitle').textContent = t;
+    document.getElementById('gameFrame').src = u;
+    document.getElementById('gamePage').classList.add('active');
+    document.getElementById('main-container').classList.add('slide-down');
+    
+    document.getElementById('gameFrame').classList.remove('fullscreen');
+    
+    console.log('Opening game:', t, 'URL:', u);
+}
+
+function closeLesson() {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_exit', {
+            'event_category': 'game_interaction',
+            'event_label': document.getElementById('gameTitle').textContent,
+            'value': 1
+        });
+    }
+    
+    document.getElementById('gamePage').classList.add('slide-down');
+    document.getElementById('main-container').classList.remove('slide-down');
+    
+    setTimeout(() => {
+        document.getElementById('gamePage').classList.remove('active', 'slide-down');
+        document.getElementById('gameFrame').src = '';
+        document.getElementById('gameFrame').classList.remove('fullscreen');
+    }, 500);
+}
+
+function toggleFullscreen() {
+    const frame = document.getElementById('gameFrame');
+    const isFullscreen = frame.classList.contains('fullscreen');
+    
+    if (typeof gtag !== 'undefined') {
+        gtag('event', isFullscreen ? 'fullscreen_exit' : 'fullscreen_enter', {
+            'event_category': 'game_interaction',
+            'event_label': document.getElementById('gameTitle').textContent,
+            'value': 1
+        });
+    }
+    
+    if (!document.fullscreenElement) {
+        if (frame.requestFullscreen) {
+            frame.requestFullscreen();
+        } else if (frame.webkitRequestFullscreen) {
+            frame.webkitRequestFullscreen();
+        } else if (frame.msRequestFullscreen) {
+            frame.msRequestFullscreen();
+        } else if (frame.mozRequestFullScreen) {
+            frame.mozRequestFullScreen();
+        }
+        frame.classList.add('fullscreen');
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        }
+        frame.classList.remove('fullscreen');
+    }
+}
+
+async function downloadCurrentGame() {
+    const frame = document.getElementById('gameFrame');
+    const url = frame.src;
+    const title = document.getElementById('gameTitle').textContent;
+    
+    console.log('Download attempted for:', url, 'Title:', title);
+    
+    if (url && (url.includes('https://raw.githack.com/') || url.includes('games/')) && url.includes('.html')) {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'download_attempt', {
+                'event_category': 'game_interaction',
+                'event_label': title,
+                'value': 1
+            });
+        }
+        
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            const content = await response.text();
+            const blob = new Blob([content], {type: 'text/html'});
+            const downloadUrl = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = `${title.replace(/[^a-z0-9]/gi, '_')}.html`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(downloadUrl);
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'download_success', {
+                    'event_category': 'game_interaction',
+                    'event_label': title,
+                    'value': 1
+                });
+            }
+        } catch (error) {
+            console.error('Download error:', error);
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'download_error', {
+                    'event_category': 'game_interaction',
+                    'event_label': title,
+                    'value': 1
+                });
+            }
+            alert('Unable to download game. Please try again later.');
+        }
+    } else {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'download_failed', {
+                'event_category': 'game_interaction',
+                'event_label': title,
+                'value': 1
+            });
+        }
+        alert('Sorry, this game is not downloadable. Try another one.');
+    }
+}
         
         function generateGameCards() {
     const popularContainer = document.getElementById('popularLessonsGrid');
@@ -1595,4 +1742,5 @@ this.baseCount = Math.max(1000, Math.min(1500, base));
         });
     </script>
 </body>
+
 </html>
