@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QPXKLD48W"></script>
     <script>
@@ -12,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canvas | College Courses</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New',monospace}
@@ -174,7 +173,163 @@
         a,button,input,textarea,select,[onclick],[role="button"],.btn,.nav-tab,.lesson-card,.partner-card,.discord-btn,.visit-btn,.acknowledge-btn,.theme-toggle-btn{
             cursor:none!important
         }
-.user-counter {
+.sorter-wrapper {
+    position: relative;
+    max-width: 350px;
+    margin: 15px auto 25px auto;
+}
+
+.sort-select {
+    width: 100%;
+    background: linear-gradient(145deg, rgba(25, 25, 25, 0.9), rgba(15, 15, 15, 0.9));
+    border: 2px solid var(--primary-orange);
+    border-radius: 8px;
+    color: var(--light-text);
+    font-size: 0.95rem;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    outline: none;
+    cursor: none !important;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 12px 50px 12px 20px;
+    background-image: none;
+    box-shadow: 0 0 25px rgba(var(--primary-orange-rgb), 0.4),
+                inset 0 0 20px rgba(0, 0, 0, 0.5),
+                0 5px 15px rgba(0, 0, 0, 0.6);
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(0deg);
+    color: var(--primary-orange);
+    font-size: 16px;
+    pointer-events: none;
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+    text-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.8);
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sorter-wrapper:hover .custom-arrow:not(.open) {
+    animation: quickPulse 1s infinite ease-in-out;
+    color: var(--accent-orange);
+}
+
+@keyframes quickPulse {
+    0%, 100% { 
+        transform: translateY(-50%) scale(1);
+        text-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.8);
+    }
+    50% { 
+        transform: translateY(-50%) scale(1.1);
+        text-shadow: 0 0 25px rgba(var(--accent-orange-rgb), 1);
+    }
+}
+
+.sort-select:hover {
+    background: linear-gradient(145deg, rgba(35, 35, 35, 0.9), rgba(20, 20, 20, 0.9));
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 40px rgba(var(--primary-orange-rgb), 0.6),
+                inset 0 0 25px rgba(0, 0, 0, 0.7),
+                0 8px 25px rgba(0, 0, 0, 0.8);
+    transform: translateY(-2px);
+}
+
+.custom-arrow.open {
+    transform: translateY(-50%) rotate(180deg);
+    color: var(--accent-orange);
+    text-shadow: 0 0 20px rgba(var(--accent-orange-rgb), 1);
+}
+
+@keyframes openFlip {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(180deg); }
+}
+
+@keyframes closeFlip {
+    0% { transform: translateY(-50%) rotate(180deg); }
+    100% { transform: translateY(-50%) rotate(0deg); }
+}
+
+.sort-select option {
+    background: #111;
+    color: var(--light-text);
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(var(--primary-orange-rgb), 0.2);
+}
+
+.sort-select option:checked {
+    background: rgba(var(--primary-orange-rgb), 0.2);
+    color: var(--accent-orange);
+}
+
+.sorter-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        var(--primary-orange), 
+        var(--accent-orange),
+        var(--primary-orange));
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    animation: pulse 2s infinite;
+}
+
+.sorter-wrapper:hover::before {
+    opacity: 0.3;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.sorter-container, .sorter-box, .sorter-icon, .sorter-info {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sorter-wrapper {
+        max-width: 280px;
+        margin: 10px auto 20px auto;
+    }
+    
+    .sort-select {
+        font-size: 0.85rem;
+        padding: 10px 45px 10px 15px;
+    }
+    
+    .custom-arrow {
+        right: 15px;
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+        line-height: 14px;
+    }
+}
+
+    .user-counter {
     position: absolute;
     top: 15px;
     right: 150px;
@@ -289,6 +444,15 @@
                 <div class="search-icon"><i class="fas fa-search"></i></div>
             </div>
             <div id="searchStats" class="search-stats"></div>
+                <div class="sorter-wrapper">
+                <select id="sortSelect" class="sort-select">
+                    <option value="default">[DEFAULT]</option>
+                    <option value="alphabetical">A → Z</option>
+                    <option value="reverse">Z → A</option>
+                    <option value="random">RANDOMIZED</option>
+                </select>
+                <div class="custom-arrow">▼</div>
+            </div>
             <div class="lessons-grid" id="allLessonsGrid">
             </div>
         </section>
@@ -385,12 +549,16 @@
 
     <script>
         const games = [
+            { title: "Slendy Tubbies", desc: "A popular indie horror game series blending the cute Teletubbies with the terrifying mechanics of Slender", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/st/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/281.jpg" },
+            { title: "Pixel Gun 3D", desc: "A popular blocky pixelated first-person shooter and a campaign where players fight hordes of pixelated zombies", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/pg3d/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/280.jpg" },
+            { title: "Flying Gorilla", desc: "A free, addictive 3D mobile arcade runner where players control a flying gorilla", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/fg/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/279.jpg" },
+            { title: "Eat The Rich", desc: "An Incremental Black Friday Simulator where you gather a mob and score massive savings!", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/eattherich/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/278.jpg" },
             { title: "GTA Vice City", desc: "An 80s-inspired open-world crime saga. Drive fast, build a criminal empire, and shoot your way to the top in a neon-soaked city", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/149.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/272.jpg" },
             { title: "Heretic", desc: "A dark medieval first-person shooter. Wield powerful magic and weapons to battle hordes of dark fantasy creatures.", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/150.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/273.jpg" },
             { title: "Bacon May Die", desc: "A fast-paced, 2D run and gun fighting game where you play as an angry pig warrior", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/151.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/274.jpg" },
-            { title: "Oneshot", desc: "A unique narrative puzzle game. Guide a child through a strange, dying world, forming a unique bond that transcends the game itself.", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/152.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/275.jpg" },
-            { title: "Jelly Drift", desc: " A wobbly physics-based racer. Master the slippery momentum of your jelly car to drift and slide around colorful tracks.", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/153.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/276.jpg" },
-            { title: "FNF Rewrite", desc: "A deceptive Friday Night Funkin' mod featuring the EXE character Rewrite. Starts as a typical horror mod before revealing a twist, with only two intense songs.", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/154.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/277.jpg" },
+            { title: "Oneshot", desc: "A unique narrative puzzle game. Guide a child through a strange, dying world, forming a unique bond that transcends the game itself", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/152.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/275.jpg" },
+            { title: "Jelly Drift", desc: " A wobbly physics-based racer. Master the slippery momentum of your jelly car to drift and slide around colorful tracks", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/153.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/276.jpg" },
+            { title: "FNF Rewrite", desc: "A deceptive Friday Night Funkin' mod featuring the EXE character Rewrite. Starts as a typical horror mod before revealing a twist, with only two intense songs", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/154.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/277.jpg" },
             { title: "Terraria", desc: "2D sandbox adventure with exploration, building, crafting, and combat in a procedurally generated world", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/148.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/271.jpg" },
             { title: "Celeste", desc: "Precision platformer about climbing a mountain while overcoming personal struggles and challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/147.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/270.jpg" },
             { title: "Burrito Bison", desc: "Physics based launch game where you catapult a luchador through candy-filled worlds to rescue gummy bears", url: "https://noahsamazingtutoringhelp.github.io/cautious-rotary-phone/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/130.jpg" },
@@ -680,27 +848,26 @@
         ];
         
         function generateGameCards() {
-            const popularContainer = document.getElementById('popularLessonsGrid');
-            const allContainer = document.getElementById('allLessonsGrid');
-            
-            popularContainer.innerHTML = '';
-            allContainer.innerHTML = '';
-            
-            const popularGames = games.filter(game => game.popular);
-            popularGames.forEach(game => {
-                const gameCard = createGameCard(game);
-                popularContainer.appendChild(gameCard);
-            });
-            
-            games.forEach(game => {
-                const gameCard = createGameCard(game);
-                allContainer.appendChild(gameCard);
-            });
-            
-            updateSearchStats();
-            
-            initCursorHover();
-        }
+    const popularContainer = document.getElementById('popularLessonsGrid');
+    const allContainer = document.getElementById('allLessonsGrid');
+    
+    popularContainer.innerHTML = '';
+    allContainer.innerHTML = '';
+    
+    const popularGames = games.filter(game => game.popular);
+    popularGames.forEach(game => {
+        const gameCard = createGameCard(game);
+        popularContainer.appendChild(gameCard);
+    });
+    
+    originalGamesOrder.forEach(game => {
+        const gameCard = createGameCard(game);
+        allContainer.appendChild(gameCard);
+    });
+    
+    updateSearchStats();
+    initCursorHover();
+}
         
         function createGameCard(game) {
             const card = document.createElement('div');
@@ -742,103 +909,285 @@
             });
         }
         
-        window.pageLoadTime=Date.now();
-        const canvas=document.getElementById('matrix-bg'),ctx=canvas.getContext('2d');
-        canvas.width=window.innerWidth;canvas.height=window.innerHeight;
-        const chars='01',charArray=chars.split(''),fontSize=14,columns=canvas.width/fontSize,drops=[];
-        for(let x=0;x<columns;x++)drops[x]=1;
-        function drawMatrix(){
-            ctx.fillStyle='rgba(10,10,10,0.04)';ctx.fillRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle=window.matrixColor||'#c27c15';ctx.font=fontSize+'px monospace';
-            for(let i=0;i<drops.length;i++){
-                const text=charArray[Math.floor(Math.random()*charArray.length)];
-                ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-                if(drops[i]*fontSize>canvas.height&&Math.random()>.975)drops[i]=0;
-                drops[i]++;
+        window.pageLoadTime = Date.now();
+const canvas = document.getElementById('matrix-bg');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const chars = '01';
+const charArray = chars.split('');
+let fontSize = 14;
+let columns = Math.floor(canvas.width / fontSize);
+const drops = [];
+
+function initDrops() {
+    columns = Math.floor(canvas.width / fontSize);
+    drops.length = 0;
+    for(let x = 0; x < columns; x++) {
+        drops[x] = Math.floor(Math.random() * canvas.height / fontSize);
+    }
+}
+
+initDrops();
+
+function drawMatrix() {
+    ctx.fillStyle = 'rgba(10, 10, 10, 0.04)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = window.matrixColor || '#c27c15';
+    ctx.font = fontSize + 'px monospace';
+    
+    for(let i = 0; i < drops.length; i++) {
+        const text = charArray[Math.floor(Math.random() * charArray.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+
+const matrixInterval = setInterval(drawMatrix, 35);
+
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    if (resizeTimeout) clearTimeout(resizeTimeout);
+    
+    resizeTimeout = setTimeout(() => {
+        const oldWidth = canvas.width;
+        const oldHeight = canvas.height;
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        columns = Math.floor(canvas.width / fontSize);
+        
+        if (columns !== drops.length) {
+            const newDrops = [];
+            for(let x = 0; x < columns; x++) {
+                const oldX = Math.floor(x * (oldWidth / columns) / fontSize);
+                if (oldX < drops.length) {
+                    newDrops[x] = Math.floor(drops[oldX] * (canvas.height / oldHeight));
+                } else {
+                    newDrops[x] = Math.floor(Math.random() * canvas.height / fontSize);
+                }
+            }
+            drops.length = 0;
+            drops.push(...newDrops);
+        } else {
+            for(let x = 0; x < columns; x++) {
+                drops[x] = Math.floor(drops[x] * (canvas.height / oldHeight));
             }
         }
-        setInterval(drawMatrix,35);
-        window.addEventListener('resize',()=>{
-            canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+        
+        drawMatrix();
+    }, 100);
+});
+
+document.addEventListener('fullscreenchange', handleFullscreenChange);
+document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+function handleFullscreenChange() {
+    setTimeout(() => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initDrops();
+        drawMatrix();
+    }, 50);
+}
+
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initDrops();
+        drawMatrix();
+    }
+});
+
+window.addEventListener('beforeunload', () => {
+    clearInterval(matrixInterval);
+});
+        
+        let currentSortMethod = 'default';
+let originalGamesOrder = [...games];
+let isSorterOpen = false;
+
+function sortGames(method) {
+    if (method === 'default') {
+        return [...originalGamesOrder];
+    }
+    
+    const sortedGames = [...games];
+    
+    switch(method) {
+        case 'alphabetical':
+            sortedGames.sort((a, b) => a.title.localeCompare(b.title));
+            break;
+            
+        case 'reverse':
+            sortedGames.sort((a, b) => b.title.localeCompare(a.title));
+            break;
+            
+        case 'random':
+            for (let i = sortedGames.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [sortedGames[i], sortedGames[j]] = [sortedGames[j], sortedGames[i]];
+            }
+            break;
+    }
+    
+    return sortedGames;
+}
+
+function applySorting() {
+    const sortedGames = sortGames(currentSortMethod);
+    const allContainer = document.getElementById('allLessonsGrid');
+    allContainer.innerHTML = '';
+    
+    sortedGames.forEach(game => {
+        const gameCard = createGameCard(game);
+        allContainer.appendChild(gameCard);
+    });
+    
+    initCursorHover();
+    updateSearchStats();
+    
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput.value) {
+        const searchEvent = new Event('input');
+        searchInput.dispatchEvent(searchEvent);
+    }
+    
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_sort', {
+            'event_category': 'engagement',
+            'event_label': currentSortMethod,
+            'value': sortedGames.length
         });
-        
-        function trackEvent(c,a,l,v){if(typeof gtag!=='undefined')gtag('event',a,{'event_category':c,'event_label':l,'value':v})}
-        if(typeof gtag!=='undefined')gtag('event','page_view',{'page_title':document.title,'page_location':window.location.href,'page_path':window.location.pathname});
-        
-        function openLesson(t,u){
-            trackEvent('game_interaction','game_launch',t,1);
-            const timeOnSite=Math.round((Date.now()-window.pageLoadTime)/1000);
-            if(typeof gtag!=='undefined')gtag('event','timing_complete',{'name':'time_to_first_game','value':timeOnSite,'event_category':'engagement'});
-            document.getElementById('gameTitle').textContent=t;
-            document.getElementById('gameFrame').src=u;
-            document.getElementById('gamePage').classList.add('active');
-            document.getElementById('main-container').classList.add('slide-down');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sortSelect = document.getElementById('sortSelect');
+    const arrow = document.querySelector('.custom-arrow');
+    
+    if (!sortSelect || !arrow) return;
+    
+    sortSelect.value = 'default';
+    
+    sortSelect.addEventListener('mousedown', function() {
+        if (!isSorterOpen) {
+            isSorterOpen = true;
+            arrow.classList.add('open');
+            arrow.style.animation = 'openFlip 0.25s cubic-bezier(0.2, 0.8, 0.2, 1.2) forwards';
         }
-        function closeLesson(){
-            trackEvent('game_interaction','game_exit',document.getElementById('gameTitle').textContent,1);
-            document.getElementById('gamePage').classList.add('slide-down');
-            document.getElementById('main-container').classList.remove('slide-down');
-            setTimeout(()=>{
-                document.getElementById('gamePage').classList.remove('active','slide-down');
-                document.getElementById('gameFrame').src='';
-                document.getElementById('gameFrame').classList.remove('fullscreen');
-            },500);
-        }
-        async function initiateDownload(g,t){
-            try{
-                const m=g.match(/games\/(\d+)\.html/);
-                if(!m)throw new Error('Could not extract game number from URL');
-                const n=m[1];
-                const u=`https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/${n}.html`;
-                console.log('Downloading from:',u);
-                const r=await fetch(u);
-                if(!r.ok)throw new Error('Network response was not ok');
-                let c=await r.text();
-                const b=`<div style="position:fixed;bottom:10px;right:10px;z-index:9999;"><a href="https://noahs-calculus-tutor.pages.dev" target="_blank" style="color:white;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(0,0,0,0.8);padding:8px 12px;border-radius:6px;font-family:Arial,sans-serif;"><span>Downloaded from Noah's Tutoring Hub</span><img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/5.png" style="height:18px;width:auto;"></a></div>`;
-                if(c.includes('</body>'))c=c.replace('</body>',b+'</body>');else c+=b;
-                if(c.includes('<title>'))c=c.replace(/<title>.*?<\/title>/i,`<title>${t}</title>`);
-                const f=new Blob([c],{type:'text/html'}),fu=URL.createObjectURL(f),dl=document.createElement('a');
-                dl.href=fu;dl.download=`${t.replace(/[^a-z0-9]/gi,'_')}.html`;document.body.appendChild(dl);dl.click();document.body.removeChild(dl);URL.revokeObjectURL(fu);
-                trackEvent('game_interaction','download_success',t,1);
-            }catch(e){
-                console.error('Download error:',e);trackEvent('game_interaction','download_error',t,1);
-                alert('Unable to download game. Please try again later.');
+    });
+    
+    sortSelect.addEventListener('change', function(e) {
+        currentSortMethod = e.target.value;
+        applySorting();
+        closeSorter();
+    });
+    
+    sortSelect.addEventListener('blur', function() {
+        setTimeout(() => {
+            if (document.activeElement !== sortSelect) {
+                closeSorter();
             }
+        }, 10);
+    });
+    
+    document.addEventListener('click', function(e) {
+        if (!sortSelect.contains(e.target) && isSorterOpen) {
+            closeSorter();
         }
-        function downloadCurrentGame(){
-            const f=document.getElementById('gameFrame'),u=f.src,t=document.getElementById('gameTitle').textContent;
-            console.log('Download attempted for:',u,'Title:',t);
-            if(u&&u.includes('https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/')&&u.includes('.html')){
-                trackEvent('game_interaction','download_attempt',t,1);initiateDownload(u,t);
-            }else{
-                trackEvent('game_interaction','download_failed',t,1);alert('Sorry, this game is not downloadable. Try another one.');
-            }
+    });
+    
+    function closeSorter() {
+        if (isSorterOpen) {
+            isSorterOpen = false;
+            arrow.classList.remove('open');
+            arrow.style.animation = 'closeFlip 0.25s cubic-bezier(0.2, 0.8, 0.2, 1.2) forwards';
+            
+            setTimeout(() => {
+                arrow.style.animation = '';
+            }, 250);
         }
-        function toggleFullscreen(){
-            const f=document.getElementById('gameFrame'),e=!f.classList.contains('fullscreen');
-            trackEvent('game_interaction',e?'fullscreen_enter':'fullscreen_exit',document.getElementById('gameTitle').textContent,1);
-            const el=document.fullscreenElement||document.webkitFullscreenElement||document.msFullscreenElement||document.mozFullScreenElement;
-            if(el){
-                if(document.exitFullscreen)document.exitFullscreen();
-                else if(document.webkitExitFullscreen)document.webkitExitFullscreen();
-                else if(document.msExitFullscreen)document.msExitFullscreen();
-                else if(document.mozCancelFullScreen)document.mozCancelFullScreen();
-            }else{
-                if(f.requestFullscreen)f.requestFullscreen();
-                else if(f.webkitRequestFullscreen)f.webkitRequestFullscreen();
-                else if(f.msRequestFullscreen)f.msRequestFullscreen();
-                else if(f.mozRequestFullScreen)f.mozRequestFullScreen();
-            }
-        }
-        
-        document.getElementById('searchInput').addEventListener('input',function(e){
-            const t=e.target.value.toLowerCase(),c=document.querySelectorAll('#allLessonsGrid .lesson-card');
-            let v=0;c.forEach(card=>{
-                const ti=card.querySelector('.lesson-title').textContent.toLowerCase(),
-                      d=card.querySelector('.lesson-desc').textContent.toLowerCase();
-                if(ti.includes(t)||d.includes(t)){card.style.display='block';v++;}else card.style.display='none';
-            });document.getElementById('searchStats').textContent=`Showing ${v} of ${c.length} lessons`;
+    }
+    
+    applySorting();
+});
+
+function updateGameDisplay(sortedGames) {
+    const allContainer = document.getElementById('allLessonsGrid');
+    allContainer.innerHTML = '';
+    
+    sortedGames.forEach(game => {
+        const gameCard = createGameCard(game);
+        allContainer.appendChild(gameCard);
+    });
+    
+    initCursorHover();
+    
+    const visibleCards = document.querySelectorAll('#allLessonsGrid .lesson-card:not([style*="display: none"])').length;
+    const totalCards = sortedGames.length;
+    document.getElementById('searchStats').textContent = `Showing ${visibleCards} of ${totalCards} lessons`;
+    
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_sort', {
+            'event_category': 'engagement',
+            'event_label': currentSortMethod,
+            'value': sortedGames.length
         });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const sortSelect = document.getElementById('sortSelect');
+    const sorterInfo = document.getElementById('sorterInfo');
+    
+        function updateSorterInfo(method) {
+        const infoMap = {
+            'default': 'ORIGINAL ORDER',
+            'alphabetical': 'ALPHABETICAL (A → Z)',
+            'reverse': 'REVERSE (Z → A)',
+            'popular': 'POPULAR FIRST',
+            'random': 'RANDOMIZED ORDER',
+            'newest': 'NEWEST FIRST'
+        };
+        sorterInfo.textContent = infoMap[method] || 'SORTING...';
+    }
+    
+    sortSelect.addEventListener('change', function(e) {
+        currentSortMethod = e.target.value;
+        const sortedGames = sortGames(currentSortMethod);
+
+        updateGameDisplay(sortedGames);
+        updateSorterInfo(currentSortMethod);
+        
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput.value) {
+            const searchEvent = new Event('input');
+            searchInput.dispatchEvent(searchEvent);
+        }
+    });
+    
+    sortSelect.value = 'default';
+    updateSorterInfo('default');
+
+    document.addEventListener('keydown', function(e) {
+        if (e.altKey && e.key === 's') {
+            e.preventDefault();
+            sortSelect.focus();
+        }
+    });
+});
         
         function hideWarning(){document.getElementById('warningOverlay').classList.add('hidden');}
         
@@ -888,6 +1237,8 @@
     let cursorHidden = false;
     let cursorTimeout;
     
+    let commentsIframe = null;
+    
     const style = document.createElement('style');
     style.textContent = `
         #custom-cursor {
@@ -896,6 +1247,19 @@
         #custom-cursor.hidden {
             opacity: 0;
             pointer-events: none;
+        }
+        
+        /* Add this to ensure iframe gets proper cursor */
+        .padlet-embed iframe {
+            cursor: auto !important;
+        }
+        
+        .blur-overlay:not(.hidden) {
+            z-index: 1000 !important;
+        }
+        
+        .warning-content, .acknowledge-btn {
+            cursor: auto !important;
         }
     `;
     document.head.appendChild(style);
@@ -927,34 +1291,70 @@
         }, 3000);
     }
     
+    function isOverIframe(x, y) {
+        const iframes = document.querySelectorAll('iframe');
+        for (const iframe of iframes) {
+            const rect = iframe.getBoundingClientRect();
+            if (x >= rect.left && x <= rect.right && 
+                y >= rect.top && y <= rect.bottom) {
+
+                if (iframe.closest('.comments-section') || 
+                    iframe.src.includes('padlet.com')) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function isOverWarningOverlay(x, y) {
+        const overlay = document.getElementById('warningOverlay');
+        if (!overlay || overlay.classList.contains('hidden')) return false;
+        
+        const rect = overlay.getBoundingClientRect();
+        return x >= rect.left && x <= rect.right && 
+               y >= rect.top && y <= rect.bottom;
+    }
+    
     document.addEventListener('mousemove', (e) => {
         mx = e.clientX;
         my = e.clientY;
-        showCursor();
-        resetCursorTimeout();
         
-        const element = document.elementFromPoint(mx, my);
-        if (element && (element.tagName === 'IFRAME' || element.closest('iframe'))) {
+        const isOverPadletIframe = isOverIframe(mx, my);
+        const isOverWarning = isOverWarningOverlay(mx, my);
+        
+        if (isOverPadletIframe && !isOverWarning) {
             hideCursor();
+            document.body.style.cursor = 'auto';
         } else {
             showCursor();
+            document.body.style.cursor = 'none';
+            resetCursorTimeout();
         }
+        
+        cx = lerp(cx, mx, 0.25);
+        cy = lerp(cy, my, 0.25);
+        c.style.left = cx + 'px';
+        c.style.top = cy + 'px';
     });
     
     function animate() {
-        if (!cursorHidden) {
-            cx = lerp(cx, mx, 0.25);
-            cy = lerp(cy, my, 0.25);
-            c.style.left = cx + 'px';
-            c.style.top = cy + 'px';
-        }
+        cx = lerp(cx, mx, 0.25);
+        cy = lerp(cy, my, 0.25);
+        c.style.left = cx + 'px';
+        c.style.top = cy + 'px';
         requestAnimationFrame(animate);
     }
     animate();
     
-    document.addEventListener('mousedown', () => {
-        showCursor();
-        c.classList.add('click');
+    document.addEventListener('mousedown', (e) => {
+        const isOverPadletIframe = isOverIframe(e.clientX, e.clientY);
+        const isOverWarning = isOverWarningOverlay(e.clientX, e.clientY);
+        
+        if (!isOverPadletIframe || isOverWarning) {
+            showCursor();
+            c.classList.add('click');
+        }
     });
     
     document.addEventListener('mouseup', () => {
@@ -962,48 +1362,29 @@
         c.classList.remove('click');
     });
     
-    document.addEventListener('mouseleave', () => {
-        hideCursor();
-    });
-    
-    document.addEventListener('mouseenter', () => {
-        showCursor();
-    });
-    
-    document.addEventListener('mousemove', (e) => {
-        const elements = document.elementsFromPoint(e.clientX, e.clientY);
-        const isOverIframe = elements.some(el => 
-            el.tagName === 'IFRAME' || 
-            (el.closest && el.closest('iframe'))
-        );
-        
-        if (isOverIframe) {
-            hideCursor();
-        } else {
-            showCursor();
-        }
-    });
-    
-    const observer = new MutationObserver(() => {
+    const gameObserver = new MutationObserver(() => {
         const gameFrame = document.getElementById('gameFrame');
         if (gameFrame) {
             gameFrame.addEventListener('mouseenter', () => {
                 hideCursor();
+                document.body.style.cursor = 'auto';
             });
             
             gameFrame.addEventListener('mouseleave', () => {
                 showCursor();
+                document.body.style.cursor = 'none';
             });
         }
     });
     
-    observer.observe(document.body, { childList: true, subtree: true });
+    gameObserver.observe(document.body, { childList: true, subtree: true });
     
-    const interactive = document.querySelectorAll('button, a, .partner-card, .nav-tab, .btn, .search-box, input, .lesson-card');
+    const interactive = document.querySelectorAll('button, a, .partner-card, .nav-tab, .btn, .search-box, input, .lesson-card, .theme-toggle-btn');
     interactive.forEach(el => {
         el.addEventListener('mouseenter', () => {
             showCursor();
             c.classList.add('hover');
+            document.body.style.cursor = 'none';
         });
         el.addEventListener('mouseleave', () => {
             showCursor();
@@ -1011,7 +1392,19 @@
         });
     });
     
-
+    const warningBtn = document.querySelector('.acknowledge-btn');
+    if (warningBtn) {
+        warningBtn.addEventListener('mouseenter', () => {
+            showCursor();
+            c.classList.add('hover');
+            document.body.style.cursor = 'none';
+        });
+        warningBtn.addEventListener('mouseleave', () => {
+            showCursor();
+            c.classList.remove('hover');
+        });
+    }
+    
     resetCursorTimeout();
 })();
         
@@ -1202,5 +1595,4 @@ this.baseCount = Math.max(1000, Math.min(1500, base));
         });
     </script>
 </body>
-
 </html>
