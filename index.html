@@ -907,7 +907,10 @@ function toggleFullscreen() {
         });
     }
     
-    if (!document.fullscreenElement) {
+    if (!document.fullscreenElement && 
+        !document.webkitFullscreenElement && 
+        !document.mozFullScreenElement && 
+        !document.msFullscreenElement) {
         if (frame.requestFullscreen) {
             frame.requestFullscreen();
         } else if (frame.webkitRequestFullscreen) {
@@ -1140,6 +1143,21 @@ document.addEventListener('mozfullscreenchange', handleFullscreenChange);
 document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 
 function handleFullscreenChange() {
+    const frame = document.getElementById('gameFrame');
+    const gamePage = document.getElementById('gamePage');
+    
+    if (!document.fullscreenElement && 
+        !document.webkitFullscreenElement && 
+        !document.mozFullScreenElement && 
+        !document.msFullscreenElement) {
+        frame.classList.remove('fullscreen');
+        
+        if (gamePage) {
+            gamePage.classList.add('active');
+            gamePage.classList.remove('slide-down');
+        }
+    }
+    
     setTimeout(() => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
