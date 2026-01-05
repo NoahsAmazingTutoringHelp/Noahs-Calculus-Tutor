@@ -204,6 +204,7 @@
     letter-spacing: 1px;
 }
 
+
 .custom-arrow {
     position: absolute;
     right: 20px;
@@ -223,6 +224,72 @@
     justify-content: center;
 }
 
+html, body, * {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none !important;
+}
+
+#custom-scrollbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100vh;
+    z-index: 99999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#custom-scrollbar.visible,
+#custom-scrollbar:hover {
+    pointer-events: auto;
+}
+
+#custom-scrollbar-track {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: auto;
+}
+
+#custom-scrollbar-thumb {
+    position: absolute;
+    right: 1px;
+    width: 8px;
+    min-height: 40px;
+    background: rgba(var(--primary-orange-rgb), 0.7);
+    border-radius: 4px;
+    cursor: grab;
+    pointer-events: auto;
+    transition: 
+        background 0.3s,
+        width 0.2s,
+        right 0.2s,
+        opacity 0.4s;
+}
+
+#custom-scrollbar-thumb:hover {
+    background: var(--accent-orange);
+    width: 10px;
+    right: 0;
+}
+
+#custom-scrollbar-thumb:active,
+#custom-scrollbar-thumb.dragging {
+    background: var(--accent-orange);
+    cursor: grabbing;
+    width: 10px;
+    right: 0;
+}
 .sorter-wrapper:hover .custom-arrow:not(.open) {
     animation: quickPulse 1s infinite ease-in-out;
     color: var(--accent-orange);
@@ -400,6 +467,11 @@
 </head>
 
 <body>
+    <div id="custom-scrollbar">
+    <div id="custom-scrollbar-track">
+        <div id="custom-scrollbar-thumb"></div>
+    </div>
+</div>
     <div id="custom-cursor"></div>
     <canvas id="matrix-bg"></canvas>
     <div class="container" id="main-container">
@@ -530,7 +602,7 @@
             </div>
         </section>
         <footer>
-            <p>© 2025 Noah's Tutoring Hub. All rights reserved.</p>
+            <p>© 2026 Noah's Tutoring Hub. All rights reserved.</p>
             <p>Educational purposes only.</p>
         </footer>
     </div>
@@ -613,27 +685,9 @@
             { title: "Super Liquid Soccer", desc: "Arcade soccer game with fluid physics and exaggerated gameplay mechanics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/98.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/222.jpg" },
             { title: "Tempoverdose", desc: "Rhythm game with intense tempo-based challenges and electronic music", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/97.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/221.jpg" },
             { title: "Abandoned", desc: "Escape room type game where you need to figure out how to get out of each", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/96.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/220.jpg" },
-            {
-                title: "Plants Vs Zombies 2",
-                desc: "Defend your lawn with crazy plants against fun-loving zombies across time",
-                url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html",
-                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg",
-                popular: true
-            },
-            {
-                title: "Hotline Miami",
-                desc: "Fast-paced top-down action combat",
-                url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html",
-                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg",
-                popular: true
-            },
-            {
-                title: "Balatro",
-                desc: "Build insane poker hands with special Joker cards",
-                url: "https://raw.githack.com/thirstygithub/mathamatic-notes/main/index.html",
-                image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg",
-                popular: true
-            },
+            { title: "Plants Vs Zombies 2", desc: "Defend your lawn with crazy plants against fun-loving zombies across time", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg", popular: true },
+            { title: "Hotline Miami", desc: "Fast-paced top-down action combat", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg", popular: true },
+            { title: "Balatro", desc: "Build insane poker hands with special Joker cards", url: "https://raw.githack.com/thirstygithub/mathamatic-notes/main/index.html",  image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg",popular: true },
             { title: "Wolfenstein 3D", desc: "The pioneer FPS game where you battle Nazis as Allied spy B.J. Blazkowicz", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/95.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/219.jpg" },
             { title: "Zombotron Reboot", desc: "Action-packed platform shooter with physics-based combat in zombie-infested world", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/94.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/218.jpg" },
             { title: "Mortal Kombat 4", desc: "Classic fighting game with brutal fatalities and iconic characters in fourth installment", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/93.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/fuckthis.jpg" },
@@ -1402,29 +1456,31 @@ document.addEventListener('DOMContentLoaded', function() {
     let cursorHidden = false;
     let cursorTimeout;
     
-    let commentsIframe = null;
+    document.documentElement.style.cursor = 'none';
+    document.body.style.cursor = 'none';
     
     const style = document.createElement('style');
     style.textContent = `
+        * {
+            cursor: none !important;
+        }
+        iframe, 
+        .padlet-embed iframe,
+        .game-frame,
+        .game-frame * {
+            cursor: auto !important;
+        }
+        .warning-content, 
+        .acknowledge-btn {
+            cursor: pointer !important;
+        }
         #custom-cursor {
             transition: opacity 0.3s ease, transform 0.12s, width 0.15s, height 0.15s;
+            z-index: 999999;
         }
         #custom-cursor.hidden {
             opacity: 0;
             pointer-events: none;
-        }
-        
-        /* Add this to ensure iframe gets proper cursor */
-        .padlet-embed iframe {
-            cursor: auto !important;
-        }
-        
-        .blur-overlay:not(.hidden) {
-            z-index: 1000 !important;
-        }
-        
-        .warning-content, .acknowledge-btn {
-            cursor: auto !important;
         }
     `;
     document.head.appendChild(style);
@@ -1433,14 +1489,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return (1 - a) * s + a * e;
     }
     
-    function hideCursor() {
+    function hideCustomCursor() {
         if (!cursorHidden) {
             c.classList.add('hidden');
             cursorHidden = true;
         }
     }
     
-    function showCursor() {
+    function showCustomCursor() {
         if (cursorHidden) {
             c.classList.remove('hidden');
             cursorHidden = false;
@@ -1451,7 +1507,7 @@ document.addEventListener('DOMContentLoaded', function() {
         clearTimeout(cursorTimeout);
         cursorTimeout = setTimeout(() => {
             if (!cursorHidden) {
-                hideCursor();
+                hideCustomCursor();
             }
         }, 3000);
     }
@@ -1462,11 +1518,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const rect = iframe.getBoundingClientRect();
             if (x >= rect.left && x <= rect.right && 
                 y >= rect.top && y <= rect.bottom) {
-
-                if (iframe.closest('.comments-section') || 
-                    iframe.src.includes('padlet.com')) {
-                    return true;
-                }
+                return true;
             }
         }
         return false;
@@ -1485,22 +1537,17 @@ document.addEventListener('DOMContentLoaded', function() {
         mx = e.clientX;
         my = e.clientY;
         
-        const isOverPadletIframe = isOverIframe(mx, my);
+        const isOverIframeArea = isOverIframe(mx, my);
         const isOverWarning = isOverWarningOverlay(mx, my);
-        
-        if (isOverPadletIframe && !isOverWarning) {
-            hideCursor();
-            document.body.style.cursor = 'auto';
+n
+        if (isOverIframeArea && !isOverWarning) {
+            hideCustomCursor();
+            document.documentElement.style.cursor = 'auto';
         } else {
-            showCursor();
-            document.body.style.cursor = 'none';
+            showCustomCursor();
+            document.documentElement.style.cursor = 'none';
             resetCursorTimeout();
         }
-        
-        cx = lerp(cx, mx, 0.25);
-        cy = lerp(cy, my, 0.25);
-        c.style.left = cx + 'px';
-        c.style.top = cy + 'px';
     });
     
     function animate() {
@@ -1511,65 +1558,66 @@ document.addEventListener('DOMContentLoaded', function() {
         requestAnimationFrame(animate);
     }
     animate();
-    
+
     document.addEventListener('mousedown', (e) => {
-        const isOverPadletIframe = isOverIframe(e.clientX, e.clientY);
+        const isOverIframeArea = isOverIframe(e.clientX, e.clientY);
         const isOverWarning = isOverWarningOverlay(e.clientX, e.clientY);
         
-        if (!isOverPadletIframe || isOverWarning) {
-            showCursor();
+        if (!isOverIframeArea || isOverWarning) {
+            showCustomCursor();
             c.classList.add('click');
         }
     });
     
     document.addEventListener('mouseup', () => {
-        showCursor();
         c.classList.remove('click');
     });
+
+    const interactive = document.querySelectorAll('button, a, .partner-card, .nav-tab, .btn, .search-box, input, .lesson-card, .theme-toggle-btn, .sort-select, .discord-btn, .visit-btn, .acknowledge-btn, .sorter-wrapper, .social-icons a');
     
-    const gameObserver = new MutationObserver(() => {
-        const gameFrame = document.getElementById('gameFrame');
-        if (gameFrame) {
-            gameFrame.addEventListener('mouseenter', () => {
-                hideCursor();
-                document.body.style.cursor = 'auto';
-            });
-            
-            gameFrame.addEventListener('mouseleave', () => {
-                showCursor();
-                document.body.style.cursor = 'none';
-            });
-        }
-    });
-    
-    gameObserver.observe(document.body, { childList: true, subtree: true });
-    
-    const interactive = document.querySelectorAll('button, a, .partner-card, .nav-tab, .btn, .search-box, input, .lesson-card, .theme-toggle-btn');
     interactive.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            showCursor();
+        el.addEventListener('mouseenter', (e) => {
+            e.stopPropagation();
+            showCustomCursor();
             c.classList.add('hover');
-            document.body.style.cursor = 'none';
         });
-        el.addEventListener('mouseleave', () => {
-            showCursor();
+        
+        el.addEventListener('mouseleave', (e) => {
+            e.stopPropagation();
             c.classList.remove('hover');
         });
     });
-    
-    const warningBtn = document.querySelector('.acknowledge-btn');
-    if (warningBtn) {
-        warningBtn.addEventListener('mouseenter', () => {
-            showCursor();
-            c.classList.add('hover');
-            document.body.style.cursor = 'none';
+
+    const gameFrame = document.getElementById('gameFrame');
+    if (gameFrame) {
+        gameFrame.addEventListener('mouseenter', () => {
+            hideCustomCursor();
+            document.documentElement.style.cursor = 'auto';
         });
-        warningBtn.addEventListener('mouseleave', () => {
-            showCursor();
-            c.classList.remove('hover');
+        
+        gameFrame.addEventListener('mouseleave', () => {
+            showCustomCursor();
+            document.documentElement.style.cursor = 'none';
         });
     }
-    
+
+    const gameControls = document.querySelectorAll('.game-controls .btn');
+    gameControls.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            showCustomCursor();
+            c.classList.add('hover');
+        });
+        btn.addEventListener('mouseleave', () => {
+            c.classList.remove('hover');
+        });
+    });
+
+    ['click', 'mousedown', 'keydown', 'scroll'].forEach(eventType => {
+        document.addEventListener(eventType, () => {
+            resetCursorTimeout();
+        });
+    });
+
     resetCursorTimeout();
 })();
         
@@ -1758,6 +1806,190 @@ this.baseCount = Math.max(1000, Math.min(1500, base));
             
             generateGameCards();
         });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollbar = document.getElementById('custom-scrollbar');
+    const scrollbarThumb = document.getElementById('custom-scrollbar-thumb');
+    const scrollbarTrack = document.getElementById('custom-scrollbar-track');
+    
+    if (!scrollbar || !scrollbarThumb || !scrollbarTrack) return;
+    
+    let isDragging = false;
+    let lastY = 0;
+    let scrollTimeout;
+    let mouseMoveTimeout;
+    let isHovering = false;
+
+    scrollbar.style.opacity = '0';
+    
+    function updateScrollbar() {
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const maxScroll = Math.max(docHeight - windowHeight, 1);
+        const thumbHeight = Math.max((windowHeight / docHeight) * windowHeight, 40);
+        scrollbarThumb.style.height = thumbHeight + 'px';
+        const thumbTop = maxScroll > 0 ? (scrollTop / maxScroll) * (windowHeight - thumbHeight) : 0;
+        scrollbarThumb.style.top = thumbTop + 'px';
+
+        showScrollbar();
+    }
+    
+    function showScrollbar() {
+        const gamePage = document.getElementById('gamePage');
+        if (gamePage && gamePage.classList.contains('active')) {
+            hideScrollbar();
+            return;
+        }
+
+        if (isHovering) return;
+        
+        scrollbar.style.opacity = '0.8';
+        clearTimeout(scrollTimeout);
+        
+        scrollTimeout = setTimeout(() => {
+            if (!isHovering && !isDragging) {
+                hideScrollbar();
+            }
+        }, 1500);
+    }
+    
+    function hideScrollbar() {
+        scrollbar.style.opacity = '0';
+    }
+    
+    function handleScrollbarMouseEnter() {
+        isHovering = true;
+        scrollbar.style.opacity = '0.8';
+        clearTimeout(scrollTimeout);
+    }
+    
+    function handleScrollbarMouseLeave() {
+        isHovering = false;
+        if (!isDragging) {
+            scrollTimeout = setTimeout(() => {
+                hideScrollbar();
+            }, 500);
+        }
+    }
+    
+    function handleDocumentMouseMove(e) {
+        const mouseX = e.clientX;
+        const windowWidth = window.innerWidth;
+        const distanceFromRight = windowWidth - mouseX;
+        
+        if (distanceFromRight <= 20) {
+            const gamePage = document.getElementById('gamePage');
+            if (gamePage && gamePage.classList.contains('active')) {
+                return;
+            }
+            
+            showScrollbar();
+        } else if (!isHovering && !isDragging && !isMouseOverScrollbar(e)) {
+            clearTimeout(mouseMoveTimeout);
+            mouseMoveTimeout = setTimeout(() => {
+                hideScrollbar();
+            }, 500);
+        }
+    }
+    
+    function isMouseOverScrollbar(e) {
+        const rect = scrollbar.getBoundingClientRect();
+        return e.clientX >= rect.left && 
+               e.clientX <= rect.right && 
+               e.clientY >= rect.top && 
+               e.clientY <= rect.bottom;
+    }
+    
+    function startDrag(e) {
+        isDragging = true;
+        lastY = e.clientY;
+        scrollbarThumb.classList.add('dragging');
+        e.preventDefault();
+    }
+    
+    function doDrag(e) {
+        if (!isDragging) return;
+        
+        const currentY = e.clientY;
+        const deltaY = currentY - lastY;
+        lastY = currentY;
+        
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const maxScroll = Math.max(docHeight - windowHeight, 1);
+        const thumbHeight = parseInt(scrollbarThumb.style.height) || 40;
+        const trackHeight = windowHeight - thumbHeight;
+        
+        const scrollPercent = deltaY / trackHeight;
+        window.scrollBy(0, scrollPercent * maxScroll);
+        
+        e.preventDefault();
+    }
+    
+    function stopDrag() {
+        isDragging = false;
+        scrollbarThumb.classList.remove('dragging');
+        
+        setTimeout(() => {
+            if (!isHovering) {
+                hideScrollbar();
+            }
+        }, 1000);
+    }
+    
+    function trackClick(e) {
+        if (e.target === scrollbarThumb) return;
+        
+        const rect = scrollbarTrack.getBoundingClientRect();
+        const clickY = e.clientY - rect.top;
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const maxScroll = Math.max(docHeight - windowHeight, 1);
+        const thumbHeight = parseInt(scrollbarThumb.style.height) || 40;
+        
+        const newThumbTop = Math.min(Math.max(clickY - thumbHeight / 2, 0), windowHeight - thumbHeight);
+        const scrollPercent = newThumbTop / (windowHeight - thumbHeight);
+        
+        window.scrollTo(0, scrollPercent * maxScroll);
+    }
+    
+    scrollbarThumb.addEventListener('mousedown', startDrag);
+    scrollbarTrack.addEventListener('mousedown', trackClick);
+    
+    scrollbar.addEventListener('mouseenter', handleScrollbarMouseEnter);
+    scrollbar.addEventListener('mouseleave', handleScrollbarMouseLeave);
+    
+    document.addEventListener('mousemove', handleDocumentMouseMove);
+    document.addEventListener('mousemove', doDrag);
+    document.addEventListener('mouseup', stopDrag);
+
+    window.addEventListener('scroll', updateScrollbar);
+    window.addEventListener('resize', updateScrollbar);
+
+    const gamePage = document.getElementById('gamePage');
+    if (gamePage) {
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    if (gamePage.classList.contains('active')) {
+                        hideScrollbar();
+                    } else {
+                        setTimeout(updateScrollbar, 100);
+                    }
+                }
+            });
+        });
+        
+        observer.observe(gamePage, { attributes: true });
+    }
+    
+    setTimeout(updateScrollbar, 100);
+    
+    setTimeout(() => {
+        hideScrollbar();
+    }, 3000);
+});
     </script>
 </body>
 
