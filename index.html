@@ -1992,21 +1992,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 3000);
 });
 
-// Tab visibility and title switching
 const schoolSubjects = ["Math", "Science", "English", "History", "Biology", "Chemistry", "Physics", "Calculus", "Algebra", "Geometry", "Literature", "Spanish", "French", "Art", "Music", "Computer Science", "Economics", "Psychology", "Statistics"];
 const activeIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/cuh.png";
 const inactiveIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/images/fruh.png";
 
-// Get a random subject (different each time)
 function getRandomSubject() {
     return schoolSubjects[Math.floor(Math.random() * schoolSubjects.length)];
 }
 
-// Set initial title with random subject
 let currentSubject = getRandomSubject();
 document.title = `Noahs Tutoring | ${currentSubject}`;
 
-// Update link element for favicon
 let favicon = document.querySelector("link[rel~='icon']");
 if (!favicon) {
     favicon = document.createElement('link');
@@ -2015,28 +2011,23 @@ if (!favicon) {
 }
 favicon.href = activeIcon;
 
-// Handle tab visibility changes
 document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
-        // Tab is hidden/out of focus
         document.title = "Home";
         favicon.href = inactiveIcon;
     } else {
-        // Tab is active/in focus - get new random subject
         currentSubject = getRandomSubject();
         document.title = `Noahs Tutoring | ${currentSubject}`;
         favicon.href = activeIcon;
     }
 });
 
-// Optional: Change subject periodically even when tab is active
 let subjectInterval = setInterval(() => {
     if (!document.hidden) {
         currentSubject = getRandomSubject();
         document.title = `Noahs Tutoring | ${currentSubject}`;
     }
-}, 30000); // Change subject every 30 seconds
+}, 30000);
     </script>
 </body>
-
 </html>
