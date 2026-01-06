@@ -11,8 +11,8 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canvas | College Courses</title>
-    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/favicon.ico">
+    <title>Noahs Tutoring | Math</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/cuh.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New',monospace}
@@ -185,7 +185,7 @@
     background: linear-gradient(145deg, rgba(25, 25, 25, 0.9), rgba(15, 15, 15, 0.9));
     border: 2px solid var(--primary-orange);
     border-radius: 8px;
-    color: var(--light-text);
+    color: var(--accent-orange);
     font-size: 0.95rem;
     font-family: 'Courier New', monospace;
     font-weight: bold;
@@ -519,7 +519,7 @@ body::-webkit-scrollbar,
             <div id="searchStats" class="search-stats"></div>
             <div class="sorter-wrapper">
                 <select id="sortSelect" class="sort-select">
-                    <option value="default">[DEFAULT]</option>
+                    <option value="default">[NEWEST]</option>
                     <option value="alphabetical">[A - Z]</option>
                     <option value="reverse">[Z - A]</option>
                     <option value="random">[RANDOMIZED]</option>
@@ -622,6 +622,7 @@ body::-webkit-scrollbar,
 
     <script>
         const games = [
+            { title: "Doom 3", desc: "A sci-fi horror first-person shooter at a Mars research base where teleportation experiments open a gateway to Hell, unleashing demons and zombies.", url: "https://doom3kaidensarcade.netlify.app/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/282.jpg" },
             { title: "Slendy Tubbies", desc: "A popular indie horror game series blending the cute Teletubbies with the terrifying mechanics of Slender", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/st/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/281.jpg" },
             { title: "Pixel Gun 3D", desc: "A popular blocky pixelated first-person shooter and a campaign where players fight hordes of pixelated zombies", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/pg3d/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/280.jpg" },
             { title: "Flying Gorilla", desc: "A free, addictive 3D mobile arcade runner where players control a flying gorilla", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/fg/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/279.jpg" },
@@ -1990,6 +1991,51 @@ document.addEventListener('DOMContentLoaded', function() {
         hideScrollbar();
     }, 3000);
 });
+
+// Tab visibility and title switching
+const schoolSubjects = ["Math", "Science", "English", "History", "Biology", "Chemistry", "Physics", "Calculus", "Algebra", "Geometry", "Literature", "Spanish", "French", "Art", "Music", "Computer Science", "Economics", "Psychology", "Statistics"];
+const activeIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/cuh.png";
+const inactiveIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/images/fruh.png";
+
+// Get a random subject (different each time)
+function getRandomSubject() {
+    return schoolSubjects[Math.floor(Math.random() * schoolSubjects.length)];
+}
+
+// Set initial title with random subject
+let currentSubject = getRandomSubject();
+document.title = `Noahs Tutoring | ${currentSubject}`;
+
+// Update link element for favicon
+let favicon = document.querySelector("link[rel~='icon']");
+if (!favicon) {
+    favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    document.head.appendChild(favicon);
+}
+favicon.href = activeIcon;
+
+// Handle tab visibility changes
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        // Tab is hidden/out of focus
+        document.title = "Home";
+        favicon.href = inactiveIcon;
+    } else {
+        // Tab is active/in focus - get new random subject
+        currentSubject = getRandomSubject();
+        document.title = `Noahs Tutoring | ${currentSubject}`;
+        favicon.href = activeIcon;
+    }
+});
+
+// Optional: Change subject periodically even when tab is active
+let subjectInterval = setInterval(() => {
+    if (!document.hidden) {
+        currentSubject = getRandomSubject();
+        document.title = `Noahs Tutoring | ${currentSubject}`;
+    }
+}, 30000); // Change subject every 30 seconds
     </script>
 </body>
 
