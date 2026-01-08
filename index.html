@@ -1144,7 +1144,7 @@ body::-webkit-scrollbar,
             const hasRandomCard = randomCard && randomCard.style.display !== 'none';
             
             if (hasRandomCard) {
-                searchStats.textContent = `Showing ${totalNonRandom + 1} of ${totalNonRandom + 1} lessons (random game included)`;
+                searchStats.textContent = `Showing ${totalNonRandom + 1} of ${totalNonRandom + 1} lessons`;
             } else {
                 searchStats.textContent = `Showing ${totalNonRandom} of ${totalNonRandom} lessons`;
             }
@@ -1383,7 +1383,7 @@ function createGameCard(game, isRandom = false) {
     const searchStats = document.getElementById('searchStats');
     if (searchStats) {
         if (hasRandomCard) {
-            searchStats.textContent = `Showing ${nonRandomCards.length + 1} of ${nonRandomCards.length + 1} lessons (random game included)`;
+            searchStats.textContent = `Showing ${nonRandomCards.length + 1} of ${nonRandomCards.length + 1} lessons`;
         } else {
             searchStats.textContent = `Showing ${nonRandomCards.length} of ${nonRandomCards.length} lessons`;
         }
