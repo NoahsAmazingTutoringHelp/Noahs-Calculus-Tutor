@@ -1,87 +1,1526 @@
-<html>
-
+<!DOCTYPE html> 
+<html lang="en-US">
 <head>
-  <meta charset="utf-8">
-  <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/gardenless/">
-  <title>PvZ2 Gardendless Online | 0.6.0</title>
-<script>
-(function() {
-  const originalImage = window.Image;
-  window.Image = function() {
-    const img = new originalImage();
-    img.crossOrigin = 'anonymous';
-    return img;
-  };
-})();
-</script>
-  <!--http://www.html5rocks.com/en/mobile/mobifying/-->
-  <meta name="viewport"
-    content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1,minimal-ui=true" />
 
-  <!--https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="format-detection" content="telephone=no">
+<title>MineSweeper - Play the classic game here!</title>
 
-  <!-- force webkit on 360 -->
-  <meta name="renderer" content="webkit" />
-  <meta name="force-rendering" content="webkit" />
-  <!-- force edge on IE -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="msapplication-tap-highlight" content="no">
+<!-- Standard Setup -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- force full screen on some browser -->
-  <meta name="full-screen" content="yes" />
-  <meta name="x5-fullscreen" content="true" />
-  <meta name="360-fullscreen" content="true" />
+<!-- Pre-Connect + Pre-Load -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
 
-  <!--fix fireball/issues/3568 -->
-  <!--<meta name="browsermode" content="application">-->
-  <meta name="x5-page-mode" content="app">
+<!-- Descriptive Meta Tags -->
+<meta name="description" content="Play minesweeper online at the original #1 site. Works on phones, tablets and Mac!" />
+<meta name="keywords" content="Minesweeper, Minesweeper Game, Minesweeper Online, Classic Minesweeper" />
+<meta name="author" content="The Free Video Games Project" />
+<meta name="copyright" content="&copy; 2005-2023. FreeVideoGames.org. All Rights Reserved." />
 
-  <!--<link rel="apple-touch-icon" href=".png" />-->
-  <!--<link rel="apple-touch-icon-precomposed" href=".png" />-->
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://freeminesweeper.org" />
+<meta property="og:site_name" content="FreeMinesweeper.org" />
+<meta property="og:title" content="Original Minesweeper.. in the Browser!" />
+<meta property="og:description" content="Awesome browser version of the original Windows Minesweeper. Play instantly anytime." />
+<meta property="og:image" content="https://freeminesweeper.org/images/thumbnails/free-minesweeper-thumbnail.png" />
+<meta name="twitter:image:alt" content="Minesweeper Game Logo" />
+<meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="stylesheet" type="text/css" href="style.f76d1.css" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FNC28KV0ZR"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+<!-- For the Robots -->
+<meta name="robots" content="all" />
+<meta name="revisit-after" content="7 days" />
 
-    gtag('config', 'G-FNC28KV0ZR');
-  </script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7637695321442015"
-    crossorigin="anonymous"></script>
-  <script async src="https://fundingchoicesmessages.google.com/i/pub-7637695321442015?ers=1"></script>
-  <script>(function () { function signalGooglefcPresent() { if (!window.frames['googlefcPresent']) { if (document.body) { const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe); } else { setTimeout(signalGooglefcPresent, 0); } } } signalGooglefcPresent(); })();</script>
-  <script>(function () { 'use strict'; function aa(a) { var b = 0; return function () { return b < a.length ? { done: !1, value: a[b++] } : { done: !0 } } } var ba = typeof Object.defineProperties == "function" ? Object.defineProperty : function (a, b, c) { if (a == Array.prototype || a == Object.prototype) return a; a[b] = c.value; return a }; function ca(a) { a = ["object" == typeof globalThis && globalThis, a, "object" == typeof window && window, "object" == typeof self && self, "object" == typeof global && global]; for (var b = 0; b < a.length; ++b) { var c = a[b]; if (c && c.Math == Math) return c } throw Error("Cannot find global object"); } var da = ca(this); function l(a, b) { if (b) a: { var c = da; a = a.split("."); for (var d = 0; d < a.length - 1; d++) { var e = a[d]; if (!(e in c)) break a; c = c[e] } a = a[a.length - 1]; d = c[a]; b = b(d); b != d && b != null && ba(c, a, { configurable: !0, writable: !0, value: b }) } } function ea(a) { return a.raw = a } function n(a) { var b = typeof Symbol != "undefined" && Symbol.iterator && a[Symbol.iterator]; if (b) return b.call(a); if (typeof a.length == "number") return { next: aa(a) }; throw Error(String(a) + " is not an iterable or ArrayLike"); } function fa(a) { for (var b, c = []; !(b = a.next()).done;)c.push(b.value); return c } var ha = typeof Object.create == "function" ? Object.create : function (a) { function b() { } b.prototype = a; return new b }, p; if (typeof Object.setPrototypeOf == "function") p = Object.setPrototypeOf; else { var q; a: { var ja = { a: !0 }, ka = {}; try { ka.__proto__ = ja; q = ka.a; break a } catch (a) { } q = !1 } p = q ? function (a, b) { a.__proto__ = b; if (a.__proto__ !== b) throw new TypeError(a + " is not extensible"); return a } : null } var la = p; function t(a, b) { a.prototype = ha(b.prototype); a.prototype.constructor = a; if (la) la(a, b); else for (var c in b) if (c != "prototype") if (Object.defineProperties) { var d = Object.getOwnPropertyDescriptor(b, c); d && Object.defineProperty(a, c, d) } else a[c] = b[c]; a.A = b.prototype } function ma() { for (var a = Number(this), b = [], c = a; c < arguments.length; c++)b[c - a] = arguments[c]; return b } l("Object.is", function (a) { return a ? a : function (b, c) { return b === c ? b !== 0 || 1 / b === 1 / c : b !== b && c !== c } }); l("Array.prototype.includes", function (a) { return a ? a : function (b, c) { var d = this; d instanceof String && (d = String(d)); var e = d.length; c = c || 0; for (c < 0 && (c = Math.max(c + e, 0)); c < e; c++) { var f = d[c]; if (f === b || Object.is(f, b)) return !0 } return !1 } }); l("String.prototype.includes", function (a) { return a ? a : function (b, c) { if (this == null) throw new TypeError("The 'this' value for String.prototype.includes must not be null or undefined"); if (b instanceof RegExp) throw new TypeError("First argument to String.prototype.includes must not be a regular expression"); return this.indexOf(b, c || 0) !== -1 } }); l("Number.MAX_SAFE_INTEGER", function () { return 9007199254740991 }); l("Number.isFinite", function (a) { return a ? a : function (b) { return typeof b !== "number" ? !1 : !isNaN(b) && b !== Infinity && b !== -Infinity } }); l("Number.isInteger", function (a) { return a ? a : function (b) { return Number.isFinite(b) ? b === Math.floor(b) : !1 } }); l("Number.isSafeInteger", function (a) { return a ? a : function (b) { return Number.isInteger(b) && Math.abs(b) <= Number.MAX_SAFE_INTEGER } }); l("Math.trunc", function (a) { return a ? a : function (b) { b = Number(b); if (isNaN(b) || b === Infinity || b === -Infinity || b === 0) return b; var c = Math.floor(Math.abs(b)); return b < 0 ? -c : c } });/* Copyright The Closure Library Authors. SPDX-License-Identifier: Apache-2.0 */ var u = this || self; function v(a, b) { a: { var c = ["CLOSURE_FLAGS"]; for (var d = u, e = 0; e < c.length; e++)if (d = d[c[e]], d == null) { c = null; break a } c = d } a = c && c[a]; return a != null ? a : b } function w(a) { return a }; function na(a) { u.setTimeout(function () { throw a; }, 0) }; var oa = v(610401301, !1), pa = v(188588736, !0), qa = v(645172343, v(1, !0)); var x, ra = u.navigator; x = ra ? ra.userAgentData || null : null; function z(a) { return oa ? x ? x.brands.some(function (b) { return (b = b.brand) && b.indexOf(a) != -1 }) : !1 : !1 } function A(a) { var b; a: { if (b = u.navigator) if (b = b.userAgent) break a; b = "" } return b.indexOf(a) != -1 }; function B() { return oa ? !!x && x.brands.length > 0 : !1 } function C() { return B() ? z("Chromium") : (A("Chrome") || A("CriOS")) && !(B() ? 0 : A("Edge")) || A("Silk") }; var sa = B() ? !1 : A("Trident") || A("MSIE"); !A("Android") || C(); C(); A("Safari") && (C() || (B() ? 0 : A("Coast")) || (B() ? 0 : A("Opera")) || (B() ? 0 : A("Edge")) || (B() ? z("Microsoft Edge") : A("Edg/")) || B() && z("Opera")); var ta = {}, D = null; var ua = typeof Uint8Array !== "undefined", va = !sa && typeof btoa === "function"; var wa; function E() { return typeof BigInt === "function" }; var F = typeof Symbol === "function" && typeof Symbol() === "symbol"; function xa(a) { return typeof Symbol === "function" && typeof Symbol() === "symbol" ? Symbol() : a } var G = xa(), ya = xa("2ex"); var za = F ? function (a, b) { a[G] |= b } : function (a, b) { a.g !== void 0 ? a.g |= b : Object.defineProperties(a, { g: { value: b, configurable: !0, writable: !0, enumerable: !1 } }) }, H = F ? function (a) { return a[G] | 0 } : function (a) { return a.g | 0 }, I = F ? function (a) { return a[G] } : function (a) { return a.g }, J = F ? function (a, b) { a[G] = b } : function (a, b) { a.g !== void 0 ? a.g = b : Object.defineProperties(a, { g: { value: b, configurable: !0, writable: !0, enumerable: !1 } }) }; function Aa(a, b) { J(b, (a | 0) & -14591) } function Ba(a, b) { J(b, (a | 34) & -14557) }; var K = {}, Ca = {}; function Da(a) { return !(!a || typeof a !== "object" || a.g !== Ca) } function Ea(a) { return a !== null && typeof a === "object" && !Array.isArray(a) && a.constructor === Object } function L(a, b, c) { if (!Array.isArray(a) || a.length) return !1; var d = H(a); if (d & 1) return !0; if (!(b && (Array.isArray(b) ? b.includes(c) : b.has(c)))) return !1; J(a, d | 1); return !0 }; var M = 0, N = 0; function Fa(a) { var b = a >>> 0; M = b; N = (a - b) / 4294967296 >>> 0 } function Ga(a) { if (a < 0) { Fa(-a); var b = n(Ha(M, N)); a = b.next().value; b = b.next().value; M = a >>> 0; N = b >>> 0 } else Fa(a) } function Ia(a, b) { b >>>= 0; a >>>= 0; if (b <= 2097151) var c = "" + (4294967296 * b + a); else E() ? c = "" + (BigInt(b) << BigInt(32) | BigInt(a)) : (c = (a >>> 24 | b << 8) & 16777215, b = b >> 16 & 65535, a = (a & 16777215) + c * 6777216 + b * 6710656, c += b * 8147497, b *= 2, a >= 1E7 && (c += a / 1E7 >>> 0, a %= 1E7), c >= 1E7 && (b += c / 1E7 >>> 0, c %= 1E7), c = b + Ja(c) + Ja(a)); return c } function Ja(a) { a = String(a); return "0000000".slice(a.length) + a } function Ha(a, b) { b = ~b; a ? a = ~a + 1 : b += 1; return [a, b] }; var Ka = /^-?([1-9][0-9]*|0)(\.[0-9]+)?$/; var O; function La(a, b) { O = b; a = new a(b); O = void 0; return a } function P(a, b, c) { a == null && (a = O); O = void 0; if (a == null) { var d = 96; c ? (a = [c], d |= 512) : a = []; b && (d = d & -16760833 | (b & 1023) << 14) } else { if (!Array.isArray(a)) throw Error("narr"); d = H(a); if (d & 2048) throw Error("farr"); if (d & 64) return a; d |= 64; if (c && (d |= 512, c !== a[0])) throw Error("mid"); a: { c = a; var e = c.length; if (e) { var f = e - 1; if (Ea(c[f])) { d |= 256; b = f - (+!!(d & 512) - 1); if (b >= 1024) throw Error("pvtlmt"); d = d & -16760833 | (b & 1023) << 14; break a } } if (b) { b = Math.max(b, e - (+!!(d & 512) - 1)); if (b > 1024) throw Error("spvt"); d = d & -16760833 | (b & 1023) << 14 } } } J(a, d); return a }; function Ma(a) { switch (typeof a) { case "number": return isFinite(a) ? a : String(a); case "boolean": return a ? 1 : 0; case "object": if (a) if (Array.isArray(a)) { if (L(a, void 0, 0)) return } else if (ua && a != null && a instanceof Uint8Array) { if (va) { for (var b = "", c = 0, d = a.length - 10240; c < d;)b += String.fromCharCode.apply(null, a.subarray(c, c += 10240)); b += String.fromCharCode.apply(null, c ? a.subarray(c) : a); a = btoa(b) } else { b === void 0 && (b = 0); if (!D) { D = {}; c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".split(""); d = ["+/=", "+/", "-_=", "-_.", "-_"]; for (var e = 0; e < 5; e++) { var f = c.concat(d[e].split("")); ta[e] = f; for (var g = 0; g < f.length; g++) { var h = f[g]; D[h] === void 0 && (D[h] = g) } } } b = ta[b]; c = Array(Math.floor(a.length / 3)); d = b[64] || ""; for (e = f = 0; f < a.length - 2; f += 3) { var k = a[f], m = a[f + 1]; h = a[f + 2]; g = b[k >> 2]; k = b[(k & 3) << 4 | m >> 4]; m = b[(m & 15) << 2 | h >> 6]; h = b[h & 63]; c[e++] = g + k + m + h } g = 0; h = d; switch (a.length - f) { case 2: g = a[f + 1], h = b[(g & 15) << 2] || d; case 1: a = a[f], c[e] = b[a >> 2] + b[(a & 3) << 4 | g >> 4] + h + d }a = c.join("") } return a } }return a }; function Na(a, b, c) { a = Array.prototype.slice.call(a); var d = a.length, e = b & 256 ? a[d - 1] : void 0; d += e ? -1 : 0; for (b = b & 512 ? 1 : 0; b < d; b++)a[b] = c(a[b]); if (e) { b = a[b] = {}; for (var f in e) Object.prototype.hasOwnProperty.call(e, f) && (b[f] = c(e[f])) } return a } function Oa(a, b, c, d, e) { if (a != null) { if (Array.isArray(a)) a = L(a, void 0, 0) ? void 0 : e && H(a) & 2 ? a : Pa(a, b, c, d !== void 0, e); else if (Ea(a)) { var f = {}, g; for (g in a) Object.prototype.hasOwnProperty.call(a, g) && (f[g] = Oa(a[g], b, c, d, e)); a = f } else a = b(a, d); return a } } function Pa(a, b, c, d, e) { var f = d || c ? H(a) : 0; d = d ? !!(f & 32) : void 0; a = Array.prototype.slice.call(a); for (var g = 0; g < a.length; g++)a[g] = Oa(a[g], b, c, d, e); c && c(f, a); return a } function Qa(a) { return a.s === K ? a.toJSON() : Ma(a) }; function Ra(a, b, c) { c = c === void 0 ? Ba : c; if (a != null) { if (ua && a instanceof Uint8Array) return b ? a : new Uint8Array(a); if (Array.isArray(a)) { var d = H(a); if (d & 2) return a; b && (b = d === 0 || !!(d & 32) && !(d & 64 || !(d & 16))); return b ? (J(a, (d | 34) & -12293), a) : Pa(a, Ra, d & 4 ? Ba : c, !0, !0) } a.s === K && (c = a.h, d = I(c), a = d & 2 ? a : La(a.constructor, Sa(c, d, !0))); return a } } function Sa(a, b, c) { var d = c || b & 2 ? Ba : Aa, e = !!(b & 32); a = Na(a, b, function (f) { return Ra(f, e, d) }); za(a, 32 | (c ? 2 : 0)); return a }; function Ta(a, b) { a = a.h; return Ua(a, I(a), b) } function Va(a, b, c, d) { b = d + (+!!(b & 512) - 1); if (!(b < 0 || b >= a.length || b >= c)) return a[b] } function Ua(a, b, c, d) { if (c === -1) return null; var e = b >> 14 & 1023 || 536870912; if (c >= e) { if (b & 256) return a[a.length - 1][c] } else { var f = a.length; if (d && b & 256 && (d = a[f - 1][c], d != null)) { if (Va(a, b, e, c) && ya != null) { var g; a = (g = wa) != null ? g : wa = {}; g = a[ya] || 0; g >= 4 || (a[ya] = g + 1, g = Error(), g.__closure__error__context__984382 || (g.__closure__error__context__984382 = {}), g.__closure__error__context__984382.severity = "incident", na(g)) } return d } return Va(a, b, e, c) } } function Wa(a, b, c, d, e) { var f = b >> 14 & 1023 || 536870912; if (c >= f || e && !qa) { var g = b; if (b & 256) e = a[a.length - 1]; else { if (d == null) return; e = a[f + (+!!(b & 512) - 1)] = {}; g |= 256 } e[c] = d; c < f && (a[c + (+!!(b & 512) - 1)] = void 0); g !== b && J(a, g) } else a[c + (+!!(b & 512) - 1)] = d, b & 256 && (a = a[a.length - 1], c in a && delete a[c]) } function Xa(a, b) { var c = Ya; var d = d === void 0 ? !1 : d; var e = a.h; var f = I(e), g = Ua(e, f, b, d); if (g != null && typeof g === "object" && g.s === K) c = g; else if (Array.isArray(g)) { var h = H(g), k = h; k === 0 && (k |= f & 32); k |= f & 2; k !== h && J(g, k); c = new c(g) } else c = void 0; c !== g && c != null && Wa(e, f, b, c, d); e = c; if (e == null) return e; a = a.h; f = I(a); f & 2 || (g = e, c = g.h, h = I(c), g = h & 2 ? La(g.constructor, Sa(c, h, !1)) : g, g !== e && (e = g, Wa(a, f, b, e, d))); return e } function Za(a, b) { a = Ta(a, b); return a == null || typeof a === "string" ? a : void 0 } function $a(a, b) { var c = c === void 0 ? 0 : c; a = Ta(a, b); if (a != null) if (b = typeof a, b === "number" ? Number.isFinite(a) : b !== "string" ? 0 : Ka.test(a)) if (typeof a === "number") { if (a = Math.trunc(a), !Number.isSafeInteger(a)) { Ga(a); b = M; var d = N; if (a = d & 2147483648) b = ~b + 1 >>> 0, d = ~d >>> 0, b == 0 && (d = d + 1 >>> 0); b = d * 4294967296 + (b >>> 0); a = a ? -b : b } } else if (b = Math.trunc(Number(a)), Number.isSafeInteger(b)) a = String(b); else { if (b = a.indexOf("."), b !== -1 && (a = a.substring(0, b)), !(a[0] === "-" ? a.length < 20 || a.length === 20 && Number(a.substring(0, 7)) > -922337 : a.length < 19 || a.length === 19 && Number(a.substring(0, 6)) < 922337)) { if (a.length < 16) Ga(Number(a)); else if (E()) a = BigInt(a), M = Number(a & BigInt(4294967295)) >>> 0, N = Number(a >> BigInt(32) & BigInt(4294967295)); else { b = +(a[0] === "-"); N = M = 0; d = a.length; for (var e = b, f = (d - b) % 6 + b; f <= d; e = f, f += 6)e = Number(a.slice(e, f)), N *= 1E6, M = M * 1E6 + e, M >= 4294967296 && (N += Math.trunc(M / 4294967296), N >>>= 0, M >>>= 0); b && (b = n(Ha(M, N)), a = b.next().value, b = b.next().value, M = a, N = b) } a = M; b = N; b & 2147483648 ? E() ? a = "" + (BigInt(b | 0) << BigInt(32) | BigInt(a >>> 0)) : (b = n(Ha(a, b)), a = b.next().value, b = b.next().value, a = "-" + Ia(a, b)) : a = Ia(a, b) } } else a = void 0; return a != null ? a : c } function R(a, b) { var c = c === void 0 ? "" : c; a = Za(a, b); return a != null ? a : c }; var S; function T(a, b, c) { this.h = P(a, b, c) } T.prototype.toJSON = function () { return ab(this) }; T.prototype.s = K; T.prototype.toString = function () { try { return S = !0, ab(this).toString() } finally { S = !1 } }; function ab(a) { var b = S ? a.h : Pa(a.h, Qa, void 0, void 0, !1); var c = !S; var d = pa ? void 0 : a.constructor.v; var e = I(c ? a.h : b); if (a = b.length) { var f = b[a - 1], g = Ea(f); g ? a-- : f = void 0; e = +!!(e & 512) - 1; var h = b; if (g) { b: { var k = f; var m = {}; g = !1; if (k) for (var r in k) if (Object.prototype.hasOwnProperty.call(k, r)) if (isNaN(+r)) m[r] = k[r]; else { var y = k[r]; Array.isArray(y) && (L(y, d, +r) || Da(y) && y.size === 0) && (y = null); y == null && (g = !0); y != null && (m[r] = y) } if (g) { for (var Q in m) break b; m = null } else m = k } k = m == null ? f != null : m !== f } for (var ia; a > 0; a--) { Q = a - 1; r = h[Q]; Q -= e; if (!(r == null || L(r, d, Q) || Da(r) && r.size === 0)) break; ia = !0 } if (h !== b || k || ia) { if (!c) h = Array.prototype.slice.call(h, 0, a); else if (ia || k || m) h.length = a; m && h.push(m) } b = h } return b }; function bb(a) { return function (b) { if (b == null || b == "") b = new a; else { b = JSON.parse(b); if (!Array.isArray(b)) throw Error("dnarr"); za(b, 32); b = La(a, b) } return b } }; function cb(a) { this.h = P(a) } t(cb, T); var db = bb(cb); var U; function V(a) { this.g = a } V.prototype.toString = function () { return this.g + "" }; var eb = {}; function fb(a) { if (U === void 0) { var b = null; var c = u.trustedTypes; if (c && c.createPolicy) { try { b = c.createPolicy("goog#html", { createHTML: w, createScript: w, createScriptURL: w }) } catch (d) { u.console && u.console.error(d.message) } U = b } else U = b } a = (b = U) ? b.createScriptURL(a) : a; return new V(a, eb) };/* SPDX-License-Identifier: Apache-2.0 */ function gb(a) { var b = ma.apply(1, arguments); if (b.length === 0) return fb(a[0]); for (var c = a[0], d = 0; d < b.length; d++)c += encodeURIComponent(b[d]) + a[d + 1]; return fb(c) }; function hb(a, b) { a.src = b instanceof V && b.constructor === V ? b.g : "type_error:TrustedResourceUrl"; var c, d; (c = (b = (d = (c = (a.ownerDocument && a.ownerDocument.defaultView || window).document).querySelector) == null ? void 0 : d.call(c, "script[nonce]")) ? b.nonce || b.getAttribute("nonce") || "" : "") && a.setAttribute("nonce", c) }; function ib() { return Math.floor(Math.random() * 2147483648).toString(36) + Math.abs(Math.floor(Math.random() * 2147483648) ^ Date.now()).toString(36) }; function jb(a, b) { b = String(b); a.contentType === "application/xhtml+xml" && (b = b.toLowerCase()); return a.createElement(b) } function kb(a) { this.g = a || u.document || document }; function lb(a) { a = a === void 0 ? document : a; return a.createElement("script") }; function mb(a, b, c, d, e, f) { try { var g = a.g, h = lb(g); h.async = !0; hb(h, b); g.head.appendChild(h); h.addEventListener("load", function () { e(); d && g.head.removeChild(h) }); h.addEventListener("error", function () { c > 0 ? mb(a, b, c - 1, d, e, f) : (d && g.head.removeChild(h), f()) }) } catch (k) { f() } }; var nb = u.atob("aHR0cHM6Ly93d3cuZ3N0YXRpYy5jb20vaW1hZ2VzL2ljb25zL21hdGVyaWFsL3N5c3RlbS8xeC93YXJuaW5nX2FtYmVyXzI0ZHAucG5n"), ob = u.atob("WW91IGFyZSBzZWVpbmcgdGhpcyBtZXNzYWdlIGJlY2F1c2UgYWQgb3Igc2NyaXB0IGJsb2NraW5nIHNvZnR3YXJlIGlzIGludGVyZmVyaW5nIHdpdGggdGhpcyBwYWdlLg=="), pb = u.atob("RGlzYWJsZSBhbnkgYWQgb3Igc2NyaXB0IGJsb2NraW5nIHNvZnR3YXJlLCB0aGVuIHJlbG9hZCB0aGlzIHBhZ2Uu"); function qb(a, b, c) { this.i = a; this.u = b; this.o = c; this.g = null; this.j = []; this.m = !1; this.l = new kb(this.i) } function rb(a) { if (a.i.body && !a.m) { var b = function () { sb(a); u.setTimeout(function () { tb(a, 3) }, 50) }; mb(a.l, a.u, 2, !0, function () { u[a.o] || b() }, b); a.m = !0 } } function sb(a) { for (var b = W(1, 5), c = 0; c < b; c++) { var d = X(a); a.i.body.appendChild(d); a.j.push(d) } b = X(a); b.style.bottom = "0"; b.style.left = "0"; b.style.position = "fixed"; b.style.width = W(100, 110).toString() + "%"; b.style.zIndex = W(2147483544, 2147483644).toString(); b.style.backgroundColor = ub(249, 259, 242, 252, 219, 229); b.style.boxShadow = "0 0 12px #888"; b.style.color = ub(0, 10, 0, 10, 0, 10); b.style.display = "flex"; b.style.justifyContent = "center"; b.style.fontFamily = "Roboto, Arial"; c = X(a); c.style.width = W(80, 85).toString() + "%"; c.style.maxWidth = W(750, 775).toString() + "px"; c.style.margin = "24px"; c.style.display = "flex"; c.style.alignItems = "flex-start"; c.style.justifyContent = "center"; d = jb(a.l.g, "IMG"); d.className = ib(); d.src = nb; d.alt = "Warning icon"; d.style.height = "24px"; d.style.width = "24px"; d.style.paddingRight = "16px"; var e = X(a), f = X(a); f.style.fontWeight = "bold"; f.textContent = ob; var g = X(a); g.textContent = pb; Y(a, e, f); Y(a, e, g); Y(a, c, d); Y(a, c, e); Y(a, b, c); a.g = b; a.i.body.appendChild(a.g); b = W(1, 5); for (c = 0; c < b; c++)d = X(a), a.i.body.appendChild(d), a.j.push(d) } function Y(a, b, c) { for (var d = W(1, 5), e = 0; e < d; e++) { var f = X(a); b.appendChild(f) } b.appendChild(c); c = W(1, 5); for (d = 0; d < c; d++)e = X(a), b.appendChild(e) } function W(a, b) { return Math.floor(a + Math.random() * (b - a)) } function ub(a, b, c, d, e, f) { return "rgb(" + W(Math.max(a, 0), Math.min(b, 255)).toString() + "," + W(Math.max(c, 0), Math.min(d, 255)).toString() + "," + W(Math.max(e, 0), Math.min(f, 255)).toString() + ")" } function X(a) { a = jb(a.l.g, "DIV"); a.className = ib(); return a } function tb(a, b) { b <= 0 || a.g != null && a.g.offsetHeight !== 0 && a.g.offsetWidth !== 0 || (vb(a), sb(a), u.setTimeout(function () { tb(a, b - 1) }, 50)) } function vb(a) { for (var b = n(a.j), c = b.next(); !c.done; c = b.next())(c = c.value) && c.parentNode && c.parentNode.removeChild(c); a.j = []; (b = a.g) && b.parentNode && b.parentNode.removeChild(b); a.g = null }; function wb(a, b, c, d, e) { function f(k) { document.body ? g(document.body) : k > 0 ? u.setTimeout(function () { f(k - 1) }, e) : b() } function g(k) { k.appendChild(h); u.setTimeout(function () { h ? (h.offsetHeight !== 0 && h.offsetWidth !== 0 ? b() : a(), h.parentNode && h.parentNode.removeChild(h)) : a() }, d) } var h = xb(c); f(3) } function xb(a) { var b = document.createElement("div"); b.className = a; b.style.width = "1px"; b.style.height = "1px"; b.style.position = "absolute"; b.style.left = "-10000px"; b.style.top = "-10000px"; b.style.zIndex = "-10000"; return b }; function Ya(a) { this.h = P(a) } t(Ya, T); function yb(a) { this.h = P(a) } t(yb, T); var zb = bb(yb); function Ab(a) { if (!a) return null; a = Za(a, 4); var b; a === null || a === void 0 ? b = null : b = fb(a); return b }; var Bb = ea([""]), Cb = ea([""]); function Db(a, b) { this.m = a; this.o = new kb(a.document); this.g = b; this.j = R(this.g, 1); this.u = Ab(Xa(this.g, 2)) || gb(Bb); this.i = !1; b = Ab(Xa(this.g, 13)) || gb(Cb); this.l = new qb(a.document, b, R(this.g, 12)) } Db.prototype.start = function () { Eb(this) }; function Eb(a) { Fb(a); mb(a.o, a.u, 3, !1, function () { a: { var b = a.j; var c = u.btoa(b); if (c = u[c]) { try { var d = db(u.atob(c)) } catch (e) { b = !1; break a } b = b === Za(d, 1) } else b = !1 } b ? Z(a, R(a.g, 14)) : (Z(a, R(a.g, 8)), rb(a.l)) }, function () { wb(function () { Z(a, R(a.g, 7)); rb(a.l) }, function () { return Z(a, R(a.g, 6)) }, R(a.g, 9), $a(a.g, 10), $a(a.g, 11)) }) } function Z(a, b) { a.i || (a.i = !0, a = new a.m.XMLHttpRequest, a.open("GET", b, !0), a.send()) } function Fb(a) { var b = u.btoa(a.j); a.m[b] && Z(a, R(a.g, 5)) }; (function (a, b) { u[a] = function () { var c = ma.apply(0, arguments); u[a] = function () { }; b.call.apply(b, [null].concat(c instanceof Array ? c : fa(n(c)))) } })("__h82AlnkH6D91__", function (a) { typeof window.atob === "function" && (new Db(window, zb(window.atob(a)))).start() }); }).call(this); window.__h82AlnkH6D91__("WyJwdWItNzYzNzY5NTMyMTQ0MjAxNSIsW251bGwsbnVsbCxudWxsLCJodHRwczovL2Z1bmRpbmdjaG9pY2VzbWVzc2FnZXMuZ29vZ2xlLmNvbS9iL3B1Yi03NjM3Njk1MzIxNDQyMDE1Il0sbnVsbCxudWxsLCJodHRwczovL2Z1bmRpbmdjaG9pY2VzbWVzc2FnZXMuZ29vZ2xlLmNvbS9lbC9BR1NLV3hYTU96TnRvb3ptX3lLdUtPMHBfb1g2TGlGNDI2Wi02dC0zd3JZN0VoYTVYRUE3ZENRYzFxZENGaEMzRWFtbFNBZ2lxbW93LVRFLTQ2a19UVDZVemxOVUdBXHUwMDNkXHUwMDNkP3RlXHUwMDNkVE9LRU5fRVhQT1NFRCIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFZqY1pkMThuYUJCTklXb1NaQWlPUm83RUtSVDExRVU2dGN0SG1hdkZPZGNqQ21feXJpS1NERmxlbEdYajBfU3dGWDN3M00zWGhwZ0JhYWpwSFk1VFpEUndcdTAwM2RcdTAwM2Q/YWJcdTAwM2QxXHUwMDI2c2JmXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFZNZFo5eE9ob1pTRkNsTk41QTNhRUFfZkxtNlZrakcyNHZhSmZzNlJMaXBpdVVTckhiYmtyY3FJd2x0M1lpY0pIcGViNDRqajEwYzNMSWhQdF9kVmZFR1FcdTAwM2RcdTAwM2Q/YWJcdTAwM2QyXHUwMDI2c2JmXHUwMDNkMSIsImh0dHBzOi8vZnVuZGluZ2Nob2ljZXNtZXNzYWdlcy5nb29nbGUuY29tL2VsL0FHU0tXeFdTbTdkOFBkQnlnczVuTTg4Y2ZJY21HR2QwUk1QSk96X1lKSWhDUGNjYXM4cFNBcmhFTzFTcWZVVjByLXk1a0VjbnBPWDcwZjFaZkZFRUVkenpSdXVna2dcdTAwM2RcdTAwM2Q/c2JmXHUwMDNkMiIsImRpdi1ncHQtYWQiLDIwLDEwMCwiY0hWaUxUYzJNemMyT1RVek1qRTBOREl3TVRVXHUwMDNkIixbbnVsbCxudWxsLG51bGwsImh0dHBzOi8vd3d3LmdzdGF0aWMuY29tLzBlbW4vZi9wL3B1Yi03NjM3Njk1MzIxNDQyMDE1LmpzP3VzcXBcdTAwM2RDQWciXSwiaHR0cHM6Ly9mdW5kaW5nY2hvaWNlc21lc3NhZ2VzLmdvb2dsZS5jb20vZWwvQUdTS1d4VTg5LU9HdGNLblVOWk9LeEg1Rld2c1JQQUNhS0hCNm8zc1BLZnY0QmMteUtCY0ZEZk52T0xIM1ZBdG9Kc04tRmNLbDNRTTVCbXlrUmtiVEN6SHZoYmdld1x1MDAzZFx1MDAzZCJd");</script>
+<!-- Canonical + Favicon -->
+<link rel="canonical" href="https://freeminesweeper.org" />
+<link rel="home" href="https://freeminesweeper.org" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" type="image/x-icon" sizes="16x16" href="images/favicon16.png" />
+<link rel="icon" type="image/png" sizes="244x244" href="images/minesweeper-game-icon-244.png" />
 
+<!-- iOS Web App Specific -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="Minesweeper" />
+<link rel="apple-touch-icon" sizes="244x244" href="images/minesweeper-game-icon-244.png" />
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="https://turbo.freevideogames.org/includes/css/core-game-site.css" />
+<link rel="stylesheet" type="text/css" href="https://turbo.freevideogames.org/includes/css/side-navigation.css" />
+<link rel="stylesheet" type="text/css" href="https://turbo.freevideogames.org/includes/css/minesweeper.css" />
+
+<!-- Fonts -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" />
+
+<!-- Scripts -->
+<script src="https://turbo.freevideogames.org/includes/js/core-game-site.js"></script>
+<script src="https://turbo.freevideogames.org/includes/js/screenfull.min.js"></script>
+<script src="https://turbo.freevideogames.org/includes/js/minesweepercookie.js"></script>
+	
+<!-- Plausible Analytics -->
+	  <script defer data-domain="freeminesweeper.org" src="https://plausible.io/js/script.js"></script>
+<!-- End Plausible Analytics -->
+	
+<!-- Start GAS -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7437598866529614" crossorigin="anonymous"></script>
+<!-- End GAS -->	
+	
+<!-- Google Tag Manager -->
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-T49RDRD8');</script>
+<!-- End Google Tag Manager -->
+	
 </head>
 
 <body>
-  <div id="GameDiv" cc_exact_fit_screen="true">
-    <div id="Cocos3dGameContainer">
-      <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="99"></canvas>
-    </div>
+	
+<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T49RDRD8"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+	
+<div id='full-page-container'>	
+<!-- Header Message -->
+<header>
+	<div id="header-message">
+		
+		<!-- This is breaking the game window so has been removed --> 
+
+	</div>		
+</header>
+<!-- End Header Message -->
+	
+<!-- Minesweeper Game Container --> 
+<div id="game-container">
+<div id="minesweepergame" style="touch-action: manipulation;">
+
+<!-- Create the menus 
+	 Uses DHTML layers, with a table around them.  Note the use of 
+	 OnClick as the primary handler.  See the javascript above. -->
+
+<!-- Game menu -->
+<div id="divMenuGame" style="position:absolute; visibility:hidden; width:150px; left:10px; top:30px; z-index:1;">
+  <table border="1" bgcolor="#C0C0C0"><tr><td class="menu_item" nowrap="nowrap">
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="10" height="10" alt="" name="imNew"          />&nbsp;<a onclick="return menuItemClick('New')">New &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F2</a><br />
+	<hr />
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="10" height="10" alt="" name="imBeginner"     />&nbsp;<a onclick="menuItemClick('Beginner')"     >Beginner</a><br />
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="10" height="10" alt="" name="imIntermediate" />&nbsp;<a onclick="menuItemClick('Intermediate')" >Intermediate</a><br />
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="10" height="10" alt="" name="imExpert"       />&nbsp;<a onclick="menuItemClick('Expert')"       >Expert</a><br />
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="10" height="10" alt="" name="imCustom"       />&nbsp;<a onclick="menuItemClick('Custom')"       >Custom</a><br />
+	<hr />
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="10" height="10" alt=""                       />&nbsp;<a onclick="return menuItemClick('Personal')" >Personal&nbsp;Best</a>
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="0" height="0" alt="" /><hr />
+	<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif" width="10" height="10" alt="" name="imExit"         />&nbsp;<a onclick="return menuItemClick('Exit')"  >Exit</a><br />
+  </td></tr></table>
+</div>
+
+<!-- Options menu -->
+<div id="divMenuOpt" style="position:absolute; visibility:hidden; width:150px; left:53px; top:30px; z-index:1;">
+  <table border="1" bgcolor="#C0C0C0"><tr><td class="menu_item" nowrap="nowrap">
+	<a onclick="return menuItemClick('First')"     title="The first move will always open a useful series of squares" >                     <img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/checked.gif" alt=""    name="imFirst"     border="0" width="10" height="10" />&nbsp;Opening&nbsp;Move</a><br />
+	<a onclick="return menuItemClick('Marks')"     title="Second left-click changes bomb marking to a question mark">                       <img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/checked.gif" alt=""   name="imMarks"     border="0" width="10" height="10" />&nbsp;Question Marks</a><br />
+	<a onclick="return menuItemClick('Area')"      title="Clicking on numbered/satisfied square will open all its neighbors">               <img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/checked.gif" alt=""   name="imUseMacro"  border="0" width="10" height="10" />&nbsp;Area Open</a><br />
+	<a onclick="return menuItemClick('Remaining')" title="When 0 bombs are left unmarked, click the bomb counter 000 to open all remaining"><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/checked.gif" alt=""   name="imRemaining" border="0" width="10" height="10" />&nbsp;Open&nbsp;Remaining</a>&nbsp;<br />
+  </td></tr></table>
+</div>
+
+<!-- Help menu -->
+<div id="divMenuHelp" style="position:absolute; visibility:hidden; width:110px; left:110px; top:30px; z-index:1;">
+  <table border="1" bgcolor="#C0C0C0"><tr><td class="menu_item" nowrap="nowrap">
+	&nbsp;<a onclick="return menuItemClick('Instructions')">Instructions</a><br />
+	<hr />
+	&nbsp;<a onclick="return menuItemClick('About')"       >About</a><br />
+  </td></tr></table>
+</div>
+
+<script type="text/javascript">
+
+//Run when the page has loaded to display welcome message for touch device users
+window.addEventListener('load', (event) => {
+if (touchDeviceGlobal){
+	document.querySelector("#firsttimemobile-modal").style.display = "block"; // Turn on display of the hidden First Time Mobile User Modal
+	document.querySelector("#firsttimemobile-modal-background").style.display = "block"; // Turn on display of the hidden First Time Mobile User Modal background
+	document.getElementById("minesweepergame").style.filter = "blur(3px)"; // Blur minesweeper game window
+}});
+
+
+
+// *************************** GAME CODE STARTS HERE *******************************
+
+   // Read in the board dimensions cookies
+   gameFormat = getCookie("gameFormat"); // Any user who's played before will have this cookie set at the bare minimum
+   console.log ("Game format: " + gameFormat);
+
+   // Set additional parameters based on cookies or size defaults.
+   // Custom
+   if (gameFormat == "Custom") {
+	  maxX = parseInt(getCookie("maxX"));
+	  maxY = parseInt(getCookie("maxY"));
+	  maxNumBombs = parseInt(getCookie("maxNumBombs")); }
+	  
+	// Intermediate
+	else { if (gameFormat == "Intermediate") {
+	maxX = 15;
+	maxY = 15;
+	maxNumBombs = 40; }
+		  
+	// Expert
+	else { if (gameFormat == "Expert") {
+	maxX = 30;
+	maxY = 15;
+	maxNumBombs = 99; }
+		  
+	// Beginner
+	else { if (gameFormat == "Beginner") {
+	maxX = 7;
+	maxY = 7;
+	maxNumBombs = 10; }
+
+   // This is a brand new user, so let's set up the default board - which is currently Intermediate for all devices
+   else { 
+	   const touchdevice = matchMedia('(hover: none)').matches; // check if this is a touch device or not, using css media query api 	  
+		 if (touchdevice) {
+			// Looks like a mobile device
+			//alert("This is a mobile device");
+			var touchDeviceGlobal = "yes";		
+		  }
+		  
+		  // Setup the default board for new users, whether mobile or not
+		  maxX = 15;
+		  maxY = 15;
+		  maxNumBombs = 40;
+		  gameFormat = "Intermediate";		  
+	  }
+  }}}
+  
+  console.log("Initial game setup complete. MaxX is " + maxX + ", maxY is " + maxY + " and maxNumBombs is " + maxNumBombs);
+	  
+   // This pre-calc just makes the next "if" easier to handle.
+   maxLegalBombs = Math.round((maxX+1)*(maxY+1) / 3)  // Max 1/3 of all cells  
+   console.log("For this board size, maxLegalBombs is calculated as " + maxLegalBombs);
+
+   // Make sure all values are numbers and are within range
+   if ((isNaN(maxX)) || (maxX<7) || (maxX>99) || (isNaN(maxY)) || (maxY<7) || (maxY>99) || (isNaN(maxNumBombs)) || (maxNumBombs<1) || (maxNumBombs>maxLegalBombs)) {
+   //Not in range: Fancy alert screen
+	  alert("Minesweeper dimensions invalid:\n\tWidth: From 8 to 100\n\tHeight: from 8 to 100\n\tBoms: 1 to 1/3 of squares"); 
+	  maxX = 7;
+	  maxY = 7;
+	  maxNumBombs = 10;
+	  gameFormat = "Beginner"; }
+
+   setCookie("gameFormat",gameFormat);
+   //window.resizeTo(calcWidth(maxX), calcHeight(maxY)); // not needed anymore
+
+   // Read the other parameter variables set by the intro page
+   // Note how the double negative will force missing to default to true
+   useQuestionMarks = ! (getCookie("useQuestionMarks") == 'false');
+   useMacroOpen = ! (getCookie("useMacroOpen") == 'false');
+   useFirstClickUseful = ! (getCookie("useFirstClickUseful") == 'false');
+   openRemaining = (getCookie("openRemaining") == 'true');
+
+   
+   // Set global constants   
+   maxCells = (maxX+1)*(maxY+1)-1;       // Constant: # of cells on board
+   topImages = 19;                        // 7 on game menu, 8 on opt menu, 3 bomb #s, smile face, 3 time #s
+   maxStackHeight = 300;                 // For recursive cell opening stack
+   smileMargin=((maxX+1)*16-(13*6+26))/2;// To center smile & rt jstfy time
+
+   // Global Arrays (created once)
+   cellArray = new Array(maxCells);      // One per cell on the board
+   for (l=0; l<=maxCells; l++) {
+	  cellArray[l]=new constructCell()}
+   markedArray = new Array(maxStackHeight); // For recursive cell opening stack
+   
+   // Variables used & reset during play
+   dead = false;                         // Hit a bomb?
+   win = false;                          // All cells open?
+   bombsFlagged = 0;                     // How many bombs marked so far?
+   cellsOpen = 0;                        // How many cells open so far?
+   markedCount = -1;                     // For recursive cell opening stack
+   highestStackHeight = -1;              // For recursive cell opening stack
+   pointingAtX = -1;                     // Current cell being pointed at.
+   pointingAtY = -1;                     // Used for space bar bomb flagging
+   numMoves = 0;                         // Count the number of clicks
+   openRemainingUsed = false;            // Was openRemaining used by the player?
+   lastClickOnMenu = false;              // Used to control smooth menu closing
+
+   // Vars for the clock time
+   clockMoving  = false;                 // Is it moving?
+   clockActive  = false;                 // Should it be moving?
+   killLastClock= false;                 // To start new time w/ old still running
+   clockCurrent = -1;                    // Current time
+
+   // preload images: all time/#bombs images, including the negative
+   timeDigits = new Array(10);
+   for (l=0; l <= 9; l++) {
+	  timeDigits[l] = new Image(23,13); 
+	  tstr = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time" + l + ".gif";
+	  timeDigits[l].src = tstr; }
+   timeNeg = new Image(23,13);
+   timeNeg.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time-.gif";
+  
+   // preload moves counter images
+   movesDigits0 = new Image(23,13); 
+   movesDigits0.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/moves0.gif";
+
+   // preload images: 9 open tiles (0..8)
+   cellOpenIm = new Array(9);
+   for (l=0; l<=8; l++) {
+	  cellOpenIm[l] = new Image(16,16);
+	  tstr = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/open" + l + ".gif";
+	  cellOpenIm[l].src = tstr; }
+
+   // preload images: the many faces of bombs and bomb markers
+   bombFlagged = new Image(16,16);
+   bombFlagged.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bombflagged.gif";
+   bombRevealed = new Image(16,16);
+   bombRevealed.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bombrevealed.gif";
+   bombMisFlagged = new Image(16,16);
+   bombMisFlagged.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bombmisflagged.gif";
+   bombDeath = new Image(16,16);
+   bombDeath.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bombdeath.gif";
+   bombQuestion = new Image(16,16);
+   bombQuestion.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bombquestion.gif";
+   blankCell = new Image(16,16);
+   blankCell.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/blank.gif";
+
+   // preload images: the 3 faces (can't use "oh" w/o mouseUp/Down methods)
+   faceDead = new Image(26,26);
+   faceDead.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/facedead.gif";
+   faceSmile = new Image(26,26);
+   faceSmile.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/facesmile.gif";
+   faceWin = new Image(26,26);
+   faceWin.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/facewin.gif";
+   faceWait = new Image(26,26);
+   faceWait.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/faceclock.gif";
+   faceOoh = new Image(26,26);
+   faceOoh.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/faceooh.gif";
+   facePirate = new Image(26,26);
+   facePirate.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/facepirate.gif";
+
+   // preload images: two images used in the menus for check marks and place holders
+   checked = new Image(10,10);
+   checked.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/checked.gif";
+   notchecked = new Image(10,10);
+   notchecked.src = "https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/notchecked.gif";
+
+
+// Creates the internal cells (as opposed to the image cells).  Called once
+// per cell upon creation of the window (see above).
+function constructCell() {
+   this.isBomb = false;         // Is the cell a bomb?
+   this.isExposed = false;      // Is it open?
+   this.isFlagged = false;      // Does it have a bomb flag on it?
+   this.isQuestion = false;     // Question mark (if its used)
+   this.isMarked = false;       // Used for recursive macro opening
+   this.neighborBombs = 0; }    // # surrounding bombs.  Set for all cells.
+
+
+//
+// General-purpose routines called throughout the game
+//
+
+
+// Returns the index of the internal playing board cellArray at given
+// x,y coords (on 0..n-1 scale).  Very useful fn.
+function arrayIndexOf(x,y) {
+   return x+y*(maxX+1); }
+
+
+// Returns the index of the documents image pointing to cell at given
+// x,y coords (on 0..n-1 scale).  Very useful fn.
+// Notes: topImages are the 3 bomb digits, the face, & the 3 time digits.
+//        Uses maxX+2 (not maxX+1) to include borderRight images.
+function imageIndexOf(x,y) {
+   return x+(y+2)*(maxX+3)+topImages+3; } // This is the simplified version
+// return x+y*(maxX+2)+topImages+(maxX+1)*2+(y+1)+6; }
+
+
+// Makes sure x,y coords are within the board.  Returns true or false.
+function checkBounds(x,y) {
+  return ((0<=x) && (x<=maxX) && (0<=y) && (y<=maxY)); }
+
+// Saves the current pointing location of the mouse.  Called w/ onMouseOver
+// for each cell.
+function cursorHoldLoc(x,y) {
+   pointingAtX = x;
+   pointingAtY = y; 
+   forceFocus(); }
+
+// Clears the saved location.  Needed when user points outside the grid.
+// Note: I check that I'm clearing the correct cell, just in case events
+// occur out of order.
+function cursorClearLoc(x,y) {
+   if ((pointingAtX == x) && (pointingAtY == y)) {
+	  pointingAtX = -1;
+	  pointingAtY = -1; } }
+
+
+// Complete the Win process. Save the cookies, and call the winning window.
+function winShowWindow() {
+	win = true;
+	setCookie("gameTime",clockCurrent);
+	setCookie("numMoves",numMoves);
+	setCookie("openRemainingUsed",openRemainingUsed);
+   
+   //The following is new for v2
+	setCookie("maxX",maxX);
+	setCookie("maxY",maxY);
+	setCookie("maxNumBombs",maxNumBombs);
+	
+	document.face.src = faceWin.src;
+   
+   gameWinModal(); // Fetch cookies mainly, more than are probably needed, and set the game time cookie if it's a new personal best. This is the old Mine Win page routines, wrapped in a function
+   modalWriteHTML(); // Write out the HTML into the Win Modal window
+ 
+	var modal = document.querySelector("#win-modal");
+	var modalBackground = document.querySelector("#win-modal-background");
+	modal.style.display = "block"; // Display the hidden Win Modal window
+	modalBackground.style.display = "block"; // Display the hidden Win Modal background
+	document.getElementById("minesweepergame").style.filter = "blur(3px)"; // Blur minesweeper game window
+
+}
+
+
+//
+// Associated w/ opening cells & cell clicking
+//
+
+// Make sure the check box always has the focus. makes the space bar work.
+function forceFocus() {
+	  document.checkForm.modeCheck.focus() }
+
+
+// You're dead.  Open the board of bombs.  Assumes death bomb is already
+// displayed (and isExposed is set to true).
+function deathShowBombs() {
+   for (i=0; i<=maxX; i++) {
+	  for (j=0; j<=maxY; j++) {
+		 with (cellArray[arrayIndexOf(i,j)]) {
+			if (!isExposed) {
+			   if ((isBomb) && (!isFlagged)) {
+				  document.images[imageIndexOf(i,j)].src =  bombRevealed.src; }
+			   else {
+				  if ((!isBomb) && (isFlagged)) {
+				  document.images[imageIndexOf(i,j)].src =  bombMisFlagged.src;
+			   } } } } } } }
+
+
+// You've won.  Mark any remaining cells as flags.
+function winShowFlags() {
+   for (i=0; i<=maxX; i++) {
+	  for (j=0; j<=maxY; j++) {
+		 with (cellArray[arrayIndexOf(i,j)]) {
+			if ((!isExposed) && (!isFlagged)) {
+			   isFlagged = true;
+			   document.images[imageIndexOf(i,j)].src = bombFlagged.src; } } } } }
+			   
+// Open all remaining cells. Returns True if the player has won.
+function openAll() {
+   allOK = true;
+   for (i=0; i<=maxX; i++) {
+	  for (j=0; j<=maxY; j++) {
+		 with (cellArray[arrayIndexOf(i,j)]) {
+			if (!isExposed) {
+			   if ((isBomb) && (!isFlagged)) {
+				  document.images[imageIndexOf(i,j)].src = bombDeath.src; 
+				  allOK = false;}
+			   else if ((!isBomb) && (isFlagged)) {
+				  document.images[imageIndexOf(i,j)].src = bombMisFlagged.src; }
+			   else if (!isBomb) {
+				  document.images[imageIndexOf(i,j)].src = cellOpenIm[neighborBombs].src; 
+			   } } } } } 
+   return allOK;}
+			 
+
+
+// Actually opens the cell.  Works for bombs & free cells.  Can handle
+// recursive calls (through markMatrixToOpen), death (if bomb), and win.
+// (should probably be broken up a bit)
+function openCell(x,y) {
+   // Normal cell opening processing begins here
+   with (cellArray[arrayIndexOf(x,y)]) {
+	  if (isBomb) {
+		 // death
+		 clockStop();
+		 document.images[imageIndexOf(x,y)].src =  bombDeath.src;
+		 document.face.src = faceDead.src;
+		 isExposed = true;
+		 dead = true;
+		 updateNumBombs();
+		 deathShowBombs(); }
+	  else {
+		 document.images[imageIndexOf(x,y)].src =  cellOpenIm[neighborBombs].src; 
+		 isExposed = true;
+		 isMarked = false;
+		 ++ cellsOpen;
+		 if ((neighborBombs == 0) && (!isBomb)) {
+			markMatrixToOpen(x,y); } 
+		 if (cellsOpen+maxNumBombs-1 == maxCells) {
+			clockStop();
+			winShowFlags();
+			winShowWindow();
+			} } } }
+		 
+
+// Cells on stack marked to be open.  Called on an as-needed basis.
+// See the markCellToOpen fn below.
+function constructMarkedCell() {
+   this.x = -1;
+   this.y = -1; }
+
+
+// Although Netscapes JavaScript 1.1 documentation says JavaScript is
+// recursive, it doesn't actually maintain a stack of local vars!
+// So these functions turned out to be a real pain to rewrite with my
+// own stack structures.
+// Adds an element to the manual stack.  Lengthens the stack if necessary.
+function markCellToOpen(x,y) {
+   ++markedCount;
+   if (highestStackHeight < markedCount) {
+	 ++highestStackHeight;
+	 markedArray[markedCount] = new constructMarkedCell() }
+   markedArray[markedCount].x = x;
+   markedArray[markedCount].y = y;
+   cellArray[arrayIndexOf(x,y)].isMarked = true; }
+
+
+// When you open a cell w/ 0 neighbors or click on a completely flagged
+// cell, open all neighbors (not flagged).  Creates recursive calls through
+// markCellToOpen
+function markMatrixToOpen(x,y) {
+   for (i=x-1; i<=x+1; i++) {
+	  for (j=y-1; j<=y+1; j++) {
+		 if (checkBounds(i,j)) {
+			with (cellArray[arrayIndexOf(i,j)]) {
+			   if ((!isExposed) && (!isMarked) && (!isFlagged)) {
+				  markCellToOpen(i,j); } } } } } }
+
+
+// Open all cells (usually one) marked for opening.  See markMatrixToOpen
+// to see how multiple cells are marked.
+function openAllMarked() {
+   while (markedCount >= 0) {
+	  markedCount--;  // Decrement first, in case a matrix is to be open
+	  with (markedArray[markedCount+1]) {
+		 openCell(x,y); } } }
+
+// Returns 1 if a cell is flagged, and 0 otherwise.  Used in determining
+// if a cell has complete surrounding cells flagged.  See below
+function checkFlagged(x,y) {
+   if (checkBounds(x,y)) 
+	  return (cellArray[arrayIndexOf(x,y)].isFlagged) ? (1) : (0); 
+   else
+	  return 0; }
+
+
+// Count the # of neighbors flagged.  Called for matrix opening.
+function checkFlaggedMatrix(x,y) {
+   count = 0;
+   for (i=x-1; i<=x+1; i++) {
+	  for (j=y-1; j<=y+1; j++) {
+		 if ((i!=x) || (j!=y)) {                  //Don't check center point
+		 count = count + checkFlagged(i,j); } } }
+   return count; }
+
+
+// Called for first click only.  Starts the clock, and makes sure there is
+// no bomb for the first open cell (or matrix).
+function firstClick(x,y) {
+	if (!useFirstClickUseful) {
+	  if (cellArray[arrayIndexOf(x,y)].isBomb) {
+		 placeBombRandomLoc();  // Place first to insure different loc
+		 removeBomb(x,y); } }
+	else {
+	  var i = 0;        // Make local
+	  var j = 0;
+	  // Set each cell of the matrix to open to prevent bomb placement.
+	  for (i=x-1; i<=x+1; i++) {
+		 for (j=y-1; j<=y+1; j++) {
+			if (checkBounds(i,j)) {
+			   cellArray[arrayIndexOf(i,j)].isExposed = true; } } }
+	  // Remove any bombs in the matrix and place elsewhere
+	  for (i=x-1; i<=x+1; i++) {
+		 for (j=y-1; j<=y+1; j++) {
+			if (checkBounds(i,j)) {
+			   if (cellArray[arrayIndexOf(i,j)].isBomb) {
+				  removeBomb(i,j);
+				  placeBombRandomLoc();
+				  } } } }
+	  // Set each cell back to normal.  (Let cell Click take it from here).
+	  for (i=x-1; i<=x+1; i++) {
+		 for (j=y-1; j<=y+1; j++) {
+			if (checkBounds(i,j)) {
+			   cellArray[arrayIndexOf(i,j)].isExposed = false; } } } }
+  clockStart(); }
+
+
+// New v2 click code.  Called whenever something is clicked. There is code specific for touch devices and code for non touch devices. For touch devices a timer detects if it is a single or double click. Right clicks are also captured here, to be passed on to the single click subroutine. This code ultimately passes off to either the single click or double click sub-routine as appropriate.
+	
+	let numClicks = 0;
+	const handleClick = (event) => {
+		
+	document.getElementById("minesweepergame").style.touchAction = "none"; // Prevent any inadvertent scrolling on mobile devices when clicking
+	
+	const touchdevice = matchMedia('(hover: none)').matches; // check if this is a touch device or not, using css media query api
+
+	if (touchdevice) { // code for handling a touch device
+		
+		numClicks++;
+		  if (numClicks === 1) {
+			singleClickTimer = setTimeout(() => {
+			  numClicks = 0;
+			  console.log("single click on touch device " + pointingAtX + " " + pointingAtY + " with event code: " + event.button);
+			  cellClick(pointingAtX,pointingAtY, '5') // note that the event.button code here is irrelevant
+			 
+			}, 400);
+		  } else if (numClicks === 2) {
+			clearTimeout(singleClickTimer);
+			numClicks = 0;
+			console.log("double click on touch device " + pointingAtX + " " + pointingAtY);
+			dblClick();
+		  }
+		
+	}
+	else { // code for handling a non-touch device e.g a desktop PC or regular laptop
+		console.log("single click on non touch device " + pointingAtX + " " + pointingAtY + " with event code: " + event.button);
+		  cellClick(pointingAtX,pointingAtY, event.button)
+	}
+		  
+	 
+	};
+	
+	// Listen out for a left click or tap
+	window.addEventListener('click', (event) => {
+		  handleClick(event);
+		})
+	
+	// Listen out for a right click
+	window.addEventListener('contextmenu', (event) => {
+		  event.preventDefault(); // prevent the regular right click context menu from appearing
+		  handleClick(event);
+		})
+
+// Double click function
+function dblClick() {
+
+		cellClick(pointingAtX,pointingAtY, null);
+		console.log('dblClick function fired');
+		
+		document.getElementById("minesweepergame").style.touchAction = "manipulation"; // Restore zoom and pan functions on mobile devices
+
+}
+
+
+
+
+// Main click function.  Called by the v2 click handler code above.  Based on mode,
+// determines what to do about the click. Handles both left and right clicks on regular devices.
+function cellClick(x,y,e) {
+	
+	if (x === -1) {return};
+	
+	//console.log("cell click function fired " + x + " " + y + " event:" + e);
+	
+//   alert("Clicked cell " + x + "," + y);  //Useful diagnostic line
+//   alert("Button pressed = " + e.button) //Useful diagnostic line
+   //closeAllMenus();
+   if ((!dead) && (!win)) {
+	  document.face.src = faceSmile.src;
+	  numMoves++;
+	  // Count the moves
+	  if ((e != null) && (e != 2)) {
+		  if (!clockMoving)
+			 firstClick(x,y);
+		  with (cellArray[arrayIndexOf(x,y)]) {
+			 // Is it already open?  If so, we may need to do a matrix (macro) open
+			 if (isExposed) {
+				if ((useMacroOpen) && (checkFlaggedMatrix(x,y) == neighborBombs)) { 
+				   markMatrixToOpen(x,y);
+				   openAllMarked(); } }
+			 else {
+				if (!isFlagged) { 
+				   markCellToOpen(x,y); 
+				   openAllMarked(); } } }
+		  if (win) {
+			 bombsFlagged = maxNumBombs;
+			 updateNumBombs(); }
+	  }
+	  else {
+		 if (x > -1) {
+		  with (cellArray[arrayIndexOf(x,y)]) {
+			 if (!isExposed) {
+				// There are 3 possibilities: blank, flagged, and question
+				// First deal with flagged going to either blank or question
+				if (isFlagged) {
+				   bombsFlagged--;
+				   isFlagged = false;
+				   if (!useQuestionMarks)
+					  document.images[imageIndexOf(x,y)].src = blankCell.src;
+				   else {
+					  isQuestion = true;
+					  document.images[imageIndexOf(x,y)].src = (bombQuestion.src); } }
+				// Now deal w/ question going to blank
+				else {
+				   if (isQuestion) {
+					  isQuestion = false;
+					  document.images[imageIndexOf(x,y)].src = blankCell.src; }
+				   // Finally, blank going to flagged
+				   else {
+					  isFlagged = true;
+					  ++bombsFlagged;
+					  document.images[imageIndexOf(x,y)].src = bombFlagged.src; } }
+			 updateNumBombs(); } } }
+	   }
+   }
+  forceFocus();
+  document.getElementById("minesweepergame").style.touchAction = "manipulation"; // Restore zoom and pan functions on mobile devices
+}
+
+
+// Mark a bomb with the space bar. Called whenever the value of the check box is toggled.
+function cellRightClick() {
+	cellClick(pointingAtX,pointingAtY, null);
+}
+
+
+// Special routine to ignore dragging starts.
+// Allows the mouse to be in motion when the user clicks.
+// Only works in IE because there is no onDrag handler in Mozilla
+function ignoreDragging() {
+   try {
+	  window.event.returnValue = false; }
+   catch (e) {}
+   return false; }
+
+
+// Show or remove the "Ooh" face when the mouse is clicked.
+function showMouseDown(e) {
+   if ((! dead) && (! win)) {
+	  closeAllMenus();
+	  document.face.src = faceOoh.src; } }
+
+
+
+// Check for F2. If pressed, restart the game. Two versions: for FF & IE
+document.onkeydown = checkKeyDown; // Uses global onkeypress. 
+function checkKeyDown(e) { 
+	try {
+		if (e.keyCode == 113) {
+			faceClick(); } }
+	catch (e) {}
+	try {
+		if (window.event.keyCode == 113) {
+			faceClick(); } }
+	catch (e) {}
+}
+
+
+// When all bombs are marked, user can open all remaining cells.
+function bombCountClick() {
+   closeAllMenus();
+   if ((!dead) && (!win) && (openRemaining) && ((maxNumBombs-bombsFlagged) == 0)) {
+	  clockStop();
+	  numMoves++;
+	  openRemainingUsed = true;
+	  if (openAll()) {
+		 winShowWindow(); 
+		 updateNumBombs(); }
+	  else {
+		 dead = true;
+		 updateNumBombs();
+		 document.face.src = faceDead.src; } }
+   forceFocus();
+   return false; }
+
+
+
+
+//
+// Board creation, re-initialization, bomb placement, etc.
+//
+
+
+// Support function for makeBoard.  Adds 1 to the neighborBombs property.
+// Does a bounds check and a check for not being a bomb. (no change if 
+// either condition fails)
+function addNeighbor(x,y) {
+   if (checkBounds(x,y)) {
+	  with (cellArray[arrayIndexOf(x,y)]) {
+			++neighborBombs; } } }
+
+
+// Called only w/ removal of bomb when 1st click is on a bomb.
+function removeNeighbor(x,y) {
+   if (checkBounds(x,y)) {
+	  with (cellArray[arrayIndexOf(x,y)]) {
+			neighborBombs--; } } }
+
+
+// Support function for makeBoard, and also called externally if first 
+// click is on a bomb.  Places a bomb at x,y loc and updates neighbor 
+// counts.  returns true upon success, failure if bomb is already there 
+// or if the square is open. (note: isExposed is set temporarily to true
+// during first click to avoid bombs being placed in bomb-free zone.)
+function placeBomb(x,y) {
+	
+	console.log("Function placeBomb was called for co-ordinates x = " + x + " y = " + y);
+   with (cellArray[arrayIndexOf(x,y)]) {
+	  if ((! isBomb) && (! isExposed)) {
+		 isBomb = true;
+		 for (i=x-1; i<=x+1; i++) {
+			for (j=y-1; j<=y+1; j++) {
+			   addNeighbor(i,j); } } 
+		 return true;} 
+	  else
+		 return false; } }
+
+
+// Only called when user's 1st click is on a bomb.
+// NOTE: This fn caused an "internal error: Stack underflow" for a while,
+// and then stopped.  I still can't find the cause, but if I split the
+// cellArray reference out into a higher "with" statement, it comes back.
+// It seems to work fine now, but be careful!
+function removeBomb(x,y) {
+   if (cellArray[arrayIndexOf(x,y)].isBomb) {
+	  for (i=x-1; i<=x+1; i++) {
+		 for (j=y-1; j<=y+1; j++) {
+			removeNeighbor(i,j); } } 
+	  cellArray[arrayIndexOf(x,y)].isBomb = false;
+	  return true; } 
+   else
+	  return false; }
+
+
+// Pixed a random stop w/o a bomb already there and places a bomb there.
+// Since it works w/ random locs and tests compliance, this fn is only
+// suitable for up to ~50% coverage. (I've limited the program to 33%).
+function placeBombRandomLoc() {
+	console.log("Function placeBombRandomLoc was called when maxX was " + maxX + " maxY = " + maxY);
+   bombPlaced = false;
+   while (!bombPlaced) {
+	  with (Math) {
+		 i = floor(random() * (maxX+1));
+		 j = floor(random() * (maxY+1)); }
+	  bombPlaced = (placeBomb(i,j)) } }
+
+
+// Does a complete clear of the internal board cell objects.
+function clearBoard() {
+   for (i=0; i<=maxX; i++) {
+	  for (j=0; j<=maxY; j++) {
+		 with (cellArray[arrayIndexOf(i,j)]) {
+			isExposed = false;
+			isBomb = false;
+			isFlagged = false;
+			isMarked = false;
+			isQuestion = false;
+			neighborBombs = 0;  } } } }
+
+
+// Puts the original image on each image cell.
+function clearBoardImages() {
+   for (j=0; j<=maxY; j++) {
+	  for (i=0; i<=maxX; i++) {
+		 with (cellArray[arrayIndexOf(i,j)]) {
+			if (document.images[imageIndexOf(i,j)].src != blankCell.src) {
+				document.images[imageIndexOf(i,j)].src = blankCell.src; } } } } }
+
+
+// Core fn for creating a board.  Does not reset time or clear images.
+function makeBoard() {
+		
+	clearBoard();
+	bombsFlagged = 0;
+	cellsOpen = 0;
+	updateNumBombs();
+	// Now place the bombs on the board
+	bombsToPlace = maxNumBombs;
+	while (bombsToPlace != 0) {
+	placeBombRandomLoc();
+	bombsToPlace--; } 
+	
+  
+  }
+
+
+// Resets clock, makes board, clears images, and prepares for next game.
+// First time doesn't do a parent reload.
+function faceClick_first() {
+   document.face.src = faceWait.src;
+   numMoves = 0;
+   closeAllMenus();
+   clockStop();
+   clockClear();
+   makeBoard();
+   clearBoardImages(); 
+   forceFocus();
+   dead = false;
+   win = false;
+   openRemainingUsed = false;
+   document.face.src = faceSmile.src;
+   return false;
+   }
+
+function faceClick() {
+	faceClick_first();
+
+   }
+
+
+// Internal testing fns
+function timetestStart() {
+	timetestStartDt = new Date(); }
+
+function timetestStop() {
+   timetestEndDt = new Date();
+   alert('Diagnostic Timer: ' + (timetestEndDt - timetestStartDt) + 'ms'); }
+
+
+
+
+
+
+//
+// Numerical displays (clock and num bomb) updated here
+//
+
+
+// Set the clock images to the current time.  Called by ticClock
+function updateClock() {
+	 tempClock = clockCurrent;
+	 if (tempClock == -1) { tempClock = 0; }
+	 digit = tempClock % 10;
+	 document.time1s.src = timeDigits[digit].src;
+	 digit = Math.floor(tempClock / 10 % 10);
+	 document.time10s.src = timeDigits[digit].src;
+	 digit = Math.floor(tempClock / 100 % 10);
+	 document.time100s.src = timeDigits[digit].src; }
+
+
+// Updates the display w/ the current number of bombs left.
+function updateNumBombs() {
+   if ((!dead) && (!win) && (openRemaining) && ((maxNumBombs-bombsFlagged) == 0)) {
+	  document.bomb1s.src = movesDigits0.src;
+	  document.bomb10s.src = movesDigits0.src;
+	  document.bomb100s.src = movesDigits0.src; }
+	  
+   else {
+	   
+	   if((maxNumBombs) && (bombsFlagged)) {
+	   
+			  console.log("Function updateNumBombs was called. maxNumBombs = " + maxNumBombs + "and bombsFlagged = " + bombsFlagged);
+			  digit = Math.abs(maxNumBombs-bombsFlagged) % 10;
+			  document.bomb1s.src = timeDigits[digit].src;
+			  digit = Math.floor(Math.abs(maxNumBombs-bombsFlagged) / 10 % 10);
+			  document.bomb10s.src = timeDigits[digit].src;
+			  digit = Math.floor(Math.abs(maxNumBombs-bombsFlagged) / 100 % 10);
+			  document.bomb100s.src = timeDigits[digit].src;
+			  if (maxNumBombs < bombsFlagged)
+				 document.bomb100s.src = timeNeg.src; 
+	 			}
+	 
+	 } 
+	 
+}
+
+
+
+
+//
+// TIME functions begin here...
+//
+
+// Clock tic.  Called once, then it repeats every 1 second.
+function ticClock() {
+   if (!killLastClock) {
+	  if (clockMoving) {
+		 ++ clockCurrent; }
+	  if ((clockMoving) && (clockCurrent < 1000)) // Max out display at 999
+		 updateClock(); 
+	  clockActive = clockMoving;
+	  if (clockActive)  {              // Always do the recursive call last
+		 id = setTimeout("ticClock()",1000) } }
+   killLastClock = false; }
+
+
+// Stops the clock
+//   SPECIAL NOTE: This function doesn't actually stop the clock: it
+//   directs the ticClock fn to stop ticking upon its next recusrive call.
+function clockStop() {
+   clockMoving = false; }
+
+
+// Stop and clear the clock.  See specal note in clockStop above.   
+function clockClear() {
+   // If we're currently moving, we need to first stop it
+   if ((!clockMoving) && (clockCurrent != 0)) {
+	  clockCurrent = 0;
+	  updateClock(); }
+   clockCurrent = -1;
+   clockMoving = false; }
+
+
+// Starts the clock.  Able to start a clear clock or restart a paused
+// clock (a feature I'm not using here).
+function clockStart() {
+   // Stop the clock (sets a temp variable for later interigation)
+   clockWasActive = clockActive;
+   clockMoving = true;
+   ticClock();
+   // harder part: We're still running.  Tells ticClock to kill old clock.
+   if (clockWasActive) {
+	  killLastClock = true;  } }
+	  
+
+
+//
+// MENU functions begin here...
+//
+
+// Close a menu
+function closeMenu(selectedMenu){
+   document.getElementById(selectedMenu).style.visibility="hidden"; }
+
+
+// Show a menu
+function openMenu(selectedMenu){
+   document.getElementById(selectedMenu).style.visibility="visible"; }
+
+
+// Close any visible menus
+function closeAllMenus(){
+   closeMenu("divMenuHelp");
+   closeMenu("divMenuOpt");
+   closeMenu("divMenuGame"); }
+
+
+// Used in menuGameClick to set the QuestionMarks, MacroOpen and FirstClickUseful
+// image check marks.
+function menuSetOptionChecks(cookieVar, imageLoc) {
+  if (cookieVar)
+	 imageLoc.src = checked.src
+	 else imageLoc.src = notchecked.src }
+
+
+// Set the check marks for the appropriate menu.
+function menusSetAllOptionChecks(thisMenu) {
+   if (thisMenu == "divMenuGame") {
+	 // Set all 4 game sizes to blanks
+	 document.imBeginner.src = notchecked.src
+	 document.imIntermediate.src = notchecked.src
+	 document.imExpert.src = notchecked.src
+	 document.imCustom.src = notchecked.src
+	 // Set the appropriate one to ckecked
+	 if (gameFormat == "Beginner") 
+		document.imBeginner.src = checked.src
+	 else if (gameFormat == "Intermediate") 
+		document.imIntermediate.src = checked.src
+	 else if (gameFormat == "Expert")
+	   document.imExpert.src = checked.src
+	 else
+	   document.imCustom.src = checked.src }
+   else if (thisMenu == "divMenuOpt") {
+	 // Set the check marks for the Options menu
+	 menuSetOptionChecks(useQuestionMarks, document.imMarks)
+	 menuSetOptionChecks(useMacroOpen, document.imUseMacro)
+	 menuSetOptionChecks(useFirstClickUseful, document.imFirst)
+	 menuSetOptionChecks(openRemaining, document.imRemaining)  } }
+
+
+// A menu was clicked
+function menuClick(thisMenu) {
+   // Determine if the menu is visible. Check BEFORE closing.
+   visibleTest = (document.getElementById(thisMenu).style.visibility == "visible");
+   // Hide any visible menu, including thisMenu
+   closeAllMenus();
+   // Toggle the menu. Note that if it was open, it has already been closed.
+   if (! visibleTest) {
+	  menusSetAllOptionChecks(thisMenu);
+	  openMenu(thisMenu); }
+   // Save state. Used to clear menus by clicking anywhere on browser.
+   lastClickOnMenu = true;
+   return false; }
+   
+
+// When a top-level menu is pointed at and another menu it open, close the 
+// current menu and open the new menu. This mimics the typical Windows menu 
+// behavior.
+function menuMouseOver(currentMenu) {
+   visibleTestGeneral = ((document.getElementById("divMenuGame").style.visibility == "visible") || (document.getElementById("divMenuOpt").style.visibility == "visible") || (document.getElementById("divMenuHelp").style.visibility == "visible"));
+   visibleTestSpecific = (document.getElementById(currentMenu).style.visibility == "visible") ;
+   if ((visibleTestGeneral) && (! visibleTestSpecific)) {
+	  menuClick(currentMenu); }
+   return false; }
+
+
+// Called whenever an item in a menu is called.
+function menuItemClick(thisMsg)
+{
+  // So they selected something... cycle through the options and execute.
+  // Game menu...
+  if (thisMsg == "Exit")
+	 window.close()
+  else if (thisMsg == "New")
+	 faceClick()
+  else if ((thisMsg == "Beginner") || (thisMsg == "Intermediate") || (thisMsg == "Expert")) {
+	 setCookie("gameFormat",thisMsg);
+	 window.location.reload(); }
+  else if (thisMsg == "Custom") {
+	  
+	  console.log("User clicked on custom menu option. At this time, maxX was " + maxX + " and maxY was " + maxY);
+	 setCookie("gameFormat","gameFormat");
+	 setCookie("maxX",maxX);
+	 setCookie("maxY",maxY);
+	 setCookie("maxNumBombs",maxNumBombs);
+	 
+	customModal(); // Function that fetches information from cookies needed for the custom game modal, and writes into the modal
+	document.querySelector("#custom-modal").style.display = "block"; // Turn on display of the hidden custom game Modal
+	document.querySelector("#custom-modal-background").style.display = "block"; // Turn on display of the hidden custom game background
+	document.getElementById("minesweepergame").style.filter = "blur(3px)"; // Blur minesweeper game window
+ 
+ }
+  else if (thisMsg == "Personal") {
+		pbModal(); // Function that fetches the information from cookies needed for the Personal Best modal, and write into the Modal Window
+		document.querySelector("#pb-modal").style.display = "block"; // Turn on display of the hidden PB Modal window
+		document.querySelector("#pb-modal-background").style.display = "block"; // Turn on display of the hidden PB Modal background
+		document.getElementById("minesweepergame").style.filter = "blur(3px)"; // Blur minesweeper game window
+		  }
+
+  // Options menu
+  else if (thisMsg == "Marks") {
+	 useQuestionMarks = ! useQuestionMarks;
+	 setCookie("useQuestionMarks",useQuestionMarks); }
+  else if (thisMsg == "Area") {
+	 useMacroOpen = ! useMacroOpen;
+	 setCookie("useMacroOpen",useMacroOpen); }
+  else if (thisMsg == "First") {
+	 useFirstClickUseful = ! useFirstClickUseful;
+	 setCookie("useFirstClickUseful",useFirstClickUseful); }
+  else if (thisMsg == "Remaining") {
+	 openRemaining = ! openRemaining;
+	 updateNumBombs();
+	 setCookie("openRemaining",openRemaining); }
+
+  // Help menu
+  else if (thisMsg == "About") {window.location.href = "minesweeper-history.php";}
+  else if (thisMsg == "Instructions") {window.location.href = "how-to-play-minesweeper.php";}
+
+  // Since we clicked, close the menu.
+  closeAllMenus();
+  // Always return a false to prevent the executing of the default href.
+  //  (this is a neat trick - we've already handled the event, so we bypass the default href link)
+  return false; }
+
+/* ]]> */
+// -->
+</script>
+
+
+
+<!-- Menubar -->
+<table width="150" border="0" cellspacing="0" cellpadding="0"  class="menu_margin">
+<tr>
+<td class="menu_title">&nbsp;</td>
+<td width="43" class="menu_title"><a onclick="return menuClick('divMenuGame')" onmouseover="return menuMouseOver('divMenuGame')">Game</a></td>
+<td width="55" class="menu_title"><a onclick="return menuClick('divMenuOpt')"  onmouseover="return menuMouseOver('divMenuOpt')" >Options</a></td>
+<td width="50" class="menu_title"><a onclick="return menuClick('divMenuHelp')" onmouseover="return menuMouseOver('divMenuHelp')">Help</a></td>
+</tr>
+</table>
+
+
+
+<!-- Special check box - retains focus no matter what. Note it is located off the screen to the left by 200 pixels.  It looks ugly otherwise. -->
+<div class="focus_box">
+<form name="checkForm" action="ignore">
+	<input id="hiddencheckbox" type="checkbox" onclick="cellRightClick()" name="modeCheck" />
+	<label for="hiddencheckbox">Hidden checkbox please ignore</label>
+</form>
+</div>
+
+
+
+<!-- Create the board itself. This is done in JavaScript so the board can be dynamically sized-->
+
+
+<script type="text/javascript">
+<!-- 
+   // Create a distinct DIV section for the board, and hide it until it is ready.
+   // This is important for slower machines, since the onclick events are
+   // available as soon as they are created, even if the board isn't fully built.
+   document.writeln('<div id="divBoard" style="visibility:hidden;">');
+
+   // By putting the grid into a table cell, nowrap can be used. Good for Opera.
+   document.writeln('<table border="0" id="gametable"><tr><td nowrap="nowrap">');
+
+   // Build the top line
+   document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bordertl.gif" width="10" height="10" alt="" />');
+   for (j=0; j<=maxX; j++) {
+	  document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bordertb.gif" height="10" width="16" alt="" />'); }
+   document.writeln('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bordertr.gif" width="10" height="10" alt="" /><br />');
+
+   // Build the top display (# bombs, face, clock)
+   
+   document.write('<div id="top-display-outer">');
+
+   document.write('<div><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderlr.gif" height="26" width="10" alt="" /></div>');
+
+document.write('<div id="top-display">');
+
+   document.write('<div><a onclick="return bombCountClick()"><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time0.gif" border="0" name="bomb100s" width="13" height="23" alt="" /><IMG SRC="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time0.gif" border="0" name="bomb10s" width="13" height="23" alt="" /><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time0.gif" border="0" name="bomb1s" width="13" height="23" alt="" /></a></div>');
+   
+   document.write('<div><a onclick="return faceClick()"><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/faceclock.gif" name="face" hspace="'+smileMargin+'" border="0" width="26" height="26" alt="" /></a></div>');
+   
+   document.write('<div><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time0.gif" border="0" name="time100s" width="13" height="23" alt="" /><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time0.gif" border="0" name="time10s" width="13" height="23" alt="" /><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/time0.gif" border="0" name="time1s" width="13" height="23" alt="" /></div>');
+   
+document.write('</div>');
+
+   
+   document.writeln('<div><img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderlr.gif" height="26" width="10" alt="" /></div>');
+   
+   document.write('</div>');
+   
+   
+   document.write('<br />');
+
+   // Line between title stuff and the board
+   document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderjointl.gif" width="10" height="10" alt="" />');
+   for (j=0; j<=maxX; j++) {
+	  document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bordertb.gif" height="10" width="16" alt="" />'); }
+   document.writeln('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderjointr.gif" width="10" height="10" alt="" /><br />');
+
+   // Build the main grid itself, placing it on-screen.  Note the l/r edge using cellClick
+   // Also, using a temp string to build line before display.  Speeds up display.
+   for (i=0; i<=maxY; i++) {
+	  document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderlr.gif" height="16" width="10" alt="" />');
+	  for (j=0; j<=maxX; j++) {
+		 // IE requires onDragStart, Netscape requires onDrag. Click is handled via onmouseup.
+		 document.write('<a onClick="" onmouseover="cursorHoldLoc('+j+','+i+')" onmouseout="cursorClearLoc('+j+','+i+')" ondragstart="ignoreDragging()" ondrag="ignoreDragging()" onmousedown="showMouseDown(event);" >');
+		 document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/blank.gif" width="16" height="16" name="cellIm'+j+'_'+i+'" border="0" alt="" /></a>'); 
+
+	  }
+	  document.writeln('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderlr.gif" border="0" height="16" width="10" alt="" /><br />'); }
+   
+   // Build the bottom line, including corners
+   document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderbl.gif" width="10" height="10" alt="" />');
+   for (j=0; j<=maxX; j++) {
+	  document.write('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/bordertb.gif" height="10" width="16" alt="" />'); }
+   document.writeln('<img src="https://cdn.jsdelivr.net/gh/thirstygithub/didactic-guacamole/images/borderbr.gif" width="10" height="10" alt="" /><br />');
+
+
+	// Move the help menu over a bit if the game isn't wide enough
+   if (maxX == 7) {
+	  document.getElementById("divMenuHelp").style.left=70; }
+
+	// Final settings - populate the board, focus, make the smile face, and create the menus
+   faceClick_first();
+   
+	//end of nowrap table
+	document.writeln('</td></tr></table>');
+   
+	document.writeln('</div>');
+
+	// Make the board visible
+	document.getElementById("divBoard").style.visibility = "visible";
+	
+//-->
+</script>
+
+
+
+</div>
+		
+</div>
+<!-- End Minesweeper Game Container --> 
+	
+<!-- Footer Navigation -->
+<footer>
+	<div id="footer-navigation">
+	</div>
+</footer>
+<!-- End Footer Navigation -->	
+
+</div>
+
+<!-- ************************* ALL MODAL WINDOWS START HERE ********************************* -->
+
+
+<!-- Win Modal HTML code -->
+<div class="modal-background" id="win-modal-background"></div>
+<div class="modal" id="win-modal">
+  <button class="close-button" id="close-button">CLOSE</button>
+  	<div class="modal-guts"> 
+		<script type="text/javascript">  
+			  function gameWinModal() {
+				  // Read the 4 vars as cookies
+				  console.log("Function gameWinModal was called and before checking cookies, maxX was " + maxX + " and maxY was " + maxY + " and maxNumBombs was " + maxNumBombs);
+				   maxX=parseInt(getCookie("maxX"),10);  // Cells wide (0..n-1)
+				   maxY=parseInt(getCookie("maxY"),10);  // Cells high (0..n-1)
+				   maxNumBombs = parseInt(getCookie("maxNumBombs"),10); // Number bombs
+				   console.log("Function gameWinModal was called and after checking cookies maxX was retrieved from cookies as " + maxX + " and maxY was retrieved as " + maxY + " and maxNumBombs was " + maxNumBombs);
+				   useQuestionMarks = ! (getCookie("useQuestionMarks") == 'false');
+				   useMacroOpen = ! (getCookie("useMacroOpen") == 'false');
+				   useFirstClickUseful = ! (getCookie("useFirstClickUseful") == 'false');
+				   displayTime = ! (getCookie("displayTime") == 'false');
+				   openRemaining = (getCookie("openRemaining") == 'true');
+				   openRemainingUsed = (getCookie("openRemainingUsed") == 'true');
+				   allowCheating = (getCookie("allowCheating") == 'true');
+				   learningMode = (getCookie("learningMode") == 'true');
+				   gameTime = parseInt(getCookie("gameTime"),10);
+				   numMoves = parseInt(getCookie("numMoves"),10);
+				   if (gameTime > 999)
+					  gameTime = 999;
+				   gameFormat = getCookie("gameFormat");
+				   referrer = getCookie("referrer");
+				   newRecord = false;  // Use to decide if "submit" button is used
+				   highTime = parseInt(getCookie(gameFormat),10);
+				   if ((gameTime < highTime) || (isNaN(highTime))) {
+				   newRecord = true;
+				   highTime = gameTime;
+				   setCookie(gameFormat,highTime); }
+				   
+				   var items = ['SUCCESS!', 'YOU WIN!', 'YOU DID IT!', 'HOORAY!', 'HURRAH!', 'WAY TO GO!', 'LIKE A BOSS!', 'CHAMPION!', 'BRAVO!', 'AMAZING!', 'EXCELLENT WORK!', 'WHOOMP THERE IT IS!']; // pick a random success message for win modal
+				   var item = items[Math.floor(Math.random() * items.length)];
+				   document.getElementById("success-message").innerHTML = "<h2>" + item + "</h2>";
+				   
+				   
+			  }
+		</script>
+	  
+<div id="success-message"><h2>SUCCESS!</h2></div>
+
+
+  <p>Congratulations on winning Minesweeper</p>
+	  <div id="win-modal-div">
+			<script>
+			// This is the old Mine Win results screen showing the game's statistics, rewritten for modal display
+			// This writes the HTML into the modal display, whether it is hidden from view or not
+			function modalWriteHTML() {
+			var winModalDiv = document.getElementById("win-modal-div");
+			var winModalHTML = "<p><strong>Game time:</strong> "+gameTime+" seconds <br />";
+			winModalDiv.innerHTML = winModalHTML;		
+			if (gameFormat == "Custom") {winModalDiv.innerHTML = winModalDiv.innerHTML + "Game parameters: "+(maxX+1)+"x"+(maxY+1)+" w/ "+maxNumBombs+" bombs<BR>";}
+		    else {winModalDiv.innerHTML = winModalDiv.innerHTML + "Your best "+gameFormat+" time is: "+highTime+" seconds<br />";}
+			winModalDiv.innerHTML = winModalDiv.innerHTML + "Number of clicks was: "+numMoves+"</p>";		
+			}
+		  </script>	  
+	  </div>	
   </div>
+</div>
+<!-- End Win Modal HTML code -->
+
+<!-- Start Win Modal Javascript code -->
+<script>
+	var winModalDIV = document.querySelector("#win-modal");
+	var winModalBackground = document.querySelector("#win-modal-background");
+	var winCloseButton = document.querySelector("#close-button");	
+	winCloseButton.addEventListener("click", function() {
+		winModalDIV.style.display = "none";
+		winModalBackground.style.display = "none";
+		document.getElementById("minesweepergame").style.filter = "none"; // Turn off blur
+	});
+</script>
+<!-- End Win Modal Javascript code -->
+	
 
 
-  <!-- Polyfills bundle. -->
+<!-- Personal Best Modal HTML code -->
+<div class="modal-background" id="pb-modal-background"></div>
+	<div class="modal" id="pb-modal">
+	  <button class="close-button" id="pb-close-button">CLOSE</button>
+		  <div class="modal-guts"> 
+			<script type="text/javascript">  
+				  function pbModal() {
+					  bestBeginner = parseInt(getCookie("Beginner"),10);
+						 if (isNaN(bestBeginner))
+							bestBeginner = 999;
+						 bestIntermediate = parseInt(getCookie("Intermediate"),10);
+						 if (isNaN(bestIntermediate))
+							bestIntermediate = 999;
+						 bestExpert = parseInt(getCookie("Expert"),10);
+						 if (isNaN(bestExpert))
+							bestExpert = 999;
+						document.getElementById("pb-beginner").innerHTML = bestBeginner + " seconds";
+						document.getElementById("pb-intermediate").innerHTML = bestIntermediate + " seconds";
+						document.getElementById("pb-expert").innerHTML = bestExpert + " seconds";					  				  
+					  function scoresReset() {
+						 setCookie("Beginner",999);
+						 setCookie("Intermediate",999);
+						 setCookie("Expert",999);
+						 window.close(); }
+				  }
+			</script>
+		  
+	<h2>Personal Best Times</h2>
+		  <div id="pb-modal-div">
+				<table cellpadding=4>
+					<tr>
+					  <td><b>Beginner:&nbsp</b></td>
+					  <td align="right"><b>
+						<div id="pb-beginner"></div>
+					  </b></td>
+					</tr>
+					<tr>
+					  <td><b>Intermediate:&nbsp</b></td>
+					  <td align="right"><b>
+						<div id="pb-intermediate"></div>
+					  </b></td>
+					</tr>
+					<tr>
+					  <td><b>Expert:&nbsp</b></td>
+					  <td align="right"><b>
+						<div id="pb-expert"></div>
+					  </b></td>
+					</tr>
+				  </table>
+		  </div>	
+	  </div>
+	</div>
+<!-- End PB Modal HTML code -->
+	
+<!-- Start PB Modal close button code -->
+<script>
+	var pbModalDIV = document.querySelector("#pb-modal");
+	var pbModalBackground = document.querySelector("#pb-modal-background");
+	var pbCloseButton = document.querySelector("#pb-close-button");	
+	pbCloseButton.addEventListener("click", function() {
+	pbModalDIV.style.display = "none";
+	pbModalBackground.style.display = "none";
+	document.getElementById("minesweepergame").style.filter = "none"; // Turn off blur
+	});
+</script>
+<!-- End PB Modal close button code -->
 
-  <script src="src/polyfills.bundle.5adbf.js" charset="utf-8"> </script>
 
 
-  <!-- SystemJS support. -->
-  <script src="src/system.bundle.543e6.js" charset="utf-8"> </script>
 
-  <!-- Import map -->
-  <script src="src/import-map.4399c.json" type="systemjs-importmap" charset="utf-8"> </script>
+<!-- Custom Game Settings Modal HTML code -->
+	<div class="modal-background" id="custom-modal-background"></div>
+		<div class="modal" id="custom-modal">
+		  <button class="close-button" id="custom-close-button">CLOSE</button>
+			  <div class="modal-guts"> 
+				<script type="text/javascript">  
+					  function customModal() {
 
-  <script>
-    System.import('./index.bed7f.js').catch(function (err) { console.error(err); })
-  </script>
-  <script src="tmpPatch.js"></script>
+					 maxX=parseInt(getCookie("maxX"),10)+1;  // Cells wide (0..n-1)
+					 maxY=parseInt(getCookie("maxY"),10)+1;  // Cells high (0..n-1)
+					 maxNumBombs = parseInt(getCookie("maxNumBombs"),10);
+					 
+					 function launchGame() {
+							// Extract the 3 entered values
+							maxX = document.CustomForm.maxX.value;
+							maxY = document.CustomForm.maxY.value;
+							maxNumBombs = document.CustomForm.maxNumBombs.value;
+							// This pre-calc just makes the next "if" easier to handle.
+							maxLegalBombs = Math.round((maxX)*(maxY) / 3)  // Max 1/3 of all cells
+							// Make sure all values are numbers and are within range
+							if ((isNaN(maxX)) || (maxX<1) || (maxX>100) || (isNaN(maxY)) || (maxY<1) || (maxY>100) || (isNaN(maxNumBombs)) || (maxNumBombs<1) || (maxNumBombs>3333)) {
+							   // Not in range: Fancy alert screen
+							   alert("Minesweeper dimensions invalid:\n\tGame Height: from 1 to 100\n\tGame Width: From 1 to 100\n\tBombs: Max 1/3 of total squares");
+							   // Cancel the submit
+							   return false;}
+							else {
+							   // Mist be ok. Save values
+							   // Extract the 3 entered values
+							   setCookie("gameFormat","Custom");
+							   setCookie("maxX",maxX-1);
+							   setCookie("maxY",maxY-1);
+							   setCookie("maxNumBombs",maxNumBombs);
+							   window.location.reload();
+							   // Reload the page to show new custom board
+ 							  } 
+						}
+							   
+   document.getElementById("custom-height").innerHTML = '<input type="text" size="3" name="maxY" value="' + (maxY) + '">';
+   document.getElementById("custom-width").innerHTML = '<input type="text" size="3" name="maxX" value="' + (maxX) + '">';
+   document.getElementById("custom-bombs").innerHTML = '<input type="text" size="3" name="maxNumBombs" value="' + maxNumBombs + '">';	
+   
+   document.getElementById("CustomForm").onsubmit = launchGame //Fire the launchGame function on submit
+   
+   var customGameForm = document.querySelector('#CustomForm'); //Select the form
+   customGameForm.addEventListener('submit', submitPrevent);    //listen for submit
+
+  function submitPrevent(e){
+	   e.preventDefault(); //stop form action i.e. submit
+   }
+					  }
+				</script>
+			  
+		<h2>Custom Game Setup</h2>
+			  <div id="custom-modal-div">
+					<form name="CustomForm" id="CustomForm">
+						<div align="center">
+							<center><table border="0">
+							<tr><td>Game Height:</td>
+								<td><div id="custom-height"></div></td>
+							</tr>
+							<tr><td>Game Width:</td>
+								<td><div id="custom-width"></div></td>
+							</tr>
+							<tr><td>Number of Bombs:</td>
+								<td><div id="custom-bombs"></div></td>
+							</tr>
+						</table></center>
+						</div>
+					<center><p><button type="submit">OK</button></p></center>
+					</form>
+			  </div>	
+		  </div>
+		</div>
+<!-- End Custom Game Settings Modal HTML code -->
+		
+<!-- Start Custom Game Settings Modal close button code -->
+<script>
+	var customModalDIV = document.querySelector("#custom-modal");
+	var customModalBackground = document.querySelector("#custom-modal-background");
+	var customCloseButton = document.querySelector("#custom-close-button");	
+	customCloseButton.addEventListener("click", function() {
+	customModalDIV.style.display = "none";
+	customModalBackground.style.display = "none";
+	document.getElementById("minesweepergame").style.filter = "none"; // Turn off blur
+	});
+</script>
+<!-- End Custom Game Settings Modal close button code -->
+	
+	
+	
+<!-- First Time Mobile User Modal HTML code -->
+	<div class="modal-background" id="firsttimemobile-modal-background"></div>
+		<div class="large-modal" id="firsttimemobile-modal">
+		  <button class="close-button" id="firsttimemobile-close-button">CLOSE</button>
+			  <div class="modal-guts"> 
+			  
+		<h1>WELCOME!</h1>
+		
+		<ul>
+		<li>This is the only <b>Minesweeper</b> website to work well on phones and tablets - you've come to the right place!</li>
+		<li>Double-tap on squares to mark them with a flag</li>
+		<li>You can find us in future by searching Google for <b>"free minesweeper"</b></li>
+		<li>If you need instructions, they're in the menu</b></li>
+		</ul>
+		<p>Enjoy!</p>
+	
+		  </div>
+		</div>
+<!-- End First Time Mobile User Modal HTML code -->
+		
+<!-- Start First Time Mobile User Modal close button code -->
+<script>
+	var firsttimemobileModalDIV = document.querySelector("#firsttimemobile-modal");
+	var firsttimemobileModalBackground = document.querySelector("#firsttimemobile-modal-background");
+	var firsttimemobileCloseButton = document.querySelector("#firsttimemobile-close-button");	
+	firsttimemobileCloseButton.addEventListener("click", function() {
+	firsttimemobileModalDIV.style.display = "none";
+	firsttimemobileModalBackground.style.display = "none";
+	document.getElementById("minesweepergame").style.filter = "none"; // Turn off blur
+	});
+</script>
+<!-- End First Time Mobile User Modal close button code -->
+
+
+<!-- ************************* ALL MODAL WINDOWS END HERE ********************************* -->
+
 </body>
-
 </html>
