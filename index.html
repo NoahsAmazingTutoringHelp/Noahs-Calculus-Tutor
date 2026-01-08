@@ -12,7 +12,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Noahs Tutoring | Math</title>
-    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/cuh.png">
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/cuh.png" id="siteFavicon">
+    <link rel="shortcut icon" href="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/cuh.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/cuh.png">
+    <meta name="theme-color" content="#c27c15">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Courier New',monospace}
@@ -147,33 +150,34 @@
             .nav-tab{padding:10px 20px}.padlet-embed{height:400px}
         }
         
-        #custom-cursor{
-            position:fixed;width:24px;height:24px;pointer-events:none;z-index:999999;
-            border-radius:50%;transform:translate(-50%,-50%);transition:transform .12s,width .15s,height .15s;
-            background:var(--cursor-bg);border:1px solid var(--cursor-border);
-            box-shadow:0 0 12px rgba(var(--primary-orange-rgb),.3),inset 0 0 12px rgba(255,255,255,.03)
-        }
-        #custom-cursor.click{transform:translate(-50%,-50%) scale(0.85);border-color:var(--cursor-hover-border)}
-        .lesson-card:hover ~ #custom-cursor,#custom-cursor.hover{
-            width:28px;height:28px;background:var(--cursor-hover-bg);border-color:var(--cursor-hover-border)
-        }
-
         #custom-cursor {
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    z-index: 999999;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
     transition: opacity 0.3s ease, transform 0.12s, width 0.15s, height 0.15s;
+    background: var(--cursor-bg);
+    border: 1px solid var(--cursor-border);
+    box-shadow: 0 0 12px rgba(var(--primary-orange-rgb), .3), inset 0 0 12px rgba(255,255,255,.03);
+    opacity: 1;
 }
 
-#custom-cursor.hidden {
-    opacity: 0;
-    pointer-events: none;
+#custom-cursor.click {
+    transform: translate(-50%, -50%) scale(0.85);
+    border-color: var(--cursor-hover-border);
 }
-        @media (hover:none) and (pointer:coarse){
-            #custom-cursor{display:none!important}
-            body,body *{cursor:auto!important}
-        }
-        
-        a,button,input,textarea,select,[onclick],[role="button"],.btn,.nav-tab,.lesson-card,.partner-card,.discord-btn,.visit-btn,.acknowledge-btn,.theme-toggle-btn{
-            cursor:none!important
-        }
+
+.lesson-card:hover ~ #custom-cursor,
+#custom-cursor.hover {
+    width: 28px;
+    height: 28px;
+    background: var(--cursor-hover-bg);
+    border-color: var(--cursor-hover-border);
+}
+
 .sorter-wrapper {
     position: relative;
     max-width: 350px;
@@ -222,6 +226,40 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+html {
+    animation: faviconFlash 0.1s linear 0.5s 1 forwards;
+}
+
+@keyframes faviconFlash {
+    0% { opacity: 0.9999; }
+    100% { opacity: 1; }
+}
+
+.game-page.active {
+    cursor: auto !important;
+}
+
+.game-page.active * {
+    cursor: auto !important;
+}
+
+.game-frame {
+    cursor: auto !important;
+}
+
+.game-frame * {
+    cursor: auto !important;
+}
+
+#custom-cursor {
+    z-index: 2147483647 !important;
+}
+
+.game-header .btn,
+.game-controls .btn {
+    cursor: none !important;
 }
 
 html, body, * {
@@ -433,6 +471,139 @@ body::-webkit-scrollbar,
     animation: pulse 2s infinite;
 }
 
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.search-box {
+    width: 100%;
+    padding: 15px 50px 15px 20px;
+    background: rgba(20, 20, 20, 0.9);
+    border: 2px solid var(--primary-orange);
+    border-radius: 50px;
+    color: var(--light-text);
+    font-size: 1.1rem;
+    outline: none;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.3);
+    cursor: none !important;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+}
+
+.search-box:focus {
+    box-shadow: 0 0 25px rgba(var(--primary-orange-rgb), 0.6);
+    border-color: var(--accent-orange);
+    background: rgba(25, 25, 25, 0.95);
+    transform: translateY(-2px);
+}
+
+.search-box::placeholder {
+    color: var(--gray-text);
+    opacity: 0.7;
+}
+
+.search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-orange);
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.search-icon.has-text {
+    pointer-events: auto;
+    cursor: none !important;
+}
+
+.search-icon.has-text:hover {
+    color: var(--accent-orange);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.search-stats {
+    text-align: center;
+    color: var(--primary-orange);
+    margin: 15px 0 25px 0;
+    font-size: 0.95rem;
+    min-height: 20px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 5px rgba(var(--primary-orange-rgb), 0.5);
+}
+
+.no-results {
+    text-align: center;
+    color: var(--gray-text);
+    font-size: 1.1rem;
+    margin: 40px 0;
+    padding: 30px;
+    background: rgba(20, 20, 20, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(var(--primary-orange-rgb), 0.3);
+    grid-column: 1 / -1;
+    display: none;
+}
+
+.no-results.show {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.search-highlight {
+    background-color: rgba(var(--primary-orange-rgb), 0.3);
+    color: var(--accent-orange);
+    padding: 0 2px;
+    border-radius: 2px;
+}
+
+.search-shortcut {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-text);
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    pointer-events: none;
+    opacity: 0.6;
+    display: none;
+}
+
+.search-box:focus ~ .search-shortcut {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .search-container {
+        max-width: 90%;
+        margin: 20px auto;
+    }
+    
+    .search-box {
+        padding: 12px 45px 12px 15px;
+        font-size: 1rem;
+    }
+    
+    .search-icon {
+        right: 15px;
+    }
+    
+    .search-shortcut {
+        display: none !important;
+    }
+}
+
 @keyframes pulse {
     0% { opacity: 0.8; }
     50% { opacity: 1; }
@@ -462,6 +633,27 @@ body::-webkit-scrollbar,
         flex-direction: column;
         align-items: center;
     }
+}
+
+.flash-image {
+    transition: opacity 0.3s ease;
+    position: relative;
+}
+
+.lesson-card[data-random-game="true"]:hover .flash-image {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(var(--primary-orange-rgb), 0.5);
+}
+
+.lesson-card[data-random-game="true"] .lesson-title {
+    color: var(--accent-orange);
+    text-shadow: 0 0 10px rgba(var(--primary-orange-rgb), 0.7);
+}
+
+.lesson-card[data-random-game="true"] .launch-command {
+    color: var(--accent-orange);
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 8px rgba(var(--primary-orange-rgb), 0.4);
 }
     </style>
 </head>
@@ -598,7 +790,7 @@ body::-webkit-scrollbar,
             </div>
             <h2>COMMENTS</h2>
             <div class="padlet-embed">
-                <iframe src="https://padlet.com/embed/fmfyddhl0zgt5kj9" frameborder="0" allow="camera;microphone;geolocation"></iframe>
+                <iframe src="https://padlet.com/embed/j6hm0jirgy8d3per" frameborder="0" allow="camera;microphone;geolocation"></iframe>
             </div>
         </section>
         <footer>
@@ -622,6 +814,15 @@ body::-webkit-scrollbar,
 
     <script>
         const games = [
+            { title: "Minesweeper Classic", desc: "A logic puzzle game where players clear a grid of hidden mines by revealing squares", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/162.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/290.jpg" },
+            { title: "Gorilla Tag", desc: "VR-inspired physics game where you swing and climb as gorillas through colorful environments", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/161.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/289.jpg" },
+            { title: "Goblin Goopmaxxing", desc: "A dark comedy sandbox story about brewing bizarre potions and experimenting on unfortunate goblin specimens", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/160.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/288.jpg" },
+            { title: "Midnight Shift", desc: "Tense horror game where you survive a night shift with supernatural occurrences and jump scares", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/159.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/287.jpg" },
+            { title: "Orange Roulette", desc: "Colorful Russian roulette-style game with fruit-themed weapons and unpredictable outcomes", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/158.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/286.jpg" },
+            { title: "Five Nights at Winstons", desc: "Office-themed horror game inspired by FNAF with quirky animatronics and survival mechanics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/157.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/285.jpg" },
+            { title: "Final Fantasy VII", desc: "Iconic RPG adventure with memorable characters, epic story, and turn-based combat system", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/156.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/284.jpg" },
+            { title: "Please Dont Touch", desc: "Interactive horror experience where you must resist touching objects with escalating consequences", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/155.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/283.jpg" },
+            { title: "Minesweeper Classic", desc: "A single-player logic puzzle where you clear a grid of hidden mines by revealing tiles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/162.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/290.jpg" },
             { title: "Doom 3", desc: "A sci-fi horror first-person shooter at a Mars research base where teleportation experiments open a gateway to Hell, unleashing demons and zombies.", url: "https://doom3kaidensarcade.netlify.app/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/282.jpg" },
             { title: "Slendy Tubbies", desc: "A popular indie horror game series blending the cute Teletubbies with the terrifying mechanics of Slender", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/st/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/281.jpg" },
             { title: "Pixel Gun 3D", desc: "A popular blocky pixelated first-person shooter and a campaign where players fight hordes of pixelated zombies", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/pg3d/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/280.jpg" },
@@ -686,7 +887,7 @@ body::-webkit-scrollbar,
             { title: "Super Liquid Soccer", desc: "Arcade soccer game with fluid physics and exaggerated gameplay mechanics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/98.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/222.jpg" },
             { title: "Tempoverdose", desc: "Rhythm game with intense tempo-based challenges and electronic music", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/97.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/221.jpg" },
             { title: "Abandoned", desc: "Escape room type game where you need to figure out how to get out of each", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/96.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/220.jpg" },
-            { title: "Plants Vs Zombies 2", desc: "Defend your lawn with crazy plants against fun-loving zombies across time", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg", popular: true },
+            { title: "Plants Vs Zombies 2", desc: "Defend your lawn with crazy plants against fun-loving zombies across time", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/162.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg", popular: true },
             { title: "Hotline Miami", desc: "Fast-paced top-down action combat", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg", popular: true },
             { title: "Balatro", desc: "Build insane poker hands with special Joker cards", url: "https://raw.githack.com/thirstygithub/mathamatic-notes/main/index.html",  image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg",popular: true },
             { title: "Wolfenstein 3D", desc: "The pioneer FPS game where you battle Nazis as Allied spy B.J. Blazkowicz", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/95.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/219.jpg" },
@@ -1051,6 +1252,69 @@ async function downloadCurrentGame() {
         alert('Sorry, this game is not downloadable. Try another one.');
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const searchStats = document.getElementById('searchStats');
+    
+    if (!searchInput) return;
+    
+    function performSearch(searchTerm) {
+    const allContainer = document.getElementById('allLessonsGrid');
+    const popularContainer = document.getElementById('popularLessonsGrid');
+    const searchTermLower = searchTerm.toLowerCase().trim();
+    
+    let visibleCount = 0;
+    let totalCount = 0;
+
+    if (allContainer) {
+        const allCards = allContainer.querySelectorAll('.lesson-card:not([data-random-game="true"])');
+        totalCount = allCards.length;
+        
+        allCards.forEach(card => {
+            const title = card.querySelector('.lesson-title').textContent.toLowerCase();
+            const desc = card.querySelector('.lesson-desc').textContent.toLowerCase();
+            
+            if (searchTermLower === '' || 
+                title.includes(searchTermLower) || 
+                desc.includes(searchTermLower)) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        const randomCard = allContainer.querySelector('.lesson-card[data-random-game="true"]');
+        if (randomCard) {
+            randomCard.style.display = 'block';
+        }
+    }
+    
+    if (searchStats) {
+        if (searchTermLower === '') {
+            searchStats.textContent = `Showing ${totalCount + 1} of ${totalCount + 1} lessons (including random)`;
+        } else {
+            searchStats.textContent = `Found ${visibleCount} of ${totalCount} lessons for "${searchTerm}" (random game always shown)`;
+        }
+    }
+}
+    
+    setTimeout(updateSearchStats, 100);
+    
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            setTimeout(() => {
+                if (searchInput.value) {
+                    performSearch(searchInput.value);
+                } else {
+                    updateSearchStats();
+                }
+            }, 100);
+        });
+    }
+});
         
         function generateGameCards() {
     const popularContainer = document.getElementById('popularLessonsGrid');
@@ -1058,6 +1322,10 @@ async function downloadCurrentGame() {
     
     popularContainer.innerHTML = '';
     allContainer.innerHTML = '';
+    
+    const randomGame = getRandomGame();
+    const randomCard = createGameCard(randomGame, true);
+    allContainer.appendChild(randomCard);
     
     const popularGames = games.filter(game => game.popular);
     popularGames.forEach(game => {
@@ -1072,30 +1340,56 @@ async function downloadCurrentGame() {
     
     updateSearchStats();
     initCursorHover();
+    startImageFlash();
 }
-        
-        function createGameCard(game) {
-            const card = document.createElement('div');
-            card.className = 'lesson-card';
-            
-            const launchCommand = game.title.toUpperCase()
-                .replace(/[^A-Z0-9]/g, '_')
-                .replace(/_+/g, '_')
-                .replace(/^_|_$/g, '');
-            
-            card.innerHTML = `
-                <img src="${game.image}" alt="${game.title}" class="lesson-image">
-                <h3 class="lesson-title">${game.title}</h3>
-                <p class="lesson-desc">${game.desc}</p>
-                <span class="launch-command">[LAUNCH: ${launchCommand}]</span>
-            `;
-            
-            card.onclick = function() {
-                openLesson(game.title, game.url);
-            };
-            
-            return card;
-        }
+
+function getRandomGame() {
+    return games[Math.floor(Math.random() * games.length)];
+}
+
+function createGameCard(game, isRandom = false) {
+    const card = document.createElement('div');
+    card.className = 'lesson-card';
+    
+    if (isRandom) {
+        card.setAttribute('data-random-game', 'true');
+    }
+    
+    const launchCommand = isRandom ? 'RANDOM_LESSON' : game.title.toUpperCase()
+        .replace(/[^A-Z0-9]/g, '_')
+        .replace(/_+/g, '_')
+        .replace(/^_|_$/g, '');
+    
+    card.innerHTML = `
+        <img src="${game.image}" alt="${isRandom ? 'Random Lesson' : game.title}" class="lesson-image ${isRandom ? 'flash-image' : ''}">
+        <h3 class="lesson-title">${isRandom ? 'Random Lesson' : game.title}</h3>
+        <p class="lesson-desc">${isRandom ? 'Tired of scrolling? Click me to find a random lesson that might cure that boredom' : game.desc}</p>
+        <span class="launch-command">[LAUNCH: ${launchCommand}]</span>
+    `;
+    
+    if (isRandom) {
+        card.onclick = function(e) {
+            e.stopPropagation();
+
+            const newRandomGame = getRandomGame();
+            openLesson(newRandomGame.title, newRandomGame.url);
+
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'random_game_click', {
+                    'event_category': 'engagement',
+                    'event_label': newRandomGame.title,
+                    'value': 1
+                });
+            }
+        };
+    } else {
+        card.onclick = function() {
+            openLesson(game.title, game.url);
+        };
+    }
+    
+    return card;
+}
         
         function updateSearchStats() {
             const cards = document.querySelectorAll('#allLessonsGrid .lesson-card');
@@ -1449,57 +1743,36 @@ document.addEventListener('DOMContentLoaded', function() {
             trackEvent('theme','switch',n,1);
         });
         
-        (function(){
+        (function() {
     const c = document.getElementById('custom-cursor');
     if (!c) return;
     
     let mx = 0, my = 0, cx = 0, cy = 0;
     let cursorHidden = false;
     let cursorTimeout;
+    let cursorVisible = true;
+    let isOverIframe = false;
+    let iframeCheckTimeout;
     
     document.documentElement.style.cursor = 'none';
     document.body.style.cursor = 'none';
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        * {
-            cursor: none !important;
-        }
-        iframe, 
-        .padlet-embed iframe,
-        .game-frame,
-        .game-frame * {
-            cursor: auto !important;
-        }
-        .warning-content, 
-        .acknowledge-btn {
-            cursor: pointer !important;
-        }
-        #custom-cursor {
-            transition: opacity 0.3s ease, transform 0.12s, width 0.15s, height 0.15s;
-            z-index: 999999;
-        }
-        #custom-cursor.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-    `;
-    document.head.appendChild(style);
     
     function lerp(s, e, a) {
         return (1 - a) * s + a * e;
     }
     
     function hideCustomCursor() {
-        if (!cursorHidden) {
-            c.classList.add('hidden');
+        if (cursorVisible) {
+            c.style.opacity = '0';
+            cursorVisible = false;
             cursorHidden = true;
         }
     }
     
     function showCustomCursor() {
-        if (cursorHidden) {
-            c.classList.remove('hidden');
+        if (!cursorVisible) {
+            c.style.opacity = '1';
+            cursorVisible = true;
             cursorHidden = false;
         }
     }
@@ -1507,50 +1780,63 @@ document.addEventListener('DOMContentLoaded', function() {
     function resetCursorTimeout() {
         clearTimeout(cursorTimeout);
         cursorTimeout = setTimeout(() => {
-            if (!cursorHidden) {
+            if (cursorVisible && !isOverIframe) {
                 hideCustomCursor();
             }
         }, 3000);
     }
     
-    function isOverIframe(x, y) {
+    function checkIfOverIframe(x, y) {
         const iframes = document.querySelectorAll('iframe');
         for (const iframe of iframes) {
             const rect = iframe.getBoundingClientRect();
-            if (x >= rect.left && x <= rect.right && 
-                y >= rect.top && y <= rect.bottom) {
+            
+            const buffer = 5;
+            const bufferRect = {
+                left: rect.left - buffer,
+                right: rect.right + buffer,
+                top: rect.top - buffer,
+                bottom: rect.bottom + buffer
+            };
+            
+            if (x >= bufferRect.left && x <= bufferRect.right && 
+                y >= bufferRect.top && y <= bufferRect.bottom) {
                 return true;
             }
         }
         return false;
     }
-
-    function isOverWarningOverlay(x, y) {
-        const overlay = document.getElementById('warningOverlay');
-        if (!overlay || overlay.classList.contains('hidden')) return false;
-        
-        const rect = overlay.getBoundingClientRect();
-        return x >= rect.left && x <= rect.right && 
-               y >= rect.top && y <= rect.bottom;
-    }
     
+    function updateIframeStatus(x, y) {
+        const wasOverIframe = isOverIframe;
+        isOverIframe = checkIfOverIframe(x, y);
+        
+        clearTimeout(iframeCheckTimeout);
+        iframeCheckTimeout = setTimeout(() => {
+            if (isOverIframe && !wasOverIframe) {
+                hideCustomCursor();
+                document.documentElement.style.cursor = 'auto';
+            } else if (!isOverIframe && wasOverIframe) {
+                showCustomCursor();
+                document.documentElement.style.cursor = 'none';
+            }
+        }, 50);
+    }
+
     document.addEventListener('mousemove', (e) => {
         mx = e.clientX;
         my = e.clientY;
         
-        const isOverIframeArea = isOverIframe(mx, my);
-        const isOverWarning = isOverWarningOverlay(mx, my);
-n
-        if (isOverIframeArea && !isOverWarning) {
-            hideCustomCursor();
-            document.documentElement.style.cursor = 'auto';
-        } else {
+        updateIframeStatus(mx, my);
+
+        if (!isOverIframe) {
             showCustomCursor();
             document.documentElement.style.cursor = 'none';
-            resetCursorTimeout();
         }
+        
+        resetCursorTimeout();
     });
-    
+
     function animate() {
         cx = lerp(cx, mx, 0.25);
         cy = lerp(cy, my, 0.25);
@@ -1561,12 +1847,10 @@ n
     animate();
 
     document.addEventListener('mousedown', (e) => {
-        const isOverIframeArea = isOverIframe(e.clientX, e.clientY);
-        const isOverWarning = isOverWarningOverlay(e.clientX, e.clientY);
-        
-        if (!isOverIframeArea || isOverWarning) {
+        if (!isOverIframe) {
             showCustomCursor();
             c.classList.add('click');
+            resetCursorTimeout();
         }
     });
     
@@ -1574,52 +1858,94 @@ n
         c.classList.remove('click');
     });
 
-    const interactive = document.querySelectorAll('button, a, .partner-card, .nav-tab, .btn, .search-box, input, .lesson-card, .theme-toggle-btn, .sort-select, .discord-btn, .visit-btn, .acknowledge-btn, .sorter-wrapper, .social-icons a');
+    const interactive = document.querySelectorAll(
+        'button, a, .partner-card, .nav-tab, .btn, .search-box, input, ' +
+        '.lesson-card, .theme-toggle-btn, .sort-select, .discord-btn, ' +
+        '.visit-btn, .acknowledge-btn, .sorter-wrapper, .social-icons a'
+    );
     
     interactive.forEach(el => {
         el.addEventListener('mouseenter', (e) => {
-            e.stopPropagation();
-            showCustomCursor();
-            c.classList.add('hover');
+            if (!isOverIframe) {
+                showCustomCursor();
+                c.classList.add('hover');
+                resetCursorTimeout();
+            }
         });
         
         el.addEventListener('mouseleave', (e) => {
-            e.stopPropagation();
             c.classList.remove('hover');
         });
     });
 
     const gameFrame = document.getElementById('gameFrame');
     if (gameFrame) {
-        gameFrame.addEventListener('mouseenter', () => {
-            hideCustomCursor();
-            document.documentElement.style.cursor = 'auto';
+        const gamePage = document.getElementById('gamePage');
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'class') {
+                    if (gamePage.classList.contains('active')) {
+                        gameFrame.addEventListener('mouseenter', () => {
+                            isOverIframe = true;
+                            hideCustomCursor();
+                            document.documentElement.style.cursor = 'auto';
+                        });
+                        
+                        gameFrame.addEventListener('mouseleave', () => {
+                            isOverIframe = false;
+                            showCustomCursor();
+                            document.documentElement.style.cursor = 'none';
+                        });
+                    } else {
+                        isOverIframe = false;
+                        showCustomCursor();
+                        document.documentElement.style.cursor = 'none';
+                    }
+                }
+            });
         });
         
-        gameFrame.addEventListener('mouseleave', () => {
-            showCustomCursor();
-            document.documentElement.style.cursor = 'none';
-        });
+        observer.observe(gamePage, { attributes: true });
     }
-
-    const gameControls = document.querySelectorAll('.game-controls .btn');
-    gameControls.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            showCustomCursor();
-            c.classList.add('hover');
-        });
-        btn.addEventListener('mouseleave', () => {
-            c.classList.remove('hover');
-        });
-    });
-
-    ['click', 'mousedown', 'keydown', 'scroll'].forEach(eventType => {
+    
+    const padletEmbed = document.querySelector('.padlet-embed');
+    if (padletEmbed) {
+        const padletIframe = padletEmbed.querySelector('iframe');
+        if (padletIframe) {
+            padletIframe.addEventListener('mouseenter', () => {
+                isOverIframe = true;
+                hideCustomCursor();
+                document.documentElement.style.cursor = 'auto';
+            });
+            
+            padletIframe.addEventListener('mouseleave', () => {
+                isOverIframe = false;
+                showCustomCursor();
+                document.documentElement.style.cursor = 'none';
+            });
+        }
+    }
+    
+    ['click', 'keydown', 'scroll'].forEach(eventType => {
         document.addEventListener(eventType, () => {
             resetCursorTimeout();
         });
     });
-
+    
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            showCustomCursor();
+            resetCursorTimeout();
+        }
+    });
+    
+    showCustomCursor();
     resetCursorTimeout();
+    
+    window.addEventListener('beforeunload', () => {
+        clearTimeout(cursorTimeout);
+        clearTimeout(iframeCheckTimeout);
+    });
 })();
         
                 document.addEventListener('DOMContentLoaded', function() {
@@ -1993,41 +2319,134 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 const schoolSubjects = ["Math", "Science", "English", "History", "Biology", "Chemistry", "Physics", "Calculus", "Algebra", "Geometry", "Literature", "Spanish", "French", "Art", "Music", "Computer Science", "Economics", "Psychology", "Statistics"];
-const activeIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/cuh.png";
-const inactiveIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/images/fruh.png";
+const activeIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/cuh.png";
+const inactiveIcon = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/images/fruh.png";
+
+let currentSubject = getRandomSubject();
 
 function getRandomSubject() {
     return schoolSubjects[Math.floor(Math.random() * schoolSubjects.length)];
 }
 
-let currentSubject = getRandomSubject();
-document.title = `Noahs Tutoring | ${currentSubject}`;
-
-let favicon = document.querySelector("link[rel~='icon']");
-if (!favicon) {
-    favicon = document.createElement('link');
+function setFavicon(iconUrl) {
+    const existingFavicons = document.querySelectorAll('link[rel*="icon"], link[rel*="shortcut"]');
+    existingFavicons.forEach(link => link.remove());
+    
+    const favicon = document.createElement('link');
     favicon.rel = 'icon';
+    favicon.type = 'image/x-icon';
+    favicon.href = iconUrl;
     document.head.appendChild(favicon);
+    
+    const shortcut = document.createElement('link');
+    shortcut.rel = 'shortcut icon';
+    shortcut.href = iconUrl;
+    document.head.appendChild(shortcut);
+    
+    const apple = document.createElement('link');
+    apple.rel = 'apple-touch-icon';
+    apple.href = iconUrl;
+    document.head.appendChild(apple);
+    
+    console.log('Favicon set to:', iconUrl);
 }
-favicon.href = activeIcon;
+
+function updateTitle() {
+    if (!document.hidden) {
+        currentSubject = getRandomSubject();
+        document.title = `Noahs Tutoring | ${currentSubject}`;
+    } else {
+        document.title = "Home";
+    }
+}
+
+function initializeFaviconAndTitle() {
+    setFavicon(activeIcon);
+    
+    updateTitle();
+    
+    console.log('Initialized favicon and title');
+}
 
 document.addEventListener('visibilitychange', function() {
     if (document.hidden) {
         document.title = "Home";
-        favicon.href = inactiveIcon;
+        setFavicon(inactiveIcon);
     } else {
         currentSubject = getRandomSubject();
         document.title = `Noahs Tutoring | ${currentSubject}`;
-        favicon.href = activeIcon;
+        setFavicon(activeIcon);
     }
 });
 
-let subjectInterval = setInterval(() => {
+setInterval(function() {
     if (!document.hidden) {
         currentSubject = getRandomSubject();
         document.title = `Noahs Tutoring | ${currentSubject}`;
     }
 }, 30000);
+
+window.addEventListener('load', function() {
+    initializeFaviconAndTitle();
+    
+    setTimeout(function() {
+        setFavicon(activeIcon);
+    }, 500);
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        setFavicon(activeIcon);
+        updateTitle();
+    }, 100);
+});
+
+function preloadFavicons() {
+    const preloadActive = new Image();
+    preloadActive.src = activeIcon;
+    
+    const preloadInactive = new Image();
+    preloadInactive.src = inactiveIcon;
+}
+
+preloadFavicons();
+
+let flashInterval;
+let flashImages = [];
+let lastRandomIndex = -1;
+
+function startImageFlash() {
+    flashImages = games.map(game => game.image).filter(img => img);
+    
+    if (flashImages.length === 0) return;
+
+    if (flashInterval) clearInterval(flashInterval);
+
+    flashInterval = setInterval(() => {
+        const randomCard = document.querySelector('.lesson-card[data-random-game="true"] .lesson-image');
+        if (randomCard) {
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * flashImages.length);
+            } while (randomIndex === lastRandomIndex && flashImages.length > 1);
+            
+            lastRandomIndex = randomIndex;
+            randomCard.src = flashImages[randomIndex];
+
+            randomCard.style.transition = 'opacity 0.3s ease';
+            randomCard.style.opacity = '0.8';
+            setTimeout(() => {
+                randomCard.style.opacity = '1';
+            }, 150);
+        }
+    }, 500);
+}
+function stopImageFlash() {
+    if (flashInterval) {
+        clearInterval(flashInterval);
+        flashInterval = null;
+    }
+}
     </script>
 </body>
 </html>
