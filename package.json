@@ -1,0 +1,20 @@
+{
+  "name": "noahs-calculus-tutor",
+  "version": "1.0.0",
+  "description": "Noah's Calculus Tutor - Game Portal",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor.git"
+  },
+  "keywords": ["games", "tutoring", "education", "unblocked"],
+  "author": "Noah's Tutoring",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/issues"
+  },
+  "homepage": "https://github.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor#readme"
+}
