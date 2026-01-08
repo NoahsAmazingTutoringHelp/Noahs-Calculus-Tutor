@@ -814,7 +814,6 @@ body::-webkit-scrollbar,
 
     <script>
         const games = [
-            { title: "Minesweeper Classic", desc: "A logic puzzle game where players clear a grid of hidden mines by revealing squares", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/162.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/290.jpg" },
             { title: "Gorilla Tag", desc: "VR-inspired physics game where you swing and climb as gorillas through colorful environments", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/161.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/289.jpg" },
             { title: "Goblin Goopmaxxing", desc: "A dark comedy sandbox story about brewing bizarre potions and experimenting on unfortunate goblin specimens", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/160.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/288.jpg" },
             { title: "Midnight Shift", desc: "Tense horror game where you survive a night shift with supernatural occurrences and jump scares", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/159.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/287.jpg" },
@@ -822,7 +821,7 @@ body::-webkit-scrollbar,
             { title: "Five Nights at Winstons", desc: "Office-themed horror game inspired by FNAF with quirky animatronics and survival mechanics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/157.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/285.jpg" },
             { title: "Final Fantasy VII", desc: "Iconic RPG adventure with memorable characters, epic story, and turn-based combat system", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/156.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/284.jpg" },
             { title: "Please Dont Touch", desc: "Interactive horror experience where you must resist touching objects with escalating consequences", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/155.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/283.jpg" },
-            { title: "Minesweeper Classic", desc: "A single-player logic puzzle where you clear a grid of hidden mines by revealing tiles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/162.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/290.jpg" },
+            { title: "Minesweeper Classic", desc: "A single-player logic puzzle where you clear a grid of hidden mines by revealing tiles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/163.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/290.jpg" },
             { title: "Doom 3", desc: "A sci-fi horror first-person shooter at a Mars research base where teleportation experiments open a gateway to Hell, unleashing demons and zombies.", url: "https://doom3kaidensarcade.netlify.app/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/282.jpg" },
             { title: "Slendy Tubbies", desc: "A popular indie horror game series blending the cute Teletubbies with the terrifying mechanics of Slender", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/st/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/281.jpg" },
             { title: "Pixel Gun 3D", desc: "A popular blocky pixelated first-person shooter and a campaign where players fight hordes of pixelated zombies", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/pg3d/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/280.jpg" },
@@ -1103,6 +1102,57 @@ body::-webkit-scrollbar,
             { title: "Monkey Mart", desc: "Store management tycoon", url: "https://noahsamazingtutoringhelp.github.io/AmazingAlgebraHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/184.jpg" },
             { title: "Short Ride", desc: "Quick racing challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/62.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/185.jpg" }
         ];
+
+        function performSearch(searchTerm) {
+    const allContainer = document.getElementById('allLessonsGrid');
+    const searchTermLower = searchTerm.toLowerCase().trim();
+    
+    let visibleCount = 0;
+    let totalNonRandom = 0;
+
+    if (allContainer) {
+        const allNonRandomCards = allContainer.querySelectorAll('.lesson-card:not([data-random-game="true"])');
+        totalNonRandom = allNonRandomCards.length;
+
+        const randomCard = allContainer.querySelector('.lesson-card[data-random-game="true"]');
+
+        if (randomCard) {
+            if (searchTermLower === '') {
+                randomCard.style.display = 'block';
+            } else {
+                randomCard.style.display = 'none';
+            }
+        }
+
+        allNonRandomCards.forEach(card => {
+            const title = card.querySelector('.lesson-title').textContent.toLowerCase();
+            const desc = card.querySelector('.lesson-desc').textContent.toLowerCase();
+            
+            if (searchTermLower === '' || title.includes(searchTermLower) || desc.includes(searchTermLower)) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    const searchStats = document.getElementById('searchStats');
+    if (searchStats) {
+        if (searchTermLower === '') {
+            const randomCard = allContainer ? allContainer.querySelector('.lesson-card[data-random-game="true"]') : null;
+            const hasRandomCard = randomCard && randomCard.style.display !== 'none';
+            
+            if (hasRandomCard) {
+                searchStats.textContent = `Showing ${totalNonRandom + 1} of ${totalNonRandom + 1} lessons (random game included)`;
+            } else {
+                searchStats.textContent = `Showing ${totalNonRandom} of ${totalNonRandom} lessons`;
+            }
+        } else {
+            searchStats.textContent = `Found ${visibleCount} of ${totalNonRandom} lessons for "${searchTerm}"`;
+        }
+    }
+}
         
         function openLesson(t, u) {
     if (typeof gtag !== 'undefined') {
@@ -1252,93 +1302,24 @@ async function downloadCurrentGame() {
         alert('Sorry, this game is not downloadable. Try another one.');
     }
 }
-
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    const searchStats = document.getElementById('searchStats');
-    
-    if (!searchInput) return;
-    
-    function performSearch(searchTerm) {
-    const allContainer = document.getElementById('allLessonsGrid');
-    const popularContainer = document.getElementById('popularLessonsGrid');
-    const searchTermLower = searchTerm.toLowerCase().trim();
-    
-    let visibleCount = 0;
-    let totalCount = 0;
-
-    if (allContainer) {
-        const allCards = allContainer.querySelectorAll('.lesson-card:not([data-random-game="true"])');
-        totalCount = allCards.length;
-        
-        allCards.forEach(card => {
-            const title = card.querySelector('.lesson-title').textContent.toLowerCase();
-            const desc = card.querySelector('.lesson-desc').textContent.toLowerCase();
-            
-            if (searchTermLower === '' || 
-                title.includes(searchTermLower) || 
-                desc.includes(searchTermLower)) {
-                card.style.display = 'block';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-
-        const randomCard = allContainer.querySelector('.lesson-card[data-random-game="true"]');
-        if (randomCard) {
-            randomCard.style.display = 'block';
-        }
-    }
-    
-    if (searchStats) {
-        if (searchTermLower === '') {
-            searchStats.textContent = `Showing ${totalCount + 1} of ${totalCount + 1} lessons (including random)`;
-        } else {
-            searchStats.textContent = `Found ${visibleCount} of ${totalCount} lessons for "${searchTerm}" (random game always shown)`;
-        }
-    }
-}
-    
-    setTimeout(updateSearchStats, 100);
-    
-    const sortSelect = document.getElementById('sortSelect');
-    if (sortSelect) {
-        sortSelect.addEventListener('change', function() {
-            setTimeout(() => {
-                if (searchInput.value) {
-                    performSearch(searchInput.value);
-                } else {
-                    updateSearchStats();
-                }
-            }, 100);
-        });
-    }
-});
-        
+   
         function generateGameCards() {
     const popularContainer = document.getElementById('popularLessonsGrid');
     const allContainer = document.getElementById('allLessonsGrid');
     
     popularContainer.innerHTML = '';
     allContainer.innerHTML = '';
-    
-    const randomGame = getRandomGame();
-    const randomCard = createGameCard(randomGame, true);
-    allContainer.appendChild(randomCard);
-    
+
     const popularGames = games.filter(game => game.popular);
     popularGames.forEach(game => {
         const gameCard = createGameCard(game);
         popularContainer.appendChild(gameCard);
     });
+
+    originalGamesOrder = [...games];
     
-    originalGamesOrder.forEach(game => {
-        const gameCard = createGameCard(game);
-        allContainer.appendChild(gameCard);
-    });
+    applySorting();
     
-    updateSearchStats();
     initCursorHover();
     startImageFlash();
 }
@@ -1392,9 +1373,22 @@ function createGameCard(game, isRandom = false) {
 }
         
         function updateSearchStats() {
-            const cards = document.querySelectorAll('#allLessonsGrid .lesson-card');
-            document.getElementById('searchStats').textContent = `Showing ${cards.length} of ${cards.length} lessons`;
+    const allContainer = document.getElementById('allLessonsGrid');
+    if (!allContainer) return;
+    
+    const nonRandomCards = document.querySelectorAll('#allLessonsGrid .lesson-card:not([data-random-game="true"])');
+    const randomCard = allContainer.querySelector('.lesson-card[data-random-game="true"]');
+    const hasRandomCard = randomCard && randomCard.style.display !== 'none';
+    
+    const searchStats = document.getElementById('searchStats');
+    if (searchStats) {
+        if (hasRandomCard) {
+            searchStats.textContent = `Showing ${nonRandomCards.length + 1} of ${nonRandomCards.length + 1} lessons (random game included)`;
+        } else {
+            searchStats.textContent = `Showing ${nonRandomCards.length} of ${nonRandomCards.length} lessons`;
         }
+    }
+}
         
         function initCursorHover() {
             const interactive = document.querySelectorAll('.lesson-card');
@@ -1562,7 +1556,17 @@ function sortGames(method) {
 function applySorting() {
     const sortedGames = sortGames(currentSortMethod);
     const allContainer = document.getElementById('allLessonsGrid');
+    
+    const searchInput = document.getElementById('searchInput');
+    const searchTerm = searchInput ? searchInput.value : '';
+    
     allContainer.innerHTML = '';
+    
+    if (currentSortMethod === 'default') {
+        const randomGame = getRandomGame();
+        const randomCard = createGameCard(randomGame, true);
+        allContainer.appendChild(randomCard);
+    }
     
     sortedGames.forEach(game => {
         const gameCard = createGameCard(game);
@@ -1570,12 +1574,11 @@ function applySorting() {
     });
     
     initCursorHover();
-    updateSearchStats();
     
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput.value) {
-        const searchEvent = new Event('input');
-        searchInput.dispatchEvent(searchEvent);
+    if (searchTerm) {
+        performSearch(searchTerm);
+    } else {
+        updateSearchStats();
     }
     
     if (typeof gtag !== 'undefined') {
@@ -1638,29 +1641,21 @@ document.addEventListener('DOMContentLoaded', function() {
     applySorting();
 });
 
-function updateGameDisplay(sortedGames) {
-    const allContainer = document.getElementById('allLessonsGrid');
-    allContainer.innerHTML = '';
+document.addEventListener('DOMContentLoaded', function() {
+    const sortSelect = document.getElementById('sortSelect');
     
-    sortedGames.forEach(game => {
-        const gameCard = createGameCard(game);
-        allContainer.appendChild(gameCard);
-    });
-    
-    initCursorHover();
-    
-    const visibleCards = document.querySelectorAll('#allLessonsGrid .lesson-card:not([style*="display: none"])').length;
-    const totalCards = sortedGames.length;
-    document.getElementById('searchStats').textContent = `Showing ${visibleCards} of ${totalCards} lessons`;
-    
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'game_sort', {
-            'event_category': 'engagement',
-            'event_label': currentSortMethod,
-            'value': sortedGames.length
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function(e) {
+            currentSortMethod = e.target.value;
+            const sortedGames = sortGames(currentSortMethod);
+            updateGameDisplay(sortedGames);
         });
     }
-}
+    
+    currentSortMethod = 'default';
+    const sortedGames = sortGames(currentSortMethod);
+    updateGameDisplay(sortedGames);
+});
 
 document.addEventListener('DOMContentLoaded', function() {
     const sortSelect = document.getElementById('sortSelect');
@@ -2445,6 +2440,26 @@ function stopImageFlash() {
     if (flashInterval) {
         clearInterval(flashInterval);
         flashInterval = null;
+    }
+}
+
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+    searchInput.addEventListener('input', function(e) {
+        performSearch(e.target.value);
+    });
+
+    const sortSelect = document.getElementById('sortSelect');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            setTimeout(() => {
+                if (searchInput.value) {
+                    performSearch(searchInput.value);
+                } else {
+                    updateSearchStats();
+                }
+            }, 100);
+        });
     }
 }
     </script>
