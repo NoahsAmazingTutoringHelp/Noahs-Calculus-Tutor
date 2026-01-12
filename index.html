@@ -655,6 +655,32 @@ body::-webkit-scrollbar,
     border-color: var(--accent-orange);
     box-shadow: 0 0 8px rgba(var(--primary-orange-rgb), 0.4);
 }
+
+.refresh-btn {
+    background: rgba(var(--primary-orange-rgb), .2);
+    color: var(--primary-orange);
+    border: 1px solid var(--primary-orange);
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: none !important;
+    transition: all .3s;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.refresh-btn:hover {
+    background: rgba(var(--primary-orange-rgb), .3);
+    box-shadow: 0 0 10px var(--primary-orange);
+}
+
+.refresh-btn i {
+    margin-right: 5px;
+    transition: transform 0.3s;
+}
+
+.refresh-btn:hover i {
+    transform: rotate(180deg);
+}
     </style>
 </head>
 
@@ -802,10 +828,11 @@ body::-webkit-scrollbar,
         <div class="game-header">
             <div class="game-title" id="gameTitle">Game Title</div>
             <div class="game-controls">
-                <button class="btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> Fullscreen</button>
-                <button class="btn" onclick="downloadCurrentGame()"><i class="fas fa-download"></i> Download</button>
-                <button class="btn" onclick="closeLesson()"><i class="fas fa-times"></i> Exit</button>
-            </div>
+    <button class="btn refresh-btn" onclick="refreshGame()" title="Refresh Game"><i class="fas fa-redo"></i> Refresh</button>
+    <button class="btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i> Fullscreen</button>
+    <button class="btn" onclick="downloadCurrentGame()"><i class="fas fa-download"></i> Download</button>
+    <button class="btn" onclick="closeLesson()"><i class="fas fa-times"></i> Exit</button>
+</div>
         </div>
         <div class="game-container">
             <iframe id="gameFrame" class="game-frame" frameborder="0" src=""></iframe>
@@ -1200,6 +1227,57 @@ function closeLesson() {
         document.getElementById('gameFrame').classList.remove('fullscreen');
     }, 500);
 }
+
+function refreshGame() {
+    const gameFrame = document.getElementById('gameFrame');
+    const currentSrc = gameFrame.src;
+    
+    if (!currentSrc) return;
+    
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_refresh', {
+            'event_category': 'game_interaction',
+            'event_label': document.getElementById('gameTitle').textContent,
+            'value': 1
+        });
+    }
+    
+    gameFrame.src = '';
+    
+    setTimeout(() => {
+        gameFrame.src = currentSrc;
+        
+        const gameTitle = document.getElementById('gameTitle');
+        gameTitle.innerHTML = '<i class="fas fa-sync-alt fa-spin" style="margin-right: 8px;"></i>' + gameTitle.textContent;
+        
+        setTimeout(() => {
+            gameTitle.innerHTML = gameTitle.textContent;
+        }, 1000);
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'game_refreshed', {
+                'event_category': 'game_interaction',
+                'event_label': gameTitle.textContent,
+                'value': 1
+            });
+        }
+    }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const refreshBtn = document.querySelector('.refresh-btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('mouseenter', () => {
+            const cursor = document.getElementById('custom-cursor');
+            if (cursor) cursor.classList.add('hover');
+        });
+        
+        refreshBtn.addEventListener('mouseleave', () => {
+            const cursor = document.getElementById('custom-cursor');
+            if (cursor) cursor.classList.remove('hover');
+        });
+    }
+});
 
 function toggleFullscreen() {
     const frame = document.getElementById('gameFrame');
