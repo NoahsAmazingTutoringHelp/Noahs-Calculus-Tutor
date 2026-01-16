@@ -2802,10 +2802,10 @@ if (searchInput) {
     }
 }
 
-window.addEventListener('beforeunload', function(event) {
+window.addEventListener('beforeunload', (event) => {
     event.preventDefault();
-    event.returnValue = 'Are you sure you want to leave?';
-    return 'Are you sure you want to leave? Changes you made may not be saved.';
+    event.returnValue = '';
+    
 });
     </script>
 </body>
