@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+
+
+<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/tomb/">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New Tab</title>
+  <link href="style.css" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* prevent scrollbars */
+      background: black; /* optional: black background */
+    }
+    #gameContainer {
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body dir="ltr">
+  <script src="UnityProgress.js"></script>
+  <script src="UnityLoader.js"></script>
+  <script>
+    var gameInstance = UnityLoader.instantiate("gameContainer", "totm.json", {
+      onProgress: UnityProgress,
+      Module: {
+        onRuntimeInitialized: function() {
+          UnityProgress(gameInstance, "complete");
+        }
+      }
+    });
+  </script>
+
+  <div class="webgl-content">
+    <div id="gameContainer"></div>
+  </div>
+</body>
+</html>

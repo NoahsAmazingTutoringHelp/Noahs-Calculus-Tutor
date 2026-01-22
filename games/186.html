@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+
+
+<html lang="en-us">
+  <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@79091a3feb921044b3597bd32cea7357b43e2d9c/madalincarmulti/">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Madalin Cars Multiplayer</title>
+	<meta name="description" content="" />
+	<link rel="canonical" href="https://www.madalingames.com/madalin-cars-multiplayer/" />
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+  </head>
+  <body>
+    <div id="unity-container" class="unity-desktop" style="width: 100%; height: 100%; overflow: hidden">
+      <canvas id="unity-canvas" style="width: 100%; height: 100%; overflow: hidden"></canvas>
+      <div id="unity-loading-bar">
+        <div id="unity-logo"></div>
+        <div id="unity-progress-bar-empty">
+          <div id="unity-progress-bar-full"></div>
+        </div>
+      </div>
+      <div id="unity-mobile-warning">
+        WebGL builds are not supported on mobile devices.
+      </div>
+    </div>
+  <script>
+      window.mergedBlobUrls = {};
+      window.assetsReady = false;
+
+      async function mergeSplitFile(fileUrlBase, numParts = 2) {
+        const partUrls = Array.from({ length: numParts }, (_, i) => 
+          `${fileUrlBase}.part${i + 1}`
+        );
+
+        try {
+          const responses = await Promise.all(
+            partUrls.map(url => fetch(url))
+          );
+
+          if (responses.some(r => !r.ok)) {
+            return null;
+          }
+
+          const parts = await Promise.all(
+            responses.map(r => r.arrayBuffer())
+          );
+
+          const combinedBlob = new Blob(parts, {
+            type: 'application/octet-stream'
+          });
+
+          return URL.createObjectURL(combinedBlob);
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function setupXHRInterceptor() {
+        if (window.xhrInterceptorInstalled) {
+          return;
+        }
+        
+        const originalOpen = XMLHttpRequest.prototype.open;
+        const originalSend = XMLHttpRequest.prototype.send;
+
+        XMLHttpRequest.prototype.open = function(method, url, ...args) {
+          this._url = url;
+          this._method = method;
+          this._args = args;
+          
+          let finalUrl = url;
+          const decodedUrl = decodeURIComponent(url);
+          
+          for (const [filename, blobUrl] of Object.entries(window.mergedBlobUrls)) {
+            if (url.includes(encodeURIComponent(filename)) || 
+                decodedUrl.includes(filename) || 
+                url.includes(filename)) {
+              finalUrl = blobUrl;
+              break;
+            }
+          }
+          
+          return originalOpen.call(this, method, finalUrl, ...args);
+        };
+
+        XMLHttpRequest.prototype.send = function(...args) {
+          const xhr = this;
+          
+          if (!window.assetsReady) {
+            const checkReady = setInterval(() => {
+              if (window.assetsReady) {
+                clearInterval(checkReady);
+                originalSend.apply(xhr, args);
+              }
+            }, 50);
+            return;
+          }
+          
+          return originalSend.apply(this, args);
+        };
+        
+        window.xhrInterceptorInstalled = true;
+      }
+
+      function setupFetchInterceptor() {
+        if (window.fetchInterceptorInstalled) {
+          return;
+        }
+
+        const originalFetch = window.fetch;
+        window.fetch = function(url, ...args) {
+          let finalUrl = url;
+          const decodedUrl = typeof url === 'string' ? decodeURIComponent(url) : '';
+          
+          for (const [filename, blobUrl] of Object.entries(window.mergedBlobUrls)) {
+            if ((typeof url === 'string' && 
+                (url.includes(encodeURIComponent(filename)) || 
+                 decodedUrl.includes(filename) || 
+                 url.includes(filename)))) {
+              finalUrl = blobUrl;
+              break;
+            }
+          }
+          
+          return originalFetch.call(this, finalUrl, ...args);
+        };
+
+        window.fetchInterceptorInstalled = true;
+      }
+
+      async function prepareGameAssets() {
+        try {
+          window.assetsReady = false;
+          delete window.xhrInterceptorInstalled;
+          delete window.fetchInterceptorInstalled;
+          window.mergedBlobUrls = {};
+          
+          setupXHRInterceptor();
+          setupFetchInterceptor();
+          
+          const filesToMerge = [
+            { filename: 'Build/97a54d9b4b7525d0f2328e0cbb512980.data', parts: 4 },
+            { filename: 'Build/03cde5b9e5b1a5b23fbab20d045d4958.wasm', parts: 2 }
+          ];
+          
+          for (const file of filesToMerge) {
+            const blobUrl = await mergeSplitFile(file.filename, file.parts);
+            if (blobUrl) {
+              window.mergedBlobUrls[file.filename] = blobUrl;
+            }
+          }
+          
+          window.assetsPrepared = true;
+          window.assetsReady = true;
+          
+        } catch (error) {
+          window.assetsPrepared = false;
+          window.assetsReady = true;
+        }
+      }
+
+      prepareGameAssets().then(() => {
+        initUnity();
+      });
+
+      function initUnity() {
+        var buildUrl = "Build";
+        var loaderUrl = buildUrl + "/304bc71d77b7acd6469bb5cc0730073b.js";
+        var config = {
+          dataUrl: buildUrl + "/97a54d9b4b7525d0f2328e0cbb512980.data",
+          frameworkUrl: buildUrl + "/4e20d7eb8e868230cafe4baff2e177d4.js",
+          codeUrl: buildUrl + "/03cde5b9e5b1a5b23fbab20d045d4958.wasm",
+          streamingAssetsUrl: "StreamingAssets",
+          companyName: "Madalin Games",
+          productName: "Madalin Cars Multiplayer",
+          productVersion: "2.0.0",
+        };
+
+        var container = document.querySelector("#unity-container");
+        var canvas = document.querySelector("#unity-canvas");
+        var loadingBar = document.querySelector("#unity-loading-bar");
+        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+        var mobileWarning = document.querySelector("#unity-mobile-warning");
+
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+          container.className = "unity-mobile";
+          config.devicePixelRatio = 1;
+          mobileWarning.style.display = "block";
+          setTimeout(() => {
+            mobileWarning.style.display = "none";
+          }, 5000);
+        }
+        canvas.style.background = "url('" + buildUrl + "/821652a7ba86ba5731dc5409d399d903.jpg') center / cover";
+        loadingBar.style.display = "block";
+
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+          createUnityInstance(canvas, config, (progress) => {
+            progressBarFull.style.width = 100 * progress + "%";
+          }).then((unityInstance) => {
+            loadingBar.style.display = "none";
+          }).catch((message) => {
+            alert(message);
+          });
+        };
+        document.body.appendChild(script);
+      }
+    </script>
+  </body>
+</html>

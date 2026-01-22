@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+
+<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/happy%20room/">
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Счастливая Комната</title>
+<link rel="stylesheet" href="TemplateData/style.css">
+<link rel="shortcut icon" href="TemplateData/favicon.ico" />
+<script src="TemplateData/UnityProgress.js"></script>
+
+<script>
+(function() {
+  'use strict';
+  
+  const config = {
+    files: [
+      { name: 'Release/build_web.data', parts: 2 },
+      { name: 'Release/build_web.asm.js', parts: 2 }
+    ],
+    debug: true
+  };
+  
+  // Store blob URLs and merged buffers
+  window.blobUrls = {};
+  window.mergedFiles = {};
+  const mergeStatus = {};
+
+  function log(...args) { 
+    if (config.debug) console.log('[BlobMerger]', ...args); 
+  }
+  
+  function error(...args) { 
+    console.error('[BlobMerger]', ...args); 
+  }
+  
+  function normalizeUrl(url) { 
+    try { 
+      return decodeURIComponent(url.toString().split('?')[0]); 
+    } catch (e) { 
+      return url; 
+    } 
+  }
+  
+  function urlsMatch(url1, url2) {
+    const n1 = normalizeUrl(url1), n2 = normalizeUrl(url2);
+    if (n1 === n2 || n1.endsWith(n2) || n2.endsWith(n1)) return true;
+    return n1.split('/').pop() === n2.split('/').pop();
+  }
+
+  async function mergeSplitFiles(filePath, partsCount) {
+    try {
+      const parts = [];
+      for (let i = 1; i <= partsCount; i++) {
+        parts.push(`${filePath}.part${i}`);
+      }
+      log(`Merging ${filePath} from ${partsCount} parts...`);
+      
+      const responses = await Promise.all(parts.map(p => fetch(p)));
+      for (const r of responses) {
+        if (!r.ok) throw new Error(`Part missing: ${r.url} (${r.status})`);
+      }
+      
+      // For .js files, merge as text
+      if (filePath.endsWith('.js')) {
+        const texts = await Promise.all(responses.map(r => r.text()));
+        const merged = texts.join('');
+        log(`✅ Merged: ${filePath} (${(merged.length/1024).toFixed(2)} KB)`);
+        
+        const blob = new Blob([merged], { type: 'application/javascript' });
+        const blobUrl = URL.createObjectURL(blob);
+        
+        return { data: merged, blobUrl: blobUrl, isText: true };
+      } else {
+        // For binary files, merge as ArrayBuffer
+        const buffers = await Promise.all(responses.map(r => r.arrayBuffer()));
+        const totalLen = buffers.reduce((acc, b) => acc + b.byteLength, 0);
+        const merged = new Uint8Array(totalLen);
+        let offset = 0;
+        
+        for (const b of buffers) { 
+          merged.set(new Uint8Array(b), offset); 
+          offset += b.byteLength; 
+        }
+        
+        log(`✅ Merged: ${filePath} (${(totalLen/1024/1024).toFixed(2)} MB)`);
+        
+        const mimeType = filePath.endsWith('.wasm') ? 'application/wasm' : 'application/octet-stream';
+        const blob = new Blob([merged], { type: mimeType });
+        const blobUrl = URL.createObjectURL(blob);
+        
+        return { data: merged.buffer, blobUrl: blobUrl, isText: false };
+      }
+    } catch (e) { 
+      error(e); 
+      throw e; 
+    }
+  }
+
+  function shouldIntercept(url) {
+    const s = normalizeUrl(url);
+    if (s.includes('.part')) return null;
+    
+    for (const f of config.files) {
+      if (urlsMatch(s, f.name)) {
+        return f.name;
+      }
+    }
+    return null;
+  }
+
+  function getBlobUrl(name) {
+    if (window.blobUrls[name]) return window.blobUrls[name];
+    for (const [k, v] of Object.entries(window.blobUrls)) {
+      if (urlsMatch(k, name)) return v;
+    }
+    return null;
+  }
+
+  function getMergedBuffer(name) {
+    if (window.mergedFiles[name]) return window.mergedFiles[name];
+    for (const [k, v] of Object.entries(window.mergedFiles)) {
+      if (urlsMatch(k, name)) return v;
+    }
+    return null;
+  }
+
+  // Intercept fetch to return blob URLs
+  if (!window.originalFetch) window.originalFetch = window.fetch;
+  window.fetch = function(url, ...args) {
+    const name = shouldIntercept(url);
+    if (name) {
+      log('Intercepting fetch for:', name);
+      return new Promise((resolve, reject) => {
+        const interval = setInterval(() => {
+          const blobUrl = getBlobUrl(name);
+          if (blobUrl) {
+            clearInterval(interval);
+            log('Fetching from blob URL:', name);
+            window.originalFetch(blobUrl, ...args)
+              .then(resolve)
+              .catch(reject);
+          } else if (mergeStatus[name] === 'failed') { 
+            clearInterval(interval); 
+            reject(new Error('Merge failed')); 
+          }
+        }, 50);
+      });
+    }
+    return window.originalFetch.call(this, url, ...args);
+  }
+
+  // Intercept XHR to use blob URLs
+  if (!window.OriginalXMLHttpRequest) window.OriginalXMLHttpRequest = window.XMLHttpRequest;
+  window.XMLHttpRequest = function(opts) {
+    const xhr = new window.OriginalXMLHttpRequest(opts);
+    const originalOpen = xhr.open;
+    const originalSend = xhr.send;
+    
+    xhr.open = function(method, url, ...args) { 
+      this._url = url;
+      this._method = method;
+      this._openArgs = args;
+      const name = shouldIntercept(url);
+      
+      if (name) {
+        log('Intercepting XHR open:', name);
+        this._shouldIntercept = true;
+        this._interceptName = name;
+        return;
+      }
+      
+      return originalOpen.call(this, method, url, ...args); 
+    };
+    
+    xhr.send = function(...args) {
+      if (this._shouldIntercept) {
+        const name = this._interceptName;
+        log('Intercepting XHR send:', name);
+        
+        const checkInterval = setInterval(() => {
+          const blobUrl = getBlobUrl(name);
+          if (blobUrl) {
+            clearInterval(checkInterval);
+            log('Sending XHR with blob URL:', name);
+            originalOpen.call(this, this._method, blobUrl, ...this._openArgs);
+            originalSend.call(this, ...args);
+          } else if (mergeStatus[name] === 'failed') {
+            clearInterval(checkInterval);
+            error('Failed to get blob URL for:', name);
+          }
+        }, 50);
+        return;
+      }
+      
+      return originalSend.call(this, ...args);
+    };
+    
+    return xhr;
+  }
+
+  // Start merging process
+  async function start() {
+    log('Starting merge process...');
+    for (const f of config.files) {
+      mergeStatus[f.name] = 'merging';
+      
+      try {
+        const result = await mergeSplitFiles(f.name, f.parts);
+        window.mergedFiles[f.name] = result.data;
+        window.blobUrls[f.name] = result.blobUrl;
+        mergeStatus[f.name] = 'ready';
+        log(`✅ Ready: ${f.name}`);
+      } catch (err) {
+        mergeStatus[f.name] = 'failed';
+        error(`Failed to merge ${f.name}:`, err);
+      }
+    }
+    log('All files processed. Ready to load Unity.');
+  }
+  
+  start();
+})();
+</script>
+
+</head>
+<body class="template">
+<div class="template-wrap clear">
+<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" width="100%" height="100%"></canvas>
+</div>
+<script type="text/javascript">
+  var Module = {
+    TOTAL_MEMORY: 268435456,
+    errorhandler: null,
+    compatibilitycheck: null,
+    backgroundColor: "#000000",
+    splashStyle: "Light",
+    dataUrl: "Release/build_web.data",
+    codeUrl: "Release/build_web.js",
+    asmUrl: "Release/build_web.asm.js",
+    memUrl: "Release/build_web.mem",
+  };
+  const canvas2 = document.getElementById("canvas");
+  // Function to resize the canvas to fit the window
+  function resizeCanvas() {
+    canvas2.width = window.innerWidth-50;
+    canvas2.height = window.innerHeight-50;
+  }
+  resizeCanvas();
+</script>
+<script src="Release/UnityLoader.js"></script>
+</body>
+</html>

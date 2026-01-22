@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<base href="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/ILOVEGAMBLING@main/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stake</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Stake-com-logo-high-res.jpg/2048px-Stake-com-logo-high-res.jpg" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+</head>
+<body>
+    <nav>
+       <a href="index.html"> <img src="assets/logo.png" alt=""></a>
+
+        <div class="bigcash">
+        <div class="cash">
+            <h3 style="font-weight: 600;" ></h3>
+            <i class="ri-money-rupee-circle-fill"></i>
+        </div>
+        <button class="wallet">Add Money</button>
+        </div>
+
+        <div class="icons">
+            <i class="ri-search-line"></i>
+
+            <h4>Search</h4>
+
+            <i class="ri-user-fill"></i>
+
+            <i class="ri-notification-2-fill"></i>
+
+            <i class="ri-message-line"></i>
+        </div>
+    </nav>
+
+    <main>
+        <div class="window">
+        <div class="bet">
+            <div class="bigbtn">
+            <button class="btn1">Manual</button>
+            <button class="btn2">Auto</button>
+            </div>
+
+            <h5>Bet Amount</h5>
+            <div class="betinp">
+            <input type="text" placeholder="0.00">
+            <div class="half">1/2</div>
+            <div class="dbl">2x</div>
+            </div>
+
+            <div class="mines-gems-row" style="display: flex; gap: 8px;">
+                <div class="mines-col" style="flex:1;">
+                    <h5>Mines</h5>
+                    <select name="Mines" style="width:100%; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.425);">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                    </select>
+                </div>
+                <div class="gems-col" style="flex:1; display:none;">
+                    <div style="color:#B1BAD3; font-size:12px; margin-bottom:2px;">Gems</div>
+                    <input id="gems-input" type="number" min="0" value="0" style="width:100%; background:#2F4553; color:#fff; border:none; border-radius:5px; padding:10px 10px; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.425);">
+                </div>
+            </div>
+
+            <div class="profit-field" style="display:none; margin-top:10px;">
+                <div style="color:#B1BAD3; font-size:13px; margin-bottom:2px;">Total Profit</div>
+                <input id="profit-input" type="number" min="0" value="0" style="width:100%; background:#2F4553; color:#fff; border:none; border-radius:5px; padding:10px 10px; box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.425);">
+            </div>
+
+            <button class="pick-random-btn" style="display:none; width:100%; margin-top:10px; background:#2F4553; color:#fff; border:none; border-radius:3px; padding:14px 0; font-weight: 700; transition-duration: 100ms;">Pick Random Tile</button>
+
+            <button class="btn3">Bet</button>
+        </div>
+
+        <div class="play">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+        <!-- Cashout Popup  -->
+        <div id="cashout-popup" class="cashout-popup" style="display:none;">
+            <div class="cashout-popup-content">
+                <div class="cashout-multiplier">1.00x</div>
+                <div class="cashout-total">₹0.00</div>
+            </div>
+        </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    
+    <!-- Wallet ka system -->
+    <div id="wallet-modal" class="wallet-modal" style="display:none;">
+        <div class="wallet-modal-content">
+            <span class="wallet-modal-close">&times;</span>
+            <h2>Add Money</h2>
+            <form id="wallet-form" autocomplete="off">
+                <label for="upi-input">UPI ID</label>
+                <input type="text" id="upi-input" placeholder="yourupi@bank" required style="margin-bottom:10px;">
+                <label for="amount-input">Amount (₹500 - ₹49,999)</label>
+                <input type="number" id="amount-input" min="500" max="50000" placeholder="Enter amount" required style="margin-bottom:10px;">
+                <label for="pin-input">PIN</label>
+                <input type="password" id="pin-input" maxlength="4" placeholder="Enter 4-digit PIN" style="margin-bottom:10px;">
+                <button type="submit" id="wallet-submit-btn">Add Money</button>
+                <div id="wallet-loader-area" style="margin-top:15px; min-height:32px;"></div>
+                <div id="wallet-error" style="color:#ff4d4f; margin-top:8px; font-size:13px;"></div>
+            </form>
+        </div>
+    </div>
+
+    <div id="linkdin-widget">
+        <!-- From Uiverse.io by vikas7754 --> 
+        <div class="tooltip-container">
+            <div class="tooltip">
+                <div class="profile">
+                    <div class="user">
+                        <div class="img">D</div>
+                        <div class="details">
+                            <div class="name">Devansh</div>
+                            <div class="username">@savenop</div>
+                        </div>
+                    </div>
+                    <div class="about">100+ Connections</div>
+                </div>
+            </div>
+            <div class="text">
+                <a class="icon" href="https://www.linkedin.com/in/devansh-chaudharyy/" target="_blank">
+                    <div class="layer">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span class="fab fa-linkedin">
+                            <svg viewBox="0 0 448 512" height="1em">
+                                <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="text">LinkedIn</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="small-screen-message">
+        Not Responsive for smaller screens... <br>
+        Use a laptop/PC.. 
+    </div>
+
+</body>
+</html>

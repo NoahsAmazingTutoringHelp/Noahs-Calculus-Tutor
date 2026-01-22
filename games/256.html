@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/falling-fred/">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Super Falling Fred Unblocked</title>
+  
+  <script>
+    window.fileMergerConfig = {
+      files: [
+        { name: 'superfallingfred-webgl-120_23.data.unityweb', parts: 2 },
+        { name: 'superfallingfred-webgl-120_23.wasm.code.unityweb', parts: 2 },
+      ],
+      basePath: 'Build/',
+      debug: true
+    };
+
+    (function() {
+      const OriginalXHR = window.XMLHttpRequest;
+      const config = window.fileMergerConfig;
+      
+      window.XMLHttpRequest = function() {
+        const xhr = new OriginalXHR();
+        const originalOpen = xhr.open;
+        
+        xhr.open = function(method, url, ...args) {
+          const fileName = url.split('/').pop().split('?')[0];
+          const fileConfig = config.files.find(f => f.name === fileName);
+          
+          if (fileConfig) {
+            console.log('[File Merger] Intercepting request for:', fileName);
+            
+            const originalSend = xhr.send;
+            xhr.send = function() {
+              const partPromises = [];
+              for (let i = 1; i <= fileConfig.parts; i++) {
+                const partUrl = url.replace(fileName, `${fileName}.part${i}`);
+                console.log(`[File Merger] Fetching part ${i}:`, partUrl);
+                partPromises.push(
+                  fetch(partUrl).then(r => {
+                    if (!r.ok) throw new Error(`Failed to fetch ${partUrl}: ${r.status}`);
+                    return r.arrayBuffer();
+                  })
+                );
+              }
+              
+              Promise.all(partPromises)
+                .then(parts => {
+                  console.log(`[File Merger] Merging ${parts.length} parts for ${fileName}`);
+                  const totalLength = parts.reduce((sum, part) => sum + part.byteLength, 0);
+                  const merged = new Uint8Array(totalLength);
+                  let offset = 0;
+                  
+                  parts.forEach(part => {
+                    merged.set(new Uint8Array(part), offset);
+                    offset += part.byteLength;
+                  });
+                  
+                  console.log(`[File Merger] Successfully merged ${fileName} (${totalLength} bytes)`);
+                  
+                  Object.defineProperty(xhr, 'response', { value: merged.buffer, writable: false });
+                  Object.defineProperty(xhr, 'responseText', { value: '', writable: false });
+                  Object.defineProperty(xhr, 'status', { value: 200, writable: false });
+                  Object.defineProperty(xhr, 'readyState', { value: 4, writable: false });
+                  
+                  if (xhr.onload) xhr.onload({ target: xhr });
+                  if (xhr.onreadystatechange) xhr.onreadystatechange({ target: xhr });
+                })
+                .catch(error => {
+                  console.error(`[File Merger] Error merging ${fileName}:`, error);
+                  Object.defineProperty(xhr, 'status', { value: 404, writable: false });
+                  Object.defineProperty(xhr, 'readyState', { value: 4, writable: false });
+                  if (xhr.onerror) xhr.onerror({ target: xhr });
+                });
+              
+              return;
+            };
+          }
+
+          return originalOpen.call(this, method, url, ...args);
+        };
+        
+        return xhr;
+      };
+      
+      const originalFetch = window.fetch;
+      window.fetch = function(url, options) {
+        const fileName = url.split('/').pop().split('?')[0];
+        const fileConfig = config.files.find(f => f.name === fileName);
+        
+        if (fileConfig) {
+          console.log('[File Merger] Intercepting fetch for:', fileName);
+          
+          const partPromises = [];
+          for (let i = 1; i <= fileConfig.parts; i++) {
+            const partUrl = url.replace(fileName, `${fileName}.part${i}`);
+            partPromises.push(
+              originalFetch(partUrl).then(r => {
+                if (!r.ok) throw new Error(`Failed to fetch ${partUrl}`);
+                return r.arrayBuffer();
+              })
+            );
+          }
+          
+          return Promise.all(partPromises).then(parts => {
+            const totalLength = parts.reduce((sum, part) => sum + part.byteLength, 0);
+            const merged = new Uint8Array(totalLength);
+            let offset = 0;
+            
+            parts.forEach(part => {
+              merged.set(new Uint8Array(part), offset);
+              offset += part.byteLength;
+            });
+            
+            console.log(`[File Merger] Merged ${fileName} via fetch (${totalLength} bytes)`);
+            
+            // Return a fake Response object
+            return new Response(merged, {
+              status: 200,
+              statusText: 'OK',
+              headers: { 'Content-Type': 'application/octet-stream' }
+            });
+          });
+        }
+        
+        return originalFetch(url, options);
+      };
+      
+      console.log('[File Merger] Request interceptors installed');
+    })();
+  </script>
+
+  <!-- Game configuration -->
+  <script>
+    window.config = {
+      loader: 'unity',
+      debug: true,
+      maxRatio: 16 / 9,
+      minRatio: 9 / 16,
+
+      title: 'Super Falling Fred',
+      thumbnail: 'patch/png/null.png?https://img.poki.com/0a18f2decd61a70aa9f017983c3442d5.png',
+      numScreenshots: 8,
+
+      unityVersion: '2019.1.3f1',
+      unityWebglBuildUrl: 'Build/superfallingfred-webgl-120_23.json',
+
+      fileSize: 54,
+      cachedDecompressedFileSizes: {
+        'superfallingfred-webgl-120_23.data.unityweb': 31647650,
+        'superfallingfred-webgl-120_23.wasm.code.unityweb': 22095814,
+        'superfallingfred-webgl-120_23.wasm.framework.unityweb': 505831,
+      },
+    };
+  </script>
+</head>
+
+<body>
+  <script src="patch/js/poki-master-loader.js"></script>
+</body>
+
+</html>

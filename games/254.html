@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<html>
+
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MENBM6GSNY"></script>
+	<script>
+		function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-MENBM6GSNY")
+	</script>
+	<title>Deep Sleep</title>
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/gh/74m4h4/74m4h4-Assets@5cb61b353cff0365c082c9309e82bb561c027201/Run%202/waflash/waflash-style.css"
+		type="text/css">
+	<script>
+		var gameConfig = { swfUrl: "https://cdn.jsdelivr.net/gh/bubbls/UGS-file-encryption@1500a41d490b7455b4f3c8bfe2922687e18a6083/theimpossiblequiz2.swf" } 
+	</script>
+</head>
+
+<body>
+	<div id="waflashContainer"> <canvas class="waflashCanvas" id="canvas" tabindex="1"></canvas>
+		<div id="waflashStatus" style="display: none;">Playing...</div>
+		<script>
+			var ua = navigator.userAgent.toLowerCase(); if ( (navigator.appName =='Netscape' && ua.indexOf('trident') != -1) || (ua.indexOf("msie") != -1)) { var waf = document.getElementById('waflashStatus'); waf.style.display ='block'; waf.innerText ='??? ?????(IE) ??? ??? ???? ???? !\n??, ???? ?? ????? ??????.'; gtag('event', 'connect_from_ie', {'event_category': 'error', 'event_label': ua }); } 
+		</script>
+		<script type="module" crossorigin="anonymous">
+			let is_mobile = /Mobi/i.test(window.navigator.userAgent); if (is_mobile) { function scrollToSubject() { try { window.scrollTo({ top: 100, left: 0, behavior: 'smooth' }); } catch (e) {} } scrollToSubject(); window.addEventListener("orientationchange", function() { setTimeout(scrollToSubject, 100); }); } else { document.getElementById('canvas').focus(); } document.getElementById('canvas').addEventListener("keydown", function(ev) { ev.preventDefault(); ev.stopPropagation(); }); document.getElementById('canvas').addEventListener("click", function() { document.getElementById('canvas').focus(); }); document.addEventListener("mousedown", (function() { const canvasElement = document.getElementById('canvas'); let focused = false; return function(ev) { if (ev.target == canvasElement) { if (!focused) { canvasElement.focus(); focused = true; } } else { if (focused) { focused = false; } } return true; } })()); import { createWaflash } from 'https://cdn.jsdelivr.net/gh/zhit73/wafedit@badeade9f58a3987043cdcc12c863c0b2eb3de01/wasm/waflash-player.min.js'; createWaflash(gameConfig.swfUrl, window.wafOptions || {}); 
+		</script>
+	</div>
+	<script src="https://cdn.jsdelivr.net/gh/st39/sdk@main/api.js"></script>
+</body>
+
+</html>

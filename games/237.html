@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+
+
+<html lang="en-us">
+  <head>
+    <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/ultimate%20car%20driving/">
+      <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Ultimate Car Driving Game</title>
+    <link rel="shortcut icon" href="TemplateData/img/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/css/style.css">
+</head>
+<body>
+  
+		<div class="keepRatio">
+		<div id="gameContainer" class="unity-desktop webgl-content">
+			<canvas id="gameCanvas"></canvas>
+			<div id="loadingBlock">
+				<img class="logo" src="TemplateData/img/Logo.png"></img>
+				<span class="subtitle"><br>
+				</span>
+			
+				<div id="progressBar">
+					<div>LOADING ...</div>
+					<div class="centered">
+						<div id="emptyBar"></div>
+						<div id="fullBar"></div>
+					</div>
+				</div>
+				
+				<div id="warningBrowserBlock" style="display:none;">
+					<div class="warningBrowserText">
+					</div>
+					<div class="browserIcons">
+					</div>
+				</div>
+				<div id="warningMobileBlock" style="display:none;">
+					<div class="warningBrowserText">
+						Please note that Unity WebGL is not currently supported on mobiles.
+					</div>
+				</div>
+			</div>
+		
+			<div id="errorBrowserBlock" style="display:none;">
+				<img class="logo" src="TemplateData/img/Logo.png"></img>
+				<span class="subtitle">  <br>
+				</span>
+				
+				<div id="errorContent" style="display:none;">
+					<div class="errorBrowserText">
+					</div>
+					<div class="browserIcons">
+					</div>
+				</div>
+			</div>
+			
+		</div>
+    </div>
+	
+	<script>
+		window.mergedBlobUrls = {};
+		window.assetsReady = false;
+
+		async function mergeSplitFile(fileUrlBase, numParts = 2) {
+			const partUrls = Array.from({ length: numParts }, (_, i) => 
+				`${fileUrlBase}.part${i + 1}`
+			);
+
+			try {
+				const responses = await Promise.all(
+					partUrls.map(url => fetch(url))
+				);
+
+				if (responses.some(r => !r.ok)) {
+					return null;
+				}
+
+				const parts = await Promise.all(
+					responses.map(r => r.arrayBuffer())
+				);
+
+				const combinedBlob = new Blob(parts, {
+					type: 'application/octet-stream'
+				});
+
+				return URL.createObjectURL(combinedBlob);
+			} catch (error) {
+				return null;
+			}
+		}
+
+		function setupXHRInterceptor() {
+			if (window.xhrInterceptorInstalled) {
+				return;
+			}
+			
+			const originalOpen = XMLHttpRequest.prototype.open;
+			const originalSend = XMLHttpRequest.prototype.send;
+
+			XMLHttpRequest.prototype.open = function(method, url, ...args) {
+				this._url = url;
+				this._method = method;
+				this._args = args;
+				
+				let finalUrl = url;
+				
+				for (const [filename, blobUrl] of Object.entries(window.mergedBlobUrls)) {
+					if (url.includes(filename)) {
+						finalUrl = blobUrl;
+						break;
+					}
+				}
+				
+				return originalOpen.call(this, method, finalUrl, ...args);
+			};
+
+			XMLHttpRequest.prototype.send = function(...args) {
+				const xhr = this;
+				
+				if (!window.assetsReady) {
+					const checkReady = setInterval(() => {
+						if (window.assetsReady) {
+							clearInterval(checkReady);
+							originalSend.apply(xhr, args);
+						}
+					}, 50);
+					return;
+				}
+				
+				return originalSend.apply(this, args);
+			};
+			
+			window.xhrInterceptorInstalled = true;
+		}
+
+		function setupFetchInterceptor() {
+			if (window.fetchInterceptorInstalled) {
+				return;
+			}
+
+			const originalFetch = window.fetch;
+			window.fetch = function(url, ...args) {
+				let finalUrl = url;
+				
+				for (const [filename, blobUrl] of Object.entries(window.mergedBlobUrls)) {
+					if (typeof url === 'string' && url.includes(filename)) {
+						finalUrl = blobUrl;
+						break;
+					}
+				}
+				
+				return originalFetch.call(this, finalUrl, ...args);
+			};
+
+			window.fetchInterceptorInstalled = true;
+		}
+
+		async function prepareGameAssets() {
+			try {
+				window.assetsReady = false;
+				delete window.xhrInterceptorInstalled;
+				delete window.fetchInterceptorInstalled;
+				window.mergedBlobUrls = {};
+				
+				setupXHRInterceptor();
+				setupFetchInterceptor();
+				
+				const filesToMerge = [
+					{ filename: 'Build/0aff4ee936778b905d874c8c2fb40213.data.unityweb', parts: 3 }
+				];
+				
+				for (const file of filesToMerge) {
+					const blobUrl = await mergeSplitFile(file.filename, file.parts);
+					if (blobUrl) {
+						window.mergedBlobUrls[file.filename] = blobUrl;
+					}
+				}
+				
+				window.assetsPrepared = true;
+				window.assetsReady = true;
+				
+			} catch (error) {
+				window.assetsPrepared = false;
+				window.assetsReady = true;
+			}
+		}
+
+		prepareGameAssets().then(() => {
+			initUnity();
+		});
+
+		function ToggleFullScreen() {
+			var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+			(document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+			(document.msFullscreenElement && document.msFullscreenElement !== null);
+			
+			var element = document.body.getElementsByClassName("webgl-content")[0];
+			
+			if (!isInFullScreen) {
+				if (element.webkitRequestFullscreen) {
+					element.webkitRequestFullscreen();
+				} else if (element.msRequestFullscreen) { 
+					element.msRequestFullscreen();
+				} else if (element.requestFullscreen) {
+					element.requestFullscreen();
+				} 
+			}
+			else {
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+				} else if (document.webkitExitFullscreen) {
+					document.webkitExitFullscreen();
+				} else if (document.msExitFullscreen) {
+					document.msExitFullscreen();
+				}
+			}
+		}
+		
+		function CheckCompatibility()
+		{
+			if (!hasWebGL()){
+				document.getElementById("errorBrowserBlock").style.display = "inherit";
+			}
+			else if ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+			{
+				document.getElementById("warningMobileBlock").style.display = "inherit";
+			}
+			else if (!isFirefox&&!isSafari&&!isChrome) {
+				document.getElementById("warningBrowserBlock").style.display = "inherit";
+			}
+		}
+		
+		function hasWebGL() {
+			var supported;
+			try {
+				var canvas = document.createElement('canvas');
+				supported = !! window.WebGLRenderingContext && (canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+			} catch(e) { supported = false; }
+
+			try {
+				eval('let foo = 123;');
+			} catch (e) { supported = false; }
+			canvas = undefined;
+			return supported;
+		}
+
+		var isFirefox = typeof InstallTrigger !== 'undefined';
+		var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+		
+		var isChromium = window.chrome;
+		var winNav = window.navigator;
+		var vendorName = winNav.vendor;
+		var isOpera = typeof window.opr !== "undefined";
+		var isIEedge = winNav.userAgent.indexOf("Edge") > -1;
+		var isIOSChrome = winNav.userAgent.match("CriOS");
+		var isChrome = isIOSChrome || (isChromium !== null && typeof isChromium !== "undefined" && vendorName === "Google Inc." && isOpera === false && isIEedge === false);
+
+		function initUnity() {
+			var buildUrl = "Build";
+			var loaderUrl = buildUrl + "/fb9502bc7610d9c812fd76745164ef27.js";
+			var config = {
+				dataUrl: buildUrl + "/0aff4ee936778b905d874c8c2fb40213.data.unityweb",
+				frameworkUrl: buildUrl + "/59f116a01ba156009be1331a920ead96.js.unityweb",
+				codeUrl: buildUrl + "/c04f87f256d6238c834e76a761d263d1.wasm.unityweb",
+				streamingAssetsUrl: "StreamingAssets",
+				companyName: "Gamebol",
+				productName: "Ultimate Car Driving",
+				productVersion: "1.0",
+			};
+
+			var container = document.querySelector("#gameContainer");
+			var canvas = document.querySelector("#gameCanvas");
+			var loadingBar = document.querySelector("#loadingBlock");
+			var progressBarFull = document.querySelector("#fullBar");
+			var progressBarEmpty = document.querySelector("#emptyBar");
+
+			if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+				container.className = "unity-mobile";
+				config.devicePixelRatio = 1;
+			}
+			CheckCompatibility();
+
+			var script = document.createElement("script");
+			script.src = loaderUrl;
+			script.onload = () => {
+				createUnityInstance(canvas, config, (progress) => {
+					progressBarFull.style.width = 100 * progress + "%";	 	
+					progressBarEmpty.style.width = (100 * (1 - progress)) + "%";
+				}).then((unityInstance) => {
+					loadingBar.style.display = "none";
+				}).catch((message) => {
+					alert(message);
+				});
+			};
+			document.body.appendChild(script);
+		}
+    </script>
+    <script src="game.js"></script>
+  </body>
+</html>
