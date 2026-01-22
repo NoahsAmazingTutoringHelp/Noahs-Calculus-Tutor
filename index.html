@@ -698,6 +698,20 @@ body::-webkit-scrollbar,
 .refresh-btn:hover i {
     transform: rotate(180deg);
 }
+
+.game-frame {
+    cursor: auto !important;
+    background: #0a0a0a !important;
+}
+
+.game-frame::-webkit-scrollbar {
+    display: none !important;
+}
+
+.game-frame {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+}
     </style>
 </head>
 
@@ -868,298 +882,272 @@ body::-webkit-scrollbar,
 
     <script>
         const games = [
-            { title: "A Difficult Game About Climbing", desc: "A physics-based platformer where you control a climber's hands to ascend a treacherous mountain", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/172.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/294.jpg" },
-            { title: "Stick War Legacy", desc: "A popular mobile strategy game where you lead armies of stick figures, managing resources like gold to build units", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/171.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/293.jpg" },
-            { title: "Buster Jam", desc: "A fast-paced, cartoon-style action-adventure game with hectic platforming and hilarious boss battles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/170.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/292.jpg" },
-            { title: "Dungeons & Degenerate Gamblers", desc: "A pixel-art roguelike deck-builder that twists traditional blackjack", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/173.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/295.jpg" },
-            { title: "Minecraft 1.12.1", desc: "Minecraft 1.12 was the world of color update focused on expanding building options with vibrant colors", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/164.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/291.jpg" },
-            { title: "Gorilla Tag", desc: "VR-inspired physics game where you swing and climb as gorillas through colorful environments", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/161.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/289.jpg" },
-            { title: "Goblin Goopmaxxing", desc: "A dark comedy sandbox story about brewing bizarre potions and experimenting on unfortunate goblin specimens", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/160.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/288.jpg" },
-            { title: "Midnight Shift", desc: "Tense horror game where you survive a night shift with supernatural occurrences and jump scares", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/159.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/287.jpg" },
-            { title: "Orange Roulette", desc: "Colorful Russian roulette-style game with fruit-themed weapons and unpredictable outcomes", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/158.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/286.jpg" },
-            { title: "Five Nights at Winstons", desc: "Office-themed horror game inspired by FNAF with quirky animatronics and survival mechanics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/157.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/285.jpg" },
-            { title: "Final Fantasy VII", desc: "Iconic RPG adventure with memorable characters, epic story, and turn-based combat system", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/156.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/284.jpg" },
-            { title: "Please Dont Touch Anything", desc: "Interactive horror experience where you must resist touching objects with escalating consequences", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/155.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/283.jpg" },
-            { title: "Minesweeper Classic", desc: "A single-player logic puzzle where you clear a grid of hidden mines by revealing tiles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/163.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/290.jpg" },
+            { title: "Half Life: Opposing Force", desc: "The first official expansion for Valves groundbreaking Half-Life", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/269.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/296.jpg" },
+            { title: "A Difficult Game About Climbing", desc: "A physics-based platformer where you control a climber's hands to ascend a treacherous mountain", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/172.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/294.jpg" },
+            { title: "Stick War Legacy", desc: "A popular mobile strategy game where you lead armies of stick figures, managing resources like gold to build units", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/171.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/293.jpg" },
+            { title: "Buster Jam", desc: "A fast-paced, cartoon-style action-adventure game with hectic platforming and hilarious boss battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/170.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/292.jpg" },
+            { title: "Dungeons & Degenerate Gamblers", desc: "A pixel-art roguelike deck-builder that twists traditional blackjack", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/173.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/295.jpg" },
+            { title: "Minecraft 1.12.1", desc: "Minecraft 1.12 was the world of color update focused on expanding building options with vibrant colors", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/164.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/291.jpg" },
+            { title: "Gorilla Tag", desc: "VR-inspired physics game where you swing and climb as gorillas through colorful environments", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/161.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/289.jpg" },
+            { title: "Goblin Goopmaxxing", desc: "A dark comedy sandbox story about brewing bizarre potions and experimenting on unfortunate goblin specimens", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/160.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/288.jpg" },
+            { title: "Midnight Shift", desc: "Tense horror game where you survive a night shift with supernatural occurrences and jump scares", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/159.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/287.jpg" },
+            { title: "Orange Roulette", desc: "Colorful Russian roulette-style game with fruit-themed weapons and unpredictable outcomes", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/158.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/286.jpg" },
+            { title: "Five Nights at Winstons", desc: "Office-themed horror game inspired by FNAF with quirky animatronics and survival mechanics", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/157.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/285.jpg" },
+            { title: "Final Fantasy VII", desc: "Iconic RPG adventure with memorable characters, epic story, and turn-based combat system", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/156.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/284.jpg" },
+            { title: "Please Dont Touch Anything", desc: "Interactive horror experience where you must resist touching objects with escalating consequences", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/155.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/283.jpg" },
+            { title: "Minesweeper Classic", desc: "A single-player logic puzzle where you clear a grid of hidden mines by revealing tiles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/163.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/290.jpg" },
             { title: "Doom 3", desc: "A sci-fi horror first-person shooter at a Mars research base where teleportation experiments open a gateway to Hell, unleashing demons and zombies.", url: "https://doom3kaidensarcade.netlify.app/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/282.jpg" },
             { title: "Slendy Tubbies", desc: "A popular indie horror game series blending the cute Teletubbies with the terrifying mechanics of Slender", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/st/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/281.jpg" },
             { title: "Pixel Gun 3D", desc: "A popular blocky pixelated first-person shooter and a campaign where players fight hordes of pixelated zombies", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/pg3d/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/280.jpg" },
             { title: "Flying Gorilla", desc: "A free, addictive 3D mobile arcade runner where players control a flying gorilla", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/fg/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/279.jpg" },
             { title: "Eat The Rich", desc: "An Incremental Black Friday Simulator where you gather a mob and score massive savings!", url: "https://rawcdn.githack.com/thirstygithub/mrmooremath/edf912ae4d86452b59348babd57f3b8c86dcbe86/public/assets/storage/webgl/eattherich/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/278.jpg" },
-            { title: "Grand Thef Auto Vice City", desc: "An 80s-inspired open-world crime saga. Drive fast, build a criminal empire, and shoot your way to the top in a neon-soaked city", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/149.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/272.jpg" },
-            { title: "Heretic", desc: "A dark medieval first-person shooter. Wield powerful magic and weapons to battle hordes of dark fantasy creatures.", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/150.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/273.jpg" },
-            { title: "Bacon May Die", desc: "A fast-paced, 2D run and gun fighting game where you play as an angry pig warrior", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/151.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/274.jpg" },
-            { title: "Oneshot", desc: "A unique narrative puzzle game. Guide a child through a strange, dying world, forming a unique bond that transcends the game itself", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/152.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/275.jpg" },
-            { title: "Jelly Drift", desc: " A wobbly physics-based racer. Master the slippery momentum of your jelly car to drift and slide around colorful tracks", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/153.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/276.jpg" },
-            { title: "FNF Rewrite", desc: "A deceptive Friday Night Funkin' mod featuring the EXE character Rewrite. Starts as a typical horror mod before revealing a twist, with only two intense songs", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/154.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/277.jpg" },
-            { title: "Terraria", desc: "2D sandbox adventure with exploration, building, crafting, and combat in a procedurally generated world", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/165.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/271.jpg" },
-            { title: "Celeste", desc: "Precision platformer about climbing a mountain while overcoming personal struggles and challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/147.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/270.jpg" },
-            { title: "Burrito Bison", desc: "Physics based launch game where you catapult a luchador through candy-filled worlds to rescue gummy bears", url: "https://noahsamazingtutoringhelp.github.io/cautious-rotary-phone/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/130.jpg" },
-            { title: "Tanuki Sunset", desc: "Radical longboarding game with stylish tricks, smooth controls, and a killer sunset aesthetic", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/146.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/269.jpg" },
-            { title: "SwordFight!!", desc: "A Cool 2bit sword fighting and also bow shooting 1 on 1 combat game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/145.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/268.jpg" },  
-            { title: "Station Saturn", desc: "Space themed first person shooter where you just shoot the enemy robots", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/144.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/267.jpg" },
-            { title: "Spelunky Classic HD", desc: "Roguelike cave exploration game with procedurally generated levels and treasure hunting", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/143.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/266.jpg" },
-            { title: "Sonic.EXE", desc: "Horror-themed Sonic fangame based on the popular creepypasta with disturbing visuals and challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/142.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/265.jpg" },  
-            { title: "Minesweeper Plus", desc: "Enhanced version of the classic puzzle game with new modes, challenges, and visual themes", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/141.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/264.jpg" },
-            { title: "Kitty Toy", desc: "Interactive cat toy simulation with various toys and playful feline behaviors", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/140.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/263.jpg" },
-            { title: "Happy Wheels", desc: "Brutal physics-based obstacle course game with ragdoll characters and user-created levels", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/139.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/174.jpg" },
-            { title: "Google Feud", desc: "Guess what people are searching for on Google in this fun and challenging word game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/138.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/262.jpg" },  
-            { title: "Basketball Stars", desc: "Fast-paced basketball game with arcade-style controls and competitive multiplayer matches", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/137.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/261.jpg" },
-            { title: "Daggerfall", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/136.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/252.jpg" },
-            { title: "Portal", desc: "Mind-bending puzzle game with portal gun mechanics and dark humor", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/135.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/253.jpg" },
-            { title: "Ice Dodo", desc: "3D obstacle course game with simple controls but complex challenging maps", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/134.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/254.jpg" },
-            { title: "Doom", desc: "The original FPS that revolutionized gaming with fast-paced demon slaying action", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/133.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/255.jpg" },
-            { title: "Doom 2", desc: "Sequel to the iconic FPS with new weapons, enemies, and hellish levels", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/257.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/257.jpg" },
-            { title: "Call of Duty: World at War", desc: "Intense DS version of the WWII FPS", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/130.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/258.jpg" },
-            { title: "Call of Duty 4: Modern Warfare", desc: "DS Version of the modern military shooter", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/129.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/259.jpg" },
-            { title: "Kart Bros", desc: "Free online kart racing game with wild antics, power-ups, and multiplayer action", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/128.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/260.jpg" },
-            { title: "Peggle", desc: "Addictive physics puzzle game where you shoot balls to clear orange pegs with satisfying challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/127.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/251.jpg" },
-            { title: "Ace Attorny", desc: "Courtroom drama adventure where you investigate crimes and defend clients with evidence and logic", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/126.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/250.jpg" },
-            { title: "FNF Agoti", desc: "Friday Night Funkin' mod featuring the popular OC character Agoti with original tracks", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/125.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/249.jpg" },
-            { title: "FNF Black Betrayal", desc: "FNF mod based on the Among Us mod with the black imposter going crazy", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/124.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/248.jpg" },
-            { title: "FNF B-Side", desc: "FNF mod featuring remixed B-side versions of original tracks with new visuals", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/123.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/247.jpg" },
-            { title: "FNF Camellia", desc: "Challenging FNF mod featuring high-BPM tracks from artist Camellia", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/122.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/246.jpg" },
-            { title: "FNF Impostor V4", desc: "Among Us themed FNF mod with sus rhythms and impostor gameplay", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/121.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/245.jpg" },
-            { title: "FNF Indie Cross", desc: "Crossover FNF mod featuring characters from popular indie games", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/120.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/244.jpg" },
-            { title: "FNF Kapi", desc: "FNF mod featuring the arcade-loving cat character Kapi with arcade-style tracks", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/119.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/243.jpg" },
-            { title: "FNF Mario Madness", desc: "Mario-themed FNF mod with madness-induced versions of classic characters", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/118.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/242.jpg" },
-            { title: "FNF Pibby Apocalypse", desc: "FNF mod based on the Pibby corruption concept with glitch-themed horror", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/117.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/241.jpg" },
-            { title: "FNF Shaggy X Matt", desc: "FNF crossover mod featuring Shaggy and Matt from Wii Sports in musical battles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/116.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/240.jpg" },
-            { title: "FNF Sonic.exe", desc: "Horror-themed FNF mod based on the Sonic.exe creepypasta with intense rhythms", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/115.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/239.jpg" },
-            { title: "FNF Garcello", desc: "Emotional FNF mod featuring the character Garcello with soulful tracks", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/114.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/238.jpg" },
-            { title: "FNF Hit Single", desc: "FNF mod with that blue singing guy that everyone likes", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/113.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/237.jpg" },
-            { title: "Achillies 2", desc: "Sequel to the action-packed Achillies game with enhanced combat and story", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/112.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/236.jpg" },
-            { title: "Russian Counter Strike", desc: "Counter-Strike inspired tactical shooter with Russian military themes", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/111.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/235.jpg" },
-            { title: "Deltarune", desc: "RPG from Undertale creator featuring Kris and Susie in a dark world adventure", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/110.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/234.jpg" },
-            { title: "Learn to Fly 3", desc: "Physics-based game where you help a penguin achieve flight through various methods", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/109.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/233.jpg" },
-            { title: "Lego Batman 2", desc: "LEGO action-adventure featuring Batman and DC superheroes in Gotham City", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/108.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/232.jpg" },
-            { title: "Lego Starwars Complete Saga", desc: "Complete LEGO Star Wars experience covering all six episodes with humor and action", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/107.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/231.jpg" },
-            { title: "Madness Interactive", desc: "Fast-paced stick figure combat game with intense action and ragdoll physics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/106.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/230.jpg" },
-            { title: "Tony Hawks Pro Skater", desc: "Classic skateboarding game with trick combos, iconic skaters, and great soundtrack", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/105.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/229.jpg" },
-            { title: "Postal", desc: "Controversial top-down shooter known for its dark humor and violent gameplay", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/104.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/228.jpg" },
-            { title: "Resident Evil 3", desc: "Survival horror game featuring Jill Valentine escaping Nemesis in Raccoon City", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/103.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/227.jpg" },
-            { title: "Scribblenauts", desc: "Puzzle game where you solve challenges by summoning objects you write", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/102.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/226.jpg" },
-            { title: "Sprunki", desc: "Basically a copy of Incredibox but with little furry creatures", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/101.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/225.jpg" },
-            { title: "Strange Rope Police", desc: "Physics-based game with rope mechanics and law enforcement themes", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/100.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/224.jpg" },
-            { title: "Street Fighter III", desc: "Classic fighting game known for parry system and competitive gameplay", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/99.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/223.jpg" },
-            { title: "Super Liquid Soccer", desc: "Arcade soccer game with fluid physics and exaggerated gameplay mechanics", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/98.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/222.jpg" },
-            { title: "Tempoverdose", desc: "Rhythm game with intense tempo-based challenges and electronic music", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/97.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/221.jpg" },
-            { title: "Abandoned", desc: "Escape room type game where you need to figure out how to get out of each", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/96.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/220.jpg" },
-            { title: "Plants Vs Zombies 2", desc: "Defend your lawn with crazy plants against fun-loving zombies across time", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg", popular: true },
-            { title: "Hotline Miami", desc: "Fast-paced top-down action combat", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg", popular: true },
-            { title: "Balatro", desc: "Build insane poker hands with special Joker cards", url: "https://raw.githack.com/thirstygithub/mathamatic-notes/main/index.html",  image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg",popular: true },
-            { title: "Wolfenstein 3D", desc: "The pioneer FPS game where you battle Nazis as Allied spy B.J. Blazkowicz", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/95.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/219.jpg" },
-            { title: "Zombotron Reboot", desc: "Action-packed platform shooter with physics-based combat in zombie-infested world", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/94.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/218.jpg" },
-            { title: "Mortal Kombat 4", desc: "Classic fighting game with brutal fatalities and iconic characters in fourth installment", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/93.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/fuckthis.jpg" },
-            { title: "Undertale", desc: "An RPG where you play as a human child who falls into an underground world of monsters, with the goal of getting back to the surface", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/91.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/217.jpg" },
-            { title: "The Legend of Zelda Majora's Mask", desc: "A dark adventure through a doomed world where you have only 3 days to prevent the moon from crashing", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/90.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/216.jpg" },
-            { title: "Cooking Mama 3", desc: "Cook delicious meals with Mama's guidance in this interactive culinary adventure", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/89.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/215.jpg" },
-            { title: "Cooking Mama 2", desc: "Continue your cooking journey with new recipes and kitchen challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/88.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/214.jpg" },
-            { title: "Cooking Mama", desc: "Learn to cook various dishes with step-by-step instructions from Mama", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/87.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/213.jpg" },
-            { title: "BloodMoney", desc: "A gritty crime thriller about the consequences of choices in the criminal underworld", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/86.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/212.jpg" },
-            { title: "Big Shot Boxing", desc: "Rise through the ranks in this intense boxing simulation and become the champion", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/85.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/211.jpg" },
-            { title: "Assessment Examination", desc: "A comprehensive test covering multiple subjects to evaluate academic progress and knowledge retention", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/84.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/210.jpg" },
-            { title: "Schoolboy Runaway", desc: "A somewhat horror game where you control a schoolboy trying to escape his troubled home life", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/83.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/209.jpg" },
-            { title: "Fears To Fathom: Home Alone", desc: "A horror game where you are home alone and must survive a stalker's terrifying visits", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/82.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/208.jpg" },
-            { title: "Dan The Man", desc: "A side-scrolling beat 'em up where you fight through hordes of enemies to save your friends", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/81.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/207.jpg" },
-            { title: "Resident Evil 2", desc: "Survival horror game where you fight zombies in a doomed police station", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/80.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/205.jpg" },
-            { title: "Get Yoked", desc: "A fitness simulator where you lift weights and manage your gym", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/79.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/204.jpg" },
-            { title: "Douche Bag Life", desc: "A satirical life simulator where you make terrible choices to become the ultimate bro", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/78.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/203.jpg" },
-            { title: "Donkey Kong", desc: "Classic arcade game where Jumpman must rescue his girlfriend from a giant ape", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/77.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/202.jpg" },
-            { title: "Apple Worm", desc: "A retro arcade game where you guide a worm to eat apples and grow longer", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/75.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/201.jpg" },
-            { title: "Chess", desc: "A classic strategy game where two kings battle to the death", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/74.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/200.jpg" },
-            { title: "Doki Doki Literature Club", desc: "A cute dating simulator where you write poems for your crush, but something is terribly wrong", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/73.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/199.jpg" },
-            { title: "Getting Over It", desc: "A frustrating climbing game where you use a hammer to scale a mountain of junk", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/72.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/198.jpg" },
+            { title: "Grand Thef Auto Vice City", desc: "An 80s-inspired open-world crime saga. Drive fast, build a criminal empire, and shoot your way to the top in a neon-soaked city", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/149.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/272.jpg" },
+            { title: "Heretic", desc: "A dark medieval first-person shooter. Wield powerful magic and weapons to battle hordes of dark fantasy creatures.", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/150.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/273.jpg" },
+            { title: "Bacon May Die", desc: "A fast-paced, 2D run and gun fighting game where you play as an angry pig warrior", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/151.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/274.jpg" },
+            { title: "Oneshot", desc: "A unique narrative puzzle game. Guide a child through a strange, dying world, forming a unique bond that transcends the game itself", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/152.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/275.jpg" },
+            { title: "Jelly Drift", desc: " A wobbly physics-based racer. Master the slippery momentum of your jelly car to drift and slide around colorful tracks", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/153.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/276.jpg" },
+            { title: "FNF Rewrite", desc: "A deceptive Friday Night Funkin' mod featuring the EXE character Rewrite. Starts as a typical horror mod before revealing a twist, with only two intense songs", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/154.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/277.jpg" },
+            { title: "Terraria", desc: "2D sandbox adventure with exploration, building, crafting, and combat in a procedurally generated world", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/165.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/271.jpg" },
+            { title: "Celeste", desc: "Precision platformer about climbing a mountain while overcoming personal struggles and challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/147.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/270.jpg" },
+            { title: "Burrito Bison", desc: "Physics based launch game where you catapult a luchador through candy-filled worlds to rescue gummy bears", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/267.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/130.jpg" },
+            { title: "Tanuki Sunset", desc: "Radical longboarding game with stylish tricks, smooth controls, and a killer sunset aesthetic", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/146.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/269.jpg" },
+            { title: "SwordFight!!", desc: "A Cool 2bit sword fighting and also bow shooting 1 on 1 combat game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/145.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/268.jpg" },  
+            { title: "Station Saturn", desc: "Space themed first person shooter where you just shoot the enemy robots", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/144.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/267.jpg" },
+            { title: "Spelunky Classic HD", desc: "Roguelike cave exploration game with procedurally generated levels and treasure hunting", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/143.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/266.jpg" },
+            { title: "Sonic.EXE", desc: "Horror-themed Sonic fangame based on the popular creepypasta with disturbing visuals and challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/142.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/265.jpg" },  
+            { title: "Minesweeper Plus", desc: "Enhanced version of the classic puzzle game with new modes, challenges, and visual themes", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/141.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/264.jpg" },
+            { title: "Kitty Toy", desc: "Interactive cat toy simulation with various toys and playful feline behaviors", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/140.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/263.jpg" },
+            { title: "Happy Wheels", desc: "Brutal physics-based obstacle course game with ragdoll characters and user-created levels", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/139.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/174.jpg" },
+            { title: "Google Feud", desc: "Guess what people are searching for on Google in this fun and challenging word game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/138.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/262.jpg" },  
+            { title: "Basketball Stars", desc: "Fast-paced basketball game with arcade-style controls and competitive multiplayer matches", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/137.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/261.jpg" },
+            { title: "Daggerfall", desc: "Classic Elder Scrolls RPG with massive open world and deep character customization", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/136.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/252.jpg" },
+            { title: "Portal", desc: "Mind-bending puzzle game with portal gun mechanics and dark humor", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/135.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/253.jpg" },
+            { title: "Ice Dodo", desc: "3D obstacle course game with simple controls but complex challenging maps", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/134.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/254.jpg" },
+            { title: "Doom", desc: "The original FPS that revolutionized gaming with fast-paced demon slaying action", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/133.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/255.jpg" },
+            { title: "Doom 2", desc: "Sequel to the iconic FPS with new weapons, enemies, and hellish levels", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/257.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/257.jpg" },
+            { title: "Call of Duty: World at War", desc: "Intense DS version of the WWII FPS", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/130.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/258.jpg" },
+            { title: "Call of Duty 4: Modern Warfare", desc: "DS Version of the modern military shooter", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/129.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/259.jpg" },
+            { title: "Kart Bros", desc: "Free online kart racing game with wild antics, power-ups, and multiplayer action", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/128.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/260.jpg" },
+            { title: "Peggle", desc: "Addictive physics puzzle game where you shoot balls to clear orange pegs with satisfying challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/127.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/251.jpg" },
+            { title: "Ace Attorny", desc: "Courtroom drama adventure where you investigate crimes and defend clients with evidence and logic", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/126.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/250.jpg" },
+            { title: "FNF Agoti", desc: "Friday Night Funkin' mod featuring the popular OC character Agoti with original tracks", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/125.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/249.jpg" },
+            { title: "FNF Black Betrayal", desc: "FNF mod based on the Among Us mod with the black imposter going crazy", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/124.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/248.jpg" },
+            { title: "FNF B-Side", desc: "FNF mod featuring remixed B-side versions of original tracks with new visuals", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/123.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/247.jpg" },
+            { title: "FNF Camellia", desc: "Challenging FNF mod featuring high-BPM tracks from artist Camellia", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/122.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/246.jpg" },
+            { title: "FNF Impostor V4", desc: "Among Us themed FNF mod with sus rhythms and impostor gameplay", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/121.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/245.jpg" },
+            { title: "FNF Indie Cross", desc: "Crossover FNF mod featuring characters from popular indie games", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/120.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/244.jpg" },
+            { title: "FNF Kapi", desc: "FNF mod featuring the arcade-loving cat character Kapi with arcade-style tracks", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/119.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/243.jpg" },
+            { title: "FNF Mario Madness", desc: "Mario-themed FNF mod with madness-induced versions of classic characters", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/118.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/242.jpg" },
+            { title: "FNF Pibby Apocalypse", desc: "FNF mod based on the Pibby corruption concept with glitch-themed horror", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/117.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/241.jpg" },
+            { title: "FNF Shaggy X Matt", desc: "FNF crossover mod featuring Shaggy and Matt from Wii Sports in musical battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/116.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/240.jpg" },
+            { title: "FNF Sonic.exe", desc: "Horror-themed FNF mod based on the Sonic.exe creepypasta with intense rhythms", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/115.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/239.jpg" },
+            { title: "FNF Garcello", desc: "Emotional FNF mod featuring the character Garcello with soulful tracks", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/114.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/238.jpg" },
+            { title: "FNF Hit Single", desc: "FNF mod with that blue singing guy that everyone likes", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/113.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/237.jpg" },
+            { title: "Achillies 2", desc: "Sequel to the action-packed Achillies game with enhanced combat and story", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/112.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/236.jpg" },
+            { title: "Russian Counter Strike", desc: "Counter-Strike inspired tactical shooter with Russian military themes", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/111.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/235.jpg" },
+            { title: "Deltarune", desc: "RPG from Undertale creator featuring Kris and Susie in a dark world adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/110.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/234.jpg" },
+            { title: "Learn to Fly 3", desc: "Physics-based game where you help a penguin achieve flight through various methods", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/109.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/233.jpg" },
+            { title: "Lego Batman 2", desc: "LEGO action-adventure featuring Batman and DC superheroes in Gotham City", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/108.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/232.jpg" },
+            { title: "Lego Starwars Complete Saga", desc: "Complete LEGO Star Wars experience covering all six episodes with humor and action", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/107.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/231.jpg" },
+            { title: "Madness Interactive", desc: "Fast-paced stick figure combat game with intense action and ragdoll physics", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/106.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/230.jpg" },
+            { title: "Tony Hawks Pro Skater", desc: "Classic skateboarding game with trick combos, iconic skaters, and great soundtrack", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/105.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/229.jpg" },
+            { title: "Postal", desc: "Controversial top-down shooter known for its dark humor and violent gameplay", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/104.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/228.jpg" },
+            { title: "Resident Evil 3", desc: "Survival horror game featuring Jill Valentine escaping Nemesis in Raccoon City", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/103.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/227.jpg" },
+            { title: "Scribblenauts", desc: "Puzzle game where you solve challenges by summoning objects you write", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/102.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/226.jpg" },
+            { title: "Sprunki", desc: "Basically a copy of Incredibox but with little furry creatures", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/101.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/225.jpg" },
+            { title: "Strange Rope Police", desc: "Physics-based game with rope mechanics and law enforcement themes", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/100.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/224.jpg" },
+            { title: "Street Fighter III", desc: "Classic fighting game known for parry system and competitive gameplay", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/99.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/223.jpg" },
+            { title: "Super Liquid Soccer", desc: "Arcade soccer game with fluid physics and exaggerated gameplay mechanics", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/98.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/222.jpg" },
+            { title: "Tempoverdose", desc: "Rhythm game with intense tempo-based challenges and electronic music", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/97.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/221.jpg" },
+            { title: "Abandoned", desc: "Escape room type game where you need to figure out how to get out of each", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/96.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/220.jpg" },
+            { title: "Plants Vs Zombies 2", desc: "Defend your lawn with crazy plants against fun-loving zombies across time", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/92.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg", popular: true },
+            { title: "Hotline Miami", desc: "Fast-paced top-down action combat", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/16.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg", popular: true },
+            { title: "Balatro", desc: "Build insane poker hands with special Joker cards", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/268.html",  image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg",popular: true },
+            { title: "Wolfenstein 3D", desc: "The pioneer FPS game where you battle Nazis as Allied spy B.J. Blazkowicz", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/95.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/219.jpg" },
+            { title: "Zombotron Reboot", desc: "Action-packed platform shooter with physics-based combat in zombie-infested world", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/94.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/218.jpg" },
+            { title: "Mortal Kombat 4", desc: "Classic fighting game with brutal fatalities and iconic characters in fourth installment", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/93.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/fuckthis.jpg" },
+            { title: "Undertale", desc: "An RPG where you play as a human child who falls into an underground world of monsters, with the goal of getting back to the surface", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/91.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/217.jpg" },
+            { title: "The Legend of Zelda Majora's Mask", desc: "A dark adventure through a doomed world where you have only 3 days to prevent the moon from crashing", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/90.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/216.jpg" },
+            { title: "Cooking Mama 3", desc: "Cook delicious meals with Mama's guidance in this interactive culinary adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/89.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/215.jpg" },
+            { title: "Cooking Mama 2", desc: "Continue your cooking journey with new recipes and kitchen challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/88.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/214.jpg" },
+            { title: "Cooking Mama", desc: "Learn to cook various dishes with step-by-step instructions from Mama", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/87.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/213.jpg" },
+            { title: "BloodMoney", desc: "A gritty crime thriller about the consequences of choices in the criminal underworld", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/86.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/212.jpg" },
+            { title: "Big Shot Boxing", desc: "Rise through the ranks in this intense boxing simulation and become the champion", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/85.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/211.jpg" },
+            { title: "Assessment Examination", desc: "A comprehensive test covering multiple subjects to evaluate academic progress and knowledge retention", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/84.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/210.jpg" },
+            { title: "Schoolboy Runaway", desc: "A somewhat horror game where you control a schoolboy trying to escape his troubled home life", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/83.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/209.jpg" },
+            { title: "Fears To Fathom: Home Alone", desc: "A horror game where you are home alone and must survive a stalker's terrifying visits", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/82.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/208.jpg" },
+            { title: "Dan The Man", desc: "A side-scrolling beat 'em up where you fight through hordes of enemies to save your friends", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/81.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/207.jpg" },
+            { title: "Resident Evil 2", desc: "Survival horror game where you fight zombies in a doomed police station", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/80.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/205.jpg" },
+            { title: "Get Yoked", desc: "A fitness simulator where you lift weights and manage your gym", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/79.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/204.jpg" },
+            { title: "Douche Bag Life", desc: "A satirical life simulator where you make terrible choices to become the ultimate bro", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/78.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/203.jpg" },
+            { title: "Donkey Kong", desc: "Classic arcade game where Jumpman must rescue his girlfriend from a giant ape", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/77.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/202.jpg" },
+            { title: "Apple Worm", desc: "A retro arcade game where you guide a worm to eat apples and grow longer", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/75.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/201.jpg" },
+            { title: "Chess", desc: "A classic strategy game where two kings battle to the death", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/74.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/200.jpg" },
+            { title: "Doki Doki Literature Club", desc: "A cute dating simulator where you write poems for your crush, but something is terribly wrong", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/73.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/199.jpg" },
+            { title: "Getting Over It", desc: "A frustrating climbing game where you use a hammer to scale a mountain of junk", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/72.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/198.jpg" },
             { title: "Toca-Boca-World", desc: "A digital toy box where you create your own stories and worlds.", url: "https://ud-gles3games.shared-osj.k8s.n2i.io/?deeplinksURI=null%3A%2F%2F&deeplinksApp=com.tocaboca.tocalifeworld&quotaBytes=89000000&naturalOrientation=portrait&invertNaturalOrientation&forcedNaturalOrientation&jitterBufferMin=0&deeplinksService=true&backOnDisconnected=true&disconnectedMessage=null&api=%7B%22back%22%3Afalse%7D&title=Toca+Boca+World", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/206.jpg" },
-            { title: "Tattletail", desc: "Feed and care for a creepy, talking toy that wanders your house at night", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/71.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/196.jpg" },
-            { title: "Sonic the Hedgehog 3", desc: "Classic platformer with Sonic and Tails vs Dr. Robotnik", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/69.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/189.jpg" },
-            { title: "Sonic the Hedgehog 2", desc: "Iconic sequel introducing Tails and spin dash move", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/68.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/190.jpg" },
-            { title: "Sonic Mania", desc: "Modern 2D Sonic with remixed classics and new zones", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/67.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/191.jpg" },
-            { title: "Sonic CD", desc: "Time-travel adventure with past and future versions", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/66.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/192.jpg" },
-            { title: "War The Knights", desc: "Medieval knight battles and castle sieges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/70.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/193.jpg" },
-            { title: "Football Bros", desc: "Arcade football with simple controls and power-ups", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/65.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/194.jpg" },
-            { title: "Buckshot Roulette", desc: "Russian Roulette type game with a TWIST", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/63.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/187.jpg" },
-            { title: "Cup Head", desc: "Fight a series of monsters to break your deal with the devil", url: "https://noahsamazingtutoringhelp.github.io/Algebrudda-Calculator/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/188.jpg" },
-            { title: "Slime Rancher", desc: "Suck and collect slimes and raise them in a ranch", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/64.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/186.jpg" },
-            { title: "FNAF: Pizza Sim", desc: "Manage your own pizzeria while surviving animatronic horrors", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/1.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/1.jpg" },
-            { title: "Baseball Bros", desc: "Engage in exciting baseball matches with strategic gameplay", url: "https://noahsamazingtutoringhelp.github.io/fantastic-octo-journey/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/2.jpg" },
-            { title: "A Dance of Fire and Ice", desc: "Rhythm game requiring perfect timing between two spheres", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/3.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/3.jpg" },
-            { title: "Smashy Kart", desc: "High-speed kart racing with demolition derby elements", url: "https://noahsamazingtutoringhelp.github.io/upgraded-goggles/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/4.jpg" },
-            { title: "Golf Orbit", desc: "Miniature golf in space with gravity mechanics", url: "https://noahsamazingtutoringhelp.github.io/studious-journey/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/5.jpg" },
-            { title: "3D Free Kick", desc: "Soccer free kick simulator with realistic physics", url: "https://noahsamazingtutoringhelp.github.io/expert-pancake/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/6.jpg" },
-            { title: "Retro Bowl College", desc: "College football management simulation", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/4.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/7.jpg" },
-            { title: "Deepest Sword", desc: "Adventure game about retrieving the deepest sword", url: "https://noahsamazingtutoringhelp.github.io/legendary-octo-train/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/8.jpg" },
-            { title: "Tomodachi Life", desc: "Life simulation with quirky island characters", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/5.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/9.jpg" },
-            { title: "FNAF: Sister Location", desc: "Survival horror in a high-tech facility", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/6.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/10.jpg" },
-            { title: "Fallout", desc: "Post-apocalyptic RPG exploring wastelands", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/7.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/11.jpg" },
-            { title: "Rocket League", desc: "Soccer with rocket-powered cars", url: "https://noahsamazingtutoringhelp.github.io/potential-meme/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/12.jpg" },
-            { title: "Street Fighter II", desc: "Classic fighting game with special moves", url: "https://noahsamazingtutoringhelp.github.io/scaling-goggles/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/13.jpg" },
-            { title: "Super Star Car", desc: "Racing with customizable super cars", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/8.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/14.jpg" },
-            { title: "Steal a Brainrot Online", desc: "Multiplayer game about strategic theft", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/9.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/15.jpg" },
-            { title: "Bad Piggies", desc: "Physics puzzles building pig contraptions", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/10.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/16.jpg" },
+            { title: "Tattletail", desc: "Feed and care for a creepy, talking toy that wanders your house at night", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/71.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/196.jpg" },
+            { title: "Sonic the Hedgehog 3", desc: "Classic platformer with Sonic and Tails vs Dr. Robotnik", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/69.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/189.jpg" },
+            { title: "Sonic the Hedgehog 2", desc: "Iconic sequel introducing Tails and spin dash move", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/68.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/190.jpg" },
+            { title: "Sonic Mania", desc: "Modern 2D Sonic with remixed classics and new zones", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/67.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/191.jpg" },
+            { title: "Sonic CD", desc: "Time-travel adventure with past and future versions", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/66.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/192.jpg" },
+            { title: "War The Knights", desc: "Medieval knight battles and castle sieges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/70.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/193.jpg" },
+            { title: "Football Bros", desc: "Arcade football with simple controls and power-ups", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/65.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/194.jpg" },
+            { title: "Buckshot Roulette", desc: "Russian Roulette type game with a TWIST", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/63.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/187.jpg" },
+            { title: "Cup Head", desc: "Fight a series of monsters to break your deal with the devil", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/266.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/188.jpg" },
+            { title: "Slime Rancher", desc: "Suck and collect slimes and raise them in a ranch", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/64.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/186.jpg" },
+            { title: "FNAF: Pizza Sim", desc: "Manage your own pizzeria while surviving animatronic horrors", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/1.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/1.jpg" },
+            { title: "Baseball Bros", desc: "Engage in exciting baseball matches with strategic gameplay", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/265.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/2.jpg" },
+            { title: "A Dance of Fire and Ice", desc: "Rhythm game requiring perfect timing between two spheres", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/3.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/3.jpg" },
+            { title: "Smashy Kart", desc: "High-speed kart racing with demolition derby elements", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/264.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/4.jpg" },
+            { title: "Retro Bowl College", desc: "College football management simulation", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/264.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/7.jpg" },
+            { title: "Deepest Sword", desc: "Adventure game about retrieving the deepest sword", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/263.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/8.jpg" },
+            { title: "Tomodachi Life", desc: "Life simulation with quirky island characters", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/5.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/9.jpg" },
+            { title: "FNAF: Sister Location", desc: "Survival horror in a high-tech facility", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/6.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/10.jpg" },
+            { title: "Fallout", desc: "Post-apocalyptic RPG exploring wastelands", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/7.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/11.jpg" },
+            { title: "Rocket League", desc: "Soccer with rocket-powered cars", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/262.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/12.jpg" },
+            { title: "Street Fighter II", desc: "Classic fighting game with special moves", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/261.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/13.jpg" },
+            { title: "Super Star Car", desc: "Racing with customizable super cars", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/8.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/14.jpg" },
+            { title: "Steal a Brainrot Online", desc: "Multiplayer game about strategic theft", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/9.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/15.jpg" },
+            { title: "Bad Piggies", desc: "Physics puzzles building pig contraptions", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/10.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/16.jpg" },
             { title: "Among Us (real)", desc: "Social deduction identifying impostors", url: "https://ud-gles3games.shared-osj.k8s.n2i.io/?deeplinksURI=null%3A%2F%2F&deeplinksApp=com.innersloth.spacemafia&naturalOrientation=landscape&forcedNaturalOrientation&autofitOnConnect&jitterBufferMin=0&deeplinksService=true&backOnDisconnected=true&disconnectedMessage=null&api=%7B%22back%22%3Afalse%7D&title=Among+Us", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/17.jpg" },
-            { title: "Yandere Simulator", desc: "Stealth game eliminating rivals", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/12.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/18.jpg" },
-            { title: "Twerk Race 3D", desc: "I dont even want to describe this game...", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/13.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/19.jpg" },
-            { title: "Quake III", desc: "Classic arena shooter with fast combat", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/14.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/20.jpg" },
-            { title: "10 Minutes Till Dawn", desc: "Intense bullet hell survival game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/15.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/21.jpg" },
-            { title: "Nubby's Number Factory", desc: "Mathematical puzzle challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/17.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/23.jpg" },
-            { title: "Generic Fighter Maybe", desc: "Combat with fighting styles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/18.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/24.jpg" },
-            { title: "Death Run 3D", desc: "Treacherous obstacle course navigation", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/19.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/25.jpg" },
-            { title: "Clash Royale", desc: "Strategic card-based battles", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/21.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/26.jpg" },
-            { title: "PaRappa The Rapper", desc: "Rhythm-based music game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/22.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/27.jpg" },
-            { title: "Hollow Knight", desc: "Metroidvania in underground kingdom", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/23.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/28.jpg" },
-            { title: "Binding of Issac WOTL", desc: "Rogue-like dungeon crawler", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/24.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/29.jpg" },
-            { title: "Blade Ball", desc: "Fast-paced ball throwing game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/25.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/30.jpg" },
-            { title: "Ages of Conflict", desc: "Historical strategy warfare game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/26.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/31.jpg" },
-            { title: "Triva Crack", desc: "Addictive trivia knowledge challenge", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/27.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/32.jpg" },
-            { title: "Bow Masters", desc: "Precision archery physics game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/28.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/33.jpg" },
-            { title: "Angry Birds", desc: "Classic physics puzzle destruction", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/29.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/34.jpg" },
-            { title: "FNAF: World", desc: "RPG with FNAF characters", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/30.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/36.jpg" },
-            { title: "Solar Smash", desc: "Planet destruction simulator", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/31.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/37.jpg" },
-            { title: "Idle Mining Empire", desc: "Addictive mining clicker game", url: "https://noahsamazingtutoringhelp.github.io/sjsDjsaokdjsa/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/37.jpg" },
-            { title: "Highway Racers 2", desc: "High-speed racing action", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/32.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/38.jpg" },
-            { title: "Bounce Masters", desc: "Physics bouncing challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/33.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/39.jpg" },
-            { title: "R.E.P.O", desc: "Stealth vehicle repossession", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/34.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/40.jpg" },
-            { title: "Raft", desc: "Ocean survival building floating home", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/35.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/41.jpg" },
-            { title: "Side Effects", desc: "Puzzle cause and effect relationships", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/36.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/42.jpg" },
-            { title: "Slender", desc: "Horror survival exploration game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/37.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/43.jpg" },
-            { title: "Line Rider", desc: "Creative physics track drawing", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/38.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/44.jpg" },
-            { title: "Kindergarten 3", desc: "Dark humor school adventure", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/39.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/45.jpg" },
-            { title: "Kindergarten 2", desc: "Strange school comedy sequel", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/40.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/46.jpg" },
-            { title: "Kindergarten", desc: "Strange school comedy sequel", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/41.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/47.jpg" },
-            { title: "Granny 3", desc: "Horror escape with new challenges", url: "https://noahsamazingtutoringhelp.github.io/ideal-parakeet/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/48.jpg" },
-            { title: "Granny 2", desc: "Sequel horror escape game", url: "https://noahsamazingtutoringhelp.github.io/Granny1/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/49.jpg" },
-            { title: "Granny", desc: "Classic horror escape game", url: "https://noahsamazingtutoringhelp.github.io/symmetrical-meme/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/50.jpg" },
-            { title: "Bad Parenting", desc: "Dark comedy parenting simulation", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/42.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/51.jpg" },
-            { title: "Baldis Basics", desc: "Survival horror educational parody", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/43.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/52.jpg" },
-            { title: "Bendy and the Ink Machine", desc: "Horror adventure in animation studio", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/44.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/53.jpg" },
-            { title: "Candy Crush", desc: "Addictive match-3 puzzle game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/45.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/54.jpg" },
-            { title: "Geometry Dash", desc: "Rhythm-based platformer challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/46.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/55.jpg" },
-            { title: "That's Not My Neighbor", desc: "Doorman identity verification game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/47.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/56.jpg" },
-            { title: "ULTRAKILL", desc: "Fast-paced retro-style shooter", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/48.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/57.jpg" },
-            { title: "WebFishing", desc: "Relaxing fishing simulation game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/49.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/58.jpg" },
-            { title: "Super Falling Fred", desc: "Endless falling obstacle avoidance", url: "https://noahsamazingtutoringhelp.github.io/ASDOKAS/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/59.jpg" },
-            { title: "Timberman", desc: "Fast-paced tree chopping game", url: "https://noahsamazingtutoringhelp.github.io/saJKLDPAW/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/60.jpg" },
-            { title: "Stupid Zombies 2", desc: "Physics zombie shooting puzzles", url: "https://noahsamazingtutoringhelp.github.io/ASJDIPAJ/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/61.jpg" },
-            { title: "Pokemon Emerald", desc: "Classic Pokemon RPG adventure", url: "https://noahsamazingtutoringhelp.github.io/ASLDO-PWA-/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/62.jpg" },
+            { title: "Yandere Simulator", desc: "Stealth game eliminating rivals", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/12.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/18.jpg" },
+            { title: "Twerk Race 3D", desc: "I dont even want to describe this game...", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/13.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/19.jpg" },
+            { title: "Quake III", desc: "Classic arena shooter with fast combat", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/14.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/20.jpg" },
+            { title: "10 Minutes Till Dawn", desc: "Intense bullet hell survival game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/15.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/21.jpg" },
+            { title: "Nubby's Number Factory", desc: "Mathematical puzzle challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/17.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/23.jpg" },
+            { title: "Generic Fighter Maybe", desc: "Combat with fighting styles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/18.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/24.jpg" },
+            { title: "Death Run 3D", desc: "Treacherous obstacle course navigation", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/19.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/25.jpg" },
+            { title: "Clash Royale", desc: "Strategic card-based battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/21.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/26.jpg" },
+            { title: "PaRappa The Rapper", desc: "Rhythm-based music game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/22.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/27.jpg" },
+            { title: "Hollow Knight", desc: "Metroidvania in underground kingdom", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/23.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/28.jpg" },
+            { title: "Binding of Issac WOTL", desc: "Rogue-like dungeon crawler", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/24.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/29.jpg" },
+            { title: "Blade Ball", desc: "Fast-paced ball throwing game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/25.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/30.jpg" },
+            { title: "Ages of Conflict", desc: "Historical strategy warfare game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/26.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/31.jpg" },
+            { title: "Triva Crack", desc: "Addictive trivia knowledge challenge", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/27.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/32.jpg" },
+            { title: "Bow Masters", desc: "Precision archery physics game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/28.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/33.jpg" },
+            { title: "Angry Birds", desc: "Classic physics puzzle destruction", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/29.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/34.jpg" },
+            { title: "FNAF: World", desc: "RPG with FNAF characters", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/30.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/36.jpg" },
+            { title: "Solar Smash", desc: "Planet destruction simulator", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/31.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/37.jpg" },
+            { title: "Idle Mining Empire", desc: "Addictive mining clicker game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/260.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/37.jpg" },
+            { title: "Highway Racers 2", desc: "High-speed racing action", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/32.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/38.jpg" },
+            { title: "Bounce Masters", desc: "Physics bouncing challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/33.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/39.jpg" },
+            { title: "R.E.P.O", desc: "Stealth vehicle repossession", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/34.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/40.jpg" },
+            { title: "Raft", desc: "Ocean survival building floating home", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/35.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/41.jpg" },
+            { title: "Side Effects", desc: "Puzzle cause and effect relationships", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/36.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/42.jpg" },
+            { title: "Slender", desc: "Horror survival exploration game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/37.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/43.jpg" },
+            { title: "Line Rider", desc: "Creative physics track drawing", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/38.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/44.jpg" },
+            { title: "Kindergarten 3", desc: "Dark humor school adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/39.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/45.jpg" },
+            { title: "Kindergarten 2", desc: "Strange school comedy sequel", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/40.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/46.jpg" },
+            { title: "Kindergarten", desc: "Strange school comedy sequel", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/41.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/47.jpg" },
+            { title: "Granny 3", desc: "Horror escape with new challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/259.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/48.jpg" },
+            { title: "Granny 2", desc: "Sequel horror escape game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/258.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/49.jpg" },
+            { title: "Granny", desc: "Classic horror escape game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/257.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/50.jpg" },
+            { title: "Bad Parenting", desc: "Dark comedy parenting simulation", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/42.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/51.jpg" },
+            { title: "Baldis Basics", desc: "Survival horror educational parody", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/43.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/52.jpg" },
+            { title: "Bendy and the Ink Machine", desc: "Horror adventure in animation studio", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/44.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/53.jpg" },
+            { title: "Candy Crush", desc: "Addictive match-3 puzzle game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/45.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/54.jpg" },
+            { title: "Geometry Dash", desc: "Rhythm-based platformer challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/46.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/55.jpg" },
+            { title: "That's Not My Neighbor", desc: "Doorman identity verification game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/47.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/56.jpg" },
+            { title: "ULTRAKILL", desc: "Fast-paced retro-style shooter", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/48.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/57.jpg" },
+            { title: "WebFishing", desc: "Relaxing fishing simulation game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/49.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/58.jpg" },
+            { title: "Super Falling Fred", desc: "Endless falling obstacle avoidance", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/256.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/59.jpg" },
+            { title: "Pokemon Emerald", desc: "Classic Pokemon RPG adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/255.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/62.jpg" },
             { title: "Impossible Quiz 2", desc: "Tricky brain-teasing questions", url: "https://xoriushourz.github.io/ImpossibleQuiz2/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/63.jpg" },
-            { title: "Super Smash Flash 2", desc: "Platform fighting game", url: "https://script.google.com/macros/s/AKfycbwSChHrprN7EV_1tBZU8Mi2KGB4uJX4PQOEf7xpPfo_iCvuojtCu7s0Mp8oRZJRPzZ7Og/exec", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/64.jpg" },
-            { title: "Idle Breakout", desc: "Addictive brick breaking idle game", url: "https://noahsamazingtutoringhelp.github.io/SKAODLMWASD/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/65.jpg" },
-            { title: "Gun Mayhem 2", desc: "Chaotic platform shooter battles", url: "https://noahsamazingtutoringhelp.github.io/AKSPDL-MA-/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/66.jpg" },
-            { title: "Gun Mayhem", desc: "Original chaotic platform shooter", url: "https://noahsamazingtutoringhelp.github.io/SAKDOWPA/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/67.jpg" },
-            { title: "Big Tower Tiny Square", desc: "Precision platforming challenges", url: "https://noahsamazingtutoringhelp.github.io/odkoasdmlwa/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/68.jpg" },
-            { title: "Big Tower Tiny Square 2", desc: "Sequel precision platformer", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/50.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/69.jpg" },
-            { title: "Unicycle Hero", desc: "Balancing unicycle stunt game", url: "https://noahsamazingtutoringhelp.github.io/sdajoiASODhsa/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/70.jpg" },
-            { title: "Murder", desc: "Mystery deduction social game", url: "https://noahsamazingtutoringhelp.github.io/hjhjbjbjkbnlkhb/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/71.jpg" },
-            { title: "Pokemon Firered", desc: "Classic Pokemon adventure remake", url: "https://noahsamazingtutoringhelp.github.io/BIGBLACKNEGABALLS/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/72.jpg" },
-            { title: "Stake Mines", desc: "Cryptocurrency mining strategy", url: "https://noahsamazingtutoringhelp.github.io/ILOVEGAMBLING/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/73.jpg" },
-            { title: "Blumgi Slime", desc: "Physics-based slime platformer", url: "https://noahsamazingtutoringhelp.github.io/BlumgiSlime/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/74.jpg" },
-            { title: "Raft Wars 2", desc: "Strategic water balloon battles", url: "https://noahsamazingtutoringhelp.github.io/raft-wars-2/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/75.jpg" },
-            { title: "Earn to Die", desc: "Zombie apocalypse vehicle escape", url: "https://noahsamazingtutoringhelp.github.io/EarnToDie/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/76.jpg" },
-            { title: "8Ball Pool", desc: "Realistic pool physics game", url: "https://noahsamazingtutoringhelp.github.io/Lindy-Leighton-Reis/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/79.jpg" },
-            { title: "President Simulator", desc: "Political decision-making game", url: "https://noahsamazingtutoringhelp.github.io/PresidentSimulator/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/80.jpg" },
-            { title: "Escape Road", desc: "Puzzle road navigation game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/51.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/81.jpg" },
-            { title: "OvO", desc: "Minimalist platformer challenges", url: "https://noahsamazingtutoringhelp.github.io/Uduak-Pitsiulaaq-Pusk-s/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/82.jpg" },
-            { title: "Moving Truck", desc: "Physics-based truck loading", url: "https://noahsamazingtutoringhelp.github.io/Sophea-Vanja-Andrei/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/83.jpg" },
-            { title: "Fruit Ninja", desc: "Slice flying fruit with precision", url: "https://noahsamazingtutoringhelp.github.io/Wanangwa-Shaked-Aikawa/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/84.jpg" },
-            { title: "Ball Sort Puzzle", desc: "Color sorting puzzle challenge", url: "https://noahsamazingtutoringhelp.github.io/Dada-Ahmose-Acardi/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/85.jpg" },
-            { title: "They're Coming", desc: "Horror survival defense game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/52.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/86.jpg" },
-            { title: "Flappy Bird", desc: "Addictive timing-based flying", url: "https://noahsamazingtutoringhelp.github.io/Qinnuajuaq-Jindra-Rosenfeld/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/87.jpg" },
-            { title: "Recoil", desc: "Physics-based shooting game", url: "https://godlover89.github.io/Santana-Yannick-Pinto/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/88.jpg" },
+            { title: "Super Smash Flash 2", desc: "Platform fighting game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/253.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/64.jpg" },
+            { title: "Idle Breakout", desc: "Addictive brick breaking idle game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/252.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/65.jpg" },
+            { title: "Gun Mayhem 2", desc: "Chaotic platform shooter battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/251.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/66.jpg" },
+            { title: "Gun Mayhem", desc: "Original chaotic platform shooter", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/250.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/67.jpg" },
+            { title: "Big Tower Tiny Square", desc: "Precision platforming challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/249.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/68.jpg" },
+            { title: "Big Tower Tiny Square 2", desc: "Sequel precision platformer", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/248.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/69.jpg" },
+            { title: "Pokemon Firered", desc: "Classic Pokemon adventure remake", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/247.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/72.jpg" },
+            { title: "Stake Mines", desc: "Cryptocurrency mining strategy", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/246.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/73.jpg" },
+            { title: "Blumgi Rocket", desc: "Physics-based slime platformer", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/245.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/74.jpg" },
+            { title: "Raft Wars 2", desc: "Strategic water balloon battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/244.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/75.jpg" },
+            { title: "8Ball Pool", desc: "Realistic pool physics game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/243.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/79.jpg" },
+            { title: "Escape Road", desc: "Puzzle road navigation game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/242.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/81.jpg" },
+            { title: "OvO", desc: "Minimalist platformer challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/241.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/82.jpg" },
+            { title: "Fruit Ninja", desc: "Slice flying fruit with precision", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/240.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/84.jpg" },
+            { title: "They're Coming", desc: "Horror survival defense game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/52.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/86.jpg" },
+            { title: "Flappy Bird", desc: "Addictive timing-based flying", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/239.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/87.jpg" },
+            { title: "Recoil", desc: "Physics-based shooting game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/238.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/88.jpg" },
             { title: "Twitch Tetris", desc: "Classic block stacking puzzle", url: "https://godlover89.github.io/Twitch-Tetris/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/89.jpg" },
-            { title: "Ultimate Car Driving Game", desc: "Realistic driving simulation", url: "https://noahsamazingtutoringhelp.github.io/Jimmie-Phuntso-Cuoco/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/90.jpg" },
-            { title: "Crazy Cattle 3D", desc: "Funny cattle herding game", url: "https://noahsamazingtutoringhelp.github.io/Ashton-Aston-Rowe/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/91.jpg" },
-            { title: "Run 3", desc: "Space tunnel running game", url: "https://lekug.github.io/tn6pS9dCf37xAhkJv/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/92.jpg" },
-            { title: "Vex 8", desc: "Challenging obstacle course platformer", url: "https://noahsamazingtutoringhelp.github.io/Abioye-Temitope-Quaranta/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/93.jpg" },
-            { title: "Apple Shooter", desc: "Precision apple shooting game", url: "https://noahsamazingtutoringhelp.github.io/imbouttokum/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/94.jpg" },
-            { title: "Running Fred", desc: "Endless running obstacle course", url: "https://noahsamazingtutoringhelp.github.io/Akpofure-Thato-Dickens/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/95.jpg" },
-            { title: "Hextrix", desc: "Hexagon-based puzzle game", url: "https://noahsamazingtutoringhelp.github.io/Li-Min-Kron/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/96.jpg" },
-            { title: "Jelly Truck", desc: "Physics-based truck driving", url: "https://noahsamazingtutoringhelp.github.io/Vanna-Adisa-Allison/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/97.jpg" },
-            { title: "Rooftop Snipers 2", desc: "2D shooter duel game", url: "https://noahsamazingtutoringhelp.github.io/Leofd-g-Lior-Maekawa/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/98.jpg" },
-            { title: "Color Switch", desc: "Color-matching obstacle game", url: "https://noahsamazingtutoringhelp.github.io/Lee-Kam-Lane/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/99.jpg" },
-            { title: "Hole.io", desc: "Black hole consuming game", url: "https://noahsamazingtutoringhelp.github.io/Mahpiya-D-lg-n-Coiro/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/100.jpg" },
-            { title: "Color Tunnel 2", desc: "3D color tunnel runner", url: "https://noahsamazingtutoringhelp.github.io/Avital-Passang-Hubert/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/101.jpg" },
-            { title: "Wrassling", desc: "Comical wrestling game", url: "https://noahsamazingtutoringhelp.github.io/Micajah-Sky-Pell-/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/102.jpg" },
-            { title: "Brain Test", desc: "Tricky puzzle brain teasers", url: "https://noahsamazingtutoringhelp.github.io/EASMEL/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/103.jpg" },
-            { title: "Hillclimb Racing", desc: "Physics-based hill climbing", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/53.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/104.jpg" },
-            { title: "Level Devil", desc: "Challenging platformer levels", url: "https://noahsamazingtutoringhelp.github.io/ChemistryHomeworkHero/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/105.jpg" },
-            { title: "Temple Run 2", desc: "Endless running adventure", url: "https://noahsamazingtutoringhelp.github.io/MarketingStudyMate/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/106.jpg" },
-            { title: "Boxing Physics 2", desc: "Physics-based boxing game", url: "https://dddavit.github.io/igra-fizika-boxa-2/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/107.jpg" },
-            { title: "Street Ball Jam", desc: "Urban basketball game", url: "", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/108.jpg" },
-            { title: "Super Mario 64", desc: "Classic 3D platformer adventure", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/54.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/109.jpg" },
-            { title: "Fruit Merge", desc: "Merge fruit puzzle game", url: "https://llerrah.com/https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/fruitmerge/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/110.jpg" },
-            { title: "Wheelie Bike 2", desc: "Motorcycle stunt game", url: "https://noahsamazingtutoringhelp.github.io/AccountingTutorPro/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/111.jpg" },
-            { title: "Park Out", desc: "Challenging parking puzzle", url: "https://noahsamazingtutoringhelp.github.io/ArchitectureTutoringPro/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/112.jpg" },
-            { title: "Bloxorz", desc: "Block rolling puzzle game", url: "https://noahsamazingtutoringhelp.github.io/LawHomeworkHub/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/113.jpg" },
-            { title: "Save The Doge", desc: "Rescue puzzle challenges", url: "https://noahsamazingtutoringhelp.github.io/MedicalSchoolHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/114.jpg" },
-            { title: "Worlds Hardest Game", desc: "Extremely challenging puzzles", url: "https://noahsamazingtutoringhelp.github.io/FinanceHomeworkHelp/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/115.jpg" },
-            { title: "Idle Digging Tycoon", desc: "Mining empire building", url: "https://noahsamazingtutoringhelp.github.io/wonderoveryonder/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/116.jpg" },
-            { title: "Impossible Quiz", desc: "Tricky question challenges", url: "https://noahsamazingtutoringhelp.github.io/lemmegetuhhhh/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/117.jpg" },
-            { title: "Stickman Hook", desc: "Swinging physics game", url: "https://noahsamazingtutoringhelp.github.io/smallasianman/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/118.jpg" },
-            { title: "Rio Rex", desc: "Dinosaur platformer adventure", url: "https://noahsamazingtutoringhelp.github.io/bustherdooniesdown/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/119.jpg" },
-            { title: "Idle Tree City", desc: "Tree-growing idle game", url: "https://noahsamazingtutoringhelp.github.io/idle-tree-city/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/120.jpg" },
-            { title: "Snake MLG", desc: "Classic snake with memes", url: "https://noahsamazingtutoringhelp.github.io/cansomeonegrabbomb/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/121.jpg" },
-            { title: "Stacktris", desc: "Tetris-inspired stacking game", url: "https://noahsamazingtutoringhelp.github.io/mommahuevo/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/123.jpg" },
-            { title: "Stickman Ragdoll Crash", desc: "Physics ragdoll crashes", url: "https://noahsamazingtutoringhelp.github.io/whatsafather/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/124.jpg" },
-            { title: "Plinko", desc: "Classic probability ball drop", url: "https://noahsamazingtutoringhelp.github.io/bug-free-pancake/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/125.jpg" },
-            { title: "Gambling Table Games", desc: "Various casino games", url: "https://noahsamazingtutoringhelp.github.io/poker/?&balance=null&theme=slate", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/126.jpg" },
-            { title: "Blocky Snakes", desc: "Block-based snake game", url: "https://noahsamazingtutoringhelp.github.io/AnatomyStudyAid/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/127.jpg" },
-            { title: "Crossy Road", desc: "Endless road crossing", url: "https://noahsamazingtutoringhelp.github.io/EconomicsExamExpert/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/128.jpg" },
-            { title: "Happy Room", desc: "Weapons testing sandbox", url: "https://noahsamazingtutoringhelp.github.io/OrganicChemHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/129.jpg" },
-            { title: "Zombocalypse", desc: "Zombie survival shooter", url: "https://noahsamazingtutoringhelp.github.io/GermanGrammarGuide/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/131.jpg" },
-            { title: "Pou", desc: "Virtual pet care game", url: "https://noahsamazingtutoringhelp.github.io/FrenchTutoringPro/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/133.jpg" },
-            { title: "Backrooms", desc: "Liminal space exploration", url: "https://noahsamazingtutoringhelp.github.io/SpanishStudySupport/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/134.jpg" },
-            { title: "Getaway Shootout", desc: "Chaotic platform shooter", url: "https://noahsamazingtutoringhelp.github.io/GeographyGuruOnline/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/135.jpg" },
-            { title: "Snow Rider 3D", desc: "Snowboarding trick game", url: "https://noahsamazingtutoringhelp.github.io/GeometryGeniusHelp/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/136.jpg" },
-            { title: "Gladihoppers", desc: "Physics gladiator battles", url: "https://noahsamazingtutoringhelp.github.io/BiologyHomeworkHero/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/137.jpg" },
-            { title: "Paper.io 2", desc: "Territory conquest game", url: "https://noahsamazingtutoringhelp.github.io/CodingHomeworkHelp/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/138.jpg" },
-            { title: "Poly Track", desc: "Geometric racing game", url: "https://noahsamazingtutoringhelp.github.io/LiteratureLearningLab/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/139.jpg" },
+            { title: "Ultimate Car Driving Game", desc: "Realistic driving simulation", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/237.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/90.jpg" },
+            { title: "Crazy Cattle 3D", desc: "Funny cattle herding game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/236.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/91.jpg" },
+            { title: "Run 3", desc: "Space tunnel running game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/235.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/92.jpg" },
+            { title: "Vex 8", desc: "Challenging obstacle course platformer", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/234.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/93.jpg" },
+            { title: "Apple Shooter", desc: "Precision apple shooting game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/233.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/94.jpg" },
+            { title: "Running Fred", desc: "Endless running obstacle course", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/232.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/95.jpg" },
+            { title: "Hextrix", desc: "Hexagon-based puzzle game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/231.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/96.jpg" },
+            { title: "Jelly Truck", desc: "Physics-based truck driving", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/230.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/97.jpg" },
+            { title: "Rooftop Snipers 2", desc: "2D shooter duel game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/229.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/98.jpg" },
+            { title: "Hole.io", desc: "Black hole consuming game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/228.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/100.jpg" },
+            { title: "Wrassling", desc: "Comical wrestling game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/227.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/102.jpg" },
+            { title: "Hillclimb Racing", desc: "Physics-based hill climbing", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/226.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/104.jpg" },
+            { title: "Level Devil", desc: "Challenging platformer levels", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/225.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/105.jpg" },
+            { title: "Temple Run 2", desc: "Endless running adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/224.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/106.jpg" },
+            { title: "Boxing Live 2", desc: "Physics-based boxing game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/223.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/107.jpg" },
+            { title: "Super Mario 64", desc: "Classic 3D platformer adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/222.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/109.jpg" },
+            { title: "Fruit Merge", desc: "Merge fruit puzzle game", url: "h", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/110.jpg" },
+            { title: "Wheelie Bike 2", desc: "Motorcycle stunt game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/221.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/111.jpg" },
+            { title: "Bloxorz", desc: "Block rolling puzzle game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/219.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/113.jpg" },
+            { title: "Worlds Hardest Game", desc: "Extremely challenging puzzles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/218.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/115.jpg" },
+            { title: "Impossible Quiz", desc: "Tricky question challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/217.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/117.jpg" },
+            { title: "Stickman Hook", desc: "Swinging physics game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/216.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/118.jpg" },
+            { title: "Rio Rex", desc: "Dinosaur platformer adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/215.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/119.jpg" },
+            { title: "Stacktris", desc: "Tetris-inspired stacking game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/214.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/123.jpg" },
+            { title: "Plinko", desc: "Classic probability ball drop", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/213.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/125.jpg" },
+            { title: "Blocky Snakes", desc: "Block-based snake game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/212.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/127.jpg" },
+            { title: "Crossy Road", desc: "Endless road crossing", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/211.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/128.jpg" },
+            { title: "Happy Room", desc: "Weapons testing sandbox", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/210.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/129.jpg" },
+            { title: "Zombocalypse 2", desc: "Zombie survival shooter", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/209.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/131.jpg" },
+            { title: "Pou", desc: "Virtual pet care game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/210.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/133.jpg" },
+            { title: "Backrooms", desc: "Liminal space exploration", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/208.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/134.jpg" },
+            { title: "Getaway Shootout", desc: "Chaotic platform shooter", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/207.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/135.jpg" },
+            { title: "Snow Rider 3D", desc: "Snowboarding trick game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/206.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/136.jpg" },
+            { title: "Gladihoppers", desc: "Physics gladiator battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/205.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/137.jpg" },
+            { title: "Paper.io 2", desc: "Territory conquest game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/204.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/138.jpg" },
+            { title: "Poly Track", desc: "Geometric racing game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/203.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/139.jpg" },
             { title: "Club Penguin", desc: "Virtual world social game", url: "https://play.cplegacy.com/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/140.jpg" },
-            { title: "Sausage Flip", desc: "Physics sausage flipping", url: "https://noahsamazingtutoringhelp.github.io/GeekSquad/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/141.jpg" },
-            { title: "Ragdoll Hit", desc: "Ragdoll physics combat", url: "https://noahsamazingtutoringhelp.github.io/PhysicsProblemPro/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/142.jpg" },
-            { title: "Gun Spin", desc: "Weapon spinning challenge", url: "https://noahsamazingtutoringhelp.github.io/CalculusCoachHub/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/143.jpg" },
+            { title: "Sausage Flip", desc: "Physics sausage flipping", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/141.jpg" },
+            { title: "Ragdoll Hit", desc: "Ragdoll physics combat", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/202.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/142.jpg" },
+            { title: "Gun Spin", desc: "Weapon spinning challenge", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/201.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/143.jpg" },
             { title: "Thorns and Balloons", desc: "Balloon popping game", url: "https://noahsamazingtutoringhelp.github.io/ScienceStudyBuddy/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/144.jpg" },
-            { title: "Subway Surfers", desc: "Endless running adventure", url: "https://noahsamazingtutoringhelp.github.io/GeologyAssignments/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/145.jpg" },
-            { title: "Block Blast", desc: "Block matching puzzle", url: "https://noahsamazingtutoringhelp.github.io/MathMasteryOnline/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/146.jpg" },
-            { title: "Stack Bounce", desc: "Ball bouncing challenge", url: "https://noahsamazingtutoringhelp.github.io/ScienceHelping/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/147.jpg" },
-            { title: "Plants Vs Zombies", desc: "Tower defense strategy", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/56.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/148.jpg" },
-            { title: "Drive Mad", desc: "Crazy driving challenges", url: "https://noahsamazingtutoringhelp.github.io/EnglishHomeworkHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/149.jpg" },
-            { title: "Drift Boss", desc: "Precision drifting game", url: "https://noahsamazingtutoringhelp.github.io/CellTheory/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/150.jpg" },
-            { title: "Friday Night Funkin", desc: "Rhythm music battles", url: "https://noahsamazingtutoringhelp.github.io/2/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/151.jpg" },
-            { title: "COD Nazi Zombies Portable", desc: "Zombie survival shooter", url: "https://noahsamazingtutoringhelp.github.io/HistoryNatureVideos/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/152.jpg" },
-            { title: "Adventure Capitalist", desc: "Business idle clicker", url: "https://noahsamazingtutoringhelp.github.io/SmartMoneyStudying/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/153.jpg" },
-            { title: "1v1.lol", desc: "Building and shooting battles", url: "https://noahsamazingtutoringhelp.github.io/VegetableVerbs/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/154.jpg" },
-            { title: "Ragdoll Archers", desc: "Physics archery combat", url: "https://noahsamazingtutoringhelp.github.io/FilmCameraSale/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/155.jpg" },
-            { title: "Dante", desc: "Action platformer adventure", url: "https://noahsamazingtutoringhelp.github.io/VegetarianBurger/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/156.jpg" },
-            { title: "Minecraft", desc: "Block building survival", url: "https://noahsamazingtutoringhelp.github.io/ChemistyStudies/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/157.jpg" },
-            { title: "Retro Bowl", desc: "Football management game", url: "https://noahsamazingtutoringhelp.github.io/MathLover/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/158.jpg" },
-            { title: "Half Life", desc: "Sci-fi FPS adventure", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/57.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/159.jpg" },
-            { title: "Jetpack Joyride", desc: "Endless flying adventure", url: "https://noahsamazingtutoringhelp.github.io/saldw/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/160.jpg" },
-            { title: "Bloons TD 4", desc: "Tower defense strategy", url: "https://spew45.github.io/game-assets/btd4/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/161.jpg" },
-            { title: "Sand Game", desc: "Physics sand simulation", url: "https://noahsamazingtutoringhelp.github.io/AlgebraTutoring/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/162.jpg" },
-            { title: "Stack Bump", desc: "Stacking puzzle game", url: "https://noahsamazingtutoringhelp.github.io/ChemistyNotes/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/163.jpg" },
-            { title: "FNAF", desc: "Original horror survival", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/166.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/164.jpg" },
-            { title: "FNAF 2", desc: "Sequel horror survival", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/167.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/165.jpg" },
-            { title: "FNAF 3", desc: "Third installment horror", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/168.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/166.jpg" },
-            { title: "FNAF 4", desc: "Nightmare horror survival", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/169.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/167.jpg" },
-            { title: "Madalin Stunt Cars 3", desc: "Car stunt driving", url: "https://noahsamazingtutoringhelp.github.io/BuisnessAssistance/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/168.jpg" },
-            { title: "Tiny Fishing", desc: "Relaxing fishing game", url: "https://noahsamazingtutoringhelp.github.io/GeometryWebAssistance/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/169.jpg" },
-            { title: "Chrome Dino", desc: "Endless running dinosaur", url: "https://noahsamazingtutoringhelp.github.io/OnlineHistoryHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/170.jpg" },
+            { title: "Subway Surfers", desc: "Endless running adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/200.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/145.jpg" },
+            { title: "Block Blast", desc: "Block matching puzzle", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/199.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/146.jpg" },
+            { title: "Stacky Dash", desc: "Ball bouncing challenge", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/198.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/147.jpg" },
+            { title: "Plants Vs Zombies", desc: "Tower defense strategy", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/197.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/148.jpg" },
+            { title: "Drift Boss", desc: "Precision drifting game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/196.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/150.jpg" },
+            { title: "Friday Night Funkin", desc: "Rhythm music battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/195.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/151.jpg" },
+            { title: "COD Nazi Zombies Portable", desc: "Zombie survival shooter", url: "hhttps://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/194.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/152.jpg" },
+            { title: "Adventure Capitalist", desc: "Business idle clicker", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/193.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/153.jpg" },
+            { title: "1v1.lol", desc: "Building and shooting battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/192.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/154.jpg" },
+            { title: "Ragdoll Archers", desc: "Physics archery combat", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/192.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/155.jpg" },
+            { title: "Retro Bowl", desc: "Football management game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/191.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/158.jpg" },
+            { title: "Half Life", desc: "Sci-fi FPS adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/190.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/159.jpg" },
+            { title: "Jetpack Joyride", desc: "Endless flying adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/189.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/160.jpg" },
+            { title: "Bloons TD 4", desc: "Tower defense strategy", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/188.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/161.jpg" },
+            { title: "Sand Game", desc: "Physics sand simulation", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/187.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/162.jpg" },
+            { title: "FNAF", desc: "Original horror survival", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/166.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/164.jpg" },
+            { title: "FNAF 2", desc: "Sequel horror survival", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/167.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/165.jpg" },
+            { title: "FNAF 3", desc: "Third installment horror", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/168.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/166.jpg" },
+            { title: "FNAF 4", desc: "Nightmare horror survival", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/169.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/167.jpg" },
+            { title: "Madalin Stunt Cars 3", desc: "Car stunt driving", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/186.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/168.jpg" },
+            { title: "Tiny Fishing", desc: "Relaxing fishing game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/185.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/169.jpg" },
+            { title: "Chrome Dino", desc: "Endless running dinosaur", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/184.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/170.jpg" },
             { title: "Dodge Ball", desc: "Dodgeball game I made (pretty fun)", url: "https://noahsamazingtutoringhelp.github.io/dskadlwasdmw-a/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/171.jpg" },
-            { title: "Age of War 2", desc: "Evolution strategy game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/58.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/172.jpg" },
-            { title: "Pandemic 2", desc: "Virus spread simulation", url: "https://noahsamazingtutoringhelp.github.io/SocialAssistance/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/173.jpg" },
-            { title: "Happy Wheels", desc: "Physics obstacle course", url: "https://noahsamazingtutoringhelp.github.io/SocialStudies/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/174.jpg" },
-            { title: "Slope", desc: "3D ball rolling game", url: "https://noahsamazingtutoringhelp.github.io/Chikondi-Josey-Spitznageasd/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/175.jpg" },
+            { title: "Age of War 2", desc: "Evolution strategy game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/183.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/172.jpg" },
+            { title: "Slope", desc: "3D ball rolling game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/182.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/175.jpg" },
             { title: "Sprinter", desc: "Track running simulation", url: "https://noahsamazingtutoringhelp.github.io/sprinter/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/176.jpg" },
-            { title: "Cookie Clicker", desc: "Addictive clicking game", url: "https://noahsamazingtutoringhelp.github.io/AKSDOAW/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/177.jpg" },
-            { title: "Bitlife", desc: "Life simulation game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/60.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/178.jpg" },
-            { title: "Drift Hunters", desc: "Realistic drifting simulation", url: "https://webglmath.github.io/drift-hunters/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/179.jpg" },
-            { title: "Cut The Rope", desc: "Physics puzzle game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/61.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/180.jpg" },
+            { title: "Cookie Clicker", desc: "Addictive clicking game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/181.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/177.jpg" },
+            { title: "Bitlife", desc: "Life simulation game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/180.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/178.jpg" },
+            { title: "Drift Hunters", desc: "Realistic drifting simulation", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/179.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/179.jpg" },
+            { title: "Cut The Rope", desc: "Physics puzzle game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/178.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/180.jpg" },
             { title: "Sort The Court", desc: "Kingdom management game", url: "https://noahsamazingtutoringhelp.github.io/skdpiwjamoksld/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/181.jpg" },
-            { title: "Tomb of the Mask", desc: "Arcade maze game", url: "https://noahsamazingtutoringhelp.github.io/kdwajdskpwmasd/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/182.jpg" },
-            { title: "Wordle", desc: "Word guessing puzzle", url: "https://bosorioo.github.io/wordle-unlimited/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/183.jpg" },
-            { title: "Monkey Mart", desc: "Store management tycoon", url: "https://noahsamazingtutoringhelp.github.io/AmazingAlgebraHelper/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/184.jpg" },
-            { title: "Short Ride", desc: "Quick racing challenges", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/62.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/185.jpg" }
+            { title: "Tomb of the Mask", desc: "Arcade maze game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/177.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/182.jpg" },
+            { title: "Wordle", desc: "Word guessing puzzle", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/176.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/183.jpg" },
+            { title: "Monkey Mart", desc: "Store management tycoon", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/175.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/184.jpg" },
+            { title: "Short Life", desc: "Quick racing challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/174.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/185.jpg" }
         ];
 
         function performSearch(searchTerm) {
@@ -1232,13 +1220,84 @@ body::-webkit-scrollbar,
     }
     
     document.getElementById('gameTitle').textContent = t;
-    document.getElementById('gameFrame').src = u;
+    
+    const isRawGitHub = u.includes('raw.githubusercontent.com') && u.includes('.html');
+    const isJsDelivr = u.includes('cdn.jsdelivr.net') && u.includes('.html');
+    const isGithack = u.includes('rawcdn.githack.com') && u.includes('.html');
+    
+    const loadingHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Loading...</title>
+            <style>
+                body {
+                    background: #0a0a0a;
+                    margin: 0;
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: 'Courier New', monospace;
+                }
+                .loader-container {
+                    text-align: center;
+                    color: #c27c15;
+                }
+                .loading-text {
+                    font-size: 18px;
+                    margin-bottom: 20px;
+                    letter-spacing: 1px;
+                }
+                .spinner {
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid rgba(194, 124, 21, 0.3);
+                    border-radius: 50%;
+                    border-top-color: #c27c15;
+                    animation: spin 1s ease-in-out infinite;
+                    margin: 0 auto;
+                }
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
+                }
+            </style>
+        </head>
+        <body>
+            <div class="loader-container">
+                <div class="loading-text">Loading ${t}...</div>
+                <div class="spinner"></div>
+            </div>
+        </body>
+        </html>
+    `;
+    
+    const gameFrame = document.getElementById('gameFrame');
+    gameFrame.srcdoc = loadingHTML;
+
     document.getElementById('gamePage').classList.add('active');
     document.getElementById('main-container').classList.add('slide-down');
     
-    document.getElementById('gameFrame').classList.remove('fullscreen');
-    
-    console.log('Opening game:', t, 'URL:', u);
+    if (isRawGitHub || isJsDelivr || isGithack) {
+        fetch(u)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.status);
+                }
+                return response.text();
+            })
+            .then(html => {
+                gameFrame.srcdoc = html;
+            })
+            .catch(error => {
+                console.log('Fetch failed, falling back to iframe:', error);
+                gameFrame.src = u;
+                gameFrame.srcdoc = '';
+            });
+    } else {
+        gameFrame.src = u;
+        gameFrame.srcdoc = '';
+    }
 }
 
 function closeLesson() {
@@ -1249,67 +1308,145 @@ function closeLesson() {
             'value': 1
         });
     }
-    
+
+    const gameFrame = document.getElementById('gameFrame');
+
+    gameFrame.src = '';
+    gameFrame.srcdoc = '';
+
+    try {
+        const iframeDoc = gameFrame.contentDocument || gameFrame.contentWindow.document;
+        if (iframeDoc) {
+            const videos = iframeDoc.querySelectorAll('video');
+            const audios = iframeDoc.querySelectorAll('audio');
+            
+            videos.forEach(video => {
+                video.pause();
+                video.currentTime = 0;
+            });
+            
+            audios.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        }
+    } catch (e) {
+    }
+
+    gameFrame.srcdoc = '<!DOCTYPE html><html><body></body></html>';
+
     document.getElementById('gamePage').classList.add('slide-down');
     document.getElementById('main-container').classList.remove('slide-down');
     
     setTimeout(() => {
         document.getElementById('gamePage').classList.remove('active', 'slide-down');
-        document.getElementById('gameFrame').src = '';
-        document.getElementById('gameFrame').classList.remove('fullscreen');
+        gameFrame.classList.remove('fullscreen');
+
+        gameFrame.src = 'about:blank';
+        gameFrame.srcdoc = '';
     }, 500);
 }
 
 function refreshGame() {
     const gameFrame = document.getElementById('gameFrame');
-    const currentSrc = gameFrame.src;
+    const currentUrl = gameFrame.src;
     
-    if (!currentSrc) return;
-    
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'game_refresh', {
-            'event_category': 'game_interaction',
-            'event_label': document.getElementById('gameTitle').textContent,
-            'value': 1
-        });
+    if (!currentUrl || currentUrl === 'about:blank') {
+        const currentSrcDoc = gameFrame.srcdoc;
+        if (currentSrcDoc && currentSrcDoc.includes('<!DOCTYPE')) {
+            const gameTitle = document.getElementById('gameTitle').textContent;
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_refresh', {
+                    'event_category': 'game_interaction',
+                    'event_label': gameTitle,
+                    'value': 1
+                });
+            }
+
+            const loadingHTML = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Refreshing...</title>
+                    <style>
+                        body {
+                            background: #0a0a0a;
+                            margin: 0;
+                            height: 100vh;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-family: 'Courier New', monospace;
+                        }
+                        .loader-container {
+                            text-align: center;
+                            color: #c27c15;
+                        }
+                        .loading-text {
+                            font-size: 18px;
+                            margin-bottom: 20px;
+                            letter-spacing: 1px;
+                        }
+                        .spinner {
+                            width: 40px;
+                            height: 40px;
+                            border: 3px solid rgba(194, 124, 21, 0.3);
+                            border-radius: 50%;
+                            border-top-color: #c27c15;
+                            animation: spin 1s ease-in-out infinite;
+                            margin: 0 auto;
+                        }
+                        @keyframes spin {
+                            to { transform: rotate(360deg); }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="loader-container">
+                        <div class="loading-text">Refreshing ${gameTitle}...</div>
+                        <div class="spinner"></div>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            gameFrame.srcdoc = loadingHTML;
+
+            const currentGame = games.find(game => game.title === gameTitle);
+            if (currentGame && currentGame.url) {
+                setTimeout(() => {
+                    fetch(currentGame.url)
+                        .then(response => response.text())
+                        .then(html => {
+                            gameFrame.srcdoc = html;
+                        })
+                        .catch(error => {
+                            console.error('Refresh failed:', error);
+                            gameFrame.src = currentGame.url;
+                            gameFrame.srcdoc = '';
+                        });
+                }, 500);
+            }
+            return;
+        }
     }
-    
-    gameFrame.src = '';
-    
-    setTimeout(() => {
-        gameFrame.src = currentSrc;
-        
-        const gameTitle = document.getElementById('gameTitle');
-        gameTitle.innerHTML = '<i class="fas fa-sync-alt fa-spin" style="margin-right: 8px;"></i>' + gameTitle.textContent;
-        
-        setTimeout(() => {
-            gameTitle.innerHTML = gameTitle.textContent;
-        }, 1000);
-        
+
+    if (currentUrl && currentUrl !== 'about:blank') {
         if (typeof gtag !== 'undefined') {
-            gtag('event', 'game_refreshed', {
+            gtag('event', 'game_refresh', {
                 'event_category': 'game_interaction',
-                'event_label': gameTitle.textContent,
+                'event_label': document.getElementById('gameTitle').textContent,
                 'value': 1
             });
         }
-    }, 100);
-}
 
-document.addEventListener('DOMContentLoaded', function() {
-    const refreshBtn = document.querySelector('.refresh-btn');
-    if (refreshBtn) {
-        refreshBtn.addEventListener('mouseenter', () => {
-            const cursor = document.getElementById('custom-cursor');
-            if (cursor) cursor.classList.add('hover');
-        });
-        
-        refreshBtn.addEventListener('mouseleave', () => {
-            const cursor = document.getElementById('custom-cursor');
-            if (cursor) cursor.classList.remove('hover');
-        });
+        gameFrame.src = '';
+        setTimeout(() => {
+            gameFrame.src = currentUrl;
+        }, 100);
     }
-});
+}
 
 function toggleFullscreen() {
     const frame = document.getElementById('gameFrame');
@@ -1353,66 +1490,78 @@ function toggleFullscreen() {
 
 async function downloadCurrentGame() {
     const frame = document.getElementById('gameFrame');
-    const url = frame.src;
+    const currentUrl = frame.src;
+    const currentSrcDoc = frame.srcdoc;
     const title = document.getElementById('gameTitle').textContent;
     
-    console.log('Download attempted for:', url, 'Title:', title);
+    console.log('Download attempted for:', title);
     
-    if (url && (url.includes('https://raw.githack.com/') || url.includes('games/')) && url.includes('.html')) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'download_attempt', {
+            'event_category': 'game_interaction',
+            'event_label': title,
+            'value': 1
+        });
+    }
+    
+    try {
+        let content = '';
+        
+        if (currentSrcDoc && currentSrcDoc.includes('<!DOCTYPE')) {
+            content = currentSrcDoc;
+        } else if (currentUrl && (currentUrl.includes('games/') || 
+                  currentUrl.includes('cdn.jsdelivr.net') || 
+                  currentUrl.includes('rawcdn.githack.com')) && 
+                  currentUrl.includes('.html')) {
+
+            const response = await fetch(currentUrl);
+            if (!response.ok) throw new Error('Network response was not ok');
+            content = await response.text();
+        } else {
+            const currentGame = games.find(game => game.title === title);
+            if (currentGame && currentGame.url) {
+                const response = await fetch(currentGame.url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                content = await response.text();
+            } else {
+                throw new Error('Game not found in database');
+            }
+        }
+
+        content = injectWatermark(content, title);
+
+        const blob = new Blob([content], {type: 'text/html'});
+        const downloadUrl = URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = `${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.html`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        setTimeout(() => {
+            URL.revokeObjectURL(downloadUrl);
+        }, 100);
+        
         if (typeof gtag !== 'undefined') {
-            gtag('event', 'download_attempt', {
+            gtag('event', 'download_success', {
                 'event_category': 'game_interaction',
                 'event_label': title,
                 'value': 1
             });
         }
         
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error('Network response was not ok');
-            
-            let content = await response.text();
-
-            content = injectWatermark(content, title);
-            
-            const blob = new Blob([content], {type: 'text/html'});
-            const downloadUrl = URL.createObjectURL(blob);
-            
-            const link = document.createElement('a');
-            link.href = downloadUrl;
-            link.download = `${title.replace(/[^a-z0-9]/gi, '_')}.html`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(downloadUrl);
-                 
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'download_success', {
-                    'event_category': 'game_interaction',
-                    'event_label': title,
-                    'value': 1
-                });
-            }
-        } catch (error) {
-            console.error('Download error:', error);
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'download_error', {
-                    'event_category': 'game_interaction',
-                    'event_label': title,
-                    'value': 1
-                });
-            }
-            alert('sums wrong with ur shit');
-        }
-    } else {
+    } catch (error) {
+        console.error('Download error:', error);
         if (typeof gtag !== 'undefined') {
-            gtag('event', 'download_failed', {
+            gtag('event', 'download_error', {
                 'event_category': 'game_interaction',
                 'event_label': title,
                 'value': 1
             });
         }
-        alert('Sorry this game is not downloadable try another one :(');
+        alert('Unable to download this game. Try another one or use the main site to download.');
     }
 }
 
@@ -1674,7 +1823,9 @@ function createGameCard(game, isRandom = false) {
     }
     
     let launchCommand;
-    if (game.title.length > 20) {
+    if (isRandom) {
+        launchCommand = "LOAD_RANDOM";
+    } else if (game.title.length > 20) {
         launchCommand = game.title.split(' ')
             .filter(word => word.length > 0)
             .map(word => word[0].toUpperCase())
@@ -1686,7 +1837,7 @@ function createGameCard(game, isRandom = false) {
             .replace(/^_|_$/g, '');
     }
     
-    if (launchCommand.length > 15) {
+    if (!isRandom && launchCommand.length > 15) {
         launchCommand = launchCommand.substring(0, 12) + '...';
     }
     
