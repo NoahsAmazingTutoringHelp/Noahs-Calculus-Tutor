@@ -1314,36 +1314,36 @@
                 }
 
                 #backToTop {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 1001; /* Above game-page */
-  width: 50px;
-  height: 50px;
-  background-color: var(--dark-bg);
-  color: var(--primary-orange);
-  border: 2px solid var(--primary-orange);
-  border-radius: 50%;
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s, visibility 0.4s, transform 0.3s;
-  box-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.4);
-}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1001; /* Above game-page */
+    width: 50px;
+    height: 50px;
+    background-color: var(--dark-bg);
+    color: var(--primary-orange);
+    border: 2px solid var(--primary-orange);
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s, transform 0.3s;
+    box-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.4);
+    }
 
-#backToTop.show {
-  opacity: 1;
-  visibility: visible;
-}
+    #backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    }
 
-#backToTop:hover {
-  background-color: var(--primary-orange);
-  color: #000;
-  transform: translateY(-5px);
-}
+    #backToTop:hover {
+    background-color: var(--primary-orange);
+    color: #000;
+    transform: translateY(-5px);
+    }
 
     </style>
   </head>
@@ -1613,10 +1613,8 @@
         <iframe class="game-frame" frameborder="0" id="gameFrame" name=
         "gameFrame" src=""></iframe>
       </div>
-    </div>
-  <button id="backToTop" title="Go to top">
-  <i class="fas fa-arrow-up"></i>
-</button>
+    </div><button id="backToTop" title="Go to top"><i class=
+    "fas fa-arrow-up"></i></button> 
     <script>
                           const games = [
                               { title: "Half Life: Opposing Force", desc: "The first official expansion for Valves groundbreaking Half-Life", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/269.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/296.jpg" },
@@ -1729,7 +1727,7 @@
                               { title: "Sonic Mania", desc: "Modern 2D Sonic with remixed classics and new zones", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/67.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/191.jpg" },
                               { title: "Sonic CD", desc: "Time-travel adventure with past and future versions", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/66.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/192.jpg" },
                               { title: "War The Knights", desc: "Medieval knight battles and castle sieges", url: "https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/70.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/193.jpg" },
-                              { title: "Football Bros", desc: "Arcade football with simple controls and power-ups", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/65.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/194.jpg" },
+                              { title: "Football Bros", desc: "Arcade football with simple controls and power-ups", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/cantcommit65.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/194.jpg" },
                               { title: "Buckshot Roulette", desc: "Russian Roulette type game with a TWIST", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/63.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/187.jpg" },
                               { title: "Cup Head", desc: "Fight a series of monsters to break your deal with the devil", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/266.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/188.jpg" },
                               { title: "Slime Rancher", desc: "Suck and collect slimes and raise them in a ranch", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/64.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/186.jpg" },
@@ -1939,103 +1937,248 @@
                    }
                           
                           function openLesson(t, u) {
-                      if (typeof gtag !== 'undefined') {
-                          gtag('event', 'game_launch', {
-                              'event_category': 'game_interaction',
-                              'event_label': t,
-                              'value': 1
-                          });
-                      }
-                      
-                      const timeOnSite = Math.round((Date.now() - window.pageLoadTime) / 1000);
-                      if (typeof gtag !== 'undefined') {
-                          gtag('event', 'timing_complete', {
-                              'name': 'time_to_first_game',
-                              'value': timeOnSite,
-                              'event_category': 'engagement'
-                          });
-                      }
-                      
-                      document.getElementById('gameTitle').textContent = t;
-                      
-                      const isRawGitHub = u.includes('raw.githubusercontent.com') && u.includes('.html');
-                      const isJsDelivr = u.includes('cdn.jsdelivr.net') && u.includes('.html');
-                      const isGithack = u.includes('rawcdn.githack.com') && u.includes('.html');
-                      
-                      const loadingHTML = `
-                          <!DOCTYPE html>
-                          <html>
-                          <head>
-                              <title>Loading...<\/title>
-                              <style>
-                                  body {
-                                      background: #0a0a0a;
-                                      margin: 0;
-                                      height: 100vh;
-                                      display: flex;
-                                      justify-content: center;
-                                      align-items: center;
-                                      font-family: 'Courier New', monospace;
-                                  }
-                                  .loader-container {
-                                      text-align: center;
-                                      color: #c27c15;
-                                  }
-                                  .loading-text {
-                                      font-size: 18px;
-                                      margin-bottom: 20px;
-                                      letter-spacing: 1px;
-                                  }
-                                  .spinner {
-                                      width: 40px;
-                                      height: 40px;
-                                      border: 3px solid rgba(194, 124, 21, 0.3);
-                                      border-radius: 50%;
-                                      border-top-color: #c27c15;
-                                      animation: spin 1s ease-in-out infinite;
-                                      margin: 0 auto;
-                                  }
-                                  @keyframes spin {
-                                      to { transform: rotate(360deg); }
-                                  }
-                              <\/style>
-                          <\/head>
-                          <body>
-                              <div class="loader-container">
-                                  <div class="loading-text">Loading ${t}...<\/div>
-                                  <div class="spinner"><\/div>
-                              <\/div>
-                          <\/body>
-                          <\/html>
-                      `;
-                      
-                      const gameFrame = document.getElementById('gameFrame');
-                      gameFrame.srcdoc = loadingHTML;
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_launch', {
+            'event_category': 'game_interaction',
+            'event_label': t,
+            'value': 1
+        });
+    }
 
-                      document.getElementById('gamePage').classList.add('active');
-                      document.getElementById('main-container').classList.add('slide-down');
-                      
-                      if (isRawGitHub || isJsDelivr || isGithack) {
-                          fetch(u)
-                              .then(response => {
-                                  if (!response.ok) {
-                                      throw new Error('Network response was not ok: ' + response.status);
-                                  }
-                                  return response.text();
-                              })
-                              .then(html => {
-                                  gameFrame.srcdoc = html;
-                              })
-                              .catch(error => {
-                                  console.log('Fetch failed, falling back to iframe:', error);
-                                  gameFrame.src = u;
-                                  gameFrame.srcdoc = '';
-                              });
-                      } else {
-                          gameFrame.src = u;
-                          gameFrame.srcdoc = '';
-                      }
-                   }
+    const timeOnSite = Math.round((Date.now() - window.pageLoadTime) / 1000);
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'timing_complete', {
+            'name': 'time_to_first_game',
+            'value': timeOnSite,
+            'event_category': 'engagement'
+        });
+    }
+
+    document.getElementById('gameTitle').textContent = t;
+
+    const isRawGitHub = u.includes('raw.githubusercontent.com') && u.includes('.html');
+    const isJsDelivr = u.includes('cdn.jsdelivr.net') && u.includes('.html');
+    const isGithack = u.includes('rawcdn.githack.com');
+
+    const isPotentiallyProblematic = isJsDelivr || isRawGitHub;
+    const shouldUseWrapper = isPotentiallyProblematic;
+
+    const loadingHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Loading...<\/title>
+            <style>
+                body {
+                    background: #0a0a0a;
+                    margin: 0;
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: 'Courier New', monospace;
+                }
+                .loader-container {
+                    text-align: center;
+                    color: #c27c15;
+                }
+                .loading-text {
+                    font-size: 18px;
+                    margin-bottom: 20px;
+                    letter-spacing: 1px;
+                }
+                .spinner {
+                    width: 40px;
+                    height: 40px;
+                    border: 3px solid rgba(194, 124, 21, 0.3);
+                    border-radius: 50%;
+                    border-top-color: #c27c15;
+                    animation: spin 1s ease-in-out infinite;
+                    margin: 0 auto;
+                }
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
+                }
+            <\/style>
+        <\/head>
+        <body>
+            <div class="loader-container">
+                <div class="loading-text">Loading ${t}...<\/div>
+                <div class="spinner"><\/div>
+            <\/div>
+        <\/body>
+        <\/html>
+    `;
+
+    const gameFrame = document.getElementById('gameFrame');
+    gameFrame.srcdoc = loadingHTML;
+
+    document.getElementById('gamePage').classList.add('active');
+    document.getElementById('main-container').classList.add('slide-down');
+
+    if (shouldUseWrapper) {
+        // Try loading with srcdoc first, then fall back if it fails
+        loadGameWithSrcdocFallback(t, u, gameFrame);
+    } else {
+        // For external URLs, always use wrapper
+        createIframeWrapper(u, gameFrame);
+    }
+    }
+
+    function loadGameWithSrcdocFallback(title, url, gameFrame) {
+    const compatibleUrl = convertToCompatibleUrl(url);
+
+    console.log(`Loading game: ${title}`);
+    console.log(`Original URL: ${url}`);
+    console.log(`Compatible URL: ${compatibleUrl}`);
+
+    // First attempt: Try fetching and loading via srcdoc
+    fetch(compatibleUrl, {
+        mode: 'cors',
+        credentials: 'omit'
+    })
+    .then(response => {
+        console.log(`Response status: ${response.status} ${response.statusText}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.text();
+    })
+    .then(html => {
+        console.log(`Fetched ${html.length} bytes of HTML`);
+        
+        // Check if the HTML contains JavaScript that needs external resources
+        const needsExternalResources = checkForExternalResources(html);
+        
+        if (needsExternalResources) {
+            console.log('Game needs external resources, using wrapper approach');
+            createIframeWrapper(compatibleUrl, gameFrame);
+        } else {
+            // Try to fix relative paths in the HTML
+            const fixedHtml = fixRelativePaths(html, compatibleUrl);
+            
+            // Load via srcdoc
+            gameFrame.srcdoc = fixedHtml;
+            
+            // Set up monitoring for loading success
+            monitorGameLoad(gameFrame, compatibleUrl, title);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch failed, falling back to wrapper:', error);
+        createIframeWrapper(compatibleUrl, gameFrame);
+    });
+    }
+
+    function detectProblematicContent(html) {
+    const checks = [
+        /<iframe/i.test(html),
+
+        /document\.domain/i.test(html),
+        /parent\.|top\.|window\.opener/i.test(html),
+
+        /http-equiv="refresh"/i.test(html),
+
+        /blob:/i.test(html),
+        /data:text\/javascript/i.test(html),
+
+        /Content-Security-Policy/i.test(html),
+        /X-Frame-Options/i.test(html)
+    ];
+
+    return checks.some(check => check === true);
+    }
+
+    function checkIfGameLoaded(gameFrame, onFailure) {
+    try {
+        const iframeDoc = gameFrame.contentDocument || gameFrame.contentWindow.document;
+
+        if (!iframeDoc || iframeDoc.body.children.length === 0) {
+            onFailure();
+            return;
+        }
+
+        const bodyText = iframeDoc.body.textContent || '';
+        const isErrorPage = 
+            bodyText.includes('error') || 
+            bodyText.includes('failed') || 
+            bodyText.includes('not load') ||
+            bodyText.includes('security') ||
+            bodyText.includes('blocked');
+
+        const isMinimalContent = iframeDoc.body.innerHTML.length < 100;
+
+        const isStillLoading = bodyText.includes('Loading') || bodyText.includes('spinner');
+        
+        if (isErrorPage || isMinimalContent || isStillLoading) {
+            onFailure();
+        }
+    } catch (e) {
+        console.log('Cannot access iframe content (cross-origin), assuming loaded');
+    }
+    }
+
+    function createIframeWrapper(url, gameFrame) {
+    let finalUrl = url;
+
+    if (url.includes('cdn.jsdelivr.net')) {
+        // Convert: https://cdn.jsdelivr.net/gh/user/repo@branch/path
+        // To: https://rawcdn.githack.com/user/repo/branch/path
+        finalUrl = url.replace('cdn.jsdelivr.net/gh/', 'rawcdn.githack.com/')
+                      .replace('@', '/');
+    } else if (url.includes('raw.githubusercontent.com')) {
+        // Convert: https://raw.githubusercontent.com/user/repo/branch/path
+        // To: https://rawcdn.githack.com/user/repo/branch/path
+        finalUrl = url.replace('raw.githubusercontent.com', 'rawcdn.githack.com');
+    }
+
+    const wrapperHTML = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Game Wrapper<\/title>
+            <style>
+                body, html {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    background: #0a0a0a;
+                }
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                    background: #0a0a0a;
+                }
+                .error-message {
+                    display: none;
+                    color: #c27c15;
+                    font-family: 'Courier New', monospace;
+                    text-align: center;
+                    padding: 20px;
+                }
+            <\/style>
+        <\/head>
+        <body>
+            <iframe id="gameIframe" src="${finalUrl}" 
+                    onload="document.getElementById('error').style.display='none';"
+                    onerror="document.getElementById('error').style.display='block';">
+            <\/iframe>
+            <div id="error" class="error-message">
+                <h2>Failed to load game<\/h2>
+                <p>Try refreshing or select a different game.<\/p>
+            <\/div>
+        <\/body>
+        <\/html>
+    `;
+
+    gameFrame.srcdoc = wrapperHTML;
+    }
 
                    function closeLesson() {
                       if (typeof gtag !== 'undefined') {
@@ -2552,62 +2695,61 @@
                    }
 
                    function createGameCard(game, isRandom = false) {
-                      const card = document.createElement('div');
-                      card.className = 'lesson-card';
-                      
-                      if (isRandom) {
-                          card.setAttribute('data-random-game', 'true');
-                      }
-                      
-                      let launchCommand;
-                      if (isRandom) {
-                          launchCommand = "LOAD_RANDOM";
-                      } else if (game.title.length > 20) {
-                          launchCommand = game.title.split(' ')
-                              .filter(word => word.length > 0)
-                              .map(word => word[0].toUpperCase())
-                              .join('');
-                      } else {
-                          launchCommand = game.title.toUpperCase()
-                              .replace(/[^A-Z0-9]/g, '_')
-                              .replace(/_+/g, '_')
-                              .replace(/^_|_$/g, '');
-                      }
-                      
-                      if (!isRandom && launchCommand.length > 15) {
-                          launchCommand = launchCommand.substring(0, 12) + '...';
-                      }
-                      
-                      card.innerHTML = `
-                          <img src="${game.image}" alt="${isRandom ? 'Random Lesson' : game.title}" class="lesson-image ${isRandom ? 'flash-image' : ''}">
-                          <h3 class="lesson-title">${isRandom ? 'Random Lesson' : game.title}<\/h3>
-                          <p class="lesson-desc">${isRandom ? 'Tired of scrolling? Click me to find a random lesson that might cure that boredom' : game.desc}<\/p>
-                          <span class="launch-command">[LAUNCH: ${launchCommand}]<\/span>
-                      `;
-                      
-                      if (isRandom) {
-                          card.onclick = function(e) {
-                              e.stopPropagation();
+    const card = document.createElement('div');
+    card.className = 'lesson-card';
 
-                              const newRandomGame = getRandomGame();
-                              openLesson(newRandomGame.title, newRandomGame.url);
+    if (isRandom) {
+        card.setAttribute('data-random-game', 'true');
+    }
 
-                              if (typeof gtag !== 'undefined') {
-                                  gtag('event', 'random_game_click', {
-                                      'event_category': 'engagement',
-                                      'event_label': newRandomGame.title,
-                                      'value': 1
-                                  });
-                              }
-                          };
-                      } else {
-                          card.onclick = function() {
-                              openLesson(game.title, game.url);
-                          };
-                      }
-                      
-                      return card;
-                   }
+    let launchCommand;
+    if (isRandom) {
+        launchCommand = "LOAD_RANDOM";
+    } else if (game.title.length > 20) {
+        launchCommand = game.title.split(' ')
+            .filter(word => word.length > 0)
+            .map(word => word[0].toUpperCase())
+            .join('');
+    } else {
+        launchCommand = game.title.toUpperCase()
+            .replace(/[^A-Z0-9]/g, '_')
+            .replace(/_+/g, '_')
+            .replace(/^_|_$/g, '');
+    }
+
+    if (!isRandom && launchCommand.length > 15) {
+        launchCommand = launchCommand.substring(0, 12) + '...';
+    }
+
+    card.innerHTML = `
+        <img src="${game.image}" alt="${isRandom ? 'Random Lesson' : game.title}" class="lesson-image ${isRandom ? 'flash-image' : ''}">
+        <h3 class="lesson-title">${isRandom ? 'Random Lesson' : game.title}<\/h3>
+        <p class="lesson-desc">${isRandom ? 'Tired of scrolling? Click me to find a random lesson that might cure that boredom' : game.desc}<\/p>
+        <span class="launch-command">[LAUNCH: ${launchCommand}]<\/span>
+    `;
+
+    if (isRandom) {
+        card.onclick = function(e) {
+            e.stopPropagation();
+            const newRandomGame = getRandomGame();
+            loadGameWithCompatibleUrl(newRandomGame.title, newRandomGame.url);
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'random_game_click', {
+                    'event_category': 'engagement',
+                    'event_label': newRandomGame.title,
+                    'value': 1
+                });
+            }
+        };
+    } else {
+        card.onclick = function() {
+            loadGameWithCompatibleUrl(game.title, game.url);
+        };
+    }
+
+    return card;
+    }
                           
                           function updateSearchStats() {
                       const allContainer = document.getElementById('allLessonsGrid');
@@ -4979,20 +5121,67 @@
 
     const backToTopBtn = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 14000) {
+    window.addEventListener("scroll", () => {
+    if (window.scrollY > 14000) {
     backToTopBtn.classList.add("show");
-  } else {
+    } else {
     backToTopBtn.classList.remove("show");
-  }
-});
+    }
+    });
 
-backToTopBtn.addEventListener("click", () => {
-  window.scrollTo({
+    backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
     top: 0,
     behavior: "smooth"
-  });
-});
+    });
+    });
+
+    function convertToCompatibleUrl(url) {
+    if (url.includes('rawcdn.githack.com')) {
+        return url;
+    }
+
+    if (url.includes('cdn.jsdelivr.net')) {
+
+        const urlObj = new URL(url);
+        const pathParts = urlObj.pathname.split('/').filter(Boolean);
+        
+        if (pathParts[0] === 'gh') {
+            const user = pathParts[1];
+            const repo = pathParts[2];
+            const rest = pathParts.slice(3).join('/');
+
+            let branch = 'master';
+            let filePath = rest;
+            
+            if (repo.includes('@')) {
+                const [repoName, repoBranch] = repo.split('@');
+                branch = repoBranch;
+                filePath = rest;
+            } else if (rest.includes('@')) {
+                const restParts = rest.split('/');
+                const firstPart = restParts[0];
+                if (firstPart.includes('@')) {
+                    branch = firstPart.split('@')[1];
+                    filePath = restParts.slice(1).join('/');
+                }
+            }
+            
+            return `https://rawcdn.githack.com/${user}/${repo.includes('@') ? repo.split('@')[0] : repo}/${branch}/${filePath}`;
+        }
+    }
+
+    if (url.includes('raw.githubusercontent.com')) {
+        return url.replace('raw.githubusercontent.com', 'rawcdn.githack.com');
+    }
+
+    return url;
+    }
+
+    function loadGameWithCompatibleUrl(title, originalUrl) {
+    const compatibleUrl = convertToCompatibleUrl(originalUrl);
+    openLesson(title, compatibleUrl);
+    }
 
     </script>
     <div id="contextMenu">
