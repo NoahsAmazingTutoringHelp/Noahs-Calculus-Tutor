@@ -4260,12 +4260,9 @@
     const loadingDuration = 3000;
 
     setTimeout(() => {
-        const isHtmlFile = u.includes('.html') || u.includes('.htm') || 
-                          u.includes('cdn.jsdelivr.net') || 
-                          u.includes('rawcdn.githack.com') ||
-                          u.includes('raw.githack.com');
-
-        if (isHtmlFile) {
+        const isJsDelivrFile = u.includes('cdn.jsdelivr.net');
+        
+        if (isJsDelivrFile) {
             fetch(u)
                 .then(response => {
                     if (!response.ok) {
@@ -4274,58 +4271,45 @@
                     return response.text();
                 })
                 .then(html => {
-                    const loadingScreen = gameFrame.contentDocument || gameFrame.contentWindow.document;
-                    if (loadingScreen) {
-                        const vantaScripts = loadingScreen.querySelectorAll('script');
-                        vantaScripts.forEach(script => {
-                            script.parentNode.removeChild(script);
-                        });
-                    }
-
                     gameFrame.srcdoc = html;
                 })
                 .catch(error => {
-                    console.log('Fetch failed, using iframe wrapper:', error);
-                    createIframeWrapper(u);
+                    console.log('Fetch failed, using simple iframe:', error);
+                    gameFrame.srcdoc = createSimpleIframeWrapper(u);
                 });
         } else {
-            createIframeWrapper(u);
+            gameFrame.srcdoc = createSimpleIframeWrapper(u);
         }
     }, loadingDuration);
 }
 
-function createIframeWrapper(url) {
-    const simplifiedWrapper = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Game</title>
-            <style>
-                body, html {
-                    margin: 0;
-                    padding: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    background: #000;
-                }
-                iframe {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                }
-            </style>
-        </head>
-        <body>
-            <iframe src="${url}" frameborder="0" allowfullscreen></iframe>
-        </body>
-        </html>
-    `;
-
-    const gameFrame = document.getElementById('gameFrame');
-    gameFrame.srcdoc = simplifiedWrapper;
+function createSimpleIframeWrapper(url) {
+    return `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe src="${url}" frameborder="0" allowfullscreen></iframe>
+</body>
+</html>`;
 }
 
                 function closeLesson() {
