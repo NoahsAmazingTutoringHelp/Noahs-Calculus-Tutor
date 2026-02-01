@@ -3634,40 +3634,52 @@
     document.addEventListener('DOMContentLoaded', function() {
     const gamePage = document.getElementById('gamePage');
     const backToTopBtn = document.getElementById("backToTop");
-    const scrollbar = document.getElementById('custom-scrollbar');
+
+    updateBackToTopVisibility();
+
+    window.addEventListener("scroll", updateBackToTopVisibility);
+
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener("click", scrollToTop);
+    }
 
     if (gamePage) {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === 'class') {
-          const isGameActive = gamePage.classList.contains('active');
-          
-          if (backToTopBtn) {
-            if (isGameActive) {
-              backToTopBtn.classList.remove("show");
-            } else {
-              setTimeout(() => {
-                if (window.scrollY > 14000) {
-                  backToTopBtn.classList.add("show");
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    setTimeout(updateBackToTopVisibility, 50);
                 }
-              }, 100);
-            }
-          }
-          
-          if (scrollbar) {
-            if (isGameActive) {
-              scrollbar.style.opacity = '0';
-            } else {
-              setTimeout(updateScrollbar, 100);
-            }
-          }
-        }
-      });
-    });
-
-    observer.observe(gamePage, { attributes: true });
+            });
+        });
+        
+        observer.observe(gamePage, { attributes: true });
     }
-    });
+    
+    function updateBackToTopVisibility() {
+        if (!backToTopBtn) return;
+        
+        const isGameActive = gamePage && gamePage.classList.contains('active');
+        const scrollPosition = window.scrollY || document.documentElement.scrollTop;
+
+        if (isGameActive) {
+            backToTopBtn.classList.remove("show");
+            return;
+        }
+
+        if (scrollPosition > 18000) {
+            backToTopBtn.classList.add("show");
+        } else {
+            backToTopBtn.classList.remove("show");
+        }
+    }
+    
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+});
 
                    function preloadFavicons() {
                       const preloadActive = new Image();
