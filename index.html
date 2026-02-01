@@ -1455,6 +1455,25 @@
         <div class="partners-grid">
           <div class="partner-card">
             <img alt="Partner Logo" class="partner-image" src=
+            "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/8.jpg">
+            <h3 class="partner-title">
+              Astra
+            </h3>
+            <p class="partner-desc">
+              The best cloudmoon bypass out there by far!! With Clash Royale,
+              Youtube, Chrome Roblox, & Fortnite (We know others also have
+              that, but we're faster)
+            </p>
+            <div class="partner-buttons">
+              <button class="discord-btn" onclick=
+              "window.open('https://discord.gg/Zcqvn8K2Ak', '_blank')"><i class="fab fa-discord">
+              </i></button> <button class="visit-btn" onclick=
+              "openInAboutBlank('https://astra.hotelconsuladoinn.com/embed/clash-royale', '_blank')">
+              VISIT SITE</button>
+            </div>
+          </div>
+          <div class="partner-card">
+            <img alt="Partner Logo" class="partner-image" src=
             "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/7.gif">
             <h3 class="partner-title">
               LUNA
@@ -1800,10 +1819,10 @@
                               { title: "Blumgi Rocket", desc: "Physics-based slime platformer", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/245.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/74.jpg" },
                               { title: "Raft Wars 2", desc: "Strategic water balloon battles", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/244.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/75.jpg" },
                               { title: "8Ball Pool", desc: "Realistic pool physics game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/243.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/79.jpg" },
-                              { title: "Escape Road", desc: "Puzzle road navigation game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/242.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/81.jpg" },
+                              { title: "Escape Road", desc: "Puzzle road navigation game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/242.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/81.jpg" },
                               { title: "OvO", desc: "Minimalist platformer challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/241.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/82.jpg" },
                               { title: "Fruit Ninja", desc: "Slice flying fruit with precision", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/240.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/84.jpg" },
-                              { title: "They're Coming", desc: "Horror survival defense game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/52.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/86.jpg" },
+                              { title: "They're Coming", desc: "Horror survival defense game", url: "https://raw.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/d689b42d2c441f234879d5e4da51fc61f07b078d/games/52.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/86.jpg" },
                               { title: "Flappy Bird", desc: "Addictive timing-based flying", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/239.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/87.jpg" },
                               { title: "Recoil", desc: "Physics-based shooting game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/238.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/88.jpg" },
                               { title: "Twitch Tetris", desc: "Classic block stacking puzzle", url: "https://godlover89.github.io/Twitch-Tetris/", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/89.jpg" },
@@ -1936,248 +1955,76 @@
                       }
                    }
                           
-                          function openLesson(t, u) {
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'game_launch', {
-            'event_category': 'game_interaction',
-            'event_label': t,
-            'value': 1
-        });
-    }
-
-    const timeOnSite = Math.round((Date.now() - window.pageLoadTime) / 1000);
-    if (typeof gtag !== 'undefined') {
-        gtag('event', 'timing_complete', {
-            'name': 'time_to_first_game',
-            'value': timeOnSite,
-            'event_category': 'engagement'
-        });
-    }
-
-    document.getElementById('gameTitle').textContent = t;
-
-    const isRawGitHub = u.includes('raw.githubusercontent.com') && u.includes('.html');
-    const isJsDelivr = u.includes('cdn.jsdelivr.net') && u.includes('.html');
-    const isGithack = u.includes('rawcdn.githack.com');
-
-    const isPotentiallyProblematic = isJsDelivr || isRawGitHub;
-    const shouldUseWrapper = isPotentiallyProblematic;
-
-    const loadingHTML = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Loading...<\/title>
-            <style>
-                body {
-                    background: #0a0a0a;
-                    margin: 0;
-                    height: 100vh;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-family: 'Courier New', monospace;
-                }
-                .loader-container {
-                    text-align: center;
-                    color: #c27c15;
-                }
-                .loading-text {
-                    font-size: 18px;
-                    margin-bottom: 20px;
-                    letter-spacing: 1px;
-                }
-                .spinner {
-                    width: 40px;
-                    height: 40px;
-                    border: 3px solid rgba(194, 124, 21, 0.3);
-                    border-radius: 50%;
-                    border-top-color: #c27c15;
-                    animation: spin 1s ease-in-out infinite;
-                    margin: 0 auto;
-                }
-                @keyframes spin {
-                    to { transform: rotate(360deg); }
-                }
-            <\/style>
-        <\/head>
-        <body>
-            <div class="loader-container">
-                <div class="loading-text">Loading ${t}...<\/div>
-                <div class="spinner"><\/div>
-            <\/div>
-        <\/body>
-        <\/html>
-    `;
-
+                          function refreshGame() {
     const gameFrame = document.getElementById('gameFrame');
-    gameFrame.srcdoc = loadingHTML;
+    const currentUrl = gameFrame.src;
+    const currentSrcDoc = gameFrame.srcdoc;
 
-    document.getElementById('gamePage').classList.add('active');
-    document.getElementById('main-container').classList.add('slide-down');
-
-    if (shouldUseWrapper) {
-        // Try loading with srcdoc first, then fall back if it fails
-        loadGameWithSrcdocFallback(t, u, gameFrame);
-    } else {
-        // For external URLs, always use wrapper
-        createIframeWrapper(u, gameFrame);
-    }
-    }
-
-    function loadGameWithSrcdocFallback(title, url, gameFrame) {
-    const compatibleUrl = convertToCompatibleUrl(url);
-
-    console.log(`Loading game: ${title}`);
-    console.log(`Original URL: ${url}`);
-    console.log(`Compatible URL: ${compatibleUrl}`);
-
-    // First attempt: Try fetching and loading via srcdoc
-    fetch(compatibleUrl, {
-        mode: 'cors',
-        credentials: 'omit'
-    })
-    .then(response => {
-        console.log(`Response status: ${response.status} ${response.statusText}`);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        return response.text();
-    })
-    .then(html => {
-        console.log(`Fetched ${html.length} bytes of HTML`);
-        
-        // Check if the HTML contains JavaScript that needs external resources
-        const needsExternalResources = checkForExternalResources(html);
-        
-        if (needsExternalResources) {
-            console.log('Game needs external resources, using wrapper approach');
-            createIframeWrapper(compatibleUrl, gameFrame);
-        } else {
-            // Try to fix relative paths in the HTML
-            const fixedHtml = fixRelativePaths(html, compatibleUrl);
+    if (!currentUrl || currentUrl === 'about:blank') {
+        if (currentSrcDoc && currentSrcDoc.includes('<!DOCTYPE')) {
+            const gameTitle = document.getElementById('gameTitle').textContent;
             
-            // Load via srcdoc
-            gameFrame.srcdoc = fixedHtml;
-            
-            // Set up monitoring for loading success
-            monitorGameLoad(gameFrame, compatibleUrl, title);
-        }
-    })
-    .catch(error => {
-        console.error('Fetch failed, falling back to wrapper:', error);
-        createIframeWrapper(compatibleUrl, gameFrame);
-    });
-    }
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_refresh', {
+                    'event_category': 'game_interaction',
+                    'event_label': gameTitle,
+                    'value': 1
+                });
+            }
 
-    function detectProblematicContent(html) {
-    const checks = [
-        /<iframe/i.test(html),
+            const loadingScreenHTML = createGameLoadingScreen(gameTitle);
+            gameFrame.srcdoc = loadingScreenHTML;
 
-        /document\.domain/i.test(html),
-        /parent\.|top\.|window\.opener/i.test(html),
-
-        /http-equiv="refresh"/i.test(html),
-
-        /blob:/i.test(html),
-        /data:text\/javascript/i.test(html),
-
-        /Content-Security-Policy/i.test(html),
-        /X-Frame-Options/i.test(html)
-    ];
-
-    return checks.some(check => check === true);
-    }
-
-    function checkIfGameLoaded(gameFrame, onFailure) {
-    try {
-        const iframeDoc = gameFrame.contentDocument || gameFrame.contentWindow.document;
-
-        if (!iframeDoc || iframeDoc.body.children.length === 0) {
-            onFailure();
+            const currentGame = games.find(game => game.title === gameTitle);
+            if (currentGame && currentGame.url) {
+                const refreshDuration = 1500 + Math.random() * 1000;
+                
+                setTimeout(() => {
+                    const isDirectGameFile = currentGame.url.includes('raw.githubusercontent.com') || 
+                                            currentGame.url.includes('cdn.jsdelivr.net') || 
+                                            currentGame.url.includes('rawcdn.githack.com');
+                    
+                    if (isDirectGameFile && (currentGame.url.includes('.html') || currentGame.url.endsWith('.htm'))) {
+                        fetch(currentGame.url)
+                            .then(response => response.text())
+                            .then(html => {
+                                gameFrame.srcdoc = html;
+                            })
+                            .catch(error => {
+                                console.error('Refresh failed:', error);
+                                createIframeWrapper(currentGame.url);
+                            });
+                    } else {
+                        createIframeWrapper(currentGame.url);
+                    }
+                }, refreshDuration);
+            }
             return;
         }
+    }
 
-        const bodyText = iframeDoc.body.textContent || '';
-        const isErrorPage = 
-            bodyText.includes('error') || 
-            bodyText.includes('failed') || 
-            bodyText.includes('not load') ||
-            bodyText.includes('security') ||
-            bodyText.includes('blocked');
-
-        const isMinimalContent = iframeDoc.body.innerHTML.length < 100;
-
-        const isStillLoading = bodyText.includes('Loading') || bodyText.includes('spinner');
-        
-        if (isErrorPage || isMinimalContent || isStillLoading) {
-            onFailure();
+    if (currentUrl && currentUrl !== 'about:blank') {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'game_refresh', {
+                'event_category': 'game_interaction',
+                'event_label': document.getElementById('gameTitle').textContent,
+                'value': 1
+            });
         }
-    } catch (e) {
-        console.log('Cannot access iframe content (cross-origin), assuming loaded');
+
+        const gameTitle = document.getElementById('gameTitle').textContent;
+        const loadingScreenHTML = createGameLoadingScreen(gameTitle);
+        gameFrame.srcdoc = loadingScreenHTML;
+
+        const refreshDuration = 1000 + Math.random() * 500;
+        
+        setTimeout(() => {
+            gameFrame.src = '';
+            setTimeout(() => {
+                gameFrame.src = currentUrl;
+            }, 100);
+        }, refreshDuration);
     }
-    }
-
-    function createIframeWrapper(url, gameFrame) {
-    let finalUrl = url;
-
-    if (url.includes('cdn.jsdelivr.net')) {
-        // Convert: https://cdn.jsdelivr.net/gh/user/repo@branch/path
-        // To: https://rawcdn.githack.com/user/repo/branch/path
-        finalUrl = url.replace('cdn.jsdelivr.net/gh/', 'rawcdn.githack.com/')
-                      .replace('@', '/');
-    } else if (url.includes('raw.githubusercontent.com')) {
-        // Convert: https://raw.githubusercontent.com/user/repo/branch/path
-        // To: https://rawcdn.githack.com/user/repo/branch/path
-        finalUrl = url.replace('raw.githubusercontent.com', 'rawcdn.githack.com');
-    }
-
-    const wrapperHTML = `
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Game Wrapper<\/title>
-            <style>
-                body, html {
-                    margin: 0;
-                    padding: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                    background: #0a0a0a;
-                }
-                iframe {
-                    width: 100%;
-                    height: 100%;
-                    border: none;
-                    background: #0a0a0a;
-                }
-                .error-message {
-                    display: none;
-                    color: #c27c15;
-                    font-family: 'Courier New', monospace;
-                    text-align: center;
-                    padding: 20px;
-                }
-            <\/style>
-        <\/head>
-        <body>
-            <iframe id="gameIframe" src="${finalUrl}" 
-                    onload="document.getElementById('error').style.display='none';"
-                    onerror="document.getElementById('error').style.display='block';">
-            <\/iframe>
-            <div id="error" class="error-message">
-                <h2>Failed to load game<\/h2>
-                <p>Try refreshing or select a different game.<\/p>
-            <\/div>
-        <\/body>
-        <\/html>
-    `;
-
-    gameFrame.srcdoc = wrapperHTML;
     }
 
                    function closeLesson() {
@@ -2695,61 +2542,62 @@
                    }
 
                    function createGameCard(game, isRandom = false) {
-    const card = document.createElement('div');
-    card.className = 'lesson-card';
+                      const card = document.createElement('div');
+                      card.className = 'lesson-card';
+                      
+                      if (isRandom) {
+                          card.setAttribute('data-random-game', 'true');
+                      }
+                      
+                      let launchCommand;
+                      if (isRandom) {
+                          launchCommand = "LOAD_RANDOM";
+                      } else if (game.title.length > 20) {
+                          launchCommand = game.title.split(' ')
+                              .filter(word => word.length > 0)
+                              .map(word => word[0].toUpperCase())
+                              .join('');
+                      } else {
+                          launchCommand = game.title.toUpperCase()
+                              .replace(/[^A-Z0-9]/g, '_')
+                              .replace(/_+/g, '_')
+                              .replace(/^_|_$/g, '');
+                      }
+                      
+                      if (!isRandom && launchCommand.length > 15) {
+                          launchCommand = launchCommand.substring(0, 12) + '...';
+                      }
+                      
+                      card.innerHTML = `
+                          <img src="${game.image}" alt="${isRandom ? 'Random Lesson' : game.title}" class="lesson-image ${isRandom ? 'flash-image' : ''}">
+                          <h3 class="lesson-title">${isRandom ? 'Random Lesson' : game.title}<\/h3>
+                          <p class="lesson-desc">${isRandom ? 'Tired of scrolling? Click me to find a random lesson that might cure that boredom' : game.desc}<\/p>
+                          <span class="launch-command">[LAUNCH: ${launchCommand}]<\/span>
+                      `;
+                      
+                      if (isRandom) {
+                          card.onclick = function(e) {
+                              e.stopPropagation();
 
-    if (isRandom) {
-        card.setAttribute('data-random-game', 'true');
-    }
+                              const newRandomGame = getRandomGame();
+                              openLesson(newRandomGame.title, newRandomGame.url);
 
-    let launchCommand;
-    if (isRandom) {
-        launchCommand = "LOAD_RANDOM";
-    } else if (game.title.length > 20) {
-        launchCommand = game.title.split(' ')
-            .filter(word => word.length > 0)
-            .map(word => word[0].toUpperCase())
-            .join('');
-    } else {
-        launchCommand = game.title.toUpperCase()
-            .replace(/[^A-Z0-9]/g, '_')
-            .replace(/_+/g, '_')
-            .replace(/^_|_$/g, '');
-    }
-
-    if (!isRandom && launchCommand.length > 15) {
-        launchCommand = launchCommand.substring(0, 12) + '...';
-    }
-
-    card.innerHTML = `
-        <img src="${game.image}" alt="${isRandom ? 'Random Lesson' : game.title}" class="lesson-image ${isRandom ? 'flash-image' : ''}">
-        <h3 class="lesson-title">${isRandom ? 'Random Lesson' : game.title}<\/h3>
-        <p class="lesson-desc">${isRandom ? 'Tired of scrolling? Click me to find a random lesson that might cure that boredom' : game.desc}<\/p>
-        <span class="launch-command">[LAUNCH: ${launchCommand}]<\/span>
-    `;
-
-    if (isRandom) {
-        card.onclick = function(e) {
-            e.stopPropagation();
-            const newRandomGame = getRandomGame();
-            loadGameWithCompatibleUrl(newRandomGame.title, newRandomGame.url);
-            
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'random_game_click', {
-                    'event_category': 'engagement',
-                    'event_label': newRandomGame.title,
-                    'value': 1
-                });
-            }
-        };
-    } else {
-        card.onclick = function() {
-            loadGameWithCompatibleUrl(game.title, game.url);
-        };
-    }
-
-    return card;
-    }
+                              if (typeof gtag !== 'undefined') {
+                                  gtag('event', 'random_game_click', {
+                                      'event_category': 'engagement',
+                                      'event_label': newRandomGame.title,
+                                      'value': 1
+                                  });
+                              }
+                          };
+                      } else {
+                          card.onclick = function() {
+                              openLesson(game.title, game.url);
+                          };
+                      }
+                      
+                      return card;
+                   }
                           
                           function updateSearchStats() {
                       const allContainer = document.getElementById('allLessonsGrid');
@@ -3092,47 +2940,6 @@
                       currentSortMethod = 'default';
                       const sortedGames = sortGames(currentSortMethod);
                       updateGameDisplay(sortedGames);
-                   });
-
-                   document.addEventListener('DOMContentLoaded', function() {
-                      const sortSelect = document.getElementById('sortSelect');
-                      const sorterInfo = document.getElementById('sorterInfo');
-                      
-                          function updateSorterInfo(method) {
-                          const infoMap = {
-                              'default': 'ORIGINAL ORDER',
-                              'alphabetical': 'ALPHABETICAL (A → Z)',
-                              'reverse': 'REVERSE (Z → A)',
-                              'popular': 'POPULAR FIRST',
-                              'random': 'RANDOMIZED ORDER',
-                              'newest': 'NEWEST FIRST'
-                          };
-                          sorterInfo.textContent = infoMap[method] || 'SORTING...';
-                      }
-                      
-                      sortSelect.addEventListener('change', function(e) {
-                          currentSortMethod = e.target.value;
-                          const sortedGames = sortGames(currentSortMethod);
-
-                          updateGameDisplay(sortedGames);
-                          updateSorterInfo(currentSortMethod);
-                          
-                          const searchInput = document.getElementById('searchInput');
-                          if (searchInput.value) {
-                              const searchEvent = new Event('input');
-                              searchInput.dispatchEvent(searchEvent);
-                          }
-                      });
-                      
-                      sortSelect.value = 'default';
-                      updateSorterInfo('default');
-
-                      document.addEventListener('keydown', function(e) {
-                          if (e.altKey && e.key === 's') {
-                              e.preventDefault();
-                              sortSelect.focus();
-                          }
-                      });
                    });
                           
                           function hideWarning(){document.getElementById('warningOverlay').classList.add('hidden');}
@@ -3579,23 +3386,27 @@
                       }
                       
                       function showScrollbar() {
-                          const gamePage = document.getElementById('gamePage');
-                          if (gamePage && gamePage.classList.contains('active')) {
-                              hideScrollbar();
-                              return;
-                          }
+    const gamePage = document.getElementById('gamePage');
+    const scrollbar = document.getElementById('custom-scrollbar');
 
-                          if (isHovering) return;
-                          
-                          scrollbar.style.opacity = '0.8';
-                          clearTimeout(scrollTimeout);
-                          
-                          scrollTimeout = setTimeout(() => {
-                              if (!isHovering && !isDragging) {
-                                  hideScrollbar();
-                              }
-                          }, 1500);
-                      }
+    if (!scrollbar) return;
+
+    if (gamePage && gamePage.classList.contains('active')) {
+    scrollbar.style.opacity = '0';
+    return;
+    }
+
+    if (isHovering) return;
+
+    scrollbar.style.opacity = '0.8';
+    clearTimeout(scrollTimeout);
+
+    scrollTimeout = setTimeout(() => {
+    if (!isHovering && !isDragging) {
+      hideScrollbar();
+    }
+    }, 1500);
+    }
                       
                       function hideScrollbar() {
                           scrollbar.style.opacity = '0';
@@ -3819,6 +3630,44 @@
                           updateTitle();
                       }, 100);
                    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const gamePage = document.getElementById('gamePage');
+    const backToTopBtn = document.getElementById("backToTop");
+    const scrollbar = document.getElementById('custom-scrollbar');
+
+    if (gamePage) {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          const isGameActive = gamePage.classList.contains('active');
+          
+          if (backToTopBtn) {
+            if (isGameActive) {
+              backToTopBtn.classList.remove("show");
+            } else {
+              setTimeout(() => {
+                if (window.scrollY > 14000) {
+                  backToTopBtn.classList.add("show");
+                }
+              }, 100);
+            }
+          }
+          
+          if (scrollbar) {
+            if (isGameActive) {
+              scrollbar.style.opacity = '0';
+            } else {
+              setTimeout(updateScrollbar, 100);
+            }
+          }
+        }
+      });
+    });
+
+    observer.observe(gamePage, { attributes: true });
+    }
+    });
 
                    function preloadFavicons() {
                       const preloadActive = new Image();
@@ -4701,134 +4550,93 @@
                 }
 
                 function openLesson(t, u) {
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'game_launch', {
-                        'event_category': 'game_interaction',
-                        'event_label': t,
-                        'value': 1
-                    });
-                }
-                
-                const timeOnSite = Math.round((Date.now() - window.pageLoadTime) / 1000);
-                if (typeof gtag !== 'undefined') {
-                    gtag('event', 'timing_complete', {
-                        'name': 'time_to_first_game',
-                        'value': timeOnSite,
-                        'event_category': 'engagement'
-                    });
-                }
-                
-                document.getElementById('gameTitle').textContent = t;
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_launch', {
+            'event_category': 'game_interaction',
+            'event_label': t,
+            'value': 1
+        });
+    }
 
-                const isRawGitHub = u.includes('raw.githubusercontent.com') && u.includes('.html');
-                const isJsDelivr = u.includes('cdn.jsdelivr.net') && u.includes('.html');
+    const timeOnSite = Math.round((Date.now() - window.pageLoadTime) / 1000);
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'timing_complete', {
+            'name': 'time_to_first_game',
+            'value': timeOnSite,
+            'event_category': 'engagement'
+        });
+    }
 
-                const isGithack = u.includes('rawcdn.githack.com');
-                const isExternalUrl = !isRawGitHub && !isJsDelivr;
-                
-                const loadingHTML = `
-                    <!DOCTYPE html>
-                    <html>
-                    <head>
-                        <title>Loading...<\/title>
-                        <style>
-                            body {
-                                background: #0a0a0a;
-                                margin: 0;
-                                height: 100vh;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                font-family: 'Courier New', monospace;
-                            }
-                            .loader-container {
-                                text-align: center;
-                                color: #c27c15;
-                            }
-                            .loading-text {
-                                font-size: 18px;
-                                margin-bottom: 20px;
-                                letter-spacing: 1px;
-                            }
-                            .spinner {
-                                width: 40px;
-                                height: 40px;
-                                border: 3px solid rgba(194, 124, 21, 0.3);
-                                border-radius: 50%;
-                                border-top-color: #c27c15;
-                                animation: spin 1s ease-in-out infinite;
-                                margin: 0 auto;
-                            }
-                            @keyframes spin {
-                                to { transform: rotate(360deg); }
-                            }
-                        <\/style>
-                    <\/head>
-                    <body>
-                        <div class="loader-container">
-                            <div class="loading-text">Loading ${t}...<\/div>
-                            <div class="spinner"><\/div>
-                        <\/div>
-                    <\/body>
-                    <\/html>
-                `;
-                
-                const gameFrame = document.getElementById('gameFrame');
-                gameFrame.srcdoc = loadingHTML;
+    document.getElementById('gameTitle').textContent = t;
 
-                document.getElementById('gamePage').classList.add('active');
-                document.getElementById('main-container').classList.add('slide-down');
+    const isJsDelivrHtml = u.includes('cdn.jsdelivr.net') && 
+                          (u.includes('.html') || u.endsWith('.htm') || 
+                           u.includes('games/') || u.includes('.html?'));
 
-                if (isRawGitHub || isJsDelivr) {
-                    fetch(u)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Network response was not ok: ' + response.status);
-                            }
-                            return response.text();
-                        })
-                        .then(html => {
-                            gameFrame.srcdoc = html;
-                        })
-                        .catch(error => {
-                            console.log('Fetch failed, falling back to iframe wrapper:', error);
-                            createIframeWrapper(u);
-                        });
-                } else {
+    const loadingScreenHTML = createGameLoadingScreen(t);
+
+    const gameFrame = document.getElementById('gameFrame');
+    gameFrame.srcdoc = loadingScreenHTML;
+
+    document.getElementById('gamePage').classList.add('active');
+    document.getElementById('main-container').classList.add('slide-down');
+
+    const loadingDuration = getRandomLoadingDuration();
+
+    setTimeout(() => {
+        if (isJsDelivrHtml) {
+            fetch(u)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok: ' + response.status);
+                    }
+                    return response.text();
+                })
+                .then(html => {
+                    gameFrame.srcdoc = html;
+                })
+                .catch(error => {
+                    console.log('Fetch failed for jsdelivr, using iframe wrapper:', error);
                     createIframeWrapper(u);
-                }
+                });
+        } else {
+            createIframeWrapper(u);
+        }
+    }, loadingDuration);
+    }
 
-                function createIframeWrapper(url) {
-                    const externalWrapperHTML = `
-                        <!DOCTYPE html>
-                        <html>
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                            <style>
-                                body, html {
-                                    margin: 0;
-                                    padding: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    overflow: hidden;
-                                }
-                                iframe {
-                                    width: 100%;
-                                    height: 100%;
-                                    border: none;
-                                }
-                            <\/style>
-                        <\/head>
-                        <body>
-                            <iframe src="${url}"><\/iframe>
-                        <\/body>
-                        <\/html>
-                    `;
-                    
-                    gameFrame.srcdoc = externalWrapperHTML;
+    function createIframeWrapper(url) {
+    const simplifiedWrapper = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+                body, html {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    background: #000;
                 }
-             }
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: none;
+                }
+            <\/style>
+        <\/head>
+        <body>
+            <iframe src="${url}" frameborder="0" allowfullscreen><\/iframe>
+        <\/body>
+        <\/html>
+    `;
+
+    const gameFrame = document.getElementById('gameFrame');
+    gameFrame.srcdoc = simplifiedWrapper;
+    }
 
                 function closeLesson() {
                    if (typeof gtag !== 'undefined') {
@@ -4897,6 +4705,20 @@
                    document.addEventListener('mozfullscreenchange', handleSettingsButtonVisibility);
                    document.addEventListener('MSFullscreenChange', handleSettingsButtonVisibility);
                 });
+
+                document.addEventListener('DOMContentLoaded', function() {
+    const sortSelect = document.getElementById('sortSelect');
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function(e) {
+            currentSortMethod = e.target.value;
+            applySorting();
+        });
+    }
+
+    currentSortMethod = 'default';
+    generateGameCards();
+    });
 
                 function getAllSettings() {
              return {
@@ -5122,6 +4944,16 @@
     const backToTopBtn = document.getElementById("backToTop");
 
     window.addEventListener("scroll", () => {
+    const gamePage = document.getElementById('gamePage');
+    const backToTopBtn = document.getElementById("backToTop");
+
+    if (!backToTopBtn) return;
+
+    if (gamePage && gamePage.classList.contains('active')) {
+    backToTopBtn.classList.remove("show");
+    return;
+    }
+
     if (window.scrollY > 14000) {
     backToTopBtn.classList.add("show");
     } else {
@@ -5129,58 +4961,463 @@
     }
     });
 
-    backToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-    });
-    });
-
-    function convertToCompatibleUrl(url) {
-    if (url.includes('rawcdn.githack.com')) {
-        return url;
-    }
-
-    if (url.includes('cdn.jsdelivr.net')) {
-
-        const urlObj = new URL(url);
-        const pathParts = urlObj.pathname.split('/').filter(Boolean);
-        
-        if (pathParts[0] === 'gh') {
-            const user = pathParts[1];
-            const repo = pathParts[2];
-            const rest = pathParts.slice(3).join('/');
-
-            let branch = 'master';
-            let filePath = rest;
-            
-            if (repo.includes('@')) {
-                const [repoName, repoBranch] = repo.split('@');
-                branch = repoBranch;
-                filePath = rest;
-            } else if (rest.includes('@')) {
-                const restParts = rest.split('/');
-                const firstPart = restParts[0];
-                if (firstPart.includes('@')) {
-                    branch = firstPart.split('@')[1];
-                    filePath = restParts.slice(1).join('/');
-                }
-            }
-            
-            return `https://rawcdn.githack.com/${user}/${repo.includes('@') ? repo.split('@')[0] : repo}/${branch}/${filePath}`;
-        }
-    }
-
-    if (url.includes('raw.githubusercontent.com')) {
-        return url.replace('raw.githubusercontent.com', 'rawcdn.githack.com');
-    }
-
-    return url;
-    }
-
     function loadGameWithCompatibleUrl(title, originalUrl) {
     const compatibleUrl = convertToCompatibleUrl(originalUrl);
     openLesson(title, compatibleUrl);
+    }
+
+    function createGameLoadingScreen(gameTitle) {
+    const quotes = [
+        "Cmon we all know that Marval Rivals is overrated",
+        "Everyone knows ur a furry buddy",
+        "For the love of god stay out of the comments",
+        "Are you enjoying the site? You better be or else...",
+        "Join my discord I have funny things on there",
+        "Tell me your favorite game in the comments",
+        "Call 911!! Whats the Number?",
+        "Access Denied - You are Gay",
+        "HELPPPPPPP HELPPPP MEEE",
+        "Linganguliguliwatalingagoolingangoo",
+        "Make sure the one homie that doesnt hop on knows who hate him",
+        "Make sure you do your homework buddy im watching you",
+        "Does your mom know you're gay?",
+        "If you can read this you're too close",
+        "I see you looking at my code",
+        "This game is way better than Fortnite",
+        "This game is way worse than Fortnite",
+        "I like turtles",
+        "Why are you still reading these?",
+        "Press F to thank the bus driver",
+        "I said wait mf....",
+        "Fun fact: your chopped",
+        "Yoooo whats up",
+        "Stop @ing me on discord bruh",
+        "Isnt this loading screen cool?",
+        "This site was made with love <3",
+        
+    ];
+
+    const loadingSteps = [
+        { status: "Stealing Lesson....", progress: 15, time: 800 },
+        { status: "Aquiring HTML assets..", progress: 30, time: 700 },
+        { status: "Putting in the thingamabobs...", progress: 45, time: 900 },
+        { status: "Screwing in the doohickeys..", progress: 60, time: 1200 },
+        { status: "Establishing tarbonator...", progress: 75, time: 600 },
+        { status: "Contacting Elon....", progress: 85, time: 800 },
+        { status: "Finalizing...", progress: 95, time: 1000 },
+        { status: "Ready to launch...", progress: 100, time: 1200 }
+    ];
+
+    function getRandomQuote() {
+        return quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    return `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Loading ${gameTitle}<\/title>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"><\/script>
+            <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"><\/script>
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                body {
+                    margin: 0;
+                    padding: 0;
+                    width: 100%;
+                    height: 100vh;
+                    overflow: hidden;
+                    font-family: 'Courier New', monospace;
+                }
+
+                #vanta-bg {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    z-index: 1;
+                }
+
+                .loading-content {
+                    text-align: center;
+                    width: 90%;
+                    max-width: 500px;
+                    z-index: 2;
+                    position: relative;
+                    margin: 0 auto;
+                    padding-top: 25vh;
+                }
+
+                .game-title {
+                    color: #ffcc8a;
+                    font-size: 1.8rem;
+                    margin-bottom: 5px;
+                    font-weight: 600;
+                    letter-spacing: 1px;
+                    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+                }
+
+                .game-subtitle {
+                    color: rgba(255, 204, 138, 0.7);
+                    font-size: 0.9rem;
+                    margin-bottom: 30px;
+                    font-weight: 400;
+                    letter-spacing: 3px;
+                    text-transform: uppercase;
+                }
+
+                .status {
+                    color: #f2b55e;
+                    font-size: 1rem;
+                    margin-bottom: 30px;
+                    font-weight: 500;
+                    height: 20px;
+                    letter-spacing: 0.5px;
+                    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+                }
+
+                .loading-bar-container {
+                    width: 100%;
+                    height: 4px;
+                    background: rgba(255, 255, 255, 0.1);
+                    border-radius: 2px;
+                    margin: 30px 0 20px;
+                    overflow: hidden;
+                    position: relative;
+                }
+
+                .loading-bar {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 30%;
+                    height: 100%;
+                    background: linear-gradient(90deg,
+                        transparent,
+                        rgba(255, 173, 87, 0.8),
+                        rgba(255, 173, 87, 0.8),
+                        transparent);
+                    animation: slide 1.5s infinite ease-in-out;
+                }
+
+                @keyframes slide {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(400%); }
+                }
+
+                .percentage {
+                    color: #ffcc8a;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-top: 10px;
+                    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                }
+
+                .quote-container {
+                    margin: 40px 0 0;
+                    padding: 20px 0 0;
+                    position: relative;
+                }
+
+                .quote-container:before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 20%;
+                    right: 20%;
+                    height: 1px;
+                    background: linear-gradient(90deg, 
+                        transparent, 
+                        rgba(255, 179, 71, 0.3), 
+                        transparent);
+                }
+
+                .quote-text {
+                    color: rgba(255, 255, 255, 0.9);
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                    font-style: italic;
+                    font-weight: 300;
+                    padding: 0 10px;
+                }
+
+                .success {
+                    color: #4CAF50;
+                    animation: pulseSuccess 2s infinite;
+                }
+
+                @keyframes pulseSuccess {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.7; }
+                }
+            <\/style>
+        <\/head>
+        <body>
+            <div id="vanta-bg"><\/div>
+
+            <div class="loading-content">
+                <div class="game-title" id="gameTitle">LOADING<\/div>
+                <div class="game-subtitle" id="gameSubtitle">${gameTitle.toUpperCase()}<\/div>
+                
+                <div class="status" id="statusText">Initializing game engine...<\/div>
+                
+                <div class="loading-bar-container">
+                    <div class="loading-bar"><\/div>
+                <\/div>
+                
+                <div class="percentage" id="percentage">0%<\/div>
+                
+                <div class="quote-container">
+                    <div class="quote-text" id="quoteText">${getRandomQuote()}<\/div>
+                <\/div>
+            <\/div>
+
+            <script>
+                const CONFIG = {
+                    quotes: ${JSON.stringify(quotes)},
+                    loadingSteps: ${JSON.stringify(loadingSteps)},
+                    vantaSettings: {
+                        el: "#vanta-bg",
+                        mouseControls: false,
+                        touchControls: false,
+                        gyroControls: false,
+                        minHeight: 200.00,
+                        minWidth: 200.00,
+                        highlightColor: 0xffab00,
+                        midtoneColor: 0xb16f3b,
+                        lowlightColor: 0x93623e,
+                        baseColor: 0x3c291b,
+                        speed: 2.50,
+                        zoom: 1.80
+                    }
+                };
+
+                let currentStep = 0;
+                let quoteInterval;
+                let vantaEffect = null;
+
+                function initVantaBackground() {
+                    if (window.VANTA && !vantaEffect) {
+                        vantaEffect = VANTA.FOG(CONFIG.vantaSettings);
+                    }
+                }
+
+                function getRandomQuote() {
+                    return CONFIG.quotes[Math.floor(Math.random() * CONFIG.quotes.length)];
+                }
+
+                function updateQuote() {
+                    document.getElementById('quoteText').textContent = getRandomQuote();
+                }
+
+                function updateProgress() {
+                    if (currentStep >= CONFIG.loadingSteps.length) return;
+                    
+                    const step = CONFIG.loadingSteps[currentStep];
+                    const percentageEl = document.getElementById('percentage');
+                    const statusEl = document.getElementById('statusText');
+
+                    statusEl.textContent = step.status;
+
+                    percentageEl.textContent = step.progress + '%';
+                    
+                    currentStep++;
+
+                    if (step.progress === 100) {
+                        statusEl.classList.add('success');
+                        percentageEl.classList.add('success');
+                    }
+
+                    if (currentStep < CONFIG.loadingSteps.length) {
+                        const randomFactor = 0.7 + Math.random() * 0.6; // 0.7 to 1.3
+                        const delay = Math.floor(step.time * randomFactor);
+                        setTimeout(updateProgress, delay);
+                    }
+                }
+
+                function startLoading() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const game = urlParams.get('game') || '${gameTitle}';
+
+                    if (game.includes(':')) {
+                        const parts = game.split(':');
+                        document.getElementById('gameTitle').textContent = parts[0].trim().toUpperCase();
+                        document.getElementById('gameSubtitle').textContent = parts[1].trim().toUpperCase();
+                    } else {
+                        document.getElementById('gameTitle').textContent = 'LOADING..';
+                        document.getElementById('gameSubtitle').textContent = game.toUpperCase();
+                    }
+
+                    initVantaBackground();
+
+                    updateQuote();
+
+                    quoteInterval = setInterval(updateQuote, 4000);
+
+                    setTimeout(() => {
+                        updateProgress();
+                    }, 500);
+                }
+
+                function handleResize() {
+                    if (vantaEffect) {
+                        vantaEffect.resize();
+                    }
+                }
+
+                window.addEventListener('DOMContentLoaded', startLoading);
+                window.addEventListener('resize', handleResize);
+
+                window.addEventListener('beforeunload', () => {
+                    if (quoteInterval) {
+                        clearInterval(quoteInterval);
+                    }
+                    if (vantaEffect) {
+                        vantaEffect.destroy();
+                    }
+                });
+            <\/script>
+        <\/body>
+        <\/html>
+    `;
+    }
+
+    function getRandomLoadingDuration() {
+    const baseTime = 2500;
+    const randomVariation = Math.random() * 2000;
+    return baseTime + randomVariation;
+    }
+
+    function refreshGame() {
+    const gameFrame = document.getElementById('gameFrame');
+    const currentUrl = gameFrame.src;
+
+    if (!currentUrl || currentUrl === 'about:blank') {
+        const currentSrcDoc = gameFrame.srcdoc;
+        if (currentSrcDoc && currentSrcDoc.includes('<!DOCTYPE')) {
+            const gameTitle = document.getElementById('gameTitle').textContent;
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'game_refresh', {
+                    'event_category': 'game_interaction',
+                    'event_label': gameTitle,
+                    'value': 1
+                });
+            }
+
+            const loadingScreenHTML = createGameLoadingScreen(gameTitle);
+            gameFrame.srcdoc = loadingScreenHTML;
+
+            const currentGame = games.find(game => game.title === gameTitle);
+            if (currentGame && currentGame.url) {
+                const refreshDuration = 1500 + Math.random() * 1000;
+                
+                setTimeout(() => {
+                    fetch(currentGame.url)
+                        .then(response => response.text())
+                        .then(html => {
+                            gameFrame.srcdoc = html;
+                        })
+                        .catch(error => {
+                            console.error('Refresh failed:', error);
+                            gameFrame.src = currentGame.url;
+                            gameFrame.srcdoc = '';
+                        });
+                }, refreshDuration);
+            }
+            return;
+        }
+    }
+
+    if (currentUrl && currentUrl !== 'about:blank') {
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'game_refresh', {
+                'event_category': 'game_interaction',
+                'event_label': document.getElementById('gameTitle').textContent,
+                'value': 1
+            });
+        }
+
+        const gameTitle = document.getElementById('gameTitle').textContent;
+        const loadingScreenHTML = createGameLoadingScreen(gameTitle);
+        gameFrame.srcdoc = loadingScreenHTML;
+
+        const refreshDuration = 1000 + Math.random() * 500;
+        
+        setTimeout(() => {
+            gameFrame.src = '';
+            setTimeout(() => {
+                gameFrame.src = currentUrl;
+            }, 100);
+        }, refreshDuration);
+    }
+    }
+
+    const loadingScreenStyle = document.createElement('style');
+    loadingScreenStyle.textContent = `
+    .game-frame {
+        background: #0a0a0a !important;
+    }
+
+    .game-frame.loading {
+        background: #1a0f0a !important;
+    }
+    `;
+    document.head.appendChild(loadingScreenStyle);
+
+    function trackLoadingTime(gameTitle, duration, type = 'initial') {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_loading_time', {
+            'event_category': 'performance',
+            'event_label': gameTitle,
+            'value': Math.round(duration),
+            'loading_type': type
+        });
+    }
+    }
+
+    function openInAboutBlank(url) {
+    const newWindow = window.open('about:blank', '_blank');
+
+    if (newWindow) {
+        const wrapperHTML = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>I ❤️ Noahs Tutoring Hub<\/title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    <\/style>
+    <\/head>
+    <body>
+    <iframe src="${url}" frameborder="0" allowfullscreen><\/iframe>
+    <\/body>
+    <\/html>`;
+        
+        newWindow.document.write(wrapperHTML);
+        newWindow.document.close();
+    } else {
+        alert("Please enable popups!");
+    }
     }
 
     </script>
