@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuhh</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="gameFrame" 
+            title="Clash Royale Game">
+    </iframe>
+
+    <script>
+        window.addEventListener('load', function() {
+            alert("Fyi this game might not work in school and it might not even work out of school, so dont complain that it doesnt work. Thanks!");
+
+            setTimeout(function() {
+                alert("WARNING I would personlly NOT log into any main google or supercell accounts onto this application, your account may be shared with others. I am not 100% about this but this warning will stay until proven otherwise");
+
+                setTimeout(loadGame, 100);
+            }, 100);
+        });
+
+        const gameLinks = [
+            "https://astra.hotelconsuladoinn.com/embed/clash-royale",
+            "http://free.unblocked.roblox.trust-lol.spacejamhd.com/embed/clash-royale",
+            "http://clash-on-astra.pxi-fusion.com.cdn.cloudflare.net/embed/clash-royale",
+            "https://idkuhnametrust.graphicon.ru/?suicidepreventionlifeline.org/embed/clash-royale",
+            "https://wildcard.poloniacruz.com/embed/clash-royale",
+            "https://astra.redlight.li/embed/clash-royale"
+        ];
+
+        let currentLinkIndex = 0;
+        let attempts = 0;
+        const maxAttempts = gameLinks.length * 2;
+
+        function loadGame() {
+            if (currentLinkIndex >= gameLinks.length) {
+                alert("Sorry, none of the game links are working right now. Please try again later or check if you have any network restrictions blocking these sites.");
+                return;
+            }
+
+            const currentLink = gameLinks[currentLinkIndex];
+            const iframe = document.getElementById('gameFrame');
+            
+            console.log(`Attempting to load: ${currentLink} (Attempt ${attempts + 1})`);
+
+            const loadTimeout = setTimeout(function() {
+                attempts++;
+                
+                if (attempts >= maxAttempts) {
+                    alert("Sorry, none of the game links are working right now. Please try again later or check if you have any network restrictions blocking these sites.");
+                    return;
+                }
+
+                currentLinkIndex++;
+                loadGame();
+            }, 5000);
+            iframe.onload = function() {
+                clearTimeout(loadTimeout);
+                console.log(`Successfully loaded: ${currentLink}`);
+            };
+
+            iframe.onerror = function() {
+                clearTimeout(loadTimeout);
+                console.log(`Failed to load: ${currentLink}`);
+                attempts++;
+                
+                if (attempts >= maxAttempts) {
+                    alert("Sorry, none of the game links are working right now. Please try again later or check if you have any network restrictions blocking these sites.");
+                    return;
+                }
+
+                currentLinkIndex++;
+                loadGame();
+            };
+
+            iframe.src = currentLink;
+        }
+    </script>
+</body>
+</html>
