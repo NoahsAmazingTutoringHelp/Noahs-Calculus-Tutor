@@ -4249,10 +4249,6 @@
 
     document.getElementById('gameTitle').textContent = t;
 
-    const isJsDelivrHtml = u.includes('cdn.jsdelivr.net') && 
-                          (u.includes('.html') || u.endsWith('.htm') || 
-                           u.includes('games/') || u.includes('.html?'));
-
     const loadingScreenHTML = createGameLoadingScreen(t);
 
     const gameFrame = document.getElementById('gameFrame');
@@ -4261,10 +4257,15 @@
     document.getElementById('gamePage').classList.add('active');
     document.getElementById('main-container').classList.add('slide-down');
 
-    const loadingDuration = getRandomLoadingDuration();
+    const loadingDuration = 3000;
 
     setTimeout(() => {
-        if (isJsDelivrHtml) {
+        const isHtmlFile = u.includes('.html') || u.includes('.htm') || 
+                          u.includes('cdn.jsdelivr.net') || 
+                          u.includes('rawcdn.githack.com') ||
+                          u.includes('raw.githack.com');
+
+        if (isHtmlFile) {
             fetch(u)
                 .then(response => {
                     if (!response.ok) {
@@ -4273,25 +4274,34 @@
                     return response.text();
                 })
                 .then(html => {
+                    const loadingScreen = gameFrame.contentDocument || gameFrame.contentWindow.document;
+                    if (loadingScreen) {
+                        const vantaScripts = loadingScreen.querySelectorAll('script');
+                        vantaScripts.forEach(script => {
+                            script.parentNode.removeChild(script);
+                        });
+                    }
+
                     gameFrame.srcdoc = html;
                 })
                 .catch(error => {
-                    console.log('Fetch failed for jsdelivr, using iframe wrapper:', error);
+                    console.log('Fetch failed, using iframe wrapper:', error);
                     createIframeWrapper(u);
                 });
         } else {
             createIframeWrapper(u);
         }
     }, loadingDuration);
-    }
+}
 
-    function createIframeWrapper(url) {
+function createIframeWrapper(url) {
     const simplifiedWrapper = `
         <!DOCTYPE html>
         <html>
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Game</title>
             <style>
                 body, html {
                     margin: 0;
@@ -4306,17 +4316,17 @@
                     height: 100%;
                     border: none;
                 }
-            <\/style>
-        <\/head>
+            </style>
+        </head>
         <body>
-            <iframe src="${url}" frameborder="0" allowfullscreen><\/iframe>
-        <\/body>
-        <\/html>
+            <iframe src="${url}" frameborder="0" allowfullscreen></iframe>
+        </body>
+        </html>
     `;
 
     const gameFrame = document.getElementById('gameFrame');
     gameFrame.srcdoc = simplifiedWrapper;
-    }
+}
 
                 function closeLesson() {
                    if (typeof gtag !== 'undefined') {
@@ -4647,6 +4657,77 @@
     }
 
     function createGameLoadingScreen(gameTitle) {
+    let primaryColor, accentColor, darkColor;
+    const currentTheme = localStorage.getItem('selectedTheme') || 'default';
+    
+    if (currentTheme === 'custom') {
+        const customColor = localStorage.getItem('customThemeColor') || '#c27c15';
+        primaryColor = customColor;
+
+        const hex = customColor.replace('#', '');
+        const r = parseInt(hex.slice(0, 2), 16);
+        const g = parseInt(hex.slice(2, 4), 16);
+        const b = parseInt(hex.slice(4, 6), 16);
+        
+        const accentR = Math.min(255, Math.floor(r * 1.2));
+        const accentG = Math.min(255, Math.floor(g * 1.2));
+        const accentB = Math.min(255, Math.floor(b * 1.2));
+        accentColor = `rgb(${accentR}, ${accentG}, ${accentB})`;
+
+        const darkR = Math.max(0, Math.floor(r * 0.3));
+        const darkG = Math.max(0, Math.floor(g * 0.3));
+        const darkB = Math.max(0, Math.floor(b * 0.3));
+        darkColor = `rgb(${darkR}, ${darkG}, ${darkB})`;
+    } else {
+        const themeColors = {
+            'default': { primary: '#c27c15', accent: '#e69500', dark: '#1a1a1a' },
+            'rainbow': { primary: '#ff0080', accent: '#ff00ff', dark: '#0a0a0a' },
+            'cyber-green': { primary: '#00ff00', accent: '#00cc00', dark: '#000000' },
+            'ice-blue': { primary: '#00ccff', accent: '#0088cc', dark: '#001122' },
+            'solarized': { primary: '#2aa198', accent: '#268bd2', dark: '#002b36' },
+            'purple-haze': { primary: '#9b59b6', accent: '#6c3483', dark: '#1a1a2e' }
+        };
+        
+        const colors = themeColors[currentTheme] || themeColors['default'];
+        primaryColor = colors.primary;
+        accentColor = colors.accent;
+        darkColor = colors.dark;
+    }
+
+    function colorToHex(color) {
+        if (color.startsWith('#')) {
+            return color;
+        }
+        if (color.startsWith('rgb(')) {
+            const rgb = color.match(/\d+/g);
+            return '#' + rgb.map(x => {
+                const hex = parseInt(x).toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('');
+        }
+        return '#c27c15';
+    }
+    
+    function rgbToNumber(color) {
+        if (color.startsWith('#')) {
+            return parseInt(color.replace('#', '0x'));
+        }
+        if (color.startsWith('rgb(')) {
+            const rgb = color.match(/\d+/g);
+            return (parseInt(rgb[0]) << 16) + (parseInt(rgb[1]) << 8) + parseInt(rgb[2]);
+        }
+        return 0xc27c15;
+    }
+    
+    const primaryHex = colorToHex(primaryColor);
+    const accentHex = colorToHex(accentColor);
+    const darkHex = colorToHex(darkColor);
+
+    const highlightColor = rgbToNumber(accentColor);
+    const midtoneColor = rgbToNumber(primaryColor);
+    const lowlightColor = rgbToNumber(accentColor);
+    const baseColor = rgbToNumber(darkColor);
+
     const quotes = [
         "Cmon we all know that Marval Rivals is overrated",
         "Everyone knows ur a furry buddy",
@@ -4674,35 +4755,29 @@
         "Stop @ing me on discord bruh",
         "Isnt this loading screen cool?",
         "This site was made with love <3",
-        "Theres no way ur rage quitting in class",
-        "tell ur mom I said hi",
-        "Go touch some grass buddy",
-        "Installing virus in 3... 2... 1...",
-        "We've been trying to reach you about your car's extended warranty",
-        "Skill issue, tbh",
-        "Go outside. Just kidding, stay here with me",
-        "If you read this, you owe me $5",
-        "Crtl + Shift + QQ",
-        "Made you look",
-        "You’re now aware of your own blinking",
-        "Don’t think about elephants",
-        "Whats 9 + 10?",
-        "21",
-        "I owe people alot of money",
-        "Does your teacher know your using this site?",
-        "I mog you",
-        "Im in love with the coco",
-        "Why is it called a building if its already built?",
-        "If a tomato is a fruit, does that make ketchup a smoothie?",
-        "Why do we park in driveways and drive on parkways?",
-        "Bruh",
-        "Its just like seeing her for the firs time, again",
-        "i've made a severe and continuous lapse in my judgement",
-        "soundcloud @barsman69",
-        "retep",
-        "Ay ma, wheres the gabagool?",
-        "Cashapp me 5 bucks and ill give you free robux",
-        "R.I.P my day 1 charlie kirk 💔"
+        "FAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH",
+        "These edibles ain't shit",
+        "Game will load after this 3 second ad",
+        "Are we there yet",
+        "You know I have to type of of these",
+        "I wish my dad came back with the milk",
+        "Uhhh my mom said I have to do my homework first",
+        "Hey siri whats the name of this site",
+        "Should've used adblock",
+        "That's what she said",
+        "Who made this piece of shit",
+        "It's not a bug it's a feature",
+        "The numbers Mason, what do they mean",
+        "Mila wheela the greatest!!",
+        "Bacon Bacon Bacon",
+        "My name is anderdingus",
+        "Goo goo ga ga",
+        "Why is this taking so long?",
+        "Mane fawk you mama huevo",
+        "Ill give you 5$ to say the n-word",
+        "Meow",
+        "Take your pants off in 3... 2... 1...",
+        "Is it okay if I touch you....?"
     ];
 
     const loadingSteps = [
@@ -4711,7 +4786,7 @@
         { status: "Putting in the thingamabobs...", progress: 45, time: 900 },
         { status: "Screwing in the doohickeys..", progress: 60, time: 1200 },
         { status: "Establishing tarbonator...", progress: 75, time: 600 },
-        { status: "Contacting Elon....", progress: 85, time: 800 },
+        { status: "Contacting Netanyahu....", progress: 85, time: 800 },
         { status: "Finalizing...", progress: 95, time: 1000 },
         { status: "Ready to launch...", progress: 100, time: 1200 }
     ];
@@ -4743,6 +4818,7 @@
                     height: 100vh;
                     overflow: hidden;
                     font-family: 'Courier New', monospace;
+                    background: ${darkColor};
                 }
 
                 #vanta-bg {
@@ -4765,7 +4841,7 @@
                 }
 
                 .game-title {
-                    color: #ffcc8a;
+                    color: ${accentColor};
                     font-size: 1.8rem;
                     margin-bottom: 5px;
                     font-weight: 600;
@@ -4774,7 +4850,7 @@
                 }
 
                 .game-subtitle {
-                    color: rgba(255, 204, 138, 0.7);
+                    color: ${accentColor}70;
                     font-size: 0.9rem;
                     margin-bottom: 30px;
                     font-weight: 400;
@@ -4783,7 +4859,7 @@
                 }
 
                 .status {
-                    color: #f2b55e;
+                    color: ${primaryColor};
                     font-size: 1rem;
                     margin-bottom: 30px;
                     font-weight: 500;
@@ -4810,8 +4886,8 @@
                     height: 100%;
                     background: linear-gradient(90deg,
                         transparent,
-                        rgba(255, 173, 87, 0.8),
-                        rgba(255, 173, 87, 0.8),
+                        ${primaryColor}80,
+                        ${primaryColor}80,
                         transparent);
                     animation: slide 1.5s infinite ease-in-out;
                 }
@@ -4822,7 +4898,7 @@
                 }
 
                 .percentage {
-                    color: #ffcc8a;
+                    color: ${accentColor};
                     font-size: 1rem;
                     font-weight: 600;
                     margin-top: 10px;
@@ -4844,7 +4920,7 @@
                     height: 1px;
                     background: linear-gradient(90deg, 
                         transparent, 
-                        rgba(255, 179, 71, 0.3), 
+                        ${primaryColor}30, 
                         transparent);
                 }
 
@@ -4899,10 +4975,10 @@
                         gyroControls: false,
                         minHeight: 200.00,
                         minWidth: 200.00,
-                        highlightColor: 0xffab00,
-                        midtoneColor: 0xb16f3b,
-                        lowlightColor: 0x93623e,
-                        baseColor: 0x3c291b,
+                        highlightColor: ${highlightColor},
+                        midtoneColor: ${midtoneColor},
+                        lowlightColor: ${lowlightColor},
+                        baseColor: ${baseColor},
                         speed: 2.50,
                         zoom: 1.80
                     }
@@ -4914,7 +4990,13 @@
 
                 function initVantaBackground() {
                     if (window.VANTA && !vantaEffect) {
-                        vantaEffect = VANTA.FOG(CONFIG.vantaSettings);
+                        try {
+                            vantaEffect = VANTA.FOG(CONFIG.vantaSettings);
+                        } catch (error) {
+                            console.error('Vanta.js initialization error:', error);
+                            // Fallback: just show solid background
+                            document.getElementById('vanta-bg').style.background = '${darkColor}';
+                        }
                     }
                 }
 
@@ -4945,25 +5027,13 @@
                     }
 
                     if (currentStep < CONFIG.loadingSteps.length) {
-                        const randomFactor = 0.7 + Math.random() * 0.6; // 0.7 to 1.3
+                        const randomFactor = 0.7 + Math.random() * 0.6;
                         const delay = Math.floor(step.time * randomFactor);
                         setTimeout(updateProgress, delay);
                     }
                 }
 
                 function startLoading() {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    const game = urlParams.get('game') || '${gameTitle}';
-
-                    if (game.includes(':')) {
-                        const parts = game.split(':');
-                        document.getElementById('gameTitle').textContent = parts[0].trim().toUpperCase();
-                        document.getElementById('gameSubtitle').textContent = parts[1].trim().toUpperCase();
-                    } else {
-                        document.getElementById('gameTitle').textContent = 'LOADING..';
-                        document.getElementById('gameSubtitle').textContent = game.toUpperCase();
-                    }
-
                     initVantaBackground();
 
                     updateQuote();
@@ -4996,55 +5066,10 @@
         <\/body>
         <\/html>
     `;
-    }
-
-    function getRandomLoadingDuration() {
-    const baseTime = 2500;
-    const randomVariation = Math.random() * 2000;
-    return baseTime + randomVariation;
-    }
-
-    function openInAboutBlank(url) {
-    const newWindow = window.open('about:blank', '_blank');
-
-    if (newWindow) {
-        const wrapperHTML = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>I ❤️ Noahs Tutoring Hub<\/title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-    <\/style>
-    <\/head>
-    <body>
-    <iframe src="${url}" frameborder="0" allowfullscreen><\/iframe>
-    <\/body>
-    <\/html>`;
-        
-        newWindow.document.write(wrapperHTML);
-        newWindow.document.close();
-    } else {
-        alert("turn on popups mf!");
-    }
-    }
+}
 
     function refreshGame() {
     const gameFrame = document.getElementById('gameFrame');
-    const currentUrl = gameFrame.src;
-    const currentSrcDoc = gameFrame.srcdoc;
-    
     const gameTitle = document.getElementById('gameTitle').textContent;
     
     if (typeof gtag !== 'undefined') {
@@ -5064,14 +5089,15 @@
         return;
     }
 
-    const refreshDuration = 1000 + Math.random() * 500;
+    const refreshDuration = 3000;
     
     setTimeout(() => {
-        const isDirectGameFile = currentGame.url.includes('raw.githubusercontent.com') || 
-                                currentGame.url.includes('cdn.jsdelivr.net') || 
-                                currentGame.url.includes('rawcdn.githack.com');
-        
-        if (isDirectGameFile && (currentGame.url.includes('.html') || currentGame.url.endsWith('.htm'))) {
+        const isHtmlFile = currentGame.url.includes('.html') || 
+                          currentGame.url.includes('.htm') || 
+                          currentGame.url.includes('cdn.jsdelivr.net') || 
+                          currentGame.url.includes('rawcdn.githack.com');
+
+        if (isHtmlFile) {
             fetch(currentGame.url)
                 .then(response => {
                     if (!response.ok) throw new Error('Network response was not ok');
