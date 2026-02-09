@@ -1949,8 +1949,37 @@
                                     { title: "Tomb of the Mask", desc: "Arcade maze game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/177.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/182.jpg" },
                                     { title: "Wordle", desc: "Word guessing puzzle", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/176.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/183.jpg" },
                                     { title: "Monkey Mart", desc: "Store management tycoon", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/175.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/184.jpg" },
-                                    { title: "Short Life", desc: "Quick racing challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/174.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/185.jpg" }
+                                    { title: "Short Life", desc: "Quick racing challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/174.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/185.jpg" },
+                                    { title: "Five Nights at Epstein", desc: "A secret escape game where you navigate through mysterious locations", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/2019.html", secret: true }
                                 ];
+
+    let typedKeys = '';
+    const secretCode = 'epstein';
+    let secretUnlocked = false;
+
+    document.addEventListener('keydown', function(e) {
+    if (e.key.length === 1 && /[a-zA-Z]/.test(e.key)) {
+        typedKeys += e.key.toLowerCase();
+
+        if (typedKeys.length > secretCode.length) {
+            typedKeys = typedKeys.slice(-secretCode.length);
+        }
+
+        if (typedKeys.includes(secretCode) && !secretUnlocked) {
+            secretUnlocked = true;
+
+            const secretGame = games.find(game => game.secret);
+            if (secretGame) {
+                openLesson(secretGame.title, secretGame.url);
+                
+                setTimeout(() => {
+                    secretUnlocked = false;
+                    typedKeys = '';
+                }, 10000);
+            }
+        }
+    }
+    });
                                 
 
                                 function performSearch(searchTerm) {
@@ -2346,25 +2375,28 @@
                          document.head.appendChild(style);
 
                                 function generateGameCards() {
-                            const popularContainer = document.getElementById('popularLessonsGrid');
-                            const allContainer = document.getElementById('allLessonsGrid');
+    const popularContainer = document.getElementById('popularLessonsGrid');
+    const allContainer = document.getElementById('allLessonsGrid');
 
-                            popularContainer.innerHTML = '';
-                            allContainer.innerHTML = '';
+    popularContainer.innerHTML = '';
+    allContainer.innerHTML = '';
 
-                            const popularGames = games.filter(game => game.popular);
-                            popularGames.forEach(game => {
-                                const gameCard = createGameCard(game);
-                                popularContainer.appendChild(gameCard);
-                            });
+    // Filter out secret games - they won't appear in the list
+    const visibleGames = games.filter(game => !game.secret);
+    const popularGames = visibleGames.filter(game => game.popular);
 
-                            originalGamesOrder = [...games];
+    popularGames.forEach(game => {
+        const gameCard = createGameCard(game);
+        popularContainer.appendChild(gameCard);
+    });
 
-                            applySorting();
+    originalGamesOrder = [...visibleGames];
 
-                            initCursorHover();
-                            startImageFlash();
-                         }
+    applySorting();
+
+    initCursorHover();
+    startImageFlash();
+    }
 
                          function getRandomGame() {
                             return games[Math.floor(Math.random() * games.length)];
@@ -4720,7 +4752,6 @@
                 document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('adsDisabled') === 'true') {
     document.getElementById('adToggle').checked = true;
-    // Remove ad scripts immediately
     document.querySelectorAll('script[src*="gizokraijaw"], script[src*="nap5k"]').forEach(script => script.remove());
     }
     });
@@ -4973,6 +5004,11 @@
               "in the big 2026",
               "big yahu",
               "sink let that in",
+              "This site won't give you a virus trust",
+              "giggity",
+              "read this if you like boys",
+              "jiggle my balls to niagra falls and before u do that, take off my drawls",
+              "I heard if you type in epstein something CRAZY happens...",
           ];
 
           const loadingSteps = [
