@@ -2056,6 +2056,54 @@
       color: #000;
       transform: translateY(-5px);
     }
+
+    .favorite-star {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 1.5rem;
+      cursor: none !important;
+      z-index: 10;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 0px transparent;
+    }
+
+    .favorite-star.favorited {
+      color: #ffd700;
+      text-shadow: 0 0 15px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.4);
+      animation: starPulse 1s ease;
+    }
+
+    .favorite-star:hover {
+      transform: scale(1.2);
+      color: rgba(255, 215, 0, 0.8);
+    }
+
+    .lesson-card {
+      position: relative;
+      overflow: visible;
+    }
+
+    @keyframes starPulse {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.3);
+        text-shadow: 0 0 25px rgba(255, 215, 0, 1);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .sort-select option[value="favorites"] {
+      color: #ffd700;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -2135,6 +2183,9 @@
         <select class="sort-select" id="sortSelect">
           <option value="default">
             [NEWEST]
+          </option>
+          <option value="favorites">
+            [⭐ FAVORITES]
           </option>
           <option value="alphabetical">
             [A - Z]
@@ -2314,6 +2365,9 @@
   </div><button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
   <script>
     const games = [
+      { title: "Hamtaro: Ham-Ham Heartbreak", desc: "Help Hamtaro and Bijou reunite Ham-Hams and repair broken hearts in this charming adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/336.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/337.jpg" },
+      { title: "Class of '09", desc: "An anti-visual novel where you navigate the toxic social landscape of high school with dark humor", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/337.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/338.jpg" },
+      { title: "Antonblast", desc: "An explosive, high-speed action platformer where you must reclaim your prized spirit collection", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/338.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/339.jpg" },
       { title: "Super Monkey Ball", desc: "Roll your ball through challenging suspended courses, reach the goal and collect bannanas", url: "https://rawcdn.githack.com/slqntdevss/quasar/main/public/assets/storage/html/smb/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/336.jpg" },
       { title: "Iron Lung", desc: "Pilot a cramped submarine through an ocean of blood on an alien moon in a claustrophobic space", url: "https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/306.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/328.jpg" },
       { title: "Superhot", desc: "Time only moves when you move, strategy and aim combine in this unique FPS where bullets crawl past as you", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/299.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/321.jpg" },
@@ -2886,12 +2940,11 @@
 		                        <script>
 		                            (function() {
 		                                var gameTitle = "${gameTitle}";
-		                                
-		                                // Ensure watermark stays on top and reappears if removed
+
 		                                function protectWatermark() {
 		                                    const watermark = document.getElementById('noahs-watermark');
 		                                    if (!watermark && document.body) {
-		                                        location.reload(); // Reload if watermark is missing (tampering detected)
+		                                        location.reload();
 		                                    }
 		                                }
 		                                
@@ -5024,6 +5077,7 @@
         version: '1.0',
         exportDate: new Date().toISOString(),
         siteName: "Noah's Tutoring Hub",
+        favorites: favorites,
         settings: {
           selectedTheme: localStorage.getItem('selectedTheme') || 'default',
           customThemeColor: localStorage.getItem('customThemeColor') || '#c27c15',
@@ -5108,8 +5162,7 @@
             return;
           }
 
-          if (confirm(`Are you SURE you want to import your settings?
-		                            If you import new settings your old settings WILL be overwritten? Do you want that buddy?`)) {
+          if (confirm(`Are you SURE you want to import your settings? If you import new settings your old settings WILL be overwritten? Do you want that buddy?`)) {
             applyImportedSettings(importedSettings);
 
             showImportStatus('Yayy!! Your settings have been imported successfully! :)', 'success');
@@ -5151,11 +5204,20 @@
         if (!(field in settings.settings)) return false;
       }
 
+      if (settings.favorites !== undefined && !Array.isArray(settings.favorites)) {
+        return false;
+      }
+
       return true;
     }
 
     function applyImportedSettings(importedSettings) {
       const settings = importedSettings.settings;
+
+      if (importedSettings.favorites && Array.isArray(importedSettings.favorites)) {
+        favorites = importedSettings.favorites;
+        localStorage.setItem('gameFavorites', JSON.stringify(favorites));
+      }
 
       Object.keys(settings).forEach(key => {
         if (settings[key] !== null && settings[key] !== undefined) {
@@ -5249,6 +5311,13 @@
           const warningOverlay = document.getElementById('warningOverlay');
           if (warningOverlay) warningOverlay.classList.add('hidden');
         }
+      }
+
+      updateFavoriteStars();
+
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect && sortSelect.value === 'favorites') {
+        applySorting();
       }
 
       updateCursorColors();
@@ -5553,6 +5622,31 @@
         "read this if you like boys",
         "jiggle my balls to niagra falls and before u do that, take off my drawls",
         "I heard if you type in epstein something CRAZY happens...",
+        "You can't be shit if you don't start shit",
+        "You can’t spell thug without hug",
+        "2026 is the new 2016",
+        "made by the thugs for the thugs",
+        "u can touch shit and shit will be on your hands -holydih120",
+        "play our games",
+        "Some people don’t realize there worth until their worth nothing -joe",
+        "Anything but doing work",
+        "Sometimes you gotta fart in order to shart",
+        "black on black on black",
+        "Keep calm and swag on",
+        "can’t let go is the hardest geometry dash level -holydih120",
+        "call me thugalicious cus all my homies cant keep their hands to themselves 🥵",
+        "HE CANT KEEP GETTING AWAY WITH THISSSS",
+        "Dany Slicer will take down this site",
+        "Yall need to stop spiking my corisol frl",
+        "can I please have a water, please?",
+        "Clavicular CASSUALY ran in to ASU frat leader and gets BRUTALLY frame mogged",
+        "But when IIIIIIII win a 40v1 I get -1000 AURAAAAA",
+        "lwk gotta take a shit brb",
+        "Call me DL the way I can’t get out the closet” -Bae da Philosopher",
+        "my homies ask if im gay, but the closet is made of glass.",
+        "Big yahu, DESTROY HIM",
+        "i’m really horny -98corbins",
+        "BOMBOCLATTTTTTTT",
       ];
 
       const loadingSteps = [
@@ -5769,7 +5863,6 @@
 		                                                        vantaEffect = VANTA.FOG(CONFIG.vantaSettings);
 		                                                    } catch (error) {
 		                                                        console.error('Vanta.js initialization error:', error);
-		                                                        // Fallback: just show solid background
 		                                                        document.getElementById('vanta-bg').style.background = '${darkColor}';
 		                                                    }
 		                                                }
@@ -5916,6 +6009,155 @@
         setTimeout(() => location.reload(), 500);
       }
     }
+
+    let favorites = JSON.parse(localStorage.getItem('gameFavorites')) || [];
+
+    function toggleFavorite(gameTitle, event) {
+      event.stopPropagation();
+
+      const index = favorites.indexOf(gameTitle);
+      if (index === -1) {
+        favorites.push(gameTitle);
+      } else {
+        favorites.splice(index, 1);
+      }
+
+      localStorage.setItem('gameFavorites', JSON.stringify(favorites));
+      updateFavoriteStars();
+
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect && sortSelect.value === 'favorites') {
+        applySorting();
+      }
+
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'favorite_toggle', {
+          'event_category': 'engagement',
+          'event_label': gameTitle,
+          'value': index === -1 ? 1 : 0
+        });
+      }
+    }
+
+    function updateFavoriteStars() {
+      document.querySelectorAll('.favorite-star').forEach(star => {
+        const card = star.closest('.lesson-card');
+        const titleElement = card.querySelector('.lesson-title');
+        if (!titleElement) return;
+
+        const gameTitle = titleElement.textContent;
+        if (favorites.includes(gameTitle)) {
+          star.classList.add('favorited');
+          star.innerHTML = '<i class="fas fa-star"></i>';
+        } else {
+          star.classList.remove('favorited');
+          star.innerHTML = '<i class="far fa-star"></i>';
+        }
+      });
+    }
+
+    const originalCreateGameCard = createGameCard;
+    createGameCard = function (game, isRandom = false) {
+      const card = originalCreateGameCard(game, isRandom);
+
+      if (!isRandom) {
+        const star = document.createElement('div');
+        star.className = 'favorite-star';
+
+        if (favorites.includes(game.title)) {
+          star.classList.add('favorited');
+          star.innerHTML = '<i class="fas fa-star"></i>';
+        } else {
+          star.innerHTML = '<i class="far fa-star"></i>';
+        }
+
+        star.onclick = (e) => toggleFavorite(game.title, e);
+        card.insertBefore(star, card.firstChild);
+
+        const originalOnClick = card.onclick;
+        card.onclick = function (e) {
+          if (!e.target.closest('.favorite-star')) {
+            originalOnClick.call(this, e);
+          }
+        };
+      }
+
+      return card;
+    };
+
+    const originalSortGames = sortGames;
+    sortGames = function (method) {
+      if (method === 'favorites') {
+        const favoriteGames = games.filter(game =>
+          !game.secret && favorites.includes(game.title)
+        );
+
+        favoriteGames.sort((a, b) => a.title.localeCompare(b.title));
+
+        return favoriteGames;
+      }
+
+      return originalSortGames(method);
+    };
+
+    const originalApplySorting = applySorting;
+    applySorting = function () {
+      const sortedGames = sortGames(currentSortMethod);
+      const allContainer = document.getElementById('allLessonsGrid');
+
+      const searchInput = document.getElementById('searchInput');
+      const searchTerm = searchInput ? searchInput.value : '';
+
+      allContainer.innerHTML = '';
+
+      if (currentSortMethod !== 'favorites' && !searchTerm && currentSortMethod === 'default') {
+        const randomGame = getRandomGame();
+        const randomCard = createGameCard(randomGame, true);
+        allContainer.appendChild(randomCard);
+      }
+
+      if (currentSortMethod === 'favorites' && sortedGames.length === 0) {
+        const noFavoritesMsg = document.createElement('div');
+        noFavoritesMsg.className = 'no-results show';
+        noFavoritesMsg.innerHTML = `
+            <i class="fas fa-star" style="color: #ffd700; font-size: 3rem; margin-bottom: 15px;"></i>
+            <h3 style="color: var(--light-text); margin-bottom: 10px;">No Favorites Yet 🥺</h3>
+            <p style="color: var(--gray-text);">Click the ⭐ on any game to add it to your favorites!</p>
+        `;
+        allContainer.appendChild(noFavoritesMsg);
+      } else {
+        sortedGames.forEach(game => {
+          const gameCard = createGameCard(game);
+          allContainer.appendChild(gameCard);
+        });
+      }
+
+      initCursorHover();
+
+      if (searchTerm) {
+        performSearch(searchTerm);
+      } else {
+        updateSearchStats();
+      }
+
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'game_sort', {
+          'event_category': 'engagement',
+          'event_label': currentSortMethod,
+          'value': sortedGames.length
+        });
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const sortSelect = document.getElementById('sortSelect');
+      if (sortSelect && !Array.from(sortSelect.options).some(opt => opt.value === 'favorites')) {
+        const option = document.createElement('option');
+        option.value = 'favorites';
+        option.textContent = '[⭐ FAVORITES]';
+        sortSelect.appendChild(option);
+      }
+    });
   </script>
   <div id="contextMenu">
     <div class="context-menu-item" onclick="openSettings()">
