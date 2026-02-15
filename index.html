@@ -2104,8 +2104,24 @@
       color: #ffd700;
       font-weight: bold;
     }
+
+    .lesson-card {
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.3s ease;
+    }
+
+    .lesson-card.fade-in {
+      opacity: 1;
+    }
   </style>
-  <script src="https://pl28717100.effectivegatecpm.com/62/d4/ba/62d4ba4a5e6660053b4929656a2293b0.js"></script>
+  <script>
+    (function () {
+      const adsDisabled = localStorage.getItem('adsDisabled') === 'true';
+      if (!adsDisabled) {
+        document.write('<script src="https://pl28717100.effectivegatecpm.com/62/d4/ba/62d4ba4a5e6660053b4929656a2293b0.js"><\/script>');
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -2122,11 +2138,11 @@
         <i class="fas fa-users"></i> <span>Live Users: <span class="user-count" id="liveUserCount">--</span></span>
       </div>
       <div class="social-icons">
-        <a href="https://discord.gg/pCGQ8vrKza" target="_blank"><i class="fab fa-discord"></i></a> 
-        <a href="https://github.com/NoahsAmazingTutoringHelp" target="_blank"><i class="fab fa-github"></i></a> 
+        <a href="https://discord.gg/pCGQ8vrKza" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="https://github.com/NoahsAmazingTutoringHelp" target="_blank"><i class="fab fa-github"></i></a>
         <a href="https://www.tiktok.com/@noahstutoringhub" target="_blank"><i class="fab fa-tiktok"></i></a>
         <a href="https://www.youtube.com/@noahstutoringhub" target="_blank"><i class="fab fa-youtube"></i></a>
-          
+
       </div>
       <div class="settings-button-container">
         <button class="settings-btn" onclick="openSettings()" title="Settings (Ctrl+Shift+S)"><i class="fas fa-cog"></i>
@@ -2218,7 +2234,7 @@
             1Key
           </h3>
           <p class="partner-desc">
-            Highly customizable and stable. We may not have the best games or bypasses, 
+            Highly customizable and stable. We may not have the best games or bypasses,
             but we're always open to suggestions, continuously improving, and building a strong community.
           </p>
           <div class="partner-buttons">
@@ -2266,7 +2282,7 @@
             Bloxcraft UBG
           </h3>
           <p class="partner-desc">
-            Welcome to Bloxcraft the Ultimate UBG site your all in-one learning hub with hundreds of 
+            Welcome to Bloxcraft the Ultimate UBG site your all in-one learning hub with hundreds of
             lessons and other UBGs right at your fingertips!
           </p>
           <div class="partner-buttons">
@@ -6183,6 +6199,8 @@
         sortSelect.appendChild(option);
       }
     });
+
+
   </script>
   <div id="contextMenu">
     <div class="context-menu-item" onclick="openSettings()">
@@ -6317,6 +6335,53 @@
       </div>
     </div>
   </div>
-  <script src="https://pl28717093.effectivegatecpm.com/0a/7a/d0/0a7ad05d3d7e256b5f2d129096017a9c.js"></script>
+  <script>
+    (function () {
+      const adsDisabled = localStorage.getItem('adsDisabled') === 'true';
+      if (!adsDisabled) {
+        document.write('<script src="https://pl28717093.effectivegatecpm.com/0a/7a/d0/0a7ad05d3d7e256b5f2d129096017a9c.js"><\/script>');
+      }
+    })();
+  </script>
+  <script>
+    function initFadeObserver() {
+      const cards = document.querySelectorAll('.lesson-card');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          } else {
+            entry.target.classList.remove('fade-in');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px'
+      });
+
+      cards.forEach(card => observer.observe(card));
+      return observer;
+    }
+    let fadeObserver = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        fadeObserver = initFadeObserver();
+      }, 100);
+    });
+
+    const originalPerformSearch = window.performSearch;
+    if (originalPerformSearch) {
+      window.performSearch = function (searchTerm) {
+        originalPerformSearch(searchTerm);
+        setTimeout(() => {
+          if (fadeObserver) fadeObserver.disconnect();
+          fadeObserver = initFadeObserver();
+        }, 50);
+      };
+    }
+  </script>
 </body>
+
 </html>
