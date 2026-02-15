@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+        <base 
+                href="https://cdn.jsdelivr.net/gh/webporting/Untitled-Goose-Game@latest/">
+<head>
+        <title>webport.ing | Untitled Goose Game</title>
+        <meta 
+                charset="UTF-8">
+        <meta 
+                name="viewport" 
+                content="width=device-width, initial-scale=1.0">
+        <meta 
+                name="title" 
+                content="webport.ing | Untitled Goose Game"">
+        <meta 
+                name="description" 
+                content="A webport of Untitled Goose Game!">
+        <link 
+                rel="preconnect" 
+                href="https://fonts.googleapis.com">
+        <link 
+                rel="preconnect" 
+                href="https://fonts.gstatic.com" 
+                crossorigin>    
+        <link 
+                href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" 
+                rel="stylesheet">
+        <link   
+                rel="icon" 
+                type="image/png" 
+                href="goose.png">
+</head>
+<style>
+                html, body {
+                        width: 100%;
+                        height: 100%;
+                        margin: 0;
+                        padding: 0;
+                        overflow: hidden; 
+                        background-color: #3a6bd4;
+                }
+                #game-container {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: #3a6bd4;
+                }
+                #unity-canvas {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                }
+                #loading {
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-family: "Transport New Heavy", "Transport New", Arial, sans-serif;
+                        font-size: 80px;
+                        font-weight: 900;
+                        text-transform: uppercase;
+                        text-align: center;
+                        width: 90%;
+                        color: white;
+                        line-height: 0.9;
+                        pointer-events: none;
+                        text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+                        z-index: 10;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                }
+                #loading img {
+                        width: 300px; 
+                        height: auto;
+                        margin-bottom: 20px;
+                        display: block;
+                }
+</style>
+<body>
+        <main>
+                <div id="game-container">
+                        <canvas id="unity-canvas" tabindex="-1"></canvas>
+                        <div id="loading">
+                                <img src="goose.png" alt="Goose Icon">
+                                <span>UNTITLED GOOSE GAME</span>
+                        </div>
+                </div>
+        </main>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRPEBVLGFH"></script>
+        <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-BRPEBVLGFH');
+                async function mergeFiles(basePath, parts) {
+                        const chunks = [];
+                        for (let i = 1; i <= parts; i++) {
+                                const response = await fetch(`${basePath}.part${i}`);
+                                if (!response.ok) throw new Error(`Part ${i} missing`);
+                                chunks.push(await response.arrayBuffer());
+                        }
+                        return new Blob(chunks);
+                }
+                async function init() {
+                        try {
+                                const dataBlob = await mergeFiles('Build/Untitled Goose Game.data', 4);
+                                const wasmBlob = await mergeFiles('Build/Untitled Goose Game.wasm', 2);
+                                const dataUrl = URL.createObjectURL(dataBlob);
+                                const wasmUrl = URL.createObjectURL(new Blob([wasmBlob], { type: 'application/wasm' }));
+                                createUnityInstance(document.querySelector("#unity-canvas"), {
+                                        dataUrl: dataUrl,
+                                        frameworkUrl: "Build/Untitled Goose Game.framework.js",
+                                        codeUrl: wasmUrl,
+                                        streamingAssetsUrl: "StreamingAssets",
+                                        companyName: "House House _ Bog",
+                                        productName: "Untitled Goose Game",
+                                        productVersion: "0.2",
+                                }).then(() => {
+                                        document.getElementById('loading').style.display = 'none';
+                                });
+                        } catch (e) {
+                                console.error(e);
+                                document.getElementById('loading').innerHTML = "Failed loading.";
+                                document.getElementById('loading').style.fontSize = "40px";
+                        }
+                }
+                const loaderScript = document.createElement('script');
+                loaderScript.src = 'Build/Untitled Goose Game.loader.js';
+                loaderScript.onload = init;
+                document.body.appendChild(loaderScript);
+        </script>
+</body>
+</html>
