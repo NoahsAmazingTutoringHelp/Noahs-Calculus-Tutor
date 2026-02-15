@@ -2105,14 +2105,14 @@
       font-weight: bold;
     }
 
-    .lesson-card {
-      opacity: 0;
-      transition: opacity 0.5s ease, transform 0.3s ease;
-    }
+.lesson-card {
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.3s ease;
+}
 
-    .lesson-card.fade-in {
-      opacity: 1;
-    }
+.lesson-card.fade-in {
+  opacity: 1;
+}
   </style>
   <script>
     (function () {
@@ -2138,11 +2138,11 @@
         <i class="fas fa-users"></i> <span>Live Users: <span class="user-count" id="liveUserCount">--</span></span>
       </div>
       <div class="social-icons">
-        <a href="https://discord.gg/pCGQ8vrKza" target="_blank"><i class="fab fa-discord"></i></a>
-        <a href="https://github.com/NoahsAmazingTutoringHelp" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://discord.gg/pCGQ8vrKza" target="_blank"><i class="fab fa-discord"></i></a> 
+        <a href="https://github.com/NoahsAmazingTutoringHelp" target="_blank"><i class="fab fa-github"></i></a> 
         <a href="https://www.tiktok.com/@noahstutoringhub" target="_blank"><i class="fab fa-tiktok"></i></a>
         <a href="https://www.youtube.com/@noahstutoringhub" target="_blank"><i class="fab fa-youtube"></i></a>
-
+          
       </div>
       <div class="settings-button-container">
         <button class="settings-btn" onclick="openSettings()" title="Settings (Ctrl+Shift+S)"><i class="fas fa-cog"></i>
@@ -2234,7 +2234,7 @@
             1Key
           </h3>
           <p class="partner-desc">
-            Highly customizable and stable. We may not have the best games or bypasses,
+            Highly customizable and stable. We may not have the best games or bypasses, 
             but we're always open to suggestions, continuously improving, and building a strong community.
           </p>
           <div class="partner-buttons">
@@ -2282,7 +2282,7 @@
             Bloxcraft UBG
           </h3>
           <p class="partner-desc">
-            Welcome to Bloxcraft the Ultimate UBG site your all in-one learning hub with hundreds of
+            Welcome to Bloxcraft the Ultimate UBG site your all in-one learning hub with hundreds of 
             lessons and other UBGs right at your fingertips!
           </p>
           <div class="partner-buttons">
@@ -2401,7 +2401,8 @@
   </div><button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
   <script>
     const games = [
-      { title: "Deltarune Chapters 3 & 4", desc: "The journey continues in the latest chapters of Deltarune. Explore new areas and face new challenges with Kris and friends.", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/340.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/341.jpg" },
+      { title: "Untitled Goose Game", desc: "A game where you are a goose let loose on an unsuspecting village terroizing EVERYONE", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/341.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/342.jpg" },
+      { title: "Deltarune Chapters 3 & 4", desc: "A journey continues in the latest chapters of Deltarun, explore new areas and face new challenges with Kris and friends", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/340.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/341.jpg" },
       { title: "Earthbound", desc: "An RPG where a young boy named Ness and his friends must save the world from an intergalactic threat", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/339.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/340.jpg" },
       { title: "Hamtaro: Ham-Ham Heartbreak", desc: "Help Hamtaro and Bijou reunite Ham-Hams and repair broken hearts in this charming adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/336.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/337.jpg" },
       { title: "Class of '09", desc: "An anti-visual novel where you navigate the toxic social landscape of high school with dark humor", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/337.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/338.jpg" },
@@ -6199,8 +6200,8 @@
         sortSelect.appendChild(option);
       }
     });
-
-
+    
+    
   </script>
   <div id="contextMenu">
     <div class="context-menu-item" onclick="openSettings()">
@@ -6344,44 +6345,43 @@
     })();
   </script>
   <script>
-    function initFadeObserver() {
-      const cards = document.querySelectorAll('.lesson-card');
-
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-          } else {
-            entry.target.classList.remove('fade-in');
-          }
-        });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px'
+  function initFadeObserver() {
+    const cards = document.querySelectorAll('.lesson-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        } else {
+          entry.target.classList.remove('fade-in');
+        }
       });
-
-      cards.forEach(card => observer.observe(card));
-      return observer;
-    }
-    let fadeObserver = null;
-
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        fadeObserver = initFadeObserver();
-      }, 100);
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px'
     });
 
-    const originalPerformSearch = window.performSearch;
-    if (originalPerformSearch) {
-      window.performSearch = function (searchTerm) {
-        originalPerformSearch(searchTerm);
-        setTimeout(() => {
-          if (fadeObserver) fadeObserver.disconnect();
-          fadeObserver = initFadeObserver();
-        }, 50);
-      };
-    }
-  </script>
-</body>
+    cards.forEach(card => observer.observe(card));
+    return observer;
+  }
+  let fadeObserver = null;
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      fadeObserver = initFadeObserver();
+    }, 100);
+  });
 
+  const originalPerformSearch = window.performSearch;
+  if (originalPerformSearch) {
+    window.performSearch = function(searchTerm) {
+      originalPerformSearch(searchTerm);
+      setTimeout(() => {
+        if (fadeObserver) fadeObserver.disconnect();
+        fadeObserver = initFadeObserver();
+      }, 50);
+    };
+  }
+</script>
+</body>
 </html>
