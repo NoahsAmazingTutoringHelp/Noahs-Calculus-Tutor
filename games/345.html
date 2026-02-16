@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flash Game</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: black;
+        }
+        ruffle-player {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Load Ruffle from CDN -->
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    
+    <!-- Ruffle will automatically detect and replace this - NO ORANGE BUTTON -->
+    <embed 
+        src="https://cdn.jsdelivr.net/gh/CBGamesdev/chilibowlflash@main/dadnme.swf"
+        width="100%"
+        height="100%"
+        style="width:100%; height:100%;"
+    />
+</body>
+</html>
