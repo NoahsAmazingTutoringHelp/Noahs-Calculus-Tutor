@@ -2,23 +2,6 @@
 <html lang="en">
 
 <head>
-
-  <script>
-    (function () {
-      const adsDisabled = localStorage.getItem('adsDisabled') === 'true';
-      if (!adsDisabled) {
-        const s1 = document.createElement('script');
-        s1.dataset.zone = '10582312';
-        s1.src = 'https://gizokraijaw.net/vignette.min.js';
-        document.head.appendChild(s1);
-
-        const s2 = document.createElement('script');
-        s2.dataset.zone = '10580678';
-        s2.src = 'https://nap5k.com/tag.min.js';
-        document.head.appendChild(s2);
-      }
-    })();
-  </script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QPXKLD48W">
   </script>
   <script>
@@ -2105,14 +2088,66 @@
       font-weight: bold;
     }
 
-.lesson-card {
-  opacity: 0;
-  transition: opacity 0.5s ease, transform 0.3s ease;
-}
+    .lesson-card {
+      opacity: 0;
+      transition: opacity 0.5s ease, transform 0.3s ease;
+    }
 
-.lesson-card.fade-in {
-  opacity: 1;
-}
+    .lesson-card.fade-in {
+      opacity: 1;
+    }
+
+    .ad-container {
+      max-width: 728px;
+      margin: 30px auto;
+      padding: 15px 0;
+      position: relative;
+      text-align: center;
+      background: rgba(20, 20, 20, 0.5);
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.3);
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .ad-container:hover {
+      border-color: var(--accent-orange);
+      box-shadow: 0 0 20px rgba(var(--primary-orange-rgb), 0.2);
+    }
+
+    .ad-label {
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      background: var(--dark-bg);
+      color: var(--gray-text);
+      font-size: 0.7rem;
+      font-family: 'Courier New', monospace;
+      padding: 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.3);
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    .ad-container iframe {
+      border-radius: 4px;
+      max-width: 100%;
+      height: auto;
+    }
+
+    @media (max-width: 768px) {
+      .ad-container {
+        margin: 20px 10px;
+        padding: 10px 0;
+      }
+
+      .ad-container iframe {
+        width: 100%;
+        height: auto;
+        min-height: 90px;
+      }
+    }
   </style>
   <script>
     (function () {
@@ -2138,11 +2173,11 @@
         <i class="fas fa-users"></i> <span>Live Users: <span class="user-count" id="liveUserCount">--</span></span>
       </div>
       <div class="social-icons">
-        <a href="https://discord.gg/pCGQ8vrKza" target="_blank"><i class="fab fa-discord"></i></a> 
-        <a href="https://github.com/NoahsAmazingTutoringHelp" target="_blank"><i class="fab fa-github"></i></a> 
+        <a href="https://discord.gg/pCGQ8vrKza" target="_blank"><i class="fab fa-discord"></i></a>
+        <a href="https://github.com/NoahsAmazingTutoringHelp" target="_blank"><i class="fab fa-github"></i></a>
         <a href="https://www.tiktok.com/@noahstutoringhub" target="_blank"><i class="fab fa-tiktok"></i></a>
         <a href="https://www.youtube.com/@noahstutoringhub" target="_blank"><i class="fab fa-youtube"></i></a>
-          
+
       </div>
       <div class="settings-button-container">
         <button class="settings-btn" onclick="openSettings()" title="Settings (Ctrl+Shift+S)"><i class="fas fa-cog"></i>
@@ -2187,6 +2222,19 @@
       </h2>
       <div class="lessons-grid" id="popularLessonsGrid"></div>
     </section>
+    <div class="ad-container banner-ad">
+      <div class="ad-label">ADVERTISEMENT</div>
+      <script>
+        atOptions = {
+          'key': '17597ffcacd1da248155d2da320dc2e5',
+          'format': 'iframe',
+          'height': 90,
+          'width': 728,
+          'params': {}
+        };
+      </script>
+      <script src="https://www.highperformanceformat.com/17597ffcacd1da248155d2da320dc2e5/invoke.js"></script>
+    </div>
     <section id="all-lessons">
       <h2>
         ALL LESSONS
@@ -2234,7 +2282,7 @@
             1Key
           </h3>
           <p class="partner-desc">
-            Highly customizable and stable. We may not have the best games or bypasses, 
+            Highly customizable and stable. We may not have the best games or bypasses,
             but we're always open to suggestions, continuously improving, and building a strong community.
           </p>
           <div class="partner-buttons">
@@ -2282,7 +2330,7 @@
             Bloxcraft UBG
           </h3>
           <p class="partner-desc">
-            Welcome to Bloxcraft the Ultimate UBG site your all in-one learning hub with hundreds of 
+            Welcome to Bloxcraft the Ultimate UBG site your all in-one learning hub with hundreds of
             lessons and other UBGs right at your fingertips!
           </p>
           <div class="partner-buttons">
@@ -6206,8 +6254,19 @@
         sortSelect.appendChild(option);
       }
     });
-    
-    
+
+    function updateGameDisplay(games) {
+      const container = document.getElementById('allLessonsGrid');
+      if (!container) return;
+
+      container.innerHTML = '';
+      games.forEach(game => {
+        const card = createGameCard(game);
+        container.appendChild(card);
+      });
+
+      initCursorHover();
+    }
   </script>
   <div id="contextMenu">
     <div class="context-menu-item" onclick="openSettings()">
@@ -6351,43 +6410,44 @@
     })();
   </script>
   <script>
-  function initFadeObserver() {
-    const cards = document.querySelectorAll('.lesson-card');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('fade-in');
-        } else {
-          entry.target.classList.remove('fade-in');
-        }
+    function initFadeObserver() {
+      const cards = document.querySelectorAll('.lesson-card');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+          } else {
+            entry.target.classList.remove('fade-in');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px'
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px'
+
+      cards.forEach(card => observer.observe(card));
+      return observer;
+    }
+    let fadeObserver = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        fadeObserver = initFadeObserver();
+      }, 100);
     });
 
-    cards.forEach(card => observer.observe(card));
-    return observer;
-  }
-  let fadeObserver = null;
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      fadeObserver = initFadeObserver();
-    }, 100);
-  });
-
-  const originalPerformSearch = window.performSearch;
-  if (originalPerformSearch) {
-    window.performSearch = function(searchTerm) {
-      originalPerformSearch(searchTerm);
-      setTimeout(() => {
-        if (fadeObserver) fadeObserver.disconnect();
-        fadeObserver = initFadeObserver();
-      }, 50);
-    };
-  }
-</script>
+    const originalPerformSearch = window.performSearch;
+    if (originalPerformSearch) {
+      window.performSearch = function (searchTerm) {
+        originalPerformSearch(searchTerm);
+        setTimeout(() => {
+          if (fadeObserver) fadeObserver.disconnect();
+          fadeObserver = initFadeObserver();
+        }, 50);
+      };
+    }
+  </script>
 </body>
+
 </html>
