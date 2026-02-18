@@ -2157,6 +2157,19 @@
     })();
   </script>
   <script src="https://unpkg.com/coi-serviceworker/coi-serviceworker.min.js"></script>
+  <script>
+  (async function() {
+    if (window.COIServiceWorker) {
+      await window.COIServiceWorker.register();
+      console.log('COI Service Worker registered');
+      setTimeout(() => {
+        console.log('Cross-origin isolated?', window.crossOriginIsolated);
+      }, 1000);
+    } else {
+      console.error('COI Service Worker failed to load');
+    }
+  })();
+</script>
 </head>
 
 <body>
