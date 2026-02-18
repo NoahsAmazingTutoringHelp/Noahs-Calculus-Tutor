@@ -2156,20 +2156,6 @@
       }
     })();
   </script>
-  <script src="https://unpkg.com/coi-serviceworker/coi-serviceworker.min.js"></script>
-  <script>
-  (async function() {
-    if (window.COIServiceWorker) {
-      await window.COIServiceWorker.register();
-      console.log('COI Service Worker registered');
-      setTimeout(() => {
-        console.log('Cross-origin isolated?', window.crossOriginIsolated);
-      }, 1000);
-    } else {
-      console.error('COI Service Worker failed to load');
-    }
-  })();
-</script>
 </head>
 
 <body>
@@ -2780,8 +2766,7 @@
       { title: "Wordle", desc: "Word guessing puzzle", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/176.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/183.jpg" },
       { title: "Monkey Mart", desc: "Store management tycoon", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/175.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/184.jpg" },
       { title: "Short Life", desc: "Quick racing challenges", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/174.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/185.jpg" },
-      { title: "Five Nights at Epstein", desc: "A secret escape game where you navigate through mysterious locations", url: "https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/38d133d8beca97f342830e0782e5ba7052125949/games/2019.html", secret: true },
-      { title: "Binding of BUILLSHIT", desc: "A dark gambling rogue-lite. Beat the slot machine, pay your debts, and escape the pit", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/musical-octo-dollop@main/index.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/343.jpg" }
+      { title: "Five Nights at Epstein", desc: "A secret escape game where you navigate through mysterious locations", url: "https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/38d133d8beca97f342830e0782e5ba7052125949/games/2019.html", secret: true }
     ];
 
     function showAdHintAlert() {
