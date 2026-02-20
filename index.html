@@ -2449,7 +2449,7 @@
   <script>
     const games = [
       { title: "The Binding of Isaac: Rebirth", desc: "A randomly generated action RPG shooter with heavy rogue-like elements. Follow Isaac on his journey to escape his mother", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/350.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/350.jpg" },
-	  { title: "Littlest Pet Shop City Friends", desc: "Explore the city, play fun mini-games, and collect adorable pets in this charming adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/348.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/349.jpg" },
+      { title: "Littlest Pet Shop City Friends", desc: "Explore the city, play fun mini-games, and collect adorable pets in this charming adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/348.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/349.jpg" },
       { title: "Cloverpit", desc: "A dark gambling rogue-lite. Beat the slot machine, pay your debts, and escape the pit", url: "https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/342.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/343.jpg" },
       { title: "Peaks of Yore", desc: "A first-person physics-based climbing game set in the great outdoors", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/343.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/344.jpg" },
       { title: "Silent Hill", desc: "The psychological horror classic. Navigate the fog-filled town and face your deepest fears", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/344.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/345.jpg" },
@@ -3399,16 +3399,27 @@
 
       allContainer.innerHTML = '';
 
-      if (currentSortMethod === 'default') {
+      if (currentSortMethod !== 'favorites' && !searchTerm && currentSortMethod === 'default') {
         const randomGame = getRandomGame();
         const randomCard = createGameCard(randomGame, true);
         allContainer.appendChild(randomCard);
       }
 
-      sortedGames.forEach(game => {
-        const gameCard = createGameCard(game);
-        allContainer.appendChild(gameCard);
-      });
+      if (currentSortMethod === 'favorites' && sortedGames.length === 0) {
+        const noFavoritesMsg = document.createElement('div');
+        noFavoritesMsg.className = 'no-results show';
+        noFavoritesMsg.innerHTML = `
+      <i class="fas fa-star" style="color: #ffd700; font-size: 3rem; margin-bottom: 15px;"></i>
+      <h3 style="color: var(--light-text); margin-bottom: 10px;">No Favorites Yet 🥺</h3>
+      <p style="color: var(--gray-text);">Click the ⭐ on any game to add it to your favorites!</p>
+    `;
+        allContainer.appendChild(noFavoritesMsg);
+      } else {
+        sortedGames.forEach(game => {
+          const gameCard = createGameCard(game);
+          allContainer.appendChild(gameCard);
+        });
+      }
 
       initCursorHover();
 
@@ -3417,6 +3428,10 @@
       } else {
         updateSearchStats();
       }
+
+      setTimeout(() => {
+        initFadeObserver();
+      }, 50);
 
       if (typeof gtag !== 'undefined') {
         gtag('event', 'game_sort', {
@@ -6230,6 +6245,7 @@
       }
 
       initCursorHover();
+      setTimeout(() => document.querySelectorAll('.lesson-card').forEach(card => card.classList.add('fade-in')), 10);
 
       if (searchTerm) {
         performSearch(searchTerm);
@@ -6411,15 +6427,26 @@
     })();
   </script>
   <script>
+    let fadeObserver = null;
+
     function initFadeObserver() {
+      if (fadeObserver) {
+        fadeObserver.disconnect();
+        fadeObserver = null;
+      }
+
       const cards = document.querySelectorAll('.lesson-card');
 
-      const observer = new IntersectionObserver((entries) => {
+      cards.forEach(card => {
+        card.classList.remove('fade-in');
+      });
+
+      if (cards.length === 0) return;
+
+      fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('fade-in');
-          } else {
-            entry.target.classList.remove('fade-in');
           }
         });
       }, {
@@ -6427,10 +6454,8 @@
         rootMargin: '0px'
       });
 
-      cards.forEach(card => observer.observe(card));
-      return observer;
+      cards.forEach(card => fadeObserver.observe(card));
     }
-    let fadeObserver = null;
 
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
@@ -6450,5 +6475,4 @@
     }
   </script>
 </body>
-
 </html>
