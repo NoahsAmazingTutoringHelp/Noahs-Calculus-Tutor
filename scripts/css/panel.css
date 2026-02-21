@@ -1,0 +1,133 @@
+.config-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin-bottom: 20px;
+  width: 270px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  color: #f2f2f2;
+  border-radius: 8px;
+  font-family: Inter, Arial, sans-serif;
+  z-index: 1000;
+  border: 1px solid #333;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.config-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1px;
+}
+
+.config-row label {
+  flex: 0 0 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  text-align: left;
+}
+
+.config-row input {
+  flex: 1;
+  max-width: 100%;
+  padding: 5px;
+  background: #333;
+  color: #f2f2f2;
+  border: none;
+  border-radius: 4px;
+}
+
+.config-panel input,
+.config-panel select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  background: #333;
+  color: #f2f2f2;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.config-panel label {
+  font-size: 12px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.config-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.config-panel.minimized {
+  height: auto;
+  max-height: none !important;
+  overflow: visible;
+  bottom: auto;
+}
+
+.config-panel.minimized .config-content {
+  display: none;
+}
+
+#toggle-config-panel {
+  background: none;
+  border: none;
+  color: #f2f2f2;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+}
+
+code {
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-size: 10px;
+  line-height: 1.5;
+  max-height: 210px;
+  margin-top: 10px;
+}
+
+#embed-code {
+  font-family: JetBrainsMono, monospace;
+}
+
+.embed-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+#copy-embed-code {
+  background: none;
+  border: 1px solid #333;
+  color: #f2f2f2;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+#copy-embed-code:hover {
+  background-color: #333;
+}

@@ -1,0 +1,19 @@
+.starfield {
+  height: 100%;
+  width: 100%;
+}
+
+.starfield-origin {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  color: #f2f2f2;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid #333;
+  font-size: 12px;
+  font-family: Inter, Arial, sans-serif;
+  border-radius: 5px;
+  padding: 10px;
+  transform: translate(-50%, -50%);
+}

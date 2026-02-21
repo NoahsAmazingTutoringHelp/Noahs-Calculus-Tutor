@@ -1,0 +1,18 @@
+{
+  "name": "starfield.js",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build  --no-source-maps",
+    "deploy": "gh-pages -d dist -b gh-pages -m 'Deploy'"
+  },
+  "dependencies": {
+    "highlight.js": "latest"
+  },
+  "devDependencies": {
+    "parcel": "latest",
+    "parcel-transformer-ogimage": "latest",
+    "svgo": "latest",
+    "gh-pages": "latest"
+  }
+}

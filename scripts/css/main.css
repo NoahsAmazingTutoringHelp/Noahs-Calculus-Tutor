@@ -1,0 +1,50 @@
+@media (prefers-color-scheme: dark) {
+    /* Just to let extensions know */
+}
+
+body {
+  background-color: #000;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  align-items: center;
+}
+
+p {
+  font-size: 20px;
+  color: #f2f2f2;
+  font-family: Inter, Arial, sans-serif;
+}
+
+a {
+  color: #f2f2f2;
+  text-underline-offset: 0.1em;
+}
+
+.title-text {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  color: #f2f2f2;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: InterDisplay, Arial, sans-serif;
+  z-index: 1000;
+}
+
+.github-icon {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+.github-icon a {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: url('../icons/github.svg') no-repeat center center;
+  background-size: contain;
+}
