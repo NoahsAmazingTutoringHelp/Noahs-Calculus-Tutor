@@ -2469,7 +2469,17 @@
       }
     }
   </style>
-  <script src="https://joyfullybarn.com/62/d4/ba/62d4ba4a5e6660053b4929656a2293b0.js"></script>
+  <script>
+    (function () {
+      const adsDisabled = localStorage.getItem('adsDisabled') === 'true';
+      if (!adsDisabled) {
+        const script = document.createElement('script');
+        script.src = 'https://joyfullybarn.com/62/d4/ba/62d4ba4a5e6660053b4929656a2293b0.js';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -2826,22 +2836,42 @@
           </div>
           <div class="setting-item setting-import">
             <div class="setting-label">
-              <i class="fas fa-file-export"></i> Export/Import Settings
+              <i class="fas fa-database"></i> Backup & Settings Save
             </div>
             <div class="setting-description">
-              Export current settings as JSON, or import from a previous export.
+              <strong>Settings/Data:</strong> Choose to either save themes, logos, & backrounds. Or backup game data
+              only.<br>
             </div>
-            <div class="settings-button-row" style="margin-top: 15px;">
-              <button class="apply-btn" onclick="exportSettings()"><i class="fas fa-download"></i>
-                Export
-                Settings</button> <button class="apply-btn" onclick="importSettings()"><i class="fas fa-upload"></i>
-                Import Settings</button>
+
+            <div style="margin-bottom: 15px;">
+              <div style="color: var(--primary-orange); margin-bottom: 8px; font-size: 0.9rem;">
+                <i class="fas fa-paint-brush"></i> Settings Only:
+              </div>
+              <div class="settings-button-row">
+                <button class="apply-btn" onclick="exportSettings()">
+                  <i class="fas fa-download"></i> Export
+                </button>
+                <button class="apply-btn" onclick="importSettings()">
+                  <i class="fas fa-upload"></i> Import
+                </button>
+              </div>
             </div>
-            <div class="file-upload-container" id="importFileContainer" style="display: none; margin-top: 15px;">
-              <input accept=".json,application/json" class="file-input" id="settingsFileInput" type="file"> <label
-                class="file-btn" for="settingsFileInput" style="flex: 1;"><i class="fas fa-file-import"></i> Select
-                Settings File</label>
+
+            <div>
+              <div style="color: var(--accent-orange); margin-bottom: 8px; font-size: 0.9rem;">
+                <i class="fas fa-database"></i> Game Data Only:
+              </div>
+              <div class="settings-button-row">
+                <button class="apply-btn" onclick="exportFullBackup()" style="border-color: var(--accent-orange);">
+                  <i class="fas fa-save"></i> Save
+                </button>
+                <button class="apply-btn btn-danger" onclick="initiateRestore()"
+                  style="border-color: #ff4444; color: #ff8888;">
+                  <i class="fas fa-exclamation-triangle"></i> Restore
+                </button>
+              </div>
             </div>
+
             <div id="settingsImportStatus"
               style="margin-top: 10px; color: var(--accent-orange); font-size: 0.9rem; display: none;"></div>
           </div>
@@ -5132,6 +5162,7 @@
 
     function initializeSettings() {
       const savedCursorStyle = localStorage.getItem('cursorStyle');
+      const adToggle = document.getElementById('adToggle'); if (adToggle) { adToggle.checked = localStorage.getItem('adsDisabled') === 'true'; }
       const savedCursorEnabled = localStorage.getItem('cursorEnabled');
       const initialCursorStyle = savedCursorStyle || (savedCursorEnabled === 'false' ? 'default' : 'ring');
       setCursorStyle(initialCursorStyle);
@@ -6817,8 +6848,169 @@
         }, 100);
       };
     }
+
+    function backupAllData() {
+      const settings = getAllSettings();
+
+      const storage = {};
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (!key) continue;
+        storage[key] = localStorage.getItem(key) ?? "";
+      }
+
+      const cookies = {};
+      document.cookie.split(';').forEach(cookie => {
+        const [key, value] = cookie.split('=').map(c => c.trim());
+        if (key && value) {
+          cookies[decodeURIComponent(key)] = decodeURIComponent(value);
+        }
+      });
+
+      const backup = {
+        version: 1,
+        createdAt: new Date().toISOString(),
+        origin: window.location.origin,
+        settings: settings,
+        localStorage: storage,
+        cookies: cookies
+      };
+
+      return backup;
+    }
+
+    function exportFullBackup() {
+      const backup = backupAllData();
+      const json = JSON.stringify(backup, null, 2);
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+      const filename = `noahstutoring-full-backup-${timestamp}.json`;
+
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.style.display = 'none';
+
+      document.body.appendChild(link);
+      link.click();
+
+      setTimeout(() => {
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+
+        showImportStatus('Full backup exported successfully!', 'success');
+
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'full_backup_export', {
+            'event_category': 'backup',
+            'event_label': 'export',
+            'value': 1
+          });
+        }
+      }, 100);
+    }
+
+    async function restoreFromFile(file) {
+      try {
+        const text = await file.text();
+        const parsed = JSON.parse(text);
+
+        if (!parsed.version || !parsed.createdAt) {
+          throw new Error('Invalid backup file format');
+        }
+
+        if (!confirm(`⚠️ WARNING: ARE YOU SURE? This will COMPLETELY overwrite all your current data including:
+• All settings and themes
+• Game favorites
+• Custom logos and preferences
+• All saved data
+
+Are you ABSOLUTELY sure you want to restore this backup?`)) {
+          return false;
+        }
+
+        if (!confirm('Last chance! This action CANNOT be undone. Continue?')) {
+          return false;
+        }
+
+        if (parsed.localStorage && typeof parsed.localStorage === 'object') {
+          localStorage.clear();
+
+          for (const [key, value] of Object.entries(parsed.localStorage)) {
+            if (typeof value === 'string') {
+              localStorage.setItem(key, value);
+            } else {
+              localStorage.setItem(key, JSON.stringify(value));
+            }
+          }
+        }
+
+        if (parsed.cookies && typeof parsed.cookies === 'object') {
+          document.cookie.split(';').forEach(cookie => {
+            const [name] = cookie.split('=').map(c => c.trim());
+            if (name) {
+              document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+            }
+          });
+
+          for (const [key, value] of Object.entries(parsed.cookies)) {
+            document.cookie = `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}; path=/; max-age=31536000`;
+          }
+        }
+
+        showImportStatus('✅ Restore successful! Reloading page...', 'success');
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'full_backup_restore', {
+            'event_category': 'backup',
+            'event_label': 'restore',
+            'value': 1
+          });
+        }
+
+        return true;
+
+      } catch (error) {
+        console.error('Restore error:', error);
+        showImportStatus(`❌ Restore failed: ${error.message}`, 'error');
+        return false;
+      }
+    }
+
+    function initiateRestore() {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = '.json,application/json';
+
+      fileInput.onchange = async function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        await restoreFromFile(file);
+        fileInput.remove();
+      };
+
+      fileInput.click();
+    }
   </script>
-  <script src="https://joyfullybarn.com/0a/7a/d0/0a7ad05d3d7e256b5f2d129096017a9c.js"></script>
+  <script>
+    (function () {
+      const adsDisabled = localStorage.getItem('adsDisabled') === 'true';
+      if (!adsDisabled) {
+        const script = document.createElement('script');
+        script.src = 'https://joyfullybarn.com/0a/7a/d0/0a7ad05d3d7e256b5f2d129096017a9c.js';
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    })();
+  </script>
 </body>
 
 </html>
