@@ -68,7 +68,7 @@
       --cursor-bg: rgba(194, 124, 21, 0.15);
       --cursor-border: rgba(194, 124, 21, 0.5);
       --cursor-hover-bg: rgba(194, 124, 21, 0.25);
-      --cursor-hover-border: rgba(230, 149, 0, 0.8)
+      --cursor-hover-border: rgba(230, 149, 0, 0.8);
     }
 
     body {
@@ -194,16 +194,16 @@
     }
 
     .logo {
-      height: 70px;
+      height: 90px;
       border-radius: 12px;
-      box-shadow: 0 0 16px rgba(var(--primary-orange-rgb), 0.62);
       animation: logoPop 0.8s;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      filter: drop-shadow(0 0 6px rgba(var(--primary-orange-rgb), 0.4));
+      transition: transform 0.22s ease, filter 0.22s ease;
     }
 
     .logo-container:hover .logo {
-      transform: scale(1.03);
-      box-shadow: 0 0 22px rgba(var(--primary-orange-rgb), 0.78);
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 20px rgba(var(--primary-orange-rgb), 0.9));
     }
 
     @keyframes logoPop {
@@ -275,8 +275,8 @@
       width: min(450px, 80vw);
       display: block;
       border-radius: 18px;
-      box-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.42);
       border: 1px solid rgba(var(--primary-orange-rgb), 0.45);
+      filter: none;
       transform-style: preserve-3d;
       transition: transform 0.15s ease-out, box-shadow 0.2s ease;
       will-change: transform;
@@ -510,24 +510,99 @@
       transform: translateY(100%)
     }
 
-    .game-header {
+    .game-browser {
+      height: 100vh;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      background: rgba(8, 10, 14, 0.96);
+    }
+
+    .game-tabbar {
+      display: flex;
       align-items: center;
-      padding: 15px 20px;
-      background: rgba(20, 20, 20, .9);
-      border-bottom: 1px solid var(--primary-orange)
+      gap: 12px;
+      padding: 8px 10px;
+      min-height: 56px;
+      background: linear-gradient(180deg, rgba(26, 26, 26, 0.96), rgba(12, 12, 12, 0.94));
+      border-bottom: 1px solid rgba(var(--primary-orange-rgb), 0.6);
     }
 
-    .game-title {
-      color: var(--primary-orange);
-      font-size: 1.5rem;
-      text-shadow: 0 0 5px rgba(var(--primary-orange-rgb), .5)
-    }
-
-    .game-controls {
+    .game-tabs-strip {
       display: flex;
-      gap: 15px
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 2px;
+    }
+
+    .game-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 280px;
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border-radius: 10px 10px 0 0;
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.4);
+      border-bottom-color: rgba(var(--primary-orange-rgb), 0.2);
+      background: linear-gradient(180deg, rgba(23, 23, 23, 0.9), rgba(12, 12, 12, 0.82));
+      color: var(--gray-text);
+      cursor: none !important;
+      transition: all 0.2s ease;
+    }
+
+    .game-tab:hover {
+      color: var(--light-text);
+      border-color: rgba(var(--primary-orange-rgb), 0.72);
+      transform: translateY(-1px);
+    }
+
+    .game-tab.active {
+      color: var(--light-text);
+      border-color: var(--accent-orange);
+      background: linear-gradient(180deg, rgba(var(--primary-orange-rgb), 0.24), rgba(17, 17, 17, 0.94));
+      box-shadow: 0 0 12px rgba(var(--primary-orange-rgb), 0.24);
+    }
+
+    .game-tab-title {
+      font-size: 0.84rem;
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+    }
+
+    .game-tab-close {
+      width: 18px;
+      height: 18px;
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.45);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      line-height: 1;
+      color: var(--gray-text);
+      background: rgba(0, 0, 0, 0.28);
+      cursor: none !important;
+      transition: all 0.2s ease;
+    }
+
+    .game-tab-close:hover {
+      color: #fff;
+      background: rgba(200, 40, 40, 0.5);
+      border-color: rgba(255, 100, 100, 0.75);
+    }
+
+    .game-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 0 0 auto;
     }
 
     .btn {
@@ -546,17 +621,191 @@
       box-shadow: 0 0 10px var(--primary-orange)
     }
 
-    .game-container {
-      height: calc(100vh - 70px);
+    .game-toolbar .btn {
+      min-width: 38px;
+      height: 38px;
+      padding: 0;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .game-toolbar .btn i {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .tab-info-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 11000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0, 0, 0, 0.62);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .tab-info-modal.active {
       display: flex;
-      flex-direction: column
+    }
+
+    .tab-info-modal-card {
+      width: min(560px, 100%);
+      border-radius: 16px;
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.5);
+      background:
+        linear-gradient(170deg, rgba(22, 24, 28, 0.92), rgba(11, 12, 14, 0.9)),
+        radial-gradient(circle at top left, rgba(var(--primary-orange-rgb), 0.12), transparent 45%);
+      box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.5),
+        0 0 22px rgba(var(--primary-orange-rgb), 0.2);
+      padding: 16px 16px 14px;
+    }
+
+    .tab-info-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .tab-info-title {
+      font-size: 1.12rem;
+      color: var(--light-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-info-title i {
+      color: var(--primary-orange);
+      text-shadow: 0 0 12px rgba(var(--primary-orange-rgb), 0.58);
+    }
+
+    .tab-info-close {
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.5);
+      background: rgba(var(--primary-orange-rgb), 0.18);
+      color: var(--primary-orange);
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none !important;
+      transition: all 0.2s ease;
+    }
+
+    .tab-info-close:hover {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+      box-shadow: 0 0 12px rgba(var(--primary-orange-rgb), 0.42);
+    }
+
+    .tab-info-text {
+      color: var(--gray-text);
+      margin: 0 0 10px 0;
+      line-height: 1.5;
+      font-size: 0.94rem;
+    }
+
+    .tab-info-text a {
+      color: var(--primary-orange);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .tab-info-link-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .tab-info-link-row {
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.28);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 8px 8px 8px 10px;
+    }
+
+    .tab-info-link-label {
+      color: var(--light-text);
+      font-size: 0.86rem;
+      font-weight: bold;
+      opacity: 0.88;
+    }
+
+    .tab-info-link-url {
+      min-width: 0;
+      color: var(--gray-text);
+      font-size: 0.84rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+    }
+
+    .tab-info-link-url:hover {
+      color: var(--light-text);
+    }
+
+    .tab-info-copy-btn {
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.55);
+      background: rgba(var(--primary-orange-rgb), 0.16);
+      color: var(--primary-orange);
+      border-radius: 9px;
+      padding: 6px 10px;
+      min-width: 74px;
+      font-size: 0.82rem;
+      font-weight: bold;
+      cursor: none !important;
+      transition: all 0.2s ease;
+    }
+
+    .tab-info-copy-btn:hover {
+      border-color: var(--accent-orange);
+      color: var(--accent-orange);
+    }
+
+    @media (max-width: 640px) {
+      .tab-info-link-row {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .tab-info-copy-btn {
+        width: 100%;
+      }
+    }
+
+    .game-view-stack {
+      position: relative;
+      flex: 1;
+      min-height: 0;
+      background: #05070b;
+      border-top: 1px solid rgba(var(--primary-orange-rgb), 0.2);
     }
 
     .game-frame {
-      flex: 1;
+      position: absolute;
+      inset: 0;
       width: 100%;
+      height: 100%;
       border: none;
+      display: none;
       background: rgba(30, 30, 30, .7)
+    }
+
+    .game-frame.active {
+      display: block;
     }
 
     .game-frame.fullscreen {
@@ -791,11 +1040,6 @@
       --cursor-hover-border: rgba(255, 0, 255, 0.8)
     }
 
-    .theme-rainbow .logo,
-    .theme-rainbow .home-logo {
-      filter: hue-rotate(300deg) saturate(2) brightness(1.2);
-      box-shadow: 0 0 20px #ff0080 !important
-    }
 
     .theme-cyber-green {
       --primary-orange: #00ff00;
@@ -810,11 +1054,6 @@
       --cursor-hover-border: rgba(0, 204, 0, 0.8)
     }
 
-    .theme-cyber-green .logo,
-    .theme-cyber-green .home-logo {
-      filter: hue-rotate(100deg) saturate(3) brightness(1.1);
-      box-shadow: 0 0 20px #ff6600 !important
-    }
 
     .theme-ice-blue {
       --primary-orange: #00ccff;
@@ -829,11 +1068,6 @@
       --cursor-hover-border: rgba(0, 136, 204, 0.8)
     }
 
-    .theme-ice-blue .logo,
-    .theme-ice-blue .home-logo {
-      filter: hue-rotate(190deg) saturate(2) brightness(1.1);
-      box-shadow: 0 0 20px #ff3300 !important
-    }
 
     .theme-solarized {
       --primary-orange: #2aa198;
@@ -848,11 +1082,6 @@
       --cursor-hover-border: rgba(38, 139, 210, 0.8)
     }
 
-    .theme-solarized .logo,
-    .theme-solarized .home-logo {
-      filter: hue-rotate(170deg) saturate(1.8) brightness(1.1);
-      box-shadow: 0 0 20px #ff6a00 !important
-    }
 
     .theme-purple-haze {
       --primary-orange: #9b59b6;
@@ -867,16 +1096,6 @@
       --cursor-hover-border: rgba(108, 52, 131, 0.8)
     }
 
-    .theme-purple-haze .logo,
-    .theme-purple-haze .home-logo {
-      filter: hue-rotate(280deg) saturate(1.8) brightness(1.1);
-      box-shadow: 0 0 16px rgba(155, 89, 182, 0.78) !important
-    }
-
-    .logo,
-    .logo-container:hover .logo {
-      box-shadow: none !important;
-    }
 
     @media (max-width:768px) {
 
@@ -889,9 +1108,19 @@
         height: 52px
       }
 
-      .game-controls {
-        flex-direction: column;
-        gap: 10px
+      .game-tabbar {
+        flex-wrap: wrap;
+      }
+
+      .game-tabs-strip {
+        order: 1;
+        width: 100%;
+      }
+
+      .game-toolbar {
+        order: 2;
+        width: 100%;
+        justify-content: flex-end;
       }
 
       .nav-tabs {
@@ -1106,7 +1335,10 @@
     }
 
     .game-header .btn,
-    .game-controls .btn {
+    .game-controls .btn,
+    .game-toolbar .btn,
+    .game-tab,
+    .game-tab-close {
       cursor: none !important;
     }
 
@@ -1494,6 +1726,10 @@
 
     .refresh-btn:hover i {
       transform: rotate(180deg);
+    }
+
+    .game-toolbar .refresh-btn i {
+      margin-right: 0;
     }
 
     .game-frame {
@@ -2312,7 +2548,7 @@
       }
 
       #settings-section .modal-body .setting-ads {
-        grid-column: 2 / 3;
+        grid-column: 1 / -1;
         grid-row: auto;
         min-height: 0;
       }
@@ -2351,13 +2587,15 @@
     .logo {
       height: 90px;
       border-radius: 12px;
-      transition: all 0.3s ease;
-      filter: drop-shadow(0 0 8px rgba(var(--primary-orange-rgb), 0.4));
+      animation: logoPop 0.8s;
+      filter: drop-shadow(0 0 6px rgba(var(--primary-orange-rgb), 0.4));
+      transition: transform 0.22s ease, filter 0.22s ease, box-shadow 0.22s ease;
     }
 
     .logo-container:hover .logo {
-      filter: drop-shadow(0 0 15px rgba(var(--primary-orange-rgb), 0.7));
-      transform: scale(1.02);
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 20px rgba(var(--primary-orange-rgb), 0.9));
+      box-shadow: none !important;
     }
 
     section,
@@ -2468,6 +2706,36 @@
         height: 65px;
       }
     }
+
+    .home-subtitle {
+      min-height: 2em;
+    }
+
+    #typing-quote {
+      display: inline;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 3px;
+      margin-left: 2px;
+      animation: blink 1s infinite;
+      font-weight: normal;
+      color: var(--primary-orange);
+    }
+
+    @keyframes blink {
+
+      0%,
+      50% {
+        opacity: 1;
+      }
+
+      51%,
+      100% {
+        opacity: 0;
+      }
+    }
   </style>
   <script>
     (function () {
@@ -2532,7 +2800,9 @@
             src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/logo.png">
           <div class="home-logo-shine" id="homeLogoShine"></div>
         </div>
-        <p class="home-subtitle">Check out all these amazing lessons!</p>
+        <p class="home-subtitle">
+          <span id="typing-quote"></span><span class="cursor">|</span>
+        </p>
       </div>
       <div class="home-popular-wrap">
         <h2>
@@ -2830,48 +3100,27 @@
               <i class="fas fa-ad"></i> Disable Ads
             </div>
             <div class="setting-description">
-              This toggle is kept for compatibility, but ads are permanently disabled site-wide.
+              Ads are currently disabled site-wide. This toggle remains for compatibility only.
             </div><label class="toggle-switch"><input id="adToggle" onchange="toggleAds(this.checked)" type="checkbox">
               <span class="toggle-slider"></span></label>
           </div>
           <div class="setting-item setting-import">
             <div class="setting-label">
-              <i class="fas fa-database"></i> Backup & Settings Save
+              <i class="fas fa-database"></i> Export/Import Site Data
             </div>
             <div class="setting-description">
-              <strong>Settings/Data:</strong> Choose to either save themes, logos, & backrounds. Or backup game data
-              only.<br>
+              Export or import complete site data: settings, favorites, local storage, session storage, and cookies.
             </div>
-
-            <div style="margin-bottom: 15px;">
-              <div style="color: var(--primary-orange); margin-bottom: 8px; font-size: 0.9rem;">
-                <i class="fas fa-paint-brush"></i> Settings Only:
-              </div>
-              <div class="settings-button-row">
-                <button class="apply-btn" onclick="exportSettings()">
-                  <i class="fas fa-download"></i> Export
-                </button>
-                <button class="apply-btn" onclick="importSettings()">
-                  <i class="fas fa-upload"></i> Import
-                </button>
-              </div>
+            <div class="settings-button-row" style="margin-top: 15px;">
+              <button class="apply-btn" onclick="exportSettings()"><i class="fas fa-download"></i>
+                Export Data</button> <button class="apply-btn" onclick="importSettings()"><i class="fas fa-upload"></i>
+                Import Data</button>
             </div>
-
-            <div>
-              <div style="color: var(--accent-orange); margin-bottom: 8px; font-size: 0.9rem;">
-                <i class="fas fa-database"></i> Game Data Only:
-              </div>
-              <div class="settings-button-row">
-                <button class="apply-btn" onclick="exportFullBackup()" style="border-color: var(--accent-orange);">
-                  <i class="fas fa-save"></i> Save
-                </button>
-                <button class="apply-btn btn-danger" onclick="initiateRestore()"
-                  style="border-color: #ff4444; color: #ff8888;">
-                  <i class="fas fa-exclamation-triangle"></i> Restore
-                </button>
-              </div>
+            <div class="file-upload-container" id="importFileContainer" style="display: none; margin-top: 15px;">
+              <input accept=".json,application/json" class="file-input" id="settingsFileInput" type="file"> <label
+                class="file-btn" for="settingsFileInput" style="flex: 1;"><i class="fas fa-file-import"></i> Select
+                Settings File</label>
             </div>
-
             <div id="settingsImportStatus"
               style="margin-top: 10px; color: var(--accent-orange); font-size: 0.9rem; display: none;"></div>
           </div>
@@ -2894,24 +3143,89 @@
     </footer>
   </div>
   <div class="game-page" id="gamePage">
-    <div class="game-header">
-      <div class="game-title" id="gameTitle">
-        Game Title
+    <div class="game-browser">
+      <div class="game-tabbar">
+        <div class="game-tabs-strip" id="gameTabsStrip">
+          <!-- tabs injected by JS -->
+        </div>
+        <div class="game-toolbar">
+          <button class="btn refresh-btn" onclick="refreshGame()" title="Reload Active Tab"
+            aria-label="Reload active tab">
+            <i class="fas fa-rotate-right"></i>
+          </button>
+          <button class="btn" onclick="downloadCurrentGame()" title="Download Active Tab"
+            aria-label="Download active tab">
+            <i class="fas fa-download"></i>
+          </button>
+          <button class="btn" onclick="toggleFullscreen()" title="Fullscreen Active Tab"
+            aria-label="Fullscreen active tab">
+            <i class="fas fa-expand"></i>
+          </button>
+          <button class="btn" onclick="openTabInfoModal()" title="Credits & Links" aria-label="Open credits and links">
+            <i class="fas fa-circle-info"></i>
+          </button>
+          <button class="btn" onclick="exitGameBrowser()" title="Exit Browser" aria-label="Exit browser">
+            <i class="fas fa-xmark"></i>
+          </button>
+        </div>
       </div>
-      <div class="game-controls">
-        <button class="btn refresh-btn" onclick="refreshGame()" title="Refresh Game"><i class="fas fa-redo"></i>
-          Refresh</button> <button class="btn" onclick="toggleFullscreen()"><i class="fas fa-expand"></i>
-          Fullscreen</button> <button class="btn" onclick="downloadCurrentGame()"><i class="fas fa-download"></i>
-          Download</button> <button class="btn" onclick="closeLesson()"><i class="fas fa-times"></i> Exit</button>
+      <div class="game-view-stack" id="gameViews">
+        <!-- iframes injected by JS -->
       </div>
     </div>
-    <div class="game-container">
-      <iframe class="game-frame" frameborder="0" id="gameFrame" name="gameFrame" src=""></iframe>
+  </div>
+  <div class="tab-info-modal" id="tabInfoModal" aria-hidden="true" role="dialog" aria-modal="true"
+    aria-labelledby="tabInfoTitle">
+    <div class="tab-info-modal-card">
+      <div class="tab-info-header">
+        <div class="tab-info-title" id="tabInfoTitle"><i class="fas fa-circle-info"></i> Tab Credits</div>
+        <button class="tab-info-close" type="button" onclick="closeTabInfoModal()" aria-label="Close tab info">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+      <p class="tab-info-text">
+        Tab and other features were made by
+        <a href="https://1key.pages.dev/" target="_blank" rel="noopener noreferrer">1key</a>.
+      </p>
+      <p class="tab-info-text">You can view these below:</p>
+      <div class="tab-info-link-list">
+        <div class="tab-info-link-row">
+          <span class="tab-info-link-label">Website</span>
+          <a class="tab-info-link-url" href="https://1key.pages.dev/" target="_blank"
+            rel="noopener noreferrer">https://1key.pages.dev/</a>
+          <button class="tab-info-copy-btn" type="button"
+            onclick="copyTabInfoLink('https://1key.pages.dev/', this)">Copy</button>
+        </div>
+        <div class="tab-info-link-row">
+          <span class="tab-info-link-label">Discord</span>
+          <a class="tab-info-link-url" href="https://discord.gg/XK8vQGrfqv" target="_blank"
+            rel="noopener noreferrer">https://discord.gg/XK8vQGrfqv</a>
+          <button class="tab-info-copy-btn" type="button"
+            onclick="copyTabInfoLink('https://discord.gg/XK8vQGrfqv', this)">Copy</button>
+        </div>
+      </div>
     </div>
-  </div><button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-  <script src="scripts/starfield.js"></script>
+  </div>
+  <button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+  <script
+    src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/scripts/starfield.js"></script>
   <script>
     const games = [
+      { title: "Brotato", desc: "A top-down arena shooter roguelite where you play a potato wielding up to 6 weapons at a time to fight off hordes of aliens", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/366.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/366.jpg" },
+      { title: "Endoparasitic 2", desc: "The intense sequel where you must survive a research facility using only one arm while fighting off mutated horrors", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/365.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/365.jpg" },
+      { title: "Endoparasitic", desc: "A unique tactical horror game where you crawl through a nightmare using a single limb to move, reload, and shoot", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/364.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/364.jpg" },
+      { title: "Baby Sniper In Vietnam", desc: "A tactical sniping game where you must complete various missions and take out targets with precision and stealth", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/363.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/363.jpg" },
+      { title: "Shift at Midnight", desc: "Survive a terrifying night shift in this claustrophobic psychological horror experience", url: "https://script.google.com/macros/s/AKfycbxbf7DaEtTxZVBBPow6r-L0q2mvgkI4D7xYUU-_sbldBlrXfiB4jK1f4ACNiR0LPuCt/exec?game=362.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/356.jpg" },
+      { title: "Road of Fury", desc: "Battle across a wasteland in this high-octane vehicular combat game", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/361.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/355.jpg" },
+      { title: "Roulette Hero", desc: "Take a gamble in this intense game of chance and survival", url: "https://script.google.com/macros/s/AKfycbxbf7DaEtTxZVBBPow6r-L0q2mvgkI4D7xYUU-_sbldBlrXfiB4jK1f4ACNiR0LPuCt/exec?game=360.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/354.jpg" },
+      { title: "Fear Assessment", desc: "Face your phobias in this psychological test of courage and reflexes", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/359.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/353.png" },
+      { title: "Dimension Incident", desc: "A surreal first-person platformer where you navigate through shifting dimensions", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/358.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/352.jpg" },
+      { title: "Raldi's Crackhouse", desc: "A chaotic parody of Baldi's Basics featuring Raldi and even stranger school rules", url: "https://script.google.com/macros/s/AKfycbxbf7DaEtTxZVBBPow6r-L0q2mvgkI4D7xYUU-_sbldBlrXfiB4jK1f4ACNiR0LPuCt/exec?game=357.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/360.jpg" },
+      { title: "Christmas Massacre", desc: "An 80s-inspired slasher horror game where you must satisfy a talking Christmas tree", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/356.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/359.jpg" },
+      { title: "Boxing Random", desc: "Wacky physics-based boxing where one hit to the head wins the round", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/355.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/358.jpg" },
+      { title: "Volley Random", desc: "Fun ragdoll volleyball with random variations in every round", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/354.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/357.jpg" },
+      { title: "Basket Random", desc: "A chaotic two-player basketball game with ragdoll physics and random environments", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/353.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/362.png" },
+      { title: "Soccer Random", desc: "Soccer but with one button, crazy physics, and changing fields and players", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/352.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/361.jpg" },
       { title: "Little Big Planet", desc: "A whimsical world of platforming and creativity where you can play, create, and share your own levels while playing as sackboy", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/351.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/images/351.jpg" },
       { title: "The Binding of Isaac: Rebirth", desc: "A randomly generated action RPG shooter with heavy rogue-like elements. Follow Isaac on his journey to escape his mother", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/350.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/350.jpg" },
       { title: "Littlest Pet Shop City Friends", desc: "Explore the city, play fun mini-games, and collect adorable pets in this charming adventure", url: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/348.html", image: "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/349.jpg" },
@@ -3317,21 +3631,21 @@
     }
 
     function toggleFullscreen() {
-      const frame = document.getElementById('gameFrame');
-      const isFullscreen = frame.classList.contains('fullscreen');
+      const activeTab = getActiveGameTab();
+      if (!activeTab || !activeTab.frame) return;
+
+      const frame = activeTab.frame;
+      const enteringFullscreen = !getFullscreenElementCompat();
 
       if (typeof gtag !== 'undefined') {
-        gtag('event', isFullscreen ? 'fullscreen_exit' : 'fullscreen_enter', {
+        gtag('event', enteringFullscreen ? 'fullscreen_enter' : 'fullscreen_exit', {
           'event_category': 'game_interaction',
-          'event_label': document.getElementById('gameTitle').textContent,
+          'event_label': activeTab.title,
           'value': 1
         });
       }
 
-      if (!document.fullscreenElement &&
-        !document.webkitFullscreenElement &&
-        !document.mozFullScreenElement &&
-        !document.msFullscreenElement) {
+      if (enteringFullscreen) {
         if (frame.requestFullscreen) {
           frame.requestFullscreen();
         } else if (frame.webkitRequestFullscreen) {
@@ -3357,11 +3671,14 @@
     }
 
     async function downloadCurrentGame() {
-      const frame = document.getElementById('gameFrame');
+      const activeTab = getActiveGameTab();
+      if (!activeTab || !activeTab.frame) return;
+
+      const frame = activeTab.frame;
+      const title = activeTab.title;
+      const sourceUrl = activeTab.url || (games.find(game => game.title === title) || {}).url;
       const currentUrl = frame.src;
       const currentSrcDoc = frame.srcdoc;
-      const title = document.getElementById('gameTitle').textContent;
-
 
       if (typeof gtag !== 'undefined') {
         gtag('event', 'download_attempt', {
@@ -3374,30 +3691,20 @@
       try {
         let content = '';
 
-        if (currentSrcDoc && currentSrcDoc.includes('<!DOCTYPE')) {
-          const currentGame = games.find(game => game.title === title);
-          if (currentGame && currentGame.url) {
-            const response = await fetch(currentGame.url);
-            if (!response.ok) throw new Error('Network response was not ok');
-            content = await response.text();
-          } else {
-            throw new Error('Game not found in database');
-          }
-        }
-        else if (currentUrl && currentUrl !== 'about:blank' && !currentUrl.includes('loading')) {
+        if (sourceUrl && currentSrcDoc && currentSrcDoc.includes('<!DOCTYPE')) {
+          const response = await fetch(sourceUrl);
+          if (!response.ok) throw new Error('Network response was not ok');
+          content = await response.text();
+        } else if (currentUrl && currentUrl !== 'about:blank' && !currentUrl.includes('loading')) {
           const response = await fetch(currentUrl);
           if (!response.ok) throw new Error('Network response was not ok');
           content = await response.text();
-        }
-        else {
-          const currentGame = games.find(game => game.title === title);
-          if (currentGame && currentGame.url) {
-            const response = await fetch(currentGame.url);
-            if (!response.ok) throw new Error('Network response was not ok');
-            content = await response.text();
-          } else {
-            throw new Error('Game not found in database');
-          }
+        } else if (sourceUrl) {
+          const response = await fetch(sourceUrl);
+          if (!response.ok) throw new Error('Network response was not ok');
+          content = await response.text();
+        } else {
+          throw new Error('No source URL available for active tab');
         }
 
         if (content && !content.includes('noahs-watermark')) {
@@ -3406,14 +3713,12 @@
 
         const blob = new Blob([content], { type: 'text/html' });
         const downloadUrl = URL.createObjectURL(blob);
-
         const link = document.createElement('a');
         link.href = downloadUrl;
         link.download = `${title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.html`;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-
         setTimeout(() => {
           URL.revokeObjectURL(downloadUrl);
         }, 100);
@@ -3425,7 +3730,6 @@
             'value': 1
           });
         }
-
       } catch (error) {
         console.error('Download error:', error);
         if (typeof gtag !== 'undefined') {
@@ -3541,8 +3845,10 @@
 
     function setSiteLogos(src) {
       document.querySelectorAll('.logo, .home-logo').forEach(logoEl => {
+        logoEl.dataset.baseSrc = src;
         logoEl.src = src;
       });
+      syncLogoThemeTone();
     }
 
     function createGameCard(game, isRandom = false) {
@@ -4304,19 +4610,40 @@
       }, 120);
     });
 
+    function getFullscreenElementCompat() {
+      return document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement ||
+        null;
+    }
+
+    function syncGameFullscreenClasses() {
+      const fullscreenEl = getFullscreenElementCompat();
+      document.querySelectorAll('.game-frame.fullscreen').forEach(frame => {
+        if (frame !== fullscreenEl) {
+          frame.classList.remove('fullscreen');
+        }
+      });
+    }
+
     document.addEventListener('fullscreenchange', () => {
+      syncGameFullscreenClasses();
       setTimeout(() => refreshActiveBackground(), 70);
     });
 
     document.addEventListener('webkitfullscreenchange', () => {
+      syncGameFullscreenClasses();
       setTimeout(() => refreshActiveBackground(), 70);
     });
 
     document.addEventListener('mozfullscreenchange', () => {
+      syncGameFullscreenClasses();
       setTimeout(() => refreshActiveBackground(), 70);
     });
 
     document.addEventListener('MSFullscreenChange', () => {
+      syncGameFullscreenClasses();
       setTimeout(() => refreshActiveBackground(), 70);
     });
 
@@ -4643,33 +4970,15 @@
         });
       });
 
-      const gameFrame = document.getElementById('gameFrame');
-      if (gameFrame) {
-        const gamePage = document.getElementById('gamePage');
-        const observer = new MutationObserver((mutations) => {
-          mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class') {
-              if (gamePage.classList.contains('active')) {
-                gameFrame.addEventListener('mouseenter', () => {
-                  isOverIframe = true;
-                  hideCustomCursor();
-                  document.documentElement.style.cursor = 'auto';
-                });
-
-                gameFrame.addEventListener('mouseleave', () => {
-                  isOverIframe = false;
-                  showCustomCursor();
-                  document.documentElement.style.cursor = 'none';
-                });
-              } else {
-                isOverIframe = false;
-                showCustomCursor();
-                document.documentElement.style.cursor = 'none';
-              }
-            }
-          });
+      const gamePage = document.getElementById('gamePage');
+      if (gamePage) {
+        const observer = new MutationObserver(() => {
+          if (!gamePage.classList.contains('active')) {
+            isOverIframe = false;
+            showCustomCursor();
+            document.documentElement.style.cursor = 'none';
+          }
         });
-
         observer.observe(gamePage, { attributes: true });
       }
 
@@ -5115,7 +5424,7 @@
         const isInIframe = target.tagName === 'IFRAME' || target.closest('iframe');
         const isInGamePage = document.getElementById('gamePage').classList.contains('active');
 
-        if (isInIframe || (isInGamePage && !target.closest('.game-header'))) {
+        if (isInIframe || (isInGamePage && !target.closest('.game-tabbar'))) {
           return;
         }
 
@@ -5162,7 +5471,6 @@
 
     function initializeSettings() {
       const savedCursorStyle = localStorage.getItem('cursorStyle');
-      const adToggle = document.getElementById('adToggle'); if (adToggle) { adToggle.checked = localStorage.getItem('adsDisabled') === 'true'; }
       const savedCursorEnabled = localStorage.getItem('cursorEnabled');
       const initialCursorStyle = savedCursorStyle || (savedCursorEnabled === 'false' ? 'default' : 'ring');
       setCursorStyle(initialCursorStyle);
@@ -5251,6 +5559,11 @@
         const customColor = localStorage.getItem('customThemeColor') || '#c27c15';
         applyCustomThemeColors(customColor);
         document.getElementById('customColorInput').style.display = 'flex';
+      } else {
+        document.documentElement.style.removeProperty('--primary-orange');
+        document.documentElement.style.removeProperty('--primary-orange-rgb');
+        document.documentElement.style.removeProperty('--accent-orange');
+        document.getElementById('customColorInput').style.display = 'none';
       }
 
       const savedBackground = normalizeBackgroundStyle(localStorage.getItem('selectedBackground') || 'matrix');
@@ -5286,20 +5599,20 @@
         document.getElementById('customColorInput').style.display = 'none';
       }
 
-      updateMatrixTheme();
+      localStorage.setItem('selectedTheme', themeName);
+
+      logoTintCache.clear();
 
       document.querySelectorAll('.theme-option').forEach(option => {
         option.classList.remove('active');
       });
-
       const activeOption = document.querySelector(`.theme-option[data-theme="${themeName}"]`);
-      if (activeOption) {
-        activeOption.classList.add('active');
-      }
+      if (activeOption) activeOption.classList.add('active');
 
+      updateLogoForCurrentTheme();
+
+      updateMatrixTheme();
       updateCursorColors();
-
-      localStorage.setItem('selectedTheme', themeName);
 
       if (typeof gtag !== 'undefined') {
         gtag('event', 'theme_change', {
@@ -5307,6 +5620,25 @@
           'event_label': themeName,
           'value': 1
         });
+      }
+    }
+
+    function updateLogoForCurrentTheme() {
+      const currentTheme = localStorage.getItem('selectedTheme') || 'default';
+      const defaultLogo = "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/logo.png";
+
+      document.querySelectorAll('.logo, .home-logo').forEach(logoEl => {
+        logoEl.src = defaultLogo;
+        logoEl.dataset.baseSrc = defaultLogo;
+      });
+
+      if (currentTheme !== 'default') {
+        setTimeout(() => {
+          const { r, g, b } = getBackgroundColorRGB();
+          document.querySelectorAll('.logo, .home-logo').forEach(logoEl => {
+            tintLogoElementExact(logoEl, r, g, b);
+          });
+        }, 50);
       }
     }
 
@@ -5540,7 +5872,112 @@
       document.documentElement.style.setProperty('--cursor-hover-border', accentColor);
     }
 
+    const logoTintCache = new Map();
+
+    function tintLogoElementExact(logoEl, r, g, b) {
+      if (!logoEl) return;
+
+      const currentTheme = localStorage.getItem('selectedTheme') || 'default';
+      const isDefaultTheme = currentTheme === 'default';
+
+      const isDefaultColor = r === 194 && g === 124 && b === 21;
+
+      if (isDefaultTheme || isDefaultColor) {
+        const baseSrc = logoEl.dataset.baseSrc ||
+          "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/logo.png";
+        if (logoEl.src !== baseSrc) {
+          logoEl.src = baseSrc;
+        }
+        return;
+      }
+
+      const baseSrc = logoEl.dataset.baseSrc || logoEl.getAttribute('src') || logoEl.src;
+      if (!baseSrc || baseSrc.startsWith('blob:')) return;
+      if (!logoEl.dataset.baseSrc) logoEl.dataset.baseSrc = baseSrc;
+
+      const cacheKey = `${baseSrc}|${r},${g},${b}`;
+      if (logoTintCache.has(cacheKey)) {
+        logoEl.src = logoTintCache.get(cacheKey);
+        return;
+      }
+
+      const img = new Image();
+      if (!baseSrc.startsWith('data:')) img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.naturalWidth || img.width || 0;
+          canvas.height = img.naturalHeight || img.height || 0;
+          if (!canvas.width || !canvas.height) return;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+
+          ctx.drawImage(img, 0, 0);
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          const data = imageData.data;
+
+          for (let i = 0; i < data.length; i += 4) {
+            const alpha = data[i + 3];
+            if (alpha === 0) continue;
+
+            const srcR = data[i];
+            const srcG = data[i + 1];
+            const srcB = data[i + 2];
+
+            const isWhite = srcR > 200 && srcG > 200 && srcB > 200;
+            const isNearWhite = Math.abs(srcR - srcG) < 20 &&
+              Math.abs(srcG - srcB) < 20 &&
+              srcR > 180 && srcG > 180 && srcB > 180;
+
+            if (isWhite || isNearWhite) {
+              data[i] = 255;
+              data[i + 1] = 255;
+              data[i + 2] = 255;
+            } else {
+              const luminance = (0.2126 * srcR + 0.7152 * srcG + 0.0722 * srcB) / 255;
+              const shade = Math.pow(luminance, 0.88);
+
+              data[i] = Math.round(r * shade);
+              data[i + 1] = Math.round(g * shade);
+              data[i + 2] = Math.round(b * shade);
+            }
+          }
+
+          ctx.putImageData(imageData, 0, 0);
+          const tintedDataUrl = canvas.toDataURL('image/png');
+          logoTintCache.set(cacheKey, tintedDataUrl);
+
+          if ((logoEl.dataset.baseSrc || '') === baseSrc) {
+            logoEl.src = tintedDataUrl;
+          }
+        } catch (error) {
+        }
+      };
+      img.onerror = () => { };
+      img.src = baseSrc;
+    }
+
+    function syncLogoThemeTone() {
+      const currentTheme = localStorage.getItem('selectedTheme') || 'default';
+
+      if (currentTheme === 'default') {
+        const defaultLogo = "https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/logo.png";
+        document.querySelectorAll('.logo, .home-logo').forEach(logoEl => {
+          if (logoEl.src !== defaultLogo) {
+            logoEl.src = defaultLogo;
+          }
+        });
+        return;
+      }
+
+      const { r, g, b } = getBackgroundColorRGB();
+      document.querySelectorAll('.logo, .home-logo').forEach(logoEl => {
+        tintLogoElementExact(logoEl, r, g, b);
+      });
+    }
+
     function updateMatrixTheme() {
+      syncLogoThemeTone();
       refreshActiveBackground();
     }
 
@@ -5624,6 +6061,10 @@
         if (savedTheme === 'custom') {
           const customColor = localStorage.getItem('customThemeColor') || '#c27c15';
           applyCustomThemeColors(customColor);
+        } else {
+          document.documentElement.style.removeProperty('--primary-orange');
+          document.documentElement.style.removeProperty('--primary-orange-rgb');
+          document.documentElement.style.removeProperty('--accent-orange');
         }
       }
 
@@ -5691,6 +6132,481 @@
       }
     }
 
+    const gameTabsState = {
+      tabs: [],
+      activeId: null,
+      nextId: 1,
+      hideTimer: null,
+      maxTabs: 10
+    };
+
+    function getGameShellElements() {
+      return {
+        page: document.getElementById('gamePage'),
+        main: document.getElementById('main-container'),
+        tabsStrip: document.getElementById('gameTabsStrip'),
+        views: document.getElementById('gameViews')
+      };
+    }
+
+    function getGameTabById(tabId) {
+      return gameTabsState.tabs.find(tab => tab.id === tabId) || null;
+    }
+
+    function getActiveGameTab() {
+      return getGameTabById(gameTabsState.activeId);
+    }
+
+    function setGameOverlayVisible(visible) {
+      const shell = getGameShellElements();
+      if (!shell.page || !shell.main) return;
+
+      if (gameTabsState.hideTimer) {
+        clearTimeout(gameTabsState.hideTimer);
+        gameTabsState.hideTimer = null;
+      }
+
+      if (visible) {
+        shell.page.classList.remove('slide-down');
+        shell.page.classList.add('active');
+        shell.main.classList.add('slide-down');
+        const activeTab = getActiveGameTab();
+        if (activeTab) resumeGameTab(activeTab);
+      } else {
+        gameTabsState.tabs.forEach(tab => freezeGameTab(tab));
+        shell.page.classList.add('slide-down');
+        shell.main.classList.remove('slide-down');
+        gameTabsState.hideTimer = setTimeout(() => {
+          shell.page.classList.remove('active', 'slide-down');
+        }, 500);
+      }
+    }
+
+    function pauseMediaInFrame(frame, reset = false) {
+      if (!frame) return;
+      try {
+        const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+        if (!iframeDoc) return;
+        const mediaEls = iframeDoc.querySelectorAll('video, audio');
+        mediaEls.forEach(media => {
+          media.pause();
+          if (reset) media.currentTime = 0;
+        });
+      } catch (error) {
+      }
+    }
+
+    function getGameFreezeHarnessScript() {
+      return `<script>
+        (function() {
+          if (window.__noahFreezeHarnessInstalled) return;
+          window.__noahFreezeHarnessInstalled = true;
+
+          var frozen = false;
+          var rafCallbacks = new Map();
+          var rafPending = new Set();
+          var intervals = new Map();
+          var timeouts = new Map();
+          var audioContexts = [];
+          var nextRafId = 1;
+          var nextIntervalId = 1;
+          var nextTimeoutId = 1;
+          var nativeRaf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : null;
+          var nativeCancelRaf = window.cancelAnimationFrame ? window.cancelAnimationFrame.bind(window) : null;
+          var nativeSetInterval = window.setInterval.bind(window);
+          var nativeClearInterval = window.clearInterval.bind(window);
+          var nativeSetTimeout = window.setTimeout.bind(window);
+          var nativeClearTimeout = window.clearTimeout.bind(window);
+
+          function invokeSafely(cb, args, ts) {
+            try {
+              if (typeof ts === 'number') cb(ts);
+              else cb.apply(window, args || []);
+            } catch (error) {
+              nativeSetTimeout(function() { throw error; }, 0);
+            }
+          }
+
+          function scheduleInterval(entry) {
+            entry.nativeId = nativeSetInterval(function() {
+              if (frozen || !entry.active) return;
+              invokeSafely(entry.cb, entry.args);
+            }, entry.delay);
+          }
+
+          function scheduleTimeout(entry, delayMs) {
+            var wait = Math.max(0, delayMs);
+            entry.startedAt = Date.now();
+            entry.nativeId = nativeSetTimeout(function() {
+              if (!entry.active) return;
+              entry.nativeId = null;
+              if (frozen) {
+                entry.remaining = Math.max(0, entry.delay - (Date.now() - entry.startedAt));
+                return;
+              }
+              invokeSafely(entry.cb, entry.args);
+              timeouts.delete(entry.id);
+            }, wait);
+          }
+
+          function scheduleRaf(rafId) {
+            if (!nativeRaf) return;
+            nativeRaf(function(ts) {
+              if (!rafCallbacks.has(rafId)) return;
+              if (frozen) {
+                rafPending.add(rafId);
+                return;
+              }
+              var cb = rafCallbacks.get(rafId);
+              rafCallbacks.delete(rafId);
+              invokeSafely(cb, null, ts);
+            });
+          }
+
+          if (nativeRaf) {
+            window.requestAnimationFrame = function(cb) {
+              if (typeof cb !== 'function') return nativeRaf(cb);
+              var rafId = nextRafId++;
+              rafCallbacks.set(rafId, cb);
+              if (frozen) {
+                rafPending.add(rafId);
+                return rafId;
+              }
+              scheduleRaf(rafId);
+              return rafId;
+            };
+
+            window.cancelAnimationFrame = function(rafId) {
+              rafCallbacks.delete(rafId);
+              rafPending.delete(rafId);
+              if (nativeCancelRaf) nativeCancelRaf(rafId);
+            };
+          }
+
+          window.setInterval = function(cb, delay) {
+            if (typeof cb !== 'function') return nativeSetInterval(cb, delay);
+            var intervalId = nextIntervalId++;
+            var entry = {
+              id: intervalId,
+              cb: cb,
+              args: Array.prototype.slice.call(arguments, 2),
+              delay: Math.max(0, Number(delay) || 0),
+              nativeId: null,
+              active: true
+            };
+            intervals.set(intervalId, entry);
+            if (!frozen) scheduleInterval(entry);
+            return intervalId;
+          };
+
+          window.clearInterval = function(intervalId) {
+            var entry = intervals.get(intervalId);
+            if (!entry) {
+              nativeClearInterval(intervalId);
+              return;
+            }
+            entry.active = false;
+            if (entry.nativeId !== null) nativeClearInterval(entry.nativeId);
+            intervals.delete(intervalId);
+          };
+
+          window.setTimeout = function(cb, delay) {
+            if (typeof cb !== 'function') return nativeSetTimeout(cb, delay);
+            var timeoutId = nextTimeoutId++;
+            var entry = {
+              id: timeoutId,
+              cb: cb,
+              args: Array.prototype.slice.call(arguments, 2),
+              delay: Math.max(0, Number(delay) || 0),
+              remaining: Math.max(0, Number(delay) || 0),
+              startedAt: 0,
+              nativeId: null,
+              active: true
+            };
+            timeouts.set(timeoutId, entry);
+            if (!frozen) scheduleTimeout(entry, entry.remaining);
+            return timeoutId;
+          };
+
+          window.clearTimeout = function(timeoutId) {
+            var entry = timeouts.get(timeoutId);
+            if (!entry) {
+              nativeClearTimeout(timeoutId);
+              return;
+            }
+            entry.active = false;
+            if (entry.nativeId !== null) nativeClearTimeout(entry.nativeId);
+            timeouts.delete(timeoutId);
+          };
+
+          function trackAudioContext(ctorName) {
+            var NativeCtor = window[ctorName];
+            if (!NativeCtor) return;
+            function WrappedAudioContext() {
+              var ctx = new NativeCtor(...arguments);
+              audioContexts.push(ctx);
+              if (frozen && typeof ctx.suspend === 'function') {
+                Promise.resolve().then(function() { return ctx.suspend(); }).catch(function() {});
+              }
+              return ctx;
+            }
+            WrappedAudioContext.prototype = NativeCtor.prototype;
+            Object.setPrototypeOf(WrappedAudioContext, NativeCtor);
+            window[ctorName] = WrappedAudioContext;
+          };
+          trackAudioContext('AudioContext');
+          trackAudioContext('webkitAudioContext');
+
+          function setFrozen(nextFrozen) {
+            frozen = !!nextFrozen;
+            window.__NOAH_FROZEN__ = frozen;
+
+            if (frozen) {
+              document.documentElement.style.animationPlayState = 'paused';
+              document.documentElement.style.transitionProperty = 'none';
+
+              intervals.forEach(function(entry) {
+                if (entry.nativeId !== null) {
+                  nativeClearInterval(entry.nativeId);
+                  entry.nativeId = null;
+                }
+              });
+
+              timeouts.forEach(function(entry) {
+                if (entry.nativeId !== null) {
+                  entry.remaining = Math.max(0, entry.delay - (Date.now() - entry.startedAt));
+                  nativeClearTimeout(entry.nativeId);
+                  entry.nativeId = null;
+                }
+              });
+
+              audioContexts.forEach(function(ctx) {
+                if (ctx && ctx.state === 'running' && typeof ctx.suspend === 'function') {
+                  Promise.resolve().then(function() { return ctx.suspend(); }).catch(function() {});
+                }
+              });
+
+              try {
+                var mediaEls = document.querySelectorAll('video, audio');
+                mediaEls.forEach(function(media) { media.pause(); });
+              } catch (error) {}
+              return;
+            }
+
+            document.documentElement.style.animationPlayState = '';
+            document.documentElement.style.transitionProperty = '';
+
+            intervals.forEach(function(entry) {
+              if (entry.active && entry.nativeId === null) scheduleInterval(entry);
+            });
+
+            timeouts.forEach(function(entry) {
+              if (entry.active && entry.nativeId === null) scheduleTimeout(entry, entry.remaining);
+            });
+
+            audioContexts.forEach(function(ctx) {
+              if (ctx && ctx.state === 'suspended' && typeof ctx.resume === 'function') {
+                Promise.resolve().then(function() { return ctx.resume(); }).catch(function() {});
+              }
+            });
+
+            if (nativeRaf && rafPending.size) {
+              var pendingIds = Array.from(rafPending);
+              rafPending.clear();
+              pendingIds.forEach(scheduleRaf);
+            }
+          }
+
+          window.addEventListener('message', function(event) {
+            if (!event || !event.data || event.data.type !== 'NOAH_TAB_STATE') return;
+            setFrozen(!!event.data.frozen);
+          });
+
+          window.__NOAH_SET_FROZEN__ = setFrozen;
+        })();
+      <\/script>`;
+    }
+
+    function injectFreezeHarnessIntoHtml(html) {
+      if (!html || typeof html !== 'string') return html;
+      const harness = getGameFreezeHarnessScript();
+
+      if (/<head[^>]*>/i.test(html)) {
+        return html.replace(/<head[^>]*>/i, match => `${match}\n${harness}`);
+      }
+
+      if (/<body[^>]*>/i.test(html)) {
+        return html.replace(/<body[^>]*>/i, match => `${match}\n${harness}`);
+      }
+
+      return `${harness}\n${html}`;
+    }
+
+    function postTabFreezeMessage(tab, frozen) {
+      if (!tab || !tab.frame) return;
+      try {
+        if (tab.frame.contentWindow) {
+          tab.frame.contentWindow.postMessage({ type: 'NOAH_TAB_STATE', frozen }, '*');
+        }
+      } catch (error) {
+      }
+      tab.frozen = frozen;
+    }
+
+    function freezeGameTab(tab) {
+      if (!tab || !tab.frame) return;
+      if (document.fullscreenElement === tab.frame && document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+      pauseMediaInFrame(tab.frame, false);
+      postTabFreezeMessage(tab, true);
+    }
+
+    function resumeGameTab(tab) {
+      if (!tab || !tab.frame) return;
+      postTabFreezeMessage(tab, false);
+    }
+
+    function setActiveGameTab(tabId) {
+      const target = getGameTabById(tabId);
+      if (!target) return;
+
+      const previous = getActiveGameTab();
+      if (previous && previous.id !== tabId) {
+        freezeGameTab(previous);
+      }
+
+      gameTabsState.activeId = tabId;
+      gameTabsState.tabs.forEach(tab => {
+        const isActive = tab.id === tabId;
+        tab.button.classList.toggle('active', isActive);
+        tab.frame.classList.toggle('active', isActive);
+      });
+      resumeGameTab(target);
+    }
+
+    function createGameTab(title, url) {
+      const shell = getGameShellElements();
+      if (!shell.tabsStrip || !shell.views) return null;
+
+      const tabId = `game-tab-${gameTabsState.nextId++}`;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'game-tab';
+      button.dataset.tabId = tabId;
+
+      const titleEl = document.createElement('span');
+      titleEl.className = 'game-tab-title';
+      titleEl.textContent = title;
+
+      const closeEl = document.createElement('span');
+      closeEl.className = 'game-tab-close';
+      closeEl.innerHTML = '<i class="fas fa-xmark"></i>';
+
+      button.appendChild(titleEl);
+      button.appendChild(closeEl);
+
+      const frame = document.createElement('iframe');
+      frame.className = 'game-frame';
+      frame.dataset.tabId = tabId;
+      frame.setAttribute('frameborder', '0');
+      frame.setAttribute('name', tabId);
+      frame.src = 'about:blank';
+
+      const tab = {
+        id: tabId,
+        title,
+        url,
+        button,
+        frame,
+        loadingTimer: null,
+        frozen: false,
+        loadToken: 0
+      };
+
+      frame.addEventListener('load', () => {
+        const liveTab = getGameTabById(tabId);
+        if (!liveTab) return;
+        if (liveTab.frozen) pauseMediaInFrame(liveTab.frame, false);
+        postTabFreezeMessage(liveTab, !!liveTab.frozen);
+      });
+
+      button.addEventListener('click', (event) => {
+        if (event.target.closest('.game-tab-close')) return;
+        setActiveGameTab(tabId);
+      });
+
+      button.addEventListener('auxclick', (event) => {
+        if (event.button === 1) {
+          event.preventDefault();
+          closeLesson(tabId);
+        }
+      });
+
+      closeEl.addEventListener('click', (event) => {
+        event.stopPropagation();
+        closeLesson(tabId);
+      });
+
+      shell.tabsStrip.appendChild(button);
+      shell.views.appendChild(frame);
+      gameTabsState.tabs.push(tab);
+      return tab;
+    }
+
+    function loadGameIntoTab(tab) {
+      if (!tab || !tab.frame) return;
+
+      if (tab.loadingTimer) {
+        clearTimeout(tab.loadingTimer);
+        tab.loadingTimer = null;
+      }
+
+      tab.loadToken += 1;
+      const loadToken = tab.loadToken;
+      const tabId = tab.id;
+      tab.suspended = false;
+      tab.frame.src = 'about:blank';
+      tab.frame.srcdoc = createGameLoadingScreen(tab.title);
+
+      tab.loadingTimer = setTimeout(() => {
+        const liveTab = getGameTabById(tabId);
+        if (!liveTab || !liveTab.frame || liveTab.loadToken !== loadToken) return;
+
+        const gameUrl = liveTab.url || '';
+        const isJsDelivrFile = gameUrl.includes('cdn.jsdelivr.net');
+        const isHtmlFile = gameUrl.includes('.html') ||
+          gameUrl.includes('.htm') ||
+          gameUrl.includes('cdn.jsdelivr.net') ||
+          gameUrl.includes('rawcdn.githack.com');
+
+        if (isJsDelivrFile || isHtmlFile) {
+          fetch(gameUrl)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+              }
+              return response.text();
+            })
+            .then(html => {
+              const currentTab = getGameTabById(tabId);
+              if (currentTab && currentTab.loadToken === loadToken) {
+                currentTab.frame.srcdoc = injectFreezeHarnessIntoHtml(html);
+              }
+            })
+            .catch(error => {
+              console.log('Fetch failed, using simple iframe:', error);
+              const currentTab = getGameTabById(tabId);
+              if (currentTab && currentTab.loadToken === loadToken) currentTab.frame.srcdoc = createSimpleIframeWrapper(gameUrl);
+            });
+        } else {
+          if (liveTab.loadToken === loadToken) {
+            liveTab.frame.srcdoc = createSimpleIframeWrapper(gameUrl);
+          }
+        }
+      }, 3000);
+    }
+
     function openLesson(t, u) {
       if (typeof gtag !== 'undefined') {
         gtag('event', 'game_launch', {
@@ -5709,47 +6625,39 @@
         });
       }
 
-      document.getElementById('gameTitle').textContent = t;
+      const normalizedUrl = (u || '').trim();
+      const existingTab = gameTabsState.tabs.find(tab =>
+        ((tab.url || '').trim() === normalizedUrl) ||
+        (tab.title === t)
+      );
+      if (existingTab) {
+        setGameOverlayVisible(true);
+        setActiveGameTab(existingTab.id);
+        return;
+      }
 
-      const loadingScreenHTML = createGameLoadingScreen(t);
-
-      const gameFrame = document.getElementById('gameFrame');
-      gameFrame.srcdoc = loadingScreenHTML;
-
-      document.getElementById('gamePage').classList.add('active');
-      document.getElementById('main-container').classList.add('slide-down');
-
-      const loadingDuration = 3000;
-
-      setTimeout(() => {
-        const isJsDelivrFile = u.includes('cdn.jsdelivr.net');
-
-        if (isJsDelivrFile) {
-          fetch(u)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.status);
-              }
-              return response.text();
-            })
-            .then(html => {
-              gameFrame.srcdoc = html;
-            })
-            .catch(error => {
-              console.log('Fetch failed, using simple iframe:', error);
-              gameFrame.srcdoc = createSimpleIframeWrapper(u);
-            });
-        } else {
-          gameFrame.srcdoc = createSimpleIframeWrapper(u);
+      if (gameTabsState.tabs.length >= gameTabsState.maxTabs) {
+        const latestTab = gameTabsState.tabs[gameTabsState.tabs.length - 1];
+        if (latestTab) {
+          setGameOverlayVisible(true);
+          setActiveGameTab(latestTab.id);
         }
-      }, loadingDuration);
+        alert(`You can only have up to ${gameTabsState.maxTabs} game tabs open at once. Please close a tab first.`);
+        return;
+      }
+
+      const tab = createGameTab(t, u);
+      if (!tab) return;
+      setGameOverlayVisible(true);
+      setActiveGameTab(tab.id);
+      loadGameIntoTab(tab);
     }
 
     function createSimpleIframeWrapper(url) {
       return `<!DOCTYPE html>
-		                            <html>
-		                            <head>
-		                                <meta charset="UTF-8">
+			                            <html>
+			                            <head>
+			                                <meta charset="UTF-8">
 		                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		                                <title>Game<\/title>
 		                                <style>
@@ -5761,71 +6669,168 @@
 		                                        overflow: hidden;
 		                                        background: #000;
 		                                    }
-		                                    iframe {
-		                                        width: 100%;
-		                                        height: 100%;
-		                                        border: none;
-		                                    }
-		                                <\/style>
-		                            <\/head>
-		                            <body>
-		                                <iframe src="${url}" frameborder="0" allowfullscreen><\/iframe>
-		                            <\/body>
-		                            <\/html>`;
+			                                    iframe {
+			                                        width: 100%;
+			                                        height: 100%;
+			                                        border: none;
+			                                    }
+			                                <\/style>
+			                                ${getGameFreezeHarnessScript()}
+			                            <\/head>
+			                            <body>
+			                                <iframe id="noah-inner-game-frame" src="${url}" frameborder="0" allowfullscreen><\/iframe>
+			                                <script>
+			                                  (function() {
+			                                    var innerFrame = document.getElementById('noah-inner-game-frame');
+			                                    var frozen = false;
+			                                    function applyFrozenState() {
+			                                      if (!innerFrame) return;
+			                                      innerFrame.style.pointerEvents = frozen ? 'none' : '';
+			                                      innerFrame.style.filter = frozen ? 'saturate(0.7) brightness(0.9)' : '';
+			                                      try {
+			                                        if (innerFrame.contentWindow) {
+			                                          if (frozen && typeof innerFrame.contentWindow.stop === 'function') {
+			                                            innerFrame.contentWindow.stop();
+			                                          }
+			                                          innerFrame.contentWindow.postMessage({ type: 'NOAH_TAB_STATE', frozen: frozen }, '*');
+			                                        }
+			                                      } catch (error) {}
+			                                    }
+
+			                                    innerFrame.addEventListener('load', function() {
+			                                      applyFrozenState();
+			                                    });
+
+			                                    window.addEventListener('message', function(event) {
+			                                      if (!event || !event.data || event.data.type !== 'NOAH_TAB_STATE') return;
+			                                      frozen = !!event.data.frozen;
+			                                      applyFrozenState();
+			                                    });
+			                                  })();
+			                                <\/script>
+			                            <\/body>
+			                            <\/html>`;
     }
 
-    function closeLesson() {
+    function closeLesson(tabId = null) {
+      const targetId = tabId || gameTabsState.activeId;
+      const targetTab = getGameTabById(targetId);
+      if (!targetTab) return;
+
       if (typeof gtag !== 'undefined') {
         gtag('event', 'game_exit', {
           'event_category': 'game_interaction',
-          'event_label': document.getElementById('gameTitle').textContent,
+          'event_label': targetTab.title,
           'value': 1
         });
       }
 
-      const gameFrame = document.getElementById('gameFrame');
+      const tabIndex = gameTabsState.tabs.findIndex(tab => tab.id === targetId);
+      if (tabIndex === -1) return;
 
-      gameFrame.src = '';
-      gameFrame.srcdoc = '';
-
-      try {
-        const iframeDoc = gameFrame.contentDocument || gameFrame.contentWindow.document;
-        if (iframeDoc) {
-          const videos = iframeDoc.querySelectorAll('video');
-          const audios = iframeDoc.querySelectorAll('audio');
-
-          videos.forEach(video => {
-            video.pause();
-            video.currentTime = 0;
-          });
-
-          audios.forEach(audio => {
-            audio.pause();
-            audio.currentTime = 0;
-          });
-        }
-      } catch (e) {
+      if (targetTab.loadingTimer) {
+        clearTimeout(targetTab.loadingTimer);
       }
 
-      gameFrame.srcdoc = '<!DOCTYPE html><html><body><\/body><\/html>';
+      if (document.fullscreenElement === targetTab.frame && document.exitFullscreen) {
+        document.exitFullscreen();
+      }
 
-      document.getElementById('gamePage').classList.add('slide-down');
-      document.getElementById('main-container').classList.remove('slide-down');
+      pauseMediaInFrame(targetTab.frame);
+      targetTab.frame.src = 'about:blank';
+      targetTab.frame.srcdoc = '';
+      targetTab.frame.classList.remove('fullscreen');
 
-      setTimeout(() => {
-        document.getElementById('gamePage').classList.remove('active', 'slide-down');
-        gameFrame.classList.remove('fullscreen');
+      targetTab.button.remove();
+      targetTab.frame.remove();
+      gameTabsState.tabs.splice(tabIndex, 1);
 
-        gameFrame.src = 'about:blank';
-        gameFrame.srcdoc = '';
-      }, 500);
+      if (!gameTabsState.tabs.length) {
+        gameTabsState.activeId = null;
+        setGameOverlayVisible(false);
+        return;
+      }
+
+      const fallbackTab = gameTabsState.tabs[tabIndex] || gameTabsState.tabs[tabIndex - 1] || gameTabsState.tabs[0];
+      if (fallbackTab) {
+        setActiveGameTab(fallbackTab.id);
+      }
     }
 
+    function exitGameBrowser() {
+      setGameOverlayVisible(false);
+    }
+
+    function openTabInfoModal() {
+      const modal = document.getElementById('tabInfoModal');
+      if (!modal) return;
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeTabInfoModal() {
+      const modal = document.getElementById('tabInfoModal');
+      if (!modal) return;
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+
+    async function copyTabInfoLink(url, triggerEl) {
+      const originalText = triggerEl ? triggerEl.textContent : '';
+      const setCopiedState = (label) => {
+        if (!triggerEl) return;
+        triggerEl.textContent = label;
+        triggerEl.disabled = true;
+        setTimeout(() => {
+          triggerEl.textContent = originalText || 'Copy';
+          triggerEl.disabled = false;
+        }, 1200);
+      };
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(url);
+        } else {
+          const tempInput = document.createElement('textarea');
+          tempInput.value = url;
+          tempInput.style.position = 'fixed';
+          tempInput.style.opacity = '0';
+          document.body.appendChild(tempInput);
+          tempInput.focus();
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        }
+        setCopiedState('Copied');
+      } catch (error) {
+        alert('Copy failed. Link: ' + url);
+      }
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        gameTabsState.tabs.forEach(tab => freezeGameTab(tab));
+      } else if (document.getElementById('gamePage')?.classList.contains('active')) {
+        const activeTab = getActiveGameTab();
+        if (!activeTab) return;
+        resumeGameTab(activeTab);
+      }
+    });
+
     document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeTabInfoModal();
+      }
       if (e.ctrlKey && e.shiftKey && e.key === 'S') {
         e.preventDefault();
         openSettings();
       }
+    });
+
+    document.addEventListener('click', (event) => {
+      const modal = document.getElementById('tabInfoModal');
+      if (!modal || !modal.classList.contains('active')) return;
+      if (event.target === modal) closeTabInfoModal();
     });
 
     document.addEventListener('DOMContentLoaded', function () {
@@ -5844,29 +6849,54 @@
       initHomeLogoTilt();
     });
 
+    function readStorageObject(storage) {
+      const data = {};
+      if (!storage) return data;
+      for (let i = 0; i < storage.length; i++) {
+        const key = storage.key(i);
+        if (key !== null) data[key] = storage.getItem(key);
+      }
+      return data;
+    }
+
+    function parseCookiesToObject() {
+      const cookieObject = {};
+      const raw = document.cookie || '';
+      if (!raw.trim()) return cookieObject;
+      raw.split(';').forEach(cookiePart => {
+        const [rawKey, ...rest] = cookiePart.split('=');
+        const key = (rawKey || '').trim();
+        if (!key) return;
+        cookieObject[key] = rest.join('=').trim();
+      });
+      return cookieObject;
+    }
+
     function getAllSettings() {
+      const localData = readStorageObject(window.localStorage);
+      const sessionData = readStorageObject(window.sessionStorage);
+      const cookiesData = parseCookiesToObject();
       return {
-        version: '1.0',
+        version: '2.0',
         exportDate: new Date().toISOString(),
         siteName: "Noah's Tutoring Hub",
-        favorites: favorites,
+        exportType: 'site-data',
+        localStorageData: localData,
+        sessionStorageData: sessionData,
+        cookiesData: cookiesData,
+        favorites: Array.isArray(favorites) ? favorites : [],
         settings: {
-          selectedTheme: localStorage.getItem('selectedTheme') || 'default',
-          selectedBackground: localStorage.getItem('selectedBackground') || 'matrix',
-          customThemeColor: localStorage.getItem('customThemeColor') || '#c27c15',
-
-          cursorEnabled: localStorage.getItem('cursorEnabled') || 'true',
-          cursorStyle: localStorage.getItem('cursorStyle') || 'ring',
-
-          inactiveTabTitle: localStorage.getItem('inactiveTabTitle') || 'Home',
-          inactiveTabFavicon: localStorage.getItem('inactiveTabFavicon') || 'https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/images/fruh.png',
-
-          customLogo: localStorage.getItem('customLogo') || null,
-
-          flashEnabled: localStorage.getItem('flashEnabled') || 'true',
-
-          lastSearchTerm: localStorage.getItem('lastSearchTerm') || '',
-          sortMethod: localStorage.getItem('sortMethod') || 'default'
+          selectedTheme: localData.selectedTheme || 'default',
+          selectedBackground: localData.selectedBackground || 'matrix',
+          customThemeColor: localData.customThemeColor || '#c27c15',
+          cursorEnabled: localData.cursorEnabled || 'true',
+          cursorStyle: localData.cursorStyle || 'ring',
+          inactiveTabTitle: localData.inactiveTabTitle || 'Home',
+          inactiveTabFavicon: localData.inactiveTabFavicon || 'https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/images/fruh.png',
+          customLogo: localData.customLogo || null,
+          flashEnabled: localData.flashEnabled || 'true',
+          lastSearchTerm: localData.lastSearchTerm || '',
+          sortMethod: localData.sortMethod || 'default'
         }
       };
     }
@@ -5876,7 +6906,7 @@
       const settingsJson = JSON.stringify(settings, null, 2);
 
       const timestamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, '-');
-      const filename = `noahstutoring-settings-${timestamp}.json`;
+      const filename = `noahstutoring-site-data-${timestamp}.json`;
 
       const blob = new Blob([settingsJson], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
@@ -5893,7 +6923,7 @@
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
 
-        showImportStatus('Settings exported successfully!', 'success');
+        showImportStatus('Site data exported successfully!', 'success');
 
         if (typeof gtag !== 'undefined') {
           gtag('event', 'settings_export', {
@@ -5917,7 +6947,7 @@
 
       const fileInput = document.getElementById('settingsFileInput');
       if (!fileInput.files || !fileInput.files[0]) {
-        showImportStatus('Please select a settings file first.', 'error');
+        showImportStatus('Please select a data export file first.', 'error');
         return;
       }
 
@@ -5929,14 +6959,14 @@
           const importedSettings = JSON.parse(e.target.result);
 
           if (!validateSettings(importedSettings)) {
-            showImportStatus('Invalid settings file format.', 'error');
+            showImportStatus('Invalid data export file format.', 'error');
             return;
           }
 
-          if (confirm(`Are you SURE you want to import your settings? If you import new settings your old settings WILL be overwritten? Do you want that buddy?`)) {
+          if (confirm(`Import this site data backup? Current local data will be overwritten.`)) {
             applyImportedSettings(importedSettings);
 
-            showImportStatus('Yayy!! Your settings have been imported successfully! :)', 'success');
+            showImportStatus('Site data imported successfully!', 'success');
 
             closeSettings();
 
@@ -5955,7 +6985,7 @@
           }
         } catch (error) {
           console.error('Error importing settings:', error);
-          showImportStatus('Error reading settings file.', 'error');
+          showImportStatus('Error reading data export file.', 'error');
         }
       };
 
@@ -5968,31 +6998,66 @@
 
     function validateSettings(settings) {
       if (!settings || typeof settings !== 'object') return false;
-      if (!settings.settings || typeof settings.settings !== 'object') return false;
-
-      const requiredFields = ['selectedTheme', 'cursorEnabled'];
-      for (const field of requiredFields) {
-        if (!(field in settings.settings)) return false;
-      }
-
+      const hasLegacySettings = settings.settings && typeof settings.settings === 'object';
+      const hasStorageSnapshot = settings.localStorageData && typeof settings.localStorageData === 'object';
+      if (!hasLegacySettings && !hasStorageSnapshot) return false;
       if (settings.favorites !== undefined && !Array.isArray(settings.favorites)) {
         return false;
       }
-
       return true;
     }
 
     function applyImportedSettings(importedSettings) {
-      const settings = importedSettings.settings;
+      if (importedSettings.localStorageData && typeof importedSettings.localStorageData === 'object') {
+        localStorage.clear();
+        Object.entries(importedSettings.localStorageData).forEach(([key, value]) => {
+          if (typeof key === 'string' && key) {
+            localStorage.setItem(key, value === null || value === undefined ? '' : String(value));
+          }
+        });
+      }
+
+      if (importedSettings.sessionStorageData && typeof importedSettings.sessionStorageData === 'object') {
+        sessionStorage.clear();
+        Object.entries(importedSettings.sessionStorageData).forEach(([key, value]) => {
+          if (typeof key === 'string' && key) {
+            sessionStorage.setItem(key, value === null || value === undefined ? '' : String(value));
+          }
+        });
+      }
+
+      if (importedSettings.cookiesData && typeof importedSettings.cookiesData === 'object') {
+        Object.entries(importedSettings.cookiesData).forEach(([key, value]) => {
+          if (typeof key === 'string' && key) {
+            document.cookie = `${key}=${value ?? ''}; path=/; max-age=31536000`;
+          }
+        });
+      }
 
       if (importedSettings.favorites && Array.isArray(importedSettings.favorites)) {
         favorites = importedSettings.favorites;
         localStorage.setItem('gameFavorites', JSON.stringify(favorites));
       }
 
+      const settings = importedSettings.settings && typeof importedSettings.settings === 'object'
+        ? importedSettings.settings
+        : {
+          selectedTheme: localStorage.getItem('selectedTheme') || 'default',
+          selectedBackground: localStorage.getItem('selectedBackground') || 'matrix',
+          customThemeColor: localStorage.getItem('customThemeColor') || '#c27c15',
+          cursorEnabled: localStorage.getItem('cursorEnabled') || 'true',
+          cursorStyle: localStorage.getItem('cursorStyle') || 'ring',
+          inactiveTabTitle: localStorage.getItem('inactiveTabTitle') || 'Home',
+          inactiveTabFavicon: localStorage.getItem('inactiveTabFavicon') || 'https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/images/fruh.png',
+          customLogo: localStorage.getItem('customLogo') || null,
+          flashEnabled: localStorage.getItem('flashEnabled') || 'true',
+          lastSearchTerm: localStorage.getItem('lastSearchTerm') || '',
+          sortMethod: localStorage.getItem('sortMethod') || 'default'
+        };
+
       Object.keys(settings).forEach(key => {
         if (settings[key] !== null && settings[key] !== undefined) {
-          localStorage.setItem(key, settings[key]);
+          localStorage.setItem(key, String(settings[key]));
         }
       });
 
@@ -6348,7 +7413,7 @@
         "fun Fact, twerking burns 285.43 calories a second, make sure to send proof in the typing section!",
         "dame tu culo",
         "ronaldo is the best soccer player ever",
-        "im gay - joseph beltran",
+        "im gay -joseph beltran",
         "this is all a simulation, ur not real",
         "are u alright? No! You are all left",
         "What is the difference between a baked potato and an apple? Im very homosexual!",
@@ -6364,7 +7429,7 @@
         "everyday we eatin good",
         "it wraps around not ONCE, not TWICE, but THRICE!",
         "shutup MOMMMMMM, silence from YOUU, your cut OFF from TALKING",
-        "Do everything like your name is on it - Joya",
+        "Do everything like your name is on it -Joya",
         "eh pretty cool site",
         "in the big 2026",
         "big yahu",
@@ -6401,7 +7466,16 @@
         "BOMBOCLATTTTTTTT",
         "It is better to shit in the sink... than to sink... in the shit...",
         "You know it's cold outside, when you go outside, and it's cold",
-        "deltarune tomorrow"
+        "deltarune tomorrow",
+        "I woke up today in this morning in the morning I woke up this morning I woke up and remember that every morning that I wake up",
+        "Never back down never what -nick eh 30",
+        "ts website lowk comp",
+        "Keep you head down and your chin up",
+        "lil bro hop off ma dihh",
+        "this is this, and that is that",
+        "If im gay you're gay too",
+        "Ima be under your bed tonight, be ready",
+        "Who TF lives in Nebraska",
       ];
 
       const loadingSteps = [
@@ -6692,61 +7766,18 @@
     }
 
     function refreshGame() {
-      const gameFrame = document.getElementById('gameFrame');
-      const gameTitle = document.getElementById('gameTitle').textContent;
+      const activeTab = getActiveGameTab();
+      if (!activeTab) return;
 
       if (typeof gtag !== 'undefined') {
         gtag('event', 'game_refresh', {
           'event_category': 'game_interaction',
-          'event_label': gameTitle,
+          'event_label': activeTab.title,
           'value': 1
         });
       }
 
-      const currentGame = games.find(game => game.title === gameTitle);
-      if (!currentGame || !currentGame.url) {
-        console.error('Game not found:', gameTitle);
-        return;
-      }
-
-      gameFrame.src = 'about:blank';
-      gameFrame.srcdoc = '';
-
-      const loadingScreenHTML = createGameLoadingScreen(gameTitle);
-      gameFrame.srcdoc = loadingScreenHTML;
-
-      setTimeout(() => {
-        const isJsDelivrFile = currentGame.url.includes('cdn.jsdelivr.net');
-        const isHtmlFile = currentGame.url.includes('.html') ||
-          currentGame.url.includes('.htm') ||
-          currentGame.url.includes('cdn.jsdelivr.net') ||
-          currentGame.url.includes('rawcdn.githack.com');
-
-        if (isJsDelivrFile || isHtmlFile) {
-          fetch(currentGame.url)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.status);
-              }
-              return response.text();
-            })
-            .then(html => {
-              setTimeout(() => {
-                gameFrame.srcdoc = html;
-              }, 500);
-            })
-            .catch(error => {
-              console.log('Fetch failed, using simple iframe:', error);
-              setTimeout(() => {
-                gameFrame.srcdoc = createSimpleIframeWrapper(currentGame.url);
-              }, 500);
-            });
-        } else {
-          setTimeout(() => {
-            gameFrame.srcdoc = createSimpleIframeWrapper(currentGame.url);
-          }, 500);
-        }
-      }, 3000);
+      loadGameIntoTab(activeTab);
     }
 
     function toggleAds(disabled) {
@@ -6848,157 +7879,6 @@
         }, 100);
       };
     }
-
-    function backupAllData() {
-      const settings = getAllSettings();
-
-      const storage = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (!key) continue;
-        storage[key] = localStorage.getItem(key) ?? "";
-      }
-
-      const cookies = {};
-      document.cookie.split(';').forEach(cookie => {
-        const [key, value] = cookie.split('=').map(c => c.trim());
-        if (key && value) {
-          cookies[decodeURIComponent(key)] = decodeURIComponent(value);
-        }
-      });
-
-      const backup = {
-        version: 1,
-        createdAt: new Date().toISOString(),
-        origin: window.location.origin,
-        settings: settings,
-        localStorage: storage,
-        cookies: cookies
-      };
-
-      return backup;
-    }
-
-    function exportFullBackup() {
-      const backup = backupAllData();
-      const json = JSON.stringify(backup, null, 2);
-
-      const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
-      const filename = `noahstutoring-full-backup-${timestamp}.json`;
-
-      const blob = new Blob([json], { type: "application/json" });
-      const url = URL.createObjectURL(blob);
-
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      link.style.display = 'none';
-
-      document.body.appendChild(link);
-      link.click();
-
-      setTimeout(() => {
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-
-        showImportStatus('Full backup exported successfully!', 'success');
-
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'full_backup_export', {
-            'event_category': 'backup',
-            'event_label': 'export',
-            'value': 1
-          });
-        }
-      }, 100);
-    }
-
-    async function restoreFromFile(file) {
-      try {
-        const text = await file.text();
-        const parsed = JSON.parse(text);
-
-        if (!parsed.version || !parsed.createdAt) {
-          throw new Error('Invalid backup file format');
-        }
-
-        if (!confirm(`⚠️ WARNING: ARE YOU SURE? This will COMPLETELY overwrite all your current data including:
-• All settings and themes
-• Game favorites
-• Custom logos and preferences
-• All saved data
-
-Are you ABSOLUTELY sure you want to restore this backup?`)) {
-          return false;
-        }
-
-        if (!confirm('Last chance! This action CANNOT be undone. Continue?')) {
-          return false;
-        }
-
-        if (parsed.localStorage && typeof parsed.localStorage === 'object') {
-          localStorage.clear();
-
-          for (const [key, value] of Object.entries(parsed.localStorage)) {
-            if (typeof value === 'string') {
-              localStorage.setItem(key, value);
-            } else {
-              localStorage.setItem(key, JSON.stringify(value));
-            }
-          }
-        }
-
-        if (parsed.cookies && typeof parsed.cookies === 'object') {
-          document.cookie.split(';').forEach(cookie => {
-            const [name] = cookie.split('=').map(c => c.trim());
-            if (name) {
-              document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
-            }
-          });
-
-          for (const [key, value] of Object.entries(parsed.cookies)) {
-            document.cookie = `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}; path=/; max-age=31536000`;
-          }
-        }
-
-        showImportStatus('✅ Restore successful! Reloading page...', 'success');
-
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'full_backup_restore', {
-            'event_category': 'backup',
-            'event_label': 'restore',
-            'value': 1
-          });
-        }
-
-        return true;
-
-      } catch (error) {
-        console.error('Restore error:', error);
-        showImportStatus(`❌ Restore failed: ${error.message}`, 'error');
-        return false;
-      }
-    }
-
-    function initiateRestore() {
-      const fileInput = document.createElement('input');
-      fileInput.type = 'file';
-      fileInput.accept = '.json,application/json';
-
-      fileInput.onchange = async function (e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        await restoreFromFile(file);
-        fileInput.remove();
-      };
-
-      fileInput.click();
-    }
   </script>
   <script>
     (function () {
@@ -7011,6 +7891,83 @@ Are you ABSOLUTELY sure you want to restore this backup?`)) {
       }
     })();
   </script>
-</body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const quotes = [
+        "Check out all these amazing lessons (none of these are actually lessons)",
+        "400+ unblocked games for when the teacher isn't looking",
+        "Your favorite games, all in one place... unlike your grades",
+        "The ultimate school gaming hub for professional procrastinators",
+        "Play now, learn never",
+        "Better than doing homework, trust me I checked",
+        "Teacher won't even notice, just keep that tab ready to switch",
+        "Join the Discord or I will touch you...",
+        "Secret games are hidden... you gotta find the secret word...",
+        "Made by the thugs, for the thugs",
+        "Your #1 source for unblocked lessons and bad life choices",
+        "Game on, or whatever the kids say these days",
+        "Chat, is this real?",
+        "Yk people think you actually learn on here?",
+        "If anyone asks, this is a research project",
+        "Hopefully your teacher doesnt check your browser history",
+        "If the site crashes, it's actually a feature",
+        "The code is held together by hopes and prayers",
+        "If you find a bug, just ignore it and keep playing",
+        "This site is 100% safe, I promise",
+        "Heyyyyyy this isnt your math homework",
+        "BOMBOCLATTTTTTTTTTTTTTTTTTTTT",
+      ];
 
+      const typingElement = document.getElementById('typing-quote');
+      if (!typingElement) return;
+
+      let currentQuote = "";
+      let charIndex = 0;
+      let isDeleting = false;
+      let isWaiting = false;
+
+      function getRandomQuote() {
+        return quotes[Math.floor(Math.random() * quotes.length)];
+      }
+
+      currentQuote = getRandomQuote();
+
+      function typeEffect() {
+        if (isDeleting) {
+          typingElement.textContent = currentQuote.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typingElement.textContent = currentQuote.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        if (!isDeleting && charIndex === currentQuote.length) {
+          isWaiting = true;
+          setTimeout(() => {
+            isDeleting = true;
+            isWaiting = false;
+            typeEffect();
+          }, 2000);
+          return;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+
+          let newQuote;
+          do {
+            newQuote = getRandomQuote();
+          } while (newQuote === currentQuote && quotes.length > 1);
+
+          currentQuote = newQuote;
+          setTimeout(typeEffect, 500);
+          return;
+        }
+
+        const speed = isDeleting ? 50 : 100;
+        setTimeout(typeEffect, speed);
+      }
+
+      setTimeout(typeEffect, 1000);
+    });
+  </script>
+</body>
 </html>
