@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flash Game</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: black;
+        }
+        #container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .loading {
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: rgba(0,0,0,0.8);
+            border-radius: 10px;
+        }
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div class="loading" id="loading">
+            <div>Loading game...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <div id="status">Initializing...</div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script>
+        window.addEventListener('load', async function() {
+            const container = document.getElementById('container');
+            const loadingEl = document.getElementById('loading');
+            const progressFill = document.getElementById('progress');
+            const statusEl = document.getElementById('status');
+            
+            try {
+                const parts = [
+                    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/newfuckassfilestorage@master/swf/gl/GL.swf.part00.part',
+                    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/newfuckassfilestorage@master/swf/gl/GL.swf.part01.part',
+                    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/newfuckassfilestorage@master/swf/gl/GL.swf.part02.part',
+                    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/newfuckassfilestorage@master/swf/gl/GL.swf.part03.part',
+                    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/newfuckassfilestorage@master/swf/gl/GL.swf.part04.part'
+                ];
+
+                statusEl.textContent = 'Downloading parts...';
+                
+                // Fetch all parts
+                const partBuffers = [];
+                for (let i = 0; i < parts.length; i++) {
+                    statusEl.textContent = `Downloading Bullshit ${i+1}/${parts.length}...`;
+                    
+                    const response = await fetch(parts[i]);
+                    if (!response.ok) throw new Error(`Failed to load part ${i+1}`);
+                    
+                    const buffer = await response.arrayBuffer();
+                    partBuffers.push(buffer);
+                    
+                    const percent = ((i + 1) / parts.length) * 100;
+                    progressFill.style.width = percent + '%';
+                }
+
+                statusEl.textContent = 'Combining parts...';
+                
+                const totalLength = partBuffers.reduce((acc, buffer) => acc + buffer.byteLength, 0);
+                const combinedBuffer = new Uint8Array(totalLength);
+                
+                let offset = 0;
+                for (const buffer of partBuffers) {
+                    combinedBuffer.set(new Uint8Array(buffer), offset);
+                    offset += buffer.byteLength;
+                }
+
+                statusEl.textContent = 'Creating game file...';
+                
+                const blob = new Blob([combinedBuffer], { type: 'application/x-shockwave-flash' });
+                const swfUrl = URL.createObjectURL(blob);
+                
+                loadingEl.remove();
+                
+                const embed = document.createElement('embed');
+                embed.src = swfUrl;
+                embed.type = 'application/x-shockwave-flash';
+                embed.width = '100%';
+                embed.height = '100%';
+                embed.style.width = '100%';
+                embed.style.height = '100%';
+                
+                container.appendChild(embed);
+                
+                setTimeout(() => URL.revokeObjectURL(swfUrl), 5000);
+                
+            } catch (error) {
+                statusEl.textContent = 'Error: ' + error.message;
+                console.error('Failed to load game:', error);
+            }
+        });
+    </script>
+</body>
+</html>
