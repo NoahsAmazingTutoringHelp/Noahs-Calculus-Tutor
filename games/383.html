@@ -1,0 +1,82 @@
+<!-- shxyder -->
+<!-- ultimate game stash file -->
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-PXHK7Q7G3Z"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	  gtag('config', 'G-PXHK7Q7G3Z');
+	</script>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Customer Support WebPort</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<style>
+		html, body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			height: 100%;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: #1f1f20;
+		}
+		canvas {
+			width: 960px;
+			height: 540px;
+			background: #1f1f20;
+		}
+		::-webkit-scrollbar {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="unity-canvas" tabindex="-1"></canvas>
+
+	<script src="https://cdn.jsdelivr.net/gh/shayderrr/portsv4@b262cde76d7bb7adf9d47a3a962cb0cede17f7b4/CustomerSupport/Build/CustomerSupportPort.loader.js"></script>
+	<script>
+		const BASE_URL = "https://cdn.jsdelivr.net/gh/shayderrr/portsv4@b262cde76d7bb7adf9d47a3a962cb0cede17f7b4/CustomerSupport/Build/";
+
+		async function fetchAndMerge(fileParts) {
+			const blobs = await Promise.all(fileParts.map(part => 
+				fetch(BASE_URL + part).then(res => {
+					if (!res.ok) throw new Error("Failed to load part");
+					return res.blob();
+				})
+			));
+			return URL.createObjectURL(new Blob(blobs));
+		}
+
+		(async () => {
+			try {
+				const dataParts = ["CustomerSupportPort.data.part1", "CustomerSupportPort.data.part2"];
+				const wasmParts = ["CustomerSupportPort.wasm.part1", "CustomerSupportPort.wasm.part2"];
+
+				const [mergedDataUrl, mergedWasmUrl] = await Promise.all([
+					fetchAndMerge(dataParts),
+					fetchAndMerge(wasmParts)
+				]);
+
+				createUnityInstance(document.querySelector("#unity-canvas"), {
+					arguments: [],
+					dataUrl: mergedDataUrl,
+					frameworkUrl: BASE_URL + "CustomerSupportPort.framework.js",
+					codeUrl: mergedWasmUrl,
+					streamingAssetsUrl: "StreamingAssets",
+					companyName: "DefaultCompany",
+					productName: "ExportedProject",
+					productVersion: "1.0",
+				});
+			} catch (e) {
+				console.error(e);
+			}
+		})();
+	</script>
+</body>
+</html>
