@@ -149,6 +149,7 @@
       gap: 8px;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .btn-discord {
@@ -199,14 +200,43 @@
         <a href="https://discord.gg/pCGQ8vrKza" target="_blank" class="btn btn-discord">
           <i class="fab fa-discord"></i> Join Discord
         </a>
-        <a href="http://51.81.220.179/" target="_blank" class="btn btn-alt">
-          <i class="fas fa-link"></i> Link that MAY be unblocked
-        </a>
+        <button id="get-links-btn" class="btn btn-alt">
+          <i class="fas fa-link"></i> Click me for new links
+        </button>
       </div>
     </div>
   </div>
 
   <script>
+    // --- LINK LOADING LOGIC ---
+    const getLinksBtn = document.getElementById('get-links-btn');
+    const sourceUrl = "https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/totallynotthelinks/refs/heads/main/index.html";
+
+    getLinksBtn.addEventListener('click', async () => {
+      try {
+        // Fetch the raw HTML content
+        const response = await fetch(sourceUrl);
+        if (!response.ok) throw new Error('Failed to fetch the file.');
+        const htmlCode = await response.text();
+
+        // Create the about:blank window
+        const win = window.open('about:blank', '_blank');
+        
+        if (win) {
+          // Write the code into the new window
+          win.document.open();
+          win.document.write(htmlCode);
+          win.document.close();
+        } else {
+          alert('Pop-up blocked! Please allow pop-ups to see the new links.');
+        }
+      } catch (error) {
+        console.error('Error loading links:', error);
+        alert('Could not load the new links. Check your connection or the Discord.');
+      }
+    });
+
+    // --- ORIGINAL MATRIX ANIMATION ---
     const canvas = document.getElementById('matrix-bg');
     const ctx = canvas.getContext('2d');
     
