@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6233004140854685"
     crossorigin="anonymous"></script>
@@ -52,6 +53,272 @@
     name="keywords">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
+    /* Outdated Site Popup Modal */
+    .popup-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Courier New', monospace;
+    }
+
+    .popup-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .popup-container {
+      position: relative;
+      width: min(450px, 90%);
+      z-index: 100000;
+      animation: popupSlideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+    }
+
+    .popup-content {
+      background: linear-gradient(145deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.98));
+      border: 2px solid var(--primary-orange);
+      border-radius: 18px;
+      padding: 0;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(var(--primary-orange-rgb), 0.4);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .popup-header {
+      display: flex;
+      align-items: center;
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(var(--primary-orange-rgb), 0.3);
+      position: relative;
+    }
+
+    .popup-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(var(--primary-orange-rgb), 0.15);
+      border: 1px solid var(--primary-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+    }
+
+    .popup-icon i {
+      color: var(--primary-orange);
+      font-size: 1.2rem;
+      animation: pulse 2s infinite;
+    }
+
+    .popup-title {
+      color: var(--primary-orange);
+      letter-spacing: 2px;
+      flex: 1;
+      text-shadow: 0 0 10px rgba(var(--primary-orange-rgb), 0.5);
+    }
+
+    .popup-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.4);
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--gray-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: none !important;
+      transition: all 0.2s ease;
+    }
+
+    .popup-close:hover {
+      border-color: var(--primary-orange);
+      color: var(--primary-orange);
+      transform: rotate(90deg);
+      box-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.3);
+    }
+
+    .popup-body {
+      padding: 22px 20px;
+      color: var(--light-text);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .popup-highlight {
+      color: var(--primary-orange);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-shadow: 0 0 8px rgba(var(--primary-orange-rgb), 0.5);
+    }
+
+    .popup-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(var(--primary-orange-rgb), 0.4), transparent);
+      margin: 18px 0;
+    }
+
+    .popup-discord-text {
+      color: var(--gray-text);
+      margin-bottom: 15px;
+    }
+
+    .popup-discord-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(88, 101, 242, 0.15);
+      border: 2px solid #5865F2;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: none !important;
+      margin: 8px 0;
+    }
+
+    .popup-discord-btn i {
+      font-size: 1.4rem;
+      color: #5865F2;
+      filter: drop-shadow(0 0 5px rgba(88, 101, 242, 0.5));
+    }
+
+    .popup-discord-btn:hover {
+      background: rgba(88, 101, 242, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+      border-color: #7983f5;
+    }
+
+    .popup-note {
+      color: var(--gray-text);
+      font-size: 0.85rem;
+      margin-top: 15px;
+      font-style: italic;
+      text-align: center;
+    }
+
+    .popup-footer {
+      padding: 15px 20px 20px;
+      text-align: center;
+    }
+
+    .popup-continue-btn {
+      background: rgba(var(--primary-orange-rgb), 0.1);
+      border: 1px solid var(--primary-orange);
+      border-radius: 50px;
+      padding: 12px 24px;
+      color: var(--primary-orange);
+      font-size: 0.95rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      cursor: none !important;
+      transition: all 0.3s ease;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .popup-continue-btn i {
+      transition: transform 0.3s ease;
+    }
+
+    .popup-continue-btn:hover {
+      background: rgba(var(--primary-orange-rgb), 0.2);
+      box-shadow: 0 0 20px rgba(var(--primary-orange-rgb), 0.3);
+    }
+
+    .popup-continue-btn:hover i {
+      transform: translateX(5px);
+    }
+
+    @keyframes popupSlideIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 480px) {
+      .popup-header {
+        padding: 15px;
+      }
+
+      .popup-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 8px;
+      }
+
+      .popup-icon i {
+        font-size: 1rem;
+      }
+
+      .popup-title {
+        font-size: 1.2rem;
+      }
+
+      .popup-body {
+        padding: 18px 15px;
+        font-size: 0.95rem;
+      }
+
+      .popup-discord-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+      }
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -2773,6 +3040,35 @@
 </head>
 
 <body>
+  <div id="outdatedPopup" class="popup-modal" style="display: flex;">
+    <div class="popup-overlay"></div>
+    <div class="popup-container">
+      <div class="popup-content">
+        <div class="popup-header">
+
+          <h2 class="popup-title">THIS VERSION IS OUTDATED</h2>
+
+        </div>
+        <div class="popup-body">
+          <p>This version of Noah's Tutoring Hub is <span class="popup-highlight">outdated</span>.</p>
+          <p>The site has moved to a new server with faster speeds, more games, and better features! This version will
+            NOT have anymore updates.</p>
+          <div class="popup-divider"></div>
+          <p class="popup-discord-text">Join the Discord for the latest links and updates:</p>
+          <a href="https://discord.com/invite/pCGQ8vrKza" target="_blank" class="popup-discord-btn"
+            onclick="closeOutdatedPopup()">
+            <i class="fab fa-discord"></i> discord.gg/pCGQ8vrKza
+          </a>
+          <p class="popup-note">Bookmark the new link once you get it!</p>
+        </div>
+        <div class="popup-footer">
+          <button class="popup-continue-btn" onclick="closeOutdatedPopup()">
+            Continue to this version <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id="custom-scrollbar">
     <div id="custom-scrollbar-track">
       <div id="custom-scrollbar-thumb"></div>
@@ -5994,6 +6290,51 @@
       }
     }
 
+    function showOutdatedPopup() {
+      const popup = document.getElementById('outdatedPopup');
+      if (popup) {
+        popup.style.display = 'flex';
+
+        document.body.style.overflow = 'hidden';
+
+        document.addEventListener('keydown', handlePopupEscape);
+      }
+    }
+
+    function closeOutdatedPopup() {
+      const popup = document.getElementById('outdatedPopup');
+      if (popup) {
+        popup.style.display = 'none';
+
+        document.body.style.overflow = '';
+
+        document.removeEventListener('keydown', handlePopupEscape);
+
+        sessionStorage.setItem('outdatedPopupShown', 'true');
+      }
+    }
+
+    function handlePopupEscape(e) {
+      if (e.key === 'Escape') {
+        closeOutdatedPopup();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!sessionStorage.getItem('outdatedPopupShown')) {
+        setTimeout(showOutdatedPopup, 500);
+      }
+    });
+
+    document.addEventListener('click', function (e) {
+      const popup = document.getElementById('outdatedPopup');
+      if (!popup || popup.style.display !== 'flex') return;
+
+      if (e.target.classList.contains('popup-overlay')) {
+        closeOutdatedPopup();
+      }
+    });
+
     function getGameFreezeHarnessScript() {
       return `<script>
         (function() {
@@ -7807,7 +8148,7 @@
         "B.D.K.M.V",
         "Dont make me up the pole on you mf",
         "Alr bro ts was not the wind",
-		"Banana",
+        "Banana",
       ];
 
       const typingElement = document.getElementById('typing-quote');
@@ -7862,4 +8203,5 @@
     });
   </script>
 </body>
+
 </html>
