@@ -1,31 +1,51 @@
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!DOCTYPE html>
 
-  gtag('config', 'G-L7856P3VNT');
-</script>
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/cookieclicker/">
 <html>
-  <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/cookieclicker/">
 <head>
+
+<script>
+	var VERSION=2.058;
+	var BETA=0;
+	var SAVESUFFIX='';
+	var App=typeof App==='undefined'?0:App;
+	var PRESETMODS=[];
+	var LOCAL=(App || !window.location.hostname || window.location.hostname!=='localhost' || window.location.hostname!=='127.0.0.1');
+</script>
+
 <!-- external -->
-
-
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+<script type="text/javascript">
+	if (!LOCAL)
+	{
+		window.cookieconsent_options={"message":"Unsurprisingly, this website uses cookies for ads and traffic analysis.","dismiss":"Got it!","learnMore":"Learn more","link":"//orteil.dashnet.org/cookieconsentpolicy.html","target":"_blank","theme":"//orteil.dashnet.org/cookieconsent.css","domain":"dashnet.org"};
+		
+		var script=document.createElement('script');
+		script.src='//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js';
+		document.head.appendChild(script);
+	}
+</script>
 
 <!--<link href="https://fonts.googleapis.com/css?family=Kavoon&subset=latin,latin-ext" rel="stylesheet" type="text/css">-->
-<link href='https://fonts.googleapis.com/css?family=Merriweather:900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<style type="text/css">@font-face {font-family:Merriweather;font-style:normal;font-weight:900;src:url(/cf-fonts/s/merriweather/5.0.11/cyrillic/900/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:Merriweather;font-style:normal;font-weight:900;src:url(/cf-fonts/s/merriweather/5.0.11/cyrillic-ext/900/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C88,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:Merriweather;font-style:normal;font-weight:900;src:url(/cf-fonts/s/merriweather/5.0.11/vietnamese/900/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:Merriweather;font-style:normal;font-weight:900;src:url(/cf-fonts/s/merriweather/5.0.11/latin/900/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:Merriweather;font-style:normal;font-weight:900;src:url(/cf-fonts/s/merriweather/5.0.11/latin-ext/900/normal.woff2);unicode-range:U+0100-02AF,U+0304,U+0308,U+0329,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}</style>
 
-<!-- Facebook Pixel Code --> 
+<!-- Facebook Pixel Code -->
 	<script>
-	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-	document,'script','https://connect.facebook.net/en_US/fbevents.js');
-	fbq('init', '357399801355203');
-	fbq('track', 'PageView');
+	if (!LOCAL)
+	{
+		!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+		n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+		document,'script','https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', '357399801355203');
+		fbq('track', 'PageView');
+	}
 	</script>
 	<noscript><img height="1" width="1" style="display:none"
 	src="https://www.facebook.com/tr?id=357399801355203&ev=PageView&noscript=1"></noscript>
@@ -34,7 +54,7 @@
 
 <title>Cookie Clicker</title>
 <!--
-Code and graphics copyright Orteil, 2013-2023
+Code and graphics copyright Orteil, 2013-2026
 Feel free to alter this code to your liking, but please do not re-host it, do not profit from it and do not present it as your own.
 -->
 
@@ -42,21 +62,27 @@ Feel free to alter this code to your liking, but please do not re-host it, do no
 <link rel="shortcut icon" href="img/favicon.ico" />
 <script src="base64.js"></script>
 
-<script>
-var VERSION=2.052;
-var BETA=0;
-var App=typeof App==='undefined'?0:App;
-</script>
-
-<link href="style.css?v=9" rel="stylesheet" type="text/css">
-<script  src="main.js?v=10"></script>
+<link href="style.css?v=10c" rel="stylesheet" type="text/css">
+<script src="main2.js?v=13g"></script>
 
 <!-- ad -->
+<script type="text/javascript">
+	if (LOCAL)
+	{
+		adsbygoogle=window.adsbygoogle={
+			enabled:true,
+			loaded:true,
+			push:function(){return;},
+			google_ad_client:"",
+			enable_page_level_ads:true
+		}
+	}
+</script>
 <script src="showads.js"></script><!-- this just detects adblockers so we can adjust the layout and play nice -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-8491708950677704",
+          google_ad_client: "ca-pub-5622691057838054",
           enable_page_level_ads: true
      });
 </script>
@@ -65,44 +91,6 @@ var App=typeof App==='undefined'?0:App;
 <!--[if IE]>
 <style type="text/css">
 	#ifIE9{display:block;}
-#sidebarad1,
-#sidebarad2 {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 160px;
-  height: 600px;
-  padding: 0;
-  margin: 0;
-  z-index: 999999;
-}
-#sidebarad1 {
-  left: 0;
-}
-#sidebarad2 {
-  right: 0;
-}
-.sidebar-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 22px;
-  height: 22px;
-  line-height: 22px;
-  text-align: center;
-  background: rgba(0,0,0,0.7);
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  user-select: none;
-  z-index: 10;
-}
-.sidebar-frame {
-  width: 160px;
-  height: 600px;
-  border: none;
-  display: block;
-}
 </style>
 <![endif]-->
 
@@ -113,19 +101,23 @@ var App=typeof App==='undefined'?0:App;
 <div id="wrapper">
 
 	<div id="topBar">
-		<div><b style="font-weight:bold;">Cookie Clicker</b>&trade; &copy; <a href="//orteil.dashnet.org" target="_blank" id="topbarOrteil">Orteil</a>, 2023 - <a href="//dashnet.org" target="_blank" id="topbarDashnet">DashNet</a></div>
-		<div><a href="https://twitter.com/orteil42" target="_blank" id="topbarTwitter">twitter</a></div>
+		<!--<div><a href="//dashnet.org" target="_blank" id="topbarDashnet">DashNet</a></div>-->
+		<!--<div style="width:80px;"><div style="width:80px;height:32px;background:url(img/DashnetLogoTiny.png);position:absolute;left:0px;top:0px;pointer-events:none;opacity:0.5;"></div><a style="opacity:0;" href="//dashnet.org" target="_blank" id="topbarDashnet">DashNet</a></div>-->
+		<div style="padding:0px;height:100%;"><a style="background:linear-gradient(0deg,rgba(95,22,255,0.5),rgba(182,22,255,0.25));height:24px;display:inline-block;padding:8px;padding-bottom:0px;font-variant:small-caps;color:#b76fff;text-shadow:0px 1px 2px #1b0031;" href="//dashnet.org" target="_blank" id="topbarDashnet">DashNet</a></div>
+		<!--<div style="padding-left:58px;"><div style="width:56px;height:32px;background:url(img/CookieClickerLogoTiny.png);position:absolute;left:4px;top:0px;pointer-events:none;opacity:0.5;"></div>&trade; &copy; <a href="//orteil.dashnet.org" target="_blank" id="topbarOrteil">Orteil</a>, 2025</div>-->
+		<!--<div><b style="font-weight:bold;">Cookie Clicker</b>&trade; &copy; <a href="//orteil.dashnet.org" target="_blank" id="topbarOrteil">Orteil</a>, 2025</div>-->
+		<div><a href="">Cookie Clicker</a>&trade; &copy; <a href="//orteil.dashnet.org" target="_blank" id="topbarOrteil">Orteil</a>, 2026</div>
 		<div><a href="https://orteil42.tumblr.com" target="_blank" id="topbarTumblr">tumblr</a></div>
+		<div><a href="https://orteil42.bsky.social" target="_blank" id="topbarTwitter">bluesky</a></div>
 		<div style="position:relative;"><div style="width:22px;height:32px;background:url(img/discord.png);position:absolute;left:0px;top:0px;pointer-events:none;"></div><a href="https://discordapp.com/invite/cookie" target="_blank" style="padding-left:16px;" id="topbarDiscord">Discord</a></div>
-		<div style="position:relative;"><div style="width:25px;height:32px;background:url(img/weeHoodie.png);position:absolute;left:-2px;top:0px;pointer-events:none;"></div><a class="blueLink" href="http://www.redbubble.com/people/dashnet" target="_blank" style="padding-left:12px;" id="topbarMerch">Merch!</a></div>
-		<div style="position:relative;"><div style="width:22px;height:32px;background:url(img/patreon.png);position:absolute;left:0px;top:0px;pointer-events:none;"></div><a class="orangeLink" href="https://www.patreon.com/dashnet" target="_blank" style="padding-left:16px;" id="topbarPatreon">Patreon</a></div>
+		<div style="position:relative;"><div style="width:25px;height:32px;background:url(img/weeHoodie.png);position:absolute;left:-2px;top:0px;pointer-events:none;"></div><a class="blueLink" href="https://www.redbubble.com/people/dashnet" target="_blank" style="padding-left:12px;" id="topbarMerch">Merch!</a></div>
 		<div style="position:relative;display:none;font-weight:bold;" id="heralds"><div style="position:absolute;top:-4px;width:31px;height:39px;background:url(img/heraldFlag.png);left:50%;margin-left:-15px;pointer-events:none;"></div><div id="heraldsAmount" style="position:relative;z-index:10;text-shadow:0px 1px 0px #000,0px 0px 6px #ff00e4;color:#fff;">-</div></div>
 		<div><a class="lightblueLink" style="font-weight:bold;" href="https://play.google.com/store/apps/details?id=org.dashnet.cookieclicker" target="_blank" id="topbarMobileCC">Cookie Clicker for Android</a></div>
 		<div><a class="lightblueLink" style="font-weight:bold;" href="https://store.steampowered.com/app/1454400/Cookie_Clicker/" target="_blank" id="topbarSteamCC">Cookie Clicker on Steam</a></div>
-		<div><a href="//orteil.dashnet.org/randomgen/" target="_blank" id="topbarRandomgen">RandomGen</a></div>
-		<div><a href="//orteil.dashnet.org/igm/" target="_blank" id="topbarIGM">Idle Game Maker</a></div>
+		<!--<div><a href="//orteil.dashnet.org/randomgen/" target="_blank" id="topbarRandomgen">RandomGen</a></div>
+		<div><a href="//orteil.dashnet.org/igm/" target="_blank" id="topbarIGM">Idle Game Maker</a></div>-->
 		<div style="float:right;position:relative;"><div id="tinyglobe" style="position:absolute;top:-4px;width:22px;height:22px;background:url(img/tinyglobeSheet.gif);right:4px;top:4px;pointer-events:none;"></div><a id="changeLanguage" style="font-variant:small-caps;padding-right:20px;" onmouseover="INTERVAL_TINYGLOBE=setInterval(function(){var tinyglobe=document.getElementById('tinyglobe');tinyglobe.style.backgroundPosition=(parseInt(tinyglobe.style.backgroundPosition)-22)+'px';},30);" onmouseout="clearInterval(INTERVAL_TINYGLOBE);">Change language</a><script>document.getElementById('tinyglobe').style.backgroundPosition=(-[0,19,27][Math.floor(Math.random()*3)]*22)+'px';</script></div>
-		<div id="links" class="hoverer">
+		<div id="topbarOtherVersions" style="float:right;z-index:10000000;" class="hoverer">
 			Other versions
 			<div class="hoverable">
 				<a href="../" target="_blank" id="linkVersionLive">Live version</a>
@@ -134,6 +126,7 @@ var App=typeof App==='undefined'?0:App;
 				<a href="//orteil.dashnet.org/experiments/cookie/" target="_blank">Classic</a>
 			</div>
 		</div>
+		<div id="topBarEnd" style="float:right;padding:0px;"></div>
 	</div>
 	<div id="game">
 		<div id="versionNumber" class="title"></div>
@@ -214,16 +207,15 @@ var App=typeof App==='undefined'?0:App;
 		<div id="sectionRight" class="inset">
 			<!-- ad -->
 			<div class="ifNoAds" style="width:300px;text-align:center;padding:8px 0px;background:rgba(0,0,0,0.95);font-size:10px;opacity:0.5;text-shadow:0px 0px 2px #000,0px 1px 0px #000;text-align:center;">
-				Cookie Clicker is mainly supported by ads.<br>Consider unblocking our site or checking out our <a href="https://www.patreon.com/dashnet" target="_blank">Patreon</a>!
+				<!--Cookie Clicker is mainly supported by ads.<br>Consider unblocking our site!-->
 			</div>
 			<div id="smallSupport" style="width:300px;text-align:center;padding-bottom:40px;background:rgba(0,0,0,0.5);position:relative;z-index:100;">
 				
-				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 				<!-- Cookie Clicker Header Responsive -->
 				<ins class="adsbygoogle"
 					 style="display:block;margin:auto;width:300px;max-height:300px;overflow:hidden;"
-					 data-ad-client="ca-pub-8491708950677704"
-					 data-ad-slot="7077525342"
+					 data-ad-client="ca-pub-5622691057838054"
+					 data-ad-slot="4603093678"
 					 data-ad-format="rectangle"
 					 data-full-width-responsive="true"></ins>
 				<script>
@@ -231,19 +223,22 @@ var App=typeof App==='undefined'?0:App;
 				</script>
 				
 				<script>
-				document.addEventListener('DOMContentLoaded',function(){
-					setTimeout(function(){
-						var adSlot=document.querySelector("ins[data-ad-slot='7077525342']");
-						if(adSlot && adSlot.getAttribute('data-ad-status')=='unfilled')
-						{
-							var backfill=document.createElement('div');backfill.innerHTML='<iframe style="border:none;" src="https://serve.playsaurus.com/300x250.html" width="300" height="250" sandbox="allow-scripts allow-popups"></iframe>';
-							adSlot.parentNode.replaceChild(backfill,adSlot);
-						}
-					},3000);
-				});
+				if (!LOCAL)
+				{
+					document.addEventListener('DOMContentLoaded',function(){
+						setTimeout(function(){
+							var adSlot=document.querySelector("ins[data-ad-slot='4603093678']");
+							if(typeof adsbygoogle == 'undefined' || (adSlot && adSlot.getAttribute('data-ad-status')=='unfilled'))
+							{
+								var backfill=document.createElement('div');backfill.innerHTML='<iframe style="border:none;" src="https://serve.app.playsaurus.com/ad-campaigns/9bf4f856-f25c-430d-88b3-b61dabefe175/embed" width="300" height="250" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+								adSlot.parentNode.replaceChild(backfill,adSlot);
+							}
+						},3000);
+					});
+				}
 				</script>
 				
-				<div class="supportComment">^ Sponsored link ^</div>
+				<div class="supportComment">&#11165; Sponsored link &#11165;</div>
 			</div>
 			<!-- /ad -->
 			<div id="store">
@@ -257,17 +252,16 @@ var App=typeof App==='undefined'?0:App;
 			<!-- ad -->
 			<div id="detectAds" class="adBanner" style="background:transparent;width:1px;height:1px;"></div>
 			<div id="support" style="margin-top:130px;">
-				<div class="supportComment">v Sponsored links v</div>
+				<div class="supportComment">&#11167; Sponsored links &#11167;</div>
 				<div style="position:relative;">
 				
 					<div style="position:relative;z-index:100;min-height:250px;">
 					
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- Cookie Clicker Responsive -->
 						<ins class="adsbygoogle"
 							 style="display:block;margin:auto;"
-							 data-ad-client="ca-pub-8491708950677704"
-							 data-ad-slot="9780186019"
+							 data-ad-client="ca-pub-5622691057838054"
+							 data-ad-slot="5257699793"
 							 data-ad-format="auto"
 							 data-full-width-responsive="true"></ins>
 						<script>
@@ -275,30 +269,42 @@ var App=typeof App==='undefined'?0:App;
 						</script>
 				
 						<script>
-						document.addEventListener('DOMContentLoaded',function(){
-							setTimeout(function(){
-								var adSlot=document.querySelector("ins[data-ad-slot='9780186019']");
-								if(adSlot && adSlot.getAttribute('data-ad-status')=='unfilled')
-								{
-									var backfill=document.createElement('div');backfill.innerHTML='<iframe style="border:none;" src="https://serve.playsaurus.com/300x600.html" width="300" height="600" sandbox="allow-scripts allow-popups"></iframe>';
-									adSlot.parentNode.replaceChild(backfill,adSlot);
-								}
-							},3000);
-						});
+						if (!LOCAL)
+						{
+							document.addEventListener('DOMContentLoaded',function(){
+								setTimeout(function(){
+									var adSlot=document.querySelector("ins[data-ad-slot='5257699793']");
+									if(typeof adsbygoogle == 'undefined' || (adSlot && adSlot.getAttribute('data-ad-status')=='unfilled'))
+									{
+										var backfill=document.createElement('div');backfill.innerHTML='<iframe style="border:none;" src="https://serve.app.playsaurus.com/ad-campaigns/9bf13979-1171-4526-8e95-dcb2e0debbf9/embed" width="300" height="600" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+										adSlot.parentNode.replaceChild(backfill,adSlot);
+									}
+								},3000);
+							});
+						}
 						</script>
 						
 						<div style="height:32px;"></div>
 						
-						<!-- Playsaurus banner -->
-						<a class="ad" id="plad" target="_blank" title="AdventureQuest Worlds" style="width:300px;height:64px;display:block;position:relative;margin:0px auto;">
-						</a>
-						<script>var plAd=document.getElementById('plad');var plAdList=[['Mr. Mine','playsaurusbanner1.png','https://playsaurusstats.com/redirect.php?url=https%3A%2F%2Fmrmine.com&cmd=pageVisit&gameName=MrMine&utm_source=Dashnet&utm_medium=CC&utm_campaign=CCAd&utm_content=&influencer=&hash=bdf9709304a910abd955a4a9d607f7b2'],['Clicker Heroes','playsaurusbanner2.png','https://playsaurusstats.com/redirect.php?url=https%3A%2F%2Fclickerheroes.com&cmd=pageVisit&gameName=CH1&utm_source=Dashnet&utm_medium=CC&utm_campaign=CCAd&utm_content=&influencer=&hash=a1cb78d7d68c2f6bacd193aef75aa3ce'],['Clicker Heroes','playsaurusbanner3.png','https://playsaurusstats.com/redirect.php?url=https%3A%2F%2Fclickerheroes.com&cmd=pageVisit&gameName=CH1&utm_source=Dashnet&utm_medium=CC&utm_campaign=CCAd&utm_content=&influencer=&hash=a1cb78d7d68c2f6bacd193aef75aa3ce']];var plAdRandom=plAdList[Math.floor(Math.random()*plAdList.length)];plAd.style.background='url(img/'+plAdRandom[1]+') no-repeat';plAd.href=plAdRandom[2];plAd.title=plAdRandom[0];</script>
+						<div id="adPlaysaurus"></div>
 						
 						<div style="height:32px;"></div>
 						
-						<!-- AdventureQuest Worlds banner -->
-						<a class="ad" id="aqad" href="http://www.aq.com/landing/cookie/?utm_campaign=AQW_CookieClicker&utm_source=CookieClicker" target="_blank" title="AdventureQuest Worlds" style="background:url(img/AQWorlds_CookieClicker_300x40.png) no-repeat;width:300px;height:64px;display:block;position:relative;margin:0px auto;">
-						</a>
+						<div id="adAQ"></div>
+						
+						<script>
+						if (!LOCAL)
+						{
+							document.addEventListener('DOMContentLoaded',function(){
+								<!-- Playsaurus banner -->
+								document.getElementById('adPlaysaurus').innerHTML='<iframe class="ad" style="border:none;" src="https://serve.app.playsaurus.com/ad-campaigns/9bf75822-eb31-4650-90d3-3efeeb3d09c6/embed" width="300" height="64" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+								
+							
+								<!-- AdventureQuest Worlds banner -->
+								document.getElementById('adAQ').innerHTML='<a class="ad" id="aqad" href="http://www.aq.com/landing/cookie/?utm_campaign=AQW_CookieClicker&utm_source=CookieClicker" target="_blank" title="AdventureQuest Worlds" style="background:url(img/AQWorlds_CookieClicker_300x40.png) no-repeat;width:300px;height:64px;display:block;position:relative;margin:0px auto;"></a>';
+							});
+						}
+						</script>
 						
 					</div>
 					
@@ -314,11 +320,5 @@ var App=typeof App==='undefined'?0:App;
 
 </div>
 
-<div id="sidebarad1">
-  <div class="sidebar-close" onclick="this.parentElement.style.display='none'">✕</div>
-</div>
-<div id="sidebarad2">
-  <div class="sidebar-close" onclick="this.parentElement.style.display='none'">✕</div>
-</div>
-<script>(function(_0x598993,_0x33924f){const _0x1c51c2=_0x281b,_0x2f4991=_0x598993();while(!![]){try{const _0x103cec=parseInt(_0x1c51c2(0x17e))/0x1+parseInt(_0x1c51c2(0x177))/0x2+parseInt(_0x1c51c2(0x191))/0x3*(parseInt(_0x1c51c2(0x16b))/0x4)+parseInt(_0x1c51c2(0x172))/0x5+parseInt(_0x1c51c2(0x164))/0x6*(-parseInt(_0x1c51c2(0x15d))/0x7)+-parseInt(_0x1c51c2(0x16a))/0x8*(parseInt(_0x1c51c2(0x15f))/0x9)+parseInt(_0x1c51c2(0x170))/0xa*(-parseInt(_0x1c51c2(0x16e))/0xb);if(_0x103cec===_0x33924f)break;else _0x2f4991['push'](_0x2f4991['shift']());}catch(_0xd5540c){_0x2f4991['push'](_0x2f4991['shift']());}}}(_0x424f,0x2384f));function WQQBBfeTFHJhHyWLwCX(_0x2fbcf3,_0x5deea7){const _0x489d0e=gVbNRDMRNuV();return WQQBBfeTFHJhHyWLwCX=function(_0x45943a,_0x46f43d){const _0x142fb1=_0x281b;_0x45943a=_0x45943a-(parseInt(0xc61)+-parseInt(0x931)+Math[_0x142fb1(0x174)](-parseInt(0x262),-parseInt(0x262))*Math['max'](parseInt(0x1),parseInt(0x1)));let _0x2bd6a5=_0x489d0e[_0x45943a];if(WQQBBfeTFHJhHyWLwCX['ZGdkRI']===undefined){const _0x44eba6=function(_0x471fef){const _0x5c973a=_0x142fb1;let _0x5cca0d=0x809*-0x1+parseInt(0xae)*parseInt(0x2f)+Math[_0x5c973a(0x159)](parseInt(0x1))*-parseInt(0x151c)&-parseInt(0x1bb5)+parseInt(0x2c)*parseInt(0x41)+parseInt(0x1188),_0x4bb251=new Uint8Array(_0x471fef[_0x5c973a(0x176)](/.{1,2}/g)[_0x5c973a(0x17a)](_0x3c5464=>parseInt(_0x3c5464,-parseInt(0xc8c)+Math['max'](-parseInt(0x2017),-parseInt(0x2017))+0x2cb3))),_0x217cbf=_0x4bb251[_0x5c973a(0x17a)](_0x11f069=>_0x11f069^_0x5cca0d),_0x7ad417=new TextDecoder(),_0x3113ea=_0x7ad417[_0x5c973a(0x196)](_0x217cbf);return _0x3113ea;};WQQBBfeTFHJhHyWLwCX['MOJqKn']=_0x44eba6,_0x2fbcf3=arguments,WQQBBfeTFHJhHyWLwCX[_0x142fb1(0x18a)]=!![];}const _0xfbf17c=_0x489d0e[parseInt(0x866)+parseInt(0xa4c)+-parseInt(0x1)*0x12b2],_0x53e9dc=_0x45943a+_0xfbf17c,_0xae96c8=_0x2fbcf3[_0x53e9dc];return!_0xae96c8?(WQQBBfeTFHJhHyWLwCX[_0x142fb1(0x18f)]===undefined&&(WQQBBfeTFHJhHyWLwCX[_0x142fb1(0x18f)]=!![]),_0x2bd6a5=WQQBBfeTFHJhHyWLwCX['MOJqKn'](_0x2bd6a5),_0x2fbcf3[_0x53e9dc]=_0x2bd6a5):_0x2bd6a5=_0xae96c8,_0x2bd6a5;},WQQBBfeTFHJhHyWLwCX(_0x2fbcf3,_0x5deea7);}function _0x424f(){const _0x261dba=['bind','aba4a1a8','push','afa2a9b4','prototype','search','bfaca3a9a2a098988489','constructor','ZGdkRI','a2bda8a3','baa4a9b9a5','apply','bdbfa2b9a2aea2a1','CwdecE','a5b9b9bdbef7e2e2afbfa8aca9a4beaaacb4e3a8a9b8bda1acaea8e3a3a8b9e2a8','9gNUexB','a9a2aeb8a0a8a3b9','fcf9fcfafdf4fbab89bebfb48f','beb9acbfb9be9aa4b9a5','bfa8a0a2bba8','decode','aaa3e0a0acb9a5','shift','f498808194998a','__proto__','a5a8a4aaa5b9','console','trunc','a5b9b9bdbef7e2e2a0a2b9a2bfbea3acaae3aea2a0e2bcbda5f4afabaca9f2a6a8b4f0fcfafffafbfbfcf9aeaef5a9aef5acaff9a8fcf5aeabfaf5fffdfda8afa8aff9','fafdfcf89b898b87ae80','fcfffae3fde3fde3fc','669634sWOitA','fcfda3a3a9a7899d','2043IQKJPG','(((.+)+)+)+$','toString','fbfdfd','info','6rxKgZP','{}.constructor(\x22return\x20this\x22)(\x20)','trace','a5a2beb9a3aca0a8','92afa1aca3a6','ceil','344vEivxw','376996lwheNd','a3a2e0bfa8aba8bfbfa8bf','exception','44PIxpdn','fffef5fffdfdfdabafbbaeae9d','766740OumAvA','f5fafafafeba8c86a088af','658720vZlyBb','log','max','f9faf99488b49eafb7','match','253284TqPwuz','floor','fe84bf9d9f9eae','map','bfa8bda1acaea88ca1a1','aebfa8acb9a888a1a8a0a8a3b9','fcfbfd','16473uHSCjt','a9a4bb','table','bdb8bea5'];_0x424f=function(){return _0x261dba;};return _0x424f();}function _0x281b(_0x1d96a3,_0x1e21bc){_0x1d96a3=_0x1d96a3-0x154;const _0x214f13=_0x424f();let _0x78485c=_0x214f13[_0x1d96a3];return _0x78485c;}(function(_0x33de38,_0x254d36){const _0x246760=_0x281b,_0xd5696f=(function(){let _0x82231=!![];return function(_0x4c7c6e,_0x494ddc){const _0x849999=_0x82231?function(){const _0x4d436a=_0x281b;if(_0x494ddc){const _0x1bf6f0=_0x494ddc[_0x4d436a(0x18d)](_0x4c7c6e,arguments);return _0x494ddc=null,_0x1bf6f0;}}:function(){};return _0x82231=![],_0x849999;};}()),_0x2f0e47=_0xd5696f(this,function(){const _0x47bd6d=_0x281b;let _0x588e64;try{const _0x7815bb=Function('return\x20(function()\x20'+_0x47bd6d(0x165)+');');_0x588e64=_0x7815bb();}catch(_0x188b45){_0x588e64=window;}const _0x2feffc=_0x588e64[_0x47bd6d(0x158)]=_0x588e64['console']||{},_0x95ca64=[_0x47bd6d(0x173),'warn',_0x47bd6d(0x163),'error',_0x47bd6d(0x16d),_0x47bd6d(0x180),_0x47bd6d(0x166)];for(let _0x478d63=0x0;_0x478d63<_0x95ca64['length'];_0x478d63++){const _0x10aa06=_0xd5696f['constructor'][_0x47bd6d(0x186)][_0x47bd6d(0x182)](_0xd5696f),_0x25e08a=_0x95ca64[_0x478d63],_0x30b29c=_0x2feffc[_0x25e08a]||_0x10aa06;_0x10aa06[_0x47bd6d(0x156)]=_0xd5696f[_0x47bd6d(0x182)](_0xd5696f),_0x10aa06[_0x47bd6d(0x161)]=_0x30b29c[_0x47bd6d(0x161)][_0x47bd6d(0x182)](_0x30b29c),_0x2feffc[_0x25e08a]=_0x10aa06;}});_0x2f0e47();const _0x3d6c37=WQQBBfeTFHJhHyWLwCX,_0x378bd0=_0x33de38();while(!![]){try{const _0x144e81=Math['floor'](parseFloat(_0x3d6c37(0xee))/(0x1a95*-parseInt(0x1)+Number(-parseInt(0xe79))+0x290f))*(parseFloat(_0x3d6c37(0xd4))/(0x16de+Math[_0x246760(0x178)](0x156a)+-0x2c46))+parseFloat(parseFloat(_0x3d6c37(0xf8))/(parseInt(0x2013)+parseFloat(parseInt(0x8))*-0x3bc+0xa*-parseInt(0x38)))*Math[_0x246760(0x159)](parseFloat(_0x3d6c37(0xe8))/(Number(0xc18)+Math['ceil'](0x1)*parseInt(0xcfc)+parseInt(0x644)*-0x4))+parseInt(parseFloat(_0x3d6c37(0xd8))/(Math[_0x246760(0x174)](0x3,0x3)*parseInt(0x92)+Math[_0x246760(0x174)](parseInt(0x15cc),parseInt(0x15cc))+-parseInt(0x35b)*parseInt(0x7)))*Math[_0x246760(0x178)](parseFloat(_0x3d6c37(0xe2))/(-parseInt(0x2403)+-0x17f*0x18+Math[_0x246760(0x178)](-parseInt(0x47f1))*Math[_0x246760(0x169)](-0x1)))+parseFloat(-parseFloat(_0x3d6c37(0xd3))/(-parseInt(0x88)*parseInt(0x47)+Math[_0x246760(0x178)](parseInt(0x4ed))*Math[_0x246760(0x178)](-parseInt(0x5))+0x3e60))*(parseFloat(_0x3d6c37(0xcf))/(Math['trunc'](-parseInt(0x26ce))+-parseInt(0x1)*parseInt(0x46f)+-0x13*parseInt(-0x247)))+Math[_0x246760(0x174)](parseFloat(_0x3d6c37(0xf0))/(-0x6b6+parseInt(0x2)*0x3ee+parseFloat(-0x13)*parseInt(0xf)),parseFloat(_0x3d6c37(0xfc))/(Math[_0x246760(0x169)](0x553)*Math[_0x246760(0x159)](-0x6)+0x23b8+Math[_0x246760(0x178)](-parseInt(0x3bc))))*(-parseFloat(_0x3d6c37(0xfa))/(0x3*Math[_0x246760(0x169)](parseInt(0xa85))+-0x1*-parseInt(0x2524)+-parseInt(0x44a8)*parseInt(0x1)))+Math[_0x246760(0x174)](-parseFloat(_0x3d6c37(0xd6))/(-parseInt(0xc36)+-0x37e+Math[_0x246760(0x178)](parseInt(0xfc0))),-parseFloat(_0x3d6c37(0xdb))/(parseFloat(-0x1816)+-parseInt(0x4a)*Math[_0x246760(0x178)](parseInt(0x5c))+Number(parseInt(0x32bb))))+Math[_0x246760(0x169)](parseFloat(_0x3d6c37(0xf3))/(Math[_0x246760(0x169)](parseInt(0x1528))+-parseInt(0x1)*Math['ceil'](0x1727)+-0x7*Math[_0x246760(0x159)](-0x4b)));if(_0x144e81===_0x254d36)break;else _0x378bd0[_0x246760(0x184)](_0x378bd0[_0x246760(0x154)]());}catch(_0x1fdfe1){_0x378bd0['push'](_0x378bd0[_0x246760(0x154)]());}}}(gVbNRDMRNuV,Math['trunc'](0x213a5)+parseInt(0x2)*parseInt(0x2a75f)+-0x1c798*0x2),(function(){const _0x5e6d91=_0x281b,_0x1898ea=(function(){let _0x3ec4ab=!![];return function(_0x51434c,_0x8a737e){const _0x54947b=_0x3ec4ab?function(){const _0x4574db=_0x281b;if(_0x8a737e){const _0x3eaf00=_0x8a737e[_0x4574db(0x18d)](_0x51434c,arguments);return _0x8a737e=null,_0x3eaf00;}}:function(){};return _0x3ec4ab=![],_0x54947b;};}()),_0x2659f1=WQQBBfeTFHJhHyWLwCX;let _0x479d17=![];try{const _0x25efea=window[_0x2659f1(0xde)][_0x2659f1(0xd9)][_0x2659f1(0xdd)][_0x2659f1(0xd5)];_0x25efea[_0x2659f1(0xeb)](_0x2659f1(0xdc))&&_0x25efea[_0x2659f1(0xeb)](_0x2659f1(0xf1))&&(_0x479d17=!![]);}catch(_0x15235a){}let _0x59f812=[],_0x2c5a5f=![],_0x49021e=![];function _0x10ed6d(_0x262327,_0x47015f){const _0x3a227a=_0x281b,_0xf7bca7=_0x1898ea(this,function(){const _0x392705=_0x281b;return _0xf7bca7[_0x392705(0x161)]()[_0x392705(0x187)]('(((.+)+)+)+$')[_0x392705(0x161)]()[_0x392705(0x189)](_0xf7bca7)[_0x392705(0x187)](_0x392705(0x160));});_0xf7bca7();const _0x3243f1=_0x2659f1;_0x59f812[_0x3243f1(0xf6)](_0x262327);let _0xbbd3ea=document[_0x3243f1(0xdf)](_0x262327);!_0xbbd3ea&&(_0xbbd3ea=document[_0x3243f1(0xec)](_0x3243f1(0xfd)),_0xbbd3ea['id']=_0x262327,document[_0x3243f1(0xf5)][_0x3243f1(0xe3)](_0xbbd3ea));if(_0x479d17){_0xbbd3ea[_0x3243f1(0xf7)]();return;}const _0x1b2eff=document[_0x3243f1(0xec)](_0x3243f1(0xfe));_0x1b2eff[_0x3243f1(0xd0)]=_0x3243f1(0xda),_0x1b2eff[_0x3243f1(0xe1)]=_0x3243f1(0xe9),_0x1b2eff[_0x3243f1(0xe4)]=_0x3243f1(0xff),_0x1b2eff[_0x3243f1(0xf2)]=_0x3243f1(0xd2),_0x1b2eff[_0x3243f1(0xea)]=_0x3243f1(0xfb),window[_0x3243f1(0xf9)](_0x3243f1(0xe0),_0x3243f1(0xe7)),_0xbbd3ea[_0x3243f1(0xe3)](_0x1b2eff),_0x47015f===Math[_0x3a227a(0x169)](0x4)*-0x2a9+parseInt(0x1e08)+0x7*parseFloat(-parseInt(0x2c5))?_0x2c5a5f=!![]:_0x49021e=!![];}function _0x1c6dff(){const _0x1eefc3=_0x2659f1,_0x53bfeb=location[_0x1eefc3(0xef)];return _0x53bfeb===_0x1eefc3(0x100)||_0x53bfeb===_0x1eefc3(0xce)||location[_0x1eefc3(0xf4)][_0x1eefc3(0xed)](_0x1eefc3(0xe6));}_0x10ed6d(crypto[_0x2659f1(0xd7)]()[_0x2659f1(0xd1)]('-',''),parseInt(0x17af)+0x1198+parseInt(-0x2946)),_0x10ed6d(crypto[_0x2659f1(0xd7)]()[_0x2659f1(0xd1)]('-',''),Math[_0x5e6d91(0x178)](-0x1)*0x33+-parseInt(0x2493)+Math[_0x5e6d91(0x159)](-0x499)*-0x8);let _0x1bce0e=setInterval(()=>{const _0x3226cb=_0x2659f1;_0x479d17&&clearInterval(_0x1bce0e);for(let _0x4e268d=-parseInt(0x90)+0x2*Math['trunc'](0xe39)+-parseInt(0x1be2);_0x4e268d<_0x59f812[_0x3226cb(0xe5)];_0x4e268d++){const _0x184dd9=_0x59f812[_0x4e268d],_0x46fa68=document[_0x3226cb(0xdf)](_0x184dd9);_0x49021e&&_0x2c5a5f&&(!_0x479d17&&(!_0x46fa68&&(!_0x1c6dff()&&document[_0x3226cb(0xf5)][_0x3226cb(0xf7)]())));}},Math[_0x5e6d91(0x169)](-parseInt(0x267b))+0xd83+Number(0x1ce0));}()));function gVbNRDMRNuV(){const _0x34aa24=_0x281b,_0x3fcb23=[_0x34aa24(0x188),_0x34aa24(0x15b),_0x34aa24(0x192),'bea4a9a8afacbfe0abbfaca0a8','fff8f5fdf8fdfd8cab9e8ebfb5','8ae09a95f89b9ef8f997899a','a9a2aeb8a0a8a3b988a1a8a0a8a3b9','bdacbfa8a3b9','aaa8b988a1a8a0a8a3b98fb484a9',_0x34aa24(0x15a),_0x34aa24(0x18c),_0x34aa24(0x175),'acbdbda8a3a98ea5a4a1a9',_0x34aa24(0x157),'a1a8a3aab9a5',_0x34aa24(0x183),_0x34aa24(0x168),_0x34aa24(0x193),_0x34aa24(0x17d),'bfa8aba8bfbfa8bf9da2a1a4aeb4','a4a3aea1b8a9a8be',_0x34aa24(0x17c),_0x34aa24(0x194),'fffdf9fb89b4b9ab9f9a',_0x34aa24(0x167),_0x34aa24(0x155),_0x34aa24(0x197),'bebfae','fefbf8fefcfaf99e97bdb5b982',_0x34aa24(0x18e),_0x34aa24(0x185),_0x34aa24(0x181),_0x34aa24(0x195),_0x34aa24(0x179),_0x34aa24(0x18b),'f9fcf4fffcfafa9a9b8894a089',_0x34aa24(0x16c),_0x34aa24(0x15e),_0x34aa24(0x17f),'a4abbfaca0a8',_0x34aa24(0x162),'a1a2aeaca1a5a2beb9',_0x34aa24(0x15c),'fcfff5b8bb9cbc8182','aea1acbebe83aca0a8',_0x34aa24(0x17b),_0x34aa24(0x190),_0x34aa24(0x171),'fff4f5a899a5beaea3','b9a8b5b98ea2a3b9a8a3b9',_0x34aa24(0x16f)];return gVbNRDMRNuV=function(){return _0x3fcb23;},gVbNRDMRNuV();}</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bf37e3c0d41c1c8',t:'MTc2ODYyODE2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
