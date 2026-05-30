@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUSD | Homepage</title>
+    <link rel="icon"
+        href="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/District%20Logo.png"
+        type="image/png">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        :root {
+            --primary-color: #cc6600;
+            --amber-bright: #ffbf00;
+            --dark-gray: #333333;
+            --light-bg: #f3f3f3;
+        }
+
+        #homepage {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: white;
+            opacity: 1;
+            transition: opacity 0.9s ease;
+            pointer-events: all;
+            overflow-y: auto;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--dark-gray);
+        }
+
+        #homepage.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .top-utility {
+            background: #eeeeee;
+            padding: 8px 5%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            font-size: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            width: 70px;
+            height: 70px;
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .district-name h1 {
+            margin: 0;
+            font-size: 22px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0 5%;
+        }
+
+        nav li {
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav li:hover {
+            background: #b35900;
+        }
+
+        .hero-section {
+            padding: 20px 5%;
+            background: white;
+        }
+
+        .hero-container {
+            position: relative;
+            height: 480px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-track {
+            display: flex;
+            height: 100%;
+            width: 300%;
+            animation: slideHero 15s infinite;
+        }
+
+        @keyframes slideHero {
+
+            0%,
+            30% {
+                transform: translateX(0);
+            }
+
+            33%,
+            63% {
+                transform: translateX(-33.33%);
+            }
+
+            66%,
+            96% {
+                transform: translateX(-66.66%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        .hero-slide {
+            width: 33.33%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-caption {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            background: rgba(204, 102, 0, 0.9);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            max-width: 400px;
+            border-left: 6px solid var(--amber-bright);
+        }
+
+        .action-tiles {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 40px 5%;
+        }
+
+        .tile {
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            transition: transform 0.2s;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        .tile:hover {
+            transform: translateY(-5px);
+            filter: brightness(1.1);
+        }
+
+        .t-blue {
+            background: #b35900;
+        }
+
+        .t-green {
+            background: #28a745;
+        }
+
+        .t-orange {
+            background: #ff8800;
+        }
+
+        .t-red {
+            background: #dc3545;
+        }
+
+        .news-container {
+            padding: 0 5% 60px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .news-header {
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .announcement {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .announcement img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        footer {
+            background: #222;
+            color: #ccc;
+            padding: 50px 5%;
+            font-size: 13px;
+        }
+
+        #mathPage {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #0a0a0a;
+            opacity: 0;
+            transition: opacity 0.9s ease 0.1s;
+        }
+
+        #mathPage.loaded {
+            opacity: 1;
+        }
+
+        #routePrompt {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        #routePrompt.show {
+            display: flex;
+        }
+
+        .prompt-card {
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border: 2px solid #c27c15;
+            border-radius: 16px;
+            padding: 32px 28px 24px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 0 40px rgba(194, 124, 21, 0.4);
+            font-family: 'Courier New', monospace;
+            color: #f6f4ef;
+            text-align: center;
+            animation: popIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1.2);
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.88) translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .prompt-card h3 {
+            color: #c27c15;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(194, 124, 21, 0.6);
+        }
+
+        .prompt-card p {
+            color: #b5b0a6;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .prompt-card p strong {
+            color: #f2ab34;
+        }
+
+        .prompt-btns {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .prompt-btn {
+            flex: 1;
+            padding: 12px 10px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: 2px solid #c27c15;
+            transition: all 0.22s ease;
+        }
+
+        .prompt-btn.confirm {
+            background: rgba(194, 124, 21, 0.18);
+            color: #f2ab34;
+        }
+
+        .prompt-btn.confirm:hover {
+            background: rgba(194, 124, 21, 0.32);
+            box-shadow: 0 0 18px rgba(194, 124, 21, 0.45);
+            transform: translateY(-2px);
+        }
+
+        .prompt-btn.alt {
+            background: rgba(255, 255, 255, 0.04);
+            color: #b5b0a6;
+            border-color: rgba(194, 124, 21, 0.4);
+        }
+
+        .prompt-btn.alt:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: #c27c15;
+            color: #f6f4ef;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <iframe id="mathPage" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
+        allowfullscreen></iframe>
+
+    <div id="homepage">
+
+        <div class="top-utility">
+            <span>Employment</span> | <span>Board of Education</span> | <span>Find a School</span> | <span>Select
+                Language ▼</span>
+        </div>
+
+        <header>
+            <div class="logo-section">
+                <div class="logo-image">
+                    <img src="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/District%20Logo.png"
+                        alt="NUSD District">
+                </div>
+                <div class="district-name">
+                    <h1>NUSD</h1>
+                    <div style="font-size: 14px; color: #666;">Empowering Diverse Learners for Success</div>
+                </div>
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search our site..."
+                    style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 250px;">
+            </div>
+        </header>
+
+        <nav>
+            <ul>
+                <li>ABOUT NUSD</li>
+                <li>STUDENTS</li>
+                <li>FAMILIES</li>
+                <li>EMPLOYEES</li>
+                <li>COMMUNITY</li>
+                <li>INSTRUCTION</li>
+            </ul>
+        </nav>
+
+        <div class="hero-section">
+            <div class="hero-container">
+                <div class="hero-track">
+                    <div class="hero-slide"
+                        style="background-image: url('https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/lookingdown.png')">
+                        <div class="hero-caption">
+                            <h2>2026 Enrollment Open</h2>
+                            <p>Join our award-winning district. Secure your student's future through our inquiry-based
+                                pedagogical frameworks.</p>
+                        </div>
+                    </div>
+                    <div class="hero-slide"
+                        style="background-image: url('https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/raisinghands.png')">
+                        <div class="hero-caption">
+                            <h2>Digital Literacy Initiative</h2>
+                            <p>Expanding asynchronous learning resources for all high school cohorts across the
+                                district.</p>
+                        </div>
+                    </div>
+                    <div class="hero-slide"
+                        style="background-image: url('https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/happy%20kid.png')">
+                        <div class="hero-caption">
+                            <h2>Strategic Planning</h2>
+                            <p>Review the 2026-2030 District Roadmap for formative assessment and campus modernization.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-tiles">
+            <div class="tile t-blue">Parent Portal<br><small>Grades & Communications</small></div>
+            <div class="tile t-green">Student Email<br><small>Resources</small></div>
+            <div class="tile t-orange">Teacher Tools<br><small>Spyware & Surveillance</small></div>
+            <div class="tile t-red">Special Education / Health<br><small>Safety Protocols</small></div>
+        </div>
+
+        <div class="news-container">
+            <div>
+                <h2 class="news-header">LATEST DISTRICT NEWS</h2>
+                <div class="announcement">
+                    <img src="https://img3.stockfresh.com/files/t/tiero/m/89/435432_stock-photo-stress-at-school.jpg"
+                        alt="News">
+                    <div>
+                        <h3 style="margin:0; color:var(--primary-color);">Is School and Math Stressing you Out?</h3>
+                        <p style="font-size: 14px;">Many students face challenges with academic pressure. The Nurse will
+                            now be providing medical doses of adderall.</p>
+                    </div>
+                </div>
+                <div class="announcement">
+                    <img src="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/reimagined-octo-winner/refs/heads/main/pictures/bully.jpg"
+                        alt="News">
+                    <div>
+                        <h3 style="margin:0; color:var(--primary-color);">Experiencing Bullying?</h3>
+                        <p style="font-size: 14px;">Reach out to someone, you are NOT alone. Counseling services are
+                            available before and after school.</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="news-header">UPCOMING EVENTS</h2>
+                <ul style="list-style: none; padding: 0; font-size: 14px;">
+                    <li style="margin-bottom: 15px;"><strong>APR 15</strong>: Board of Education Regular Meeting</li>
+                    <li style="margin-bottom: 15px;"><strong>APR 20</strong>: School vaping facility meeting (Virtual)
+                    </li>
+                    <li style="margin-bottom: 15px;"><strong>MAY 02</strong>: District-Wide Polish Arts Festival</li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Noah's Unified School District</strong></p>
+            <p>321 W 2nd St, Dixon, IL 61021 | Phone: (800) 306-2662</p>
+            <hr style="border: 0; border-top: 1px solid #444; margin: 20px 0;">
+            <p>© 2026 Noah's Unified School District. All rights reserved. FERPA Compliance & "No Snitching" Policy.</p>
+        </footer>
+
+    </div>
+
+    <div id="routePrompt">
+        <div class="prompt-card">
+            <h3>Load Tutoring Resources</h3>
+            <p>Would you like to load the site in this tab or open it in an <strong>"about:blank"</strong> tab (for
+                better cover)?</p>
+            <div class="prompt-btns">
+                <button class="prompt-btn confirm" id="openHere">This Tab</button>
+                <button class="prompt-btn alt" id="openBlank">About:Blank Tab</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var resourceUrl = 'https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/index.html';
+
+        var homepage = document.getElementById('homepage');
+        var mathPage = document.getElementById('mathPage');
+        var routePrompt = document.getElementById('routePrompt');
+        var openHere = document.getElementById('openHere');
+        var openBlank = document.getElementById('openBlank');
+
+        var pageData = null;
+        var loadFailed = false;
+
+        fetch(resourceUrl)
+            .then(function (r) { return r.text(); })
+            .then(function (html) { pageData = html; })
+            .catch(function () { loadFailed = true; });
+
+        setTimeout(function () {
+            routePrompt.classList.add('show');
+        }, 3000);
+
+        function writeToDoc(doc, html) {
+            doc.open();
+            doc.write(html);
+            doc.close();
+        }
+
+        var spinnerMarkup = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Loading</title><style>body{margin:0;background:#0a0a0a;display:flex;align-items:center;justify-content:center;height:100vh;font-family:monospace;color:#c27c15;}.w{text-align:center;}p{margin-top:14px;font-size:.9rem;opacity:.7;}svg{animation:sp 1s linear infinite;}@keyframes sp{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style></head><body><div class="w"><svg width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" stroke="#c27c15" stroke-width="4" stroke-dasharray="80 40" stroke-linecap="round"/></svg><p>Loading...</p></div></body></html>';
+
+        openHere.addEventListener('click', function () {
+            routePrompt.classList.remove('show');
+
+            function revealPage(html) {
+                writeToDoc(mathPage.contentDocument, html);
+                mathPage.classList.add('loaded');
+                setTimeout(function () {
+                    homepage.classList.add('fade-out');
+                    homepage.addEventListener('transitionend', function () {
+                        homepage.remove();
+                    }, { once: true });
+                }, 150);
+            }
+
+            if (pageData) {
+                revealPage(pageData);
+            } else if (loadFailed) {
+                window.location.href = resourceUrl;
+            } else {
+                writeToDoc(mathPage.contentDocument, spinnerMarkup);
+                mathPage.classList.add('loaded');
+                homepage.classList.add('fade-out');
+                homepage.addEventListener('transitionend', function () { homepage.remove(); }, { once: true });
+
+                var waiting = setInterval(function () {
+                    if (pageData) {
+                        clearInterval(waiting);
+                        writeToDoc(mathPage.contentDocument, pageData);
+                    } else if (loadFailed) {
+                        clearInterval(waiting);
+                        window.location.href = resourceUrl;
+                    }
+                }, 200);
+            }
+        });
+
+        openBlank.addEventListener('click', function () {
+            routePrompt.classList.remove('show');
+
+            var newTab = window.open('about:blank', '_blank');
+
+            if (!newTab) {
+                window.location.href = resourceUrl;
+                return;
+            }
+
+            function sendToTab(html) {
+                writeToDoc(newTab.document, html);
+                setTimeout(function () { window.close(); }, 400);
+            }
+
+            if (pageData) {
+                sendToTab(pageData);
+            } else if (loadFailed) {
+                newTab.location.href = resourceUrl;
+                setTimeout(function () { window.close(); }, 400);
+            } else {
+                writeToDoc(newTab.document, spinnerMarkup);
+                var waiting = setInterval(function () {
+                    if (pageData) {
+                        clearInterval(waiting);
+                        sendToTab(pageData);
+                    } else if (loadFailed) {
+                        clearInterval(waiting);
+                        newTab.location.href = resourceUrl;
+                        setTimeout(function () { window.close(); }, 400);
+                    }
+                }, 200);
+            }
+        });
+    </script>
+</body>
+</html>
