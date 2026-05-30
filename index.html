@@ -287,7 +287,6 @@
       }
     }
 
-    /* Mobile responsive */
     @media (max-width: 480px) {
       .popup-header {
         padding: 15px;
@@ -698,48 +697,85 @@
 
     .lessons-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-      gap: 18px;
-      margin-top: 12px
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 12px;
     }
 
     .lesson-card {
-      background: linear-gradient(160deg, rgba(20, 20, 20, 0.82), rgba(10, 10, 10, 0.78));
-      border: 1px solid rgba(var(--primary-orange-rgb), 0.48);
-      border-radius: 14px;
-      padding: 16px;
-      transition: all .3s;
       position: relative;
+      aspect-ratio: 16 / 9;
+      border-radius: 20px;
       overflow: hidden;
-      cursor: none !important
+      cursor: none !important;
+      background: #0a0a0a;
+      border: 1px solid rgba(var(--primary-orange-rgb), 0.25);
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     }
 
     .lesson-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(var(--primary-orange-rgb), .3);
-      border-color: var(--accent-orange)
+      transform: translateY(-8px);
+      border-color: var(--accent-orange);
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(var(--primary-orange-rgb), 0.3);
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
 
     .lesson-image {
       width: 100%;
-      height: 160px;
+      height: 100%;
       object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      border: 1px solid rgba(var(--primary-orange-rgb), .24)
+      transition: transform 0.5s ease;
+      display: block;
+    }
+
+    .lesson-card:hover .lesson-image {
+      transform: scale(1.12);
+    }
+
+    .card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top,
+          rgba(0, 0, 0, 0.9) 0%,
+          rgba(0, 0, 0, 0.7) 40%,
+          transparent 100%);
+      padding: 20px 16px 16px;
+      transform: translateY(0);
+      transition: all 0.3s ease;
+    }
+
+    .lesson-card:hover .card-overlay {
+      padding-bottom: 24px;
     }
 
     .lesson-title {
-      font-size: 1.15rem;
+      margin: 0;
       color: var(--light-text);
-      margin-bottom: 6px
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+    }
+
+    .lesson-card:hover .lesson-title {
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      color: var(--accent-orange);
+      text-shadow: 0 0 8px rgba(var(--primary-orange-rgb), 0.5);
     }
 
     .lesson-desc {
-      color: var(--gray-text);
-      margin-bottom: 10px;
-      font-size: .92rem;
-      min-height: 52px
+      display: none;
     }
 
     footer {
@@ -1954,19 +1990,22 @@
       }
     }
 
+    .lesson-card[data-random-game="true"] .lesson-title {
+      color: var(--accent-orange);
+    }
+
+    .lesson-card[data-random-game="true"]:hover .lesson-title {
+      font-size: 1.15rem;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(var(--primary-orange-rgb), 0.8);
+    }
+
     .flash-image {
-      transition: opacity 0.3s ease;
-      position: relative;
+      transition: transform 0.5s ease;
     }
 
     .lesson-card[data-random-game="true"]:hover .flash-image {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(var(--primary-orange-rgb), 0.5);
-    }
-
-    .lesson-card[data-random-game="true"] .lesson-title {
-      color: var(--accent-orange);
-      text-shadow: 0 0 10px rgba(var(--primary-orange-rgb), 0.7);
+      transform: scale(1.12);
     }
 
     .refresh-btn {
@@ -3024,6 +3063,138 @@
         opacity: 0;
       }
     }
+
+    .grid-control-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      margin: -45px 12px 20px 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .waffle-btn {
+      background: linear-gradient(145deg, rgba(25, 25, 25, 0.9), rgba(15, 15, 15, 0.9));
+      border: 1px solid var(--primary-orange);
+      border-radius: 12px;
+      padding: 8px 18px;
+      color: var(--primary-orange);
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: none !important;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      backdrop-filter: blur(4px);
+    }
+
+    .waffle-btn:hover {
+      background: rgba(var(--primary-orange-rgb), 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(var(--primary-orange-rgb), 0.3);
+    }
+
+    .waffle-btn i {
+      font-size: 1rem;
+    }
+
+    .waffle-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 8px;
+      background: linear-gradient(145deg, rgba(20, 20, 20, 0.98), rgba(10, 10, 10, 0.98));
+      border: 1px solid var(--primary-orange);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      min-width: 180px;
+      z-index: 100;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .waffle-option {
+      padding: 10px 16px;
+      color: var(--gray-text);
+      font-size: 0.85rem;
+      cursor: none !important;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid rgba(var(--primary-orange-rgb), 0.15);
+    }
+
+    .waffle-option:last-child {
+      border-bottom: none;
+    }
+
+    .waffle-option:hover {
+      background: rgba(var(--primary-orange-rgb), 0.15);
+      color: var(--accent-orange);
+      padding-left: 22px;
+    }
+
+    .waffle-option.active {
+      color: var(--primary-orange);
+      background: rgba(var(--primary-orange-rgb), 0.1);
+    }
+
+    .waffle-option i {
+      width: 20px;
+      text-align: center;
+    }
+
+    .lessons-grid.grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lessons-grid.grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lessons-grid.grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .lessons-grid.grid-5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .lessons-grid.grid-6 {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+
+    .waffle-btn .grid-icon {
+      transition: all 0.2s ease;
+    }
+
+    @media (max-width: 1024px) {
+
+      .lessons-grid.grid-5,
+      .lessons-grid.grid-6 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .lessons-grid.grid-3,
+      .lessons-grid.grid-4,
+      .lessons-grid.grid-5,
+      .lessons-grid.grid-6 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lessons-grid.grid-2 {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+
+      .grid-control-wrapper {
+        margin: -45px 8px 20px 0;
+      }
+    }
   </style>
   <script>
     (function () {
@@ -3145,6 +3316,29 @@
       <h2>
         ALL LESSONS
       </h2>
+      <div class="grid-control-wrapper">
+        <button class="waffle-btn" id="waffleBtn">
+          <i class="fas fa-th grid-icon"></i> <span id="currentGridSize">3</span> cols
+          <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i>
+        </button>
+        <div class="waffle-dropdown" id="waffleDropdown" style="display: none;">
+          <div class="waffle-option" data-cols="2">
+            <i class="fas fa-th-large"></i> 2 columns
+          </div>
+          <div class="waffle-option" data-cols="3">
+            <i class="fas fa-th"></i> 3 columns
+          </div>
+          <div class="waffle-option" data-cols="4">
+            <i class="fas fa-th"></i> 4 columns
+          </div>
+          <div class="waffle-option" data-cols="5">
+            <i class="fas fa-th-large"></i> 5 columns
+          </div>
+          <div class="waffle-option" data-cols="6">
+            <i class="fas fa-border-all"></i> 6 columns
+          </div>
+        </div>
+      </div>
       <div class="search-container">
         <input class="search-box" id="searchInput" placeholder="Search lessons..." type="text">
         <div class="search-icon">
@@ -3947,38 +4141,29 @@
     function createGameCard(game, isRandom = false) {
       const card = document.createElement('div');
       card.className = 'lesson-card';
-
       if (isRandom) {
         card.setAttribute('data-random-game', 'true');
       }
-
       card.innerHTML = `
-		                                                      <img src="${game.image}" alt="${isRandom ? 'Random Lesson' : game.title}" class="lesson-image ${isRandom ? 'flash-image' : ''}">
-		                                                      <h3 class="lesson-title">${isRandom ? 'Random Lesson' : game.title}<\/h3>
-		                                                      <p class="lesson-desc">${isRandom ? 'Tired of scrolling? Click me to find a random lesson that might cure that boredom' : game.desc}<\/p>
-		                                                  `;
+    <div class="card-inner">
+      <img src="${game.image}" alt="${isRandom ? 'Random Lesson' : game.title}" class="lesson-image ${isRandom ? 'flash-image' : ''}">
+      <div class="card-overlay">
+        <h3 class="lesson-title">${isRandom ? 'RANDOM' : game.title}</h3>
+      </div>
+    </div>
+  `;
 
       if (isRandom) {
         card.onclick = function (e) {
           e.stopPropagation();
-
           const newRandomGame = getRandomGame();
           openLesson(newRandomGame.title, newRandomGame.url);
-
-          if (typeof gtag !== 'undefined') {
-            gtag('event', 'random_game_click', {
-              'event_category': 'engagement',
-              'event_label': newRandomGame.title,
-              'value': 1
-            });
-          }
         };
       } else {
         card.onclick = function () {
           openLesson(game.title, game.url);
         };
       }
-
       return card;
     }
 
@@ -8200,7 +8385,98 @@
 
       setTimeout(typeEffect, 1000);
     });
+
+    (function () {
+      const grid = document.getElementById('allLessonsGrid');
+      const waffleBtn = document.getElementById('waffleBtn');
+      const dropdown = document.getElementById('waffleDropdown');
+      const currentSpan = document.getElementById('currentGridSize');
+      const gridIcon = document.querySelector('.waffle-btn .grid-icon');
+
+      if (!grid || !waffleBtn) return;
+
+      let currentCols = parseInt(localStorage.getItem('waffleGridCols')) || 3;
+
+      function updateGridIcon(cols) {
+        if (!gridIcon) return;
+        gridIcon.classList.remove('fa-th', 'fa-th-large', 'fa-border-all', 'fa-grip', 'fa-grip-horizontal', 'fa-table-cells', 'fa-table-cells-large');
+
+        if (cols === 2) {
+          gridIcon.classList.add('fa-th-large');
+        } else if (cols === 3) {
+          gridIcon.classList.add('fa-th');
+        } else if (cols === 4) {
+          gridIcon.classList.add('fa-th');
+        } else if (cols === 5) {
+          gridIcon.classList.add('fa-th-large');
+        } else if (cols === 6) {
+          gridIcon.classList.add('fa-border-all');
+        } else {
+          gridIcon.classList.add('fa-th');
+        }
+      }
+
+      function applyGridColumns(cols) {
+        grid.classList.remove('grid-2', 'grid-3', 'grid-4', 'grid-5', 'grid-6');
+        grid.classList.add(`grid-${cols}`);
+        currentSpan.textContent = cols;
+        currentCols = cols;
+        localStorage.setItem('waffleGridCols', cols);
+
+        updateGridIcon(cols);
+
+        document.querySelectorAll('.waffle-option').forEach(opt => {
+          opt.classList.toggle('active', parseInt(opt.dataset.cols) === cols);
+        });
+      }
+
+      waffleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isVisible = dropdown.style.display === 'block';
+        dropdown.style.display = isVisible ? 'none' : 'block';
+      });
+
+      document.addEventListener('click', () => {
+        dropdown.style.display = 'none';
+      });
+
+      document.querySelectorAll('.waffle-option').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const cols = parseInt(opt.dataset.cols);
+          applyGridColumns(cols);
+          dropdown.style.display = 'none';
+        });
+      });
+
+      applyGridColumns(currentCols);
+
+      const originalApplySorting = window.applySorting;
+      if (originalApplySorting) {
+        window.applySorting = function () {
+          originalApplySorting();
+          setTimeout(() => {
+            const savedCols = parseInt(localStorage.getItem('waffleGridCols')) || 3;
+            grid.classList.remove('grid-2', 'grid-3', 'grid-4', 'grid-5', 'grid-6');
+            grid.classList.add(`grid-${savedCols}`);
+            updateGridIcon(savedCols);
+          }, 50);
+        };
+      }
+
+      const originalPerformSearch = window.performSearch;
+      if (originalPerformSearch) {
+        window.performSearch = function (searchTerm) {
+          originalPerformSearch(searchTerm);
+          setTimeout(() => {
+            const savedCols = parseInt(localStorage.getItem('waffleGridCols')) || 3;
+            grid.classList.remove('grid-2', 'grid-3', 'grid-4', 'grid-5', 'grid-6');
+            grid.classList.add(`grid-${savedCols}`);
+            updateGridIcon(savedCols);
+          }, 50);
+        };
+      }
+    })();
   </script>
 </body>
-
 </html>
