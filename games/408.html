@@ -1,0 +1,136 @@
+<html>
+<head>
+  <script>
+    window.gameconfig = {
+      name: "lumines2",
+      url: "https://cdn.jsdelivr.net/gh/thugaliciousbruh/animated-octo-eureka/lumines2.iso",
+      core: "psp",
+      min: 0,
+      max: 53
+    };
+  </script>
+  <script>
+    async function mergeFiles(fileParts, cb) {
+      const buffers = [];
+      let loaded = 0;
+
+      for (const partUrl of fileParts) {
+        try {
+          const response = await fetch(partUrl, { mode: 'cors' });
+          if (!response.ok) throw new Error(`Network error on ${partUrl}`);
+
+          const data = await response.arrayBuffer();
+          buffers.push(data);
+
+          loaded++;
+
+          console.log(`Successfully fetched: ${partUrl} (${loaded}/${fileParts.length})`);
+
+          cb(loaded);
+
+          if (loaded % 10 === 0) {
+            await new Promise(resolve => setTimeout(resolve, 0));
+          }
+        } catch (err) {
+          console.error("Download failed:", err);
+          throw err;
+        }
+      }
+
+      const mergedBlob = new Blob(buffers, { type: "application/octet-stream" });
+      buffers.length = 0;
+
+      return URL.createObjectURL(mergedBlob);
+    }
+
+    function getParts(file, start, end) {
+      let parts = [];
+      for (let i = start; i <= end; i++) {
+        let padded = String(i).padStart(2, '0');
+
+        parts.push(file + ".part" + padded + ".part");
+      }
+      return parts;
+    }
+    getParts("asd.js", 0, 100)
+  </script>
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: #121212;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #game-container {
+      text-align: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    #loading-progress {
+      font-size: 18px;
+      margin-top: 20px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game-container">
+    <div id="game"></div>
+    <div id="loading-progress">Loading: 5/7</div>
+    <div id="first-time">First-time loading may take longer...</div>
+  </div>
+  <script>
+    var parts = getParts(
+      window.gameconfig.url,
+      window.gameconfig.min,
+      window.gameconfig.max
+    );
+    var totalParts = parts.length;
+
+    function updateLoadingProgress(loaded) {
+      const progressElement = document.getElementById("loading-progress");
+      if (loaded === 0) {
+        progressElement.textContent = "Loading: 0/0";
+      } else {
+        progressElement.textContent = `Loading: ${loaded}/${totalParts}`;
+      }
+    }
+
+    Promise.all([mergeFiles(parts, updateLoadingProgress)])
+      .then(([gameUrl]) => {
+        document.getElementById("loading-progress").remove();
+        document.getElementById("first-time").remove();
+        EJS_player = "#game";
+        EJS_core = window.gameconfig.core;
+        EJS_gameName = window.gameconfig.name;
+        EJS_color = "#0064ff";
+        EJS_startOnLoaded = true;
+        EJS_pathtodata = "https://cdn.jsdelivr.net/gh/genizy/emu@master/";
+        EJS_gameUrl = gameUrl;
+        EJS_threads = true;
+        const script = document.createElement("script");
+        script.src =
+          "https://cdn.jsdelivr.net/gh/genizy/emu@master/loader.js";
+        document.body.appendChild(script);
+      })
+      .catch((error) => {
+        console.error(error);
+        document.getElementById("loading-progress").textContent =
+          "Error loading game.";
+      });
+  </script>
+</body>
+</html>

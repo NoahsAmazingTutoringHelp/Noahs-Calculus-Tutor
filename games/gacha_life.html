@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Flash Game</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: black;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .loading {
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="loading" id="loading">
+            <div>Loading game...</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <div id="status">Initializing...</div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+    <script>
+        window.addEventListener('load', async function () {
+            const container = document.getElementById('container');
+            const loadingEl = document.getElementById('loading');
+            const progressFill = document.getElementById('progress');
+            const statusEl = document.getElementById('status');
+
+            try {
+                const parts = [
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part00.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part01.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part02.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part03.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part04.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part05.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part06.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part07.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part08.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part09.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part10.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part11.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part12.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part13.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part14.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part15.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part16.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part17.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part18.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part19.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part20.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part21.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part22.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part23.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part24.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part25.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part26.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part27.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part28.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part29.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part30.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part31.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part32.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part33.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part34.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part35.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part36.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part37.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part38.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part39.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part40.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part41.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part42.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part43.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part44.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part45.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part46.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part47.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part48.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part49.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part50.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part51.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part52.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part53.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part54.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part55.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part56.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part57.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part58.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part59.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part60.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part61.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part62.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part63.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part64.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part65.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part66.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part67.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part68.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part69.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part70.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part71.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part72.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part73.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part74.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part75.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part76.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part77.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part78.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part79.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part80.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part81.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part82.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part83.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part84.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part85.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part86.part',
+    'https://cdn.jsdelivr.net/gh/thugaliciousbruh/turbo-bassoon@booty/GL.swf.part87.part'
+];
+
+                statusEl.textContent = 'Downloading parts...';
+
+                const partBuffers = [];
+                for (let i = 0; i < parts.length; i++) {
+                    statusEl.textContent = `Downloading Bullshit ${i + 1}/${parts.length}...`;
+
+                    const response = await fetch(parts[i]);
+                    if (!response.ok) throw new Error(`Failed to load part ${i + 1}`);
+
+                    const buffer = await response.arrayBuffer();
+                    partBuffers.push(buffer);
+
+                    const percent = ((i + 1) / parts.length) * 100;
+                    progressFill.style.width = percent + '%';
+                }
+
+                statusEl.textContent = 'Combining parts...';
+
+                const totalLength = partBuffers.reduce((acc, buffer) => acc + buffer.byteLength, 0);
+                const combinedBuffer = new Uint8Array(totalLength);
+
+                let offset = 0;
+                for (const buffer of partBuffers) {
+                    combinedBuffer.set(new Uint8Array(buffer), offset);
+                    offset += buffer.byteLength;
+                }
+
+                statusEl.textContent = 'Creating game file...';
+
+                const blob = new Blob([combinedBuffer], { type: 'application/x-shockwave-flash' });
+                const swfUrl = URL.createObjectURL(blob);
+
+                loadingEl.remove();
+
+                const embed = document.createElement('embed');
+                embed.src = swfUrl;
+                embed.type = 'application/x-shockwave-flash';
+                embed.width = '100%';
+                embed.height = '100%';
+                embed.style.width = '100%';
+                embed.style.height = '100%';
+
+                container.appendChild(embed);
+
+                setTimeout(() => URL.revokeObjectURL(swfUrl), 5000);
+
+            } catch (error) {
+                statusEl.textContent = 'Error: ' + error.message;
+                console.error('Failed to load game:', error);
+            }
+        });
+    </script>
+</html>
