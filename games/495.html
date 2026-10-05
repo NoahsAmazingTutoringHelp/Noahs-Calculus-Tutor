@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Trees Hate You</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <style>
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            background-color: #000000;
+            font-family: monospace;
+        }
+        #unity-container { 
+            width: 100vw !important; 
+            height: 100vh !important; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+        }
+        #unity-canvas { 
+            width: 100% !important; 
+            height: 100% !important; 
+            display: block;
+        }
+        #custom-loader {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background: #222222;
+            margin-bottom: 10px;
+        }
+        #progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #ffffff;
+            transition: width 0.1s linear;
+        }
+        #loader-status {
+            color: #ffffff;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div id="unity-container">
+        <canvas id="unity-canvas" tabindex="-1"></canvas>
+    </div>
+    <div id="custom-loader">
+        <div class="progress-container">
+            <div id="progress-fill"></div>
+        </div>
+        <div id="loader-status">0%</div>
+    </div>
+    <script>
+        const BASE = "https://cdn.jsdelivr.net/gh/thirstygithub/fugglelatougin@main/Build/";
+        const loaderStatus = document.getElementById('loader-status');
+        const progressFill = document.getElementById('progress-fill');
+        const customLoader = document.getElementById('custom-loader');
+
+        function updateProgress(percent) {
+            if (percent !== null) {
+                const p = Math.min(100, Math.max(0, Math.round(percent)));
+                progressFill.style.width = p + '%';
+                loaderStatus.innerText = p + '%';
+            }
+        }
+
+        async function fetchChunks(name, parts, progressStart, progressEnd) {
+            const buffers = [];
+            let total = 0;
+            for (let i = 0; i < parts; i++) {
+                const pct = progressStart + ((i / parts) * (progressEnd - progressStart));
+                updateProgress(pct);
+                
+                const r = await fetch(BASE + name + ".part" + i);
+                if (!r.ok) throw new Error("Failed: " + name + ".part" + i);
+                const buf = await r.arrayBuffer();
+                buffers.push(buf);
+                total += buf.byteLength;
+            }
+            const out = new Uint8Array(total);
+            let off = 0;
+            for (const b of buffers) { out.set(new Uint8Array(b), off); off += b.byteLength; }
+            return out;
+        }
+
+        async function boot() {
+            try {
+                const dataBytes = await fetchChunks("TreesHateYou_Web.data.br", 5, 0, 40);
+                const dataUrl = URL.createObjectURL(new Blob([dataBytes]));
+
+                updateProgress(45);
+                const r = await fetch(BASE + "TreesHateYou_Web.framework.js.br");
+                const fwBytes = await r.arrayBuffer();
+                const fwText = new TextDecoder().decode(fwBytes);
+                await new Promise((resolve, reject) => {
+                    const s = document.createElement("script");
+                    s.textContent = fwText;
+                    s.onerror = reject;
+                    document.head.appendChild(s);
+                    resolve();
+                });
+                const fwUrl = URL.createObjectURL(new Blob([""], { type: "application/javascript" }));
+                
+                const wasmBytes = await fetchChunks("TreesHateYou_Web.wasm.br", 4, 50, 90);
+                const wasmUrl = URL.createObjectURL(new Blob([wasmBytes], { type: "application/wasm" }));
+
+                updateProgress(90);
+                var canvas = document.querySelector("#unity-canvas");
+
+                var config = {
+                    arguments: [],
+                    dataUrl: dataUrl,
+                    frameworkUrl: fwUrl,
+                    codeUrl: wasmUrl,
+                    streamingAssetsUrl: "StreamingAssets",
+                    companyName: "tykenn games",
+                    productName: "Trees Hate You",
+                    productVersion: "0.1.0",
+                };
+
+                updateProgress(92);
+                const loaderRes = await fetch(BASE + "TreesHateYou_Web.loader.js");
+                const loaderText = await loaderRes.text();
+                const script = document.createElement("script");
+                script.textContent = loaderText;
+                document.head.appendChild(script);
+
+                updateProgress(95);
+                
+                createUnityInstance(canvas, config, (progress) => {
+                    updateProgress(95 + (progress * 5));
+                }).then((unityInstance) => {
+                    updateProgress(100);
+                    customLoader.style.opacity = '0';
+                    setTimeout(() => customLoader.style.display = 'none', 300);
+                }).catch((message) => {
+                    loaderStatus.innerText = "Error";
+                    alert(message);
+                });
+
+            } catch(err) {
+                loaderStatus.innerText = "Error";
+                console.error(err);
+            }
+        }
+
+        boot();
+    </script>
+</body>
+</html>

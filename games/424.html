@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+<html lang="en-us">
+<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/going%20balls/">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Going Balls - UBG365</title>
+
+  <meta name="description" content="Going Balls is a fun game you can play at school.">
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
+
+  <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* FULLSCREEN CONTAINER */
+    #unity-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    /* CANVAS ALWAYS FILLS SCREEN */
+    #unity-canvas {
+      width: 100vw !important;
+      height: 100vh !important;
+      display: block;
+    }
+
+    /* loading bar stays on top */
+    #unity-loading-bar { 
+      z-index: 10; 
+    }
+  </style>
+</head>
+
+<body>
+  <div id="unity-container" class="unity-desktop">
+    <canvas id="unity-canvas"></canvas>
+
+    <div id="unity-loading-bar">
+      <div id="unity-logo"></div>
+      <div id="unity-progress-bar-empty">
+        <div id="unity-progress-bar-full"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/Build_6.loader.js";
+
+    var config = {
+      dataUrl: buildUrl + "/Build_6.data",
+      frameworkUrl: buildUrl + "/Build_6.framework.js",
+      codeUrl: buildUrl + "/Build_6.wasm",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "DEFU Games",
+      productName: "Going Balls",
+      productVersion: "0.1",
+    };
+
+    var container = document.querySelector("#unity-container");
+    var canvas = document.querySelector("#unity-canvas");
+    var loadingBar = document.querySelector("#unity-loading-bar");
+    var progressBarFull = document.querySelector("#unity-progress-bar-full");
+
+    // MOBILE FIX
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+      document.head.innerHTML += '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
+      config.devicePixelRatio = 1;
+    } else {
+      config.devicePixelRatio = window.devicePixelRatio || 1;
+    }
+
+    loadingBar.style.display = "block";
+
+    // Load Unity Loader
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      (async () => {
+        try {
+          async function fetchMaybeSplit(baseUrl) {
+            try {
+              const p1 = await fetch(baseUrl + ".part1");
+              const p2 = await fetch(baseUrl + ".part2");
+              if (p1.ok && p2.ok) {
+                const b1 = await p1.arrayBuffer();
+                const b2 = await p2.arrayBuffer();
+                const combined = new Uint8Array(b1.byteLength + b2.byteLength);
+                combined.set(new Uint8Array(b1), 0);
+                combined.set(new Uint8Array(b2), b1.byteLength);
+                return combined.buffer;
+              }
+            } catch (e) {}
+
+            const single = await fetch(baseUrl);
+            if (!single.ok) throw new Error("Failed to fetch " + baseUrl);
+            return await single.arrayBuffer();
+          }
+
+          const dataBuf = await fetchMaybeSplit(buildUrl + "/Build_6.data");
+          const wasmBuf = await fetchMaybeSplit(buildUrl + "/Build_6.wasm");
+
+          const combinedBlob = new Blob([dataBuf, wasmBuf], { type: "application/octet-stream" });
+          const dataSlice = combinedBlob.slice(0, dataBuf.byteLength, "application/octet-stream");
+          const wasmSlice = combinedBlob.slice(dataBuf.byteLength, dataBuf.byteLength + wasmBuf.byteLength, "application/wasm");
+
+          const dataBlobUrl = URL.createObjectURL(dataSlice);
+          const wasmBlobUrl = URL.createObjectURL(wasmSlice);
+
+          config.dataUrl = dataBlobUrl;
+          config.codeUrl = wasmBlobUrl;
+
+          function resizeCanvas() {
+            const dpr = config.devicePixelRatio || 1;
+            const w = Math.max(1, Math.floor(window.innerWidth * dpr));
+            const h = Math.max(1, Math.floor(window.innerHeight * dpr));
+
+            canvas.width = w;
+            canvas.height = h;
+
+            canvas.style.width = "100vw";
+            canvas.style.height = "100vh";
+          }
+
+          createUnityInstance(canvas, config, (progress) => {
+            progressBarFull.style.width = 100 * progress + "%";
+          }).then((unityInstance) => {
+            loadingBar.style.display = "none";
+            resizeCanvas();
+            window.addEventListener("resize", resizeCanvas);
+
+            setTimeout(() => {
+              URL.revokeObjectURL(dataBlobUrl);
+              URL.revokeObjectURL(wasmBlobUrl);
+            }, 5000);
+          }).catch((message) => {
+            alert(message);
+          });
+
+        } catch (e) {
+          alert("Error loading build: " + e);
+        }
+      })();
+    };
+
+    document.body.appendChild(script);
+  </script>
+</body>
+
+</html>
+
+

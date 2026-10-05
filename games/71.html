@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@latest/tattletail/">
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tattletail</title>
+    <script src="Build/UnityLoader.js"></script>
+    <style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000}#gameContainer{position:fixed;top:0;left:0;width:100vw;height:100vh}#loading-container{position:fixed;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:#000}#loading-bar{width:50%;height:20px;background:#fff;border:2px solid #000;margin-top:20px}#loading-progress{width:0%;height:100%;background:#000;transition:width .3s}#loading-text{color:#fff;font-size:18px;font-family:Arial,sans-serif}canvas{width:100%;height:100%;display:block}</style>
+  </head>
+
+  <body>
+    <div id="loading-container">
+      <div id="loading-text">Loading Game...</div>
+      <div id="loading-bar">
+        <div id="loading-progress"></div>
+      </div>
+    </div>
+    <div id="gameContainer" hidden></div>
+    <script>alert('Thank you snubby for the port, all credits go to him "snubby.top"!!!');const loadingProgress=document.querySelector("#loading-progress");const loadingText=document.querySelector("#loading-text");const loadingContainer=document.querySelector("#loading-container");let totalBytes=64246251.52;let loadedBytes=0;async function fetchWithProgress(url){const response=await fetch(url);const reader=response.body.getReader();let chunks=[];let received=0;while(true){const{done:done,value:value}=await reader.read();if(done)break;received+=value.length;loadedBytes+=value.length;chunks.push(value);const percent=totalBytes>0?loadedBytes/totalBytes*100:0;loadingProgress.style.width=percent+"%"}let fullBuffer=new Uint8Array(received);let offset=0;for(let chunk of chunks){fullBuffer.set(chunk,offset);offset+=chunk.length}return fullBuffer.buffer}async function mergeFiles(parts){const buffers=await Promise.all(parts.map(fetchWithProgress));return URL.createObjectURL(new Blob(buffers))}function getParts(file,count){let parts=[];for(let i=1;i<=count;i++){parts.push(file+".part"+i)}return parts}function resizeUnityContainer(){var container=document.getElementById("gameContainer");container.style.width=window.innerWidth+"px";container.style.height=window.innerHeight+"px"}(async()=>{try{const dataParts=getParts("Build/WebGL.data.unityweb",4);const[dataUrl]=await Promise.all([mergeFiles(dataParts)]);var json={companyName:"Waygetter Electronics",productName:"Tattletail",dataUrl:dataUrl,wasmCodeUrl:"WebGL.wasm.code.unityweb",wasmFrameworkUrl:"WebGL.wasm.framework.unityweb",TOTAL_MEMORY:251658240,graphicsAPI:["WebGL 2.0","WebGL 1.0"],webglContextAttributes:{preserveDrawingBuffer:false},splashScreenStyle:"Dark",backgroundColor:"#000000"};let blob=new Blob([JSON.stringify(json)],{type:"application/json"});let blobUrl=URL.createObjectURL(blob);document.querySelector("#gameContainer").hidden=false;var gameInstance=UnityLoader.instantiate("gameContainer",json,{url:blobUrl,Module:{onRuntimeInitialized:function(){resizeUnityContainer();window.onresize=function(){resizeUnityContainer()};loadingContainer.remove()}}})}catch(error){console.error("Error loading game:",error);loadingText.textContent="Error loading game. Check console for details."}})();</script>
+  </body>
+</html>

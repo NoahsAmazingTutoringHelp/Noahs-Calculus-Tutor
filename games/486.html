@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes">
+<title>How to Fish</title>
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+}
+#unity-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+}
+#unity-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  outline: none;
+}
+#unity-loading-bar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  width: 280px;
+}
+#unity-progress-bar-empty {
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  overflow: hidden;
+}
+#unity-progress-bar-full {
+  width: 0%;
+  height: 100%;
+  background: #fff;
+}
+#unity-status {
+  margin-top: 10px;
+  text-align: center;
+  font-family: arial, sans-serif;
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#unity-warning {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: arial, sans-serif;
+  font-size: 12px;
+  color: #d9a441;
+}
+#unity-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  max-width: 80%;
+  text-align: center;
+  font-family: arial, sans-serif;
+  font-size: 13px;
+  color: #d97070;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+<div id="unity-container">
+<canvas id="unity-canvas" tabindex="-1"></canvas>
+<div id="unity-loading-bar">
+<div id="unity-progress-bar-empty">
+<div id="unity-progress-bar-full"></div>
+</div>
+<div id="unity-status"></div>
+</div>
+<div id="unity-warning"> </div>
+<div id="unity-error"></div>
+</div>
+<script>
+var container = document.querySelector("#unity-container");
+var canvas = document.querySelector("#unity-canvas");
+var loadingBar = document.querySelector("#unity-loading-bar");
+var progressBarFull = document.querySelector("#unity-progress-bar-full");
+var statusText = document.querySelector("#unity-status");
+var warningBanner = document.querySelector("#unity-warning");
+var errorBox = document.querySelector("#unity-error");
+
+function showError(msg) {
+  loadingBar.style.display = "none";
+  errorBox.style.display = "block";
+  errorBox.innerHTML = msg;
+}
+
+function unityShowBanner(msg, type) {
+  function updateBannerVisibility() {
+    warningBanner.style.display = warningBanner.children.length ? "block" : "none";
+  }
+  var div = document.createElement("div");
+  div.innerHTML = msg;
+  warningBanner.appendChild(div);
+  if (type != "error") {
+    setTimeout(function () {
+      warningBanner.removeChild(div);
+      updateBannerVisibility();
+    }, 5000);
+  }
+  updateBannerVisibility();
+}
+
+// Non-fatal Unity warnings arrive as alert() ("This page says...") and as an on-page
+// banner; neither helps a player, so route both to the console.
+window.alert = function (m) { console.warn("[unity]", m); };
+unityShowBanner = function (msg, type) { console.warn("[unity " + (type || "info") + "]", msg); };
+
+var repoBase = "https://cdn.jsdelivr.net/gh/NotRexed/HowToFishPort@main/";
+var buildUrl = repoBase + "Build";
+var loaderUrl = buildUrl + "/WebGL.loader.js";
+var frameworkUrl = buildUrl + "/WebGL.framework.js";
+var dataUrl = buildUrl + "/WebGL.data";
+var wasmUrl = buildUrl + "/WebGL.wasm";
+
+var MAX_PARTS = 128;
+var objectUrls = [];
+
+function basename(url) {
+  return url.split("/").pop();
+}
+
+// raw.githubusercontent answers HEAD, but fall back to a one-byte ranged GET if a proxy or CDN in
+// front of it does not. Returns the byte size, or -1 when the file is absent.
+async function probeSize(url) {
+  try {
+    var head = await fetch(url, { method: "HEAD" });
+    if (head.ok) {
+      var len = parseInt(head.headers.get("content-length") || "0", 10);
+      return isNaN(len) ? 0 : len;
+    }
+    if (head.status === 404) return -1;
+  } catch (e) { /* fall through to the ranged GET */ }
+
+  try {
+    var res = await fetch(url, { headers: { Range: "bytes=0-0" } });
+    if (!res.ok && res.status !== 206) return -1;
+    var cr = res.headers.get("content-range");
+    if (cr && cr.indexOf("/") !== -1) {
+      var total = parseInt(cr.split("/")[1], 10);
+      if (!isNaN(total)) return total;
+    }
+    return 0;
+  } catch (e) {
+    return -1;
+  }
+}
+
+// The two payloads were split with different tools, so they use different numbering:
+//     WebGL.data.part1 .. .part7    (1-based)
+//     WebGL.wasm.000   .. .003      (0-based, zero padded)
+// Probe each scheme rather than hard-coding counts, so re-splitting needs no edit here.
+async function discoverParts(url) {
+  var schemes = [
+    function (i) { return url + ".part" + (i + 1); },
+    function (i) { return url + "." + String(i).padStart(3, "0"); },
+    function (i) { return url + ".part" + String(i + 1).padStart(3, "0"); },
+  ];
+  for (var s = 0; s < schemes.length; s++) {
+    var naming = schemes[s];
+    var first = await probeSize(naming(0));
+    if (first < 0) continue;
+    var parts = [{ url: naming(0), size: first }];
+    for (var i = 1; i < MAX_PARTS; i++) {
+      var size = await probeSize(naming(i));
+      if (size < 0) break;
+      parts.push({ url: naming(i), size: size });
+    }
+    return parts;
+  }
+  return [];
+}
+
+// One Blob per part, combined into a Blob of Blobs at the end. The browser can back a Blob with
+// disk, so peak memory stays near a single part instead of the whole 126 MB payload.
+async function fetchPartBlob(url, onBytes) {
+  var res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch " + url + " (HTTP " + res.status + ")");
+  if (!res.body || !res.body.getReader) {
+    var buf = await res.arrayBuffer();
+    onBytes(buf.byteLength);
+    return new Blob([buf]);
+  }
+  var reader = res.body.getReader();
+  var chunks = [];
+  for (;;) {
+    var step = await reader.read();
+    if (step.done) break;
+    chunks.push(step.value);
+    onBytes(step.value.length);
+  }
+  return new Blob(chunks);
+}
+
+async function resolveUrl(url, mimeType, plan, onBytes, onFile) {
+  var parts = plan[url];
+  if (!parts || !parts.length) return url;   // not split - hand the plain URL to Unity
+  var blobs = [];
+  for (var i = 0; i < parts.length; i++) {
+    onFile(basename(parts[i].url));
+    blobs.push(await fetchPartBlob(parts[i].url, onBytes));
+  }
+  var objUrl = URL.createObjectURL(new Blob(blobs, { type: mimeType }));
+  objectUrls.push(objUrl);
+  return objUrl;
+}
+
+// raw.githubusercontent serves .js as text/plain with X-Content-Type-Options: nosniff, so a plain
+// <script src> pointing at it is refused. Fetch the text and re-serve it from a blob: URL instead.
+async function fetchAsScriptBlob(url) {
+  statusText.textContent = basename(url);
+  var res = await fetch(url);
+  if (!res.ok) throw new Error("Failed to fetch " + url + " (HTTP " + res.status + ")");
+  var text = await res.text();
+  var objUrl = URL.createObjectURL(new Blob([text], { type: "text/javascript" }));
+  objectUrls.push(objUrl);
+  return objUrl;
+}
+
+async function boot() {
+  loadingBar.style.display = "block";
+  statusText.textContent = "Checking files...";
+
+  var plan = {};
+  plan[dataUrl] = await discoverParts(dataUrl);
+  plan[wasmUrl] = await discoverParts(wasmUrl);
+
+  if (!plan[dataUrl].length && (await probeSize(dataUrl)) < 0) {
+    throw new Error("Could not find WebGL.data or any of its parts in the repo.");
+  }
+  if (!plan[wasmUrl].length && (await probeSize(wasmUrl)) < 0) {
+    throw new Error("Could not find WebGL.wasm or any of its parts in the repo.");
+  }
+
+  var totalBytes = 0;
+  Object.keys(plan).forEach(function (k) {
+    plan[k].forEach(function (p) { totalBytes += p.size; });
+  });
+
+  var loadedBytes = 0;
+  var currentFile = "";
+  function onBytes(n) {
+    loadedBytes += n;
+    if (totalBytes > 0) {
+      var frac = Math.min(loadedBytes / totalBytes, 1);
+      // Downloading is the bulk of the wait, so give it 90% of the bar and leave 10% for Unity.
+      progressBarFull.style.width = (frac * 90) + "%";
+      statusText.textContent = currentFile + " - " + Math.round(frac * 100) + "%";
+    }
+  }
+  function onFile(name) {
+    currentFile = name;
+    statusText.textContent = currentFile;
+  }
+
+  // Sequential on purpose: two multi-hundred-megabyte downloads at once just fight for bandwidth.
+  var resolvedWasm = await resolveUrl(wasmUrl, "application/wasm", plan, onBytes, onFile);
+  var resolvedData = await resolveUrl(dataUrl, "application/octet-stream", plan, onBytes, onFile);
+  var resolvedLoader = await fetchAsScriptBlob(loaderUrl);
+  var resolvedFramework = await fetchAsScriptBlob(frameworkUrl);
+
+  statusText.textContent = "Starting...";
+
+  var config = {
+    dataUrl: resolvedData,
+    frameworkUrl: resolvedFramework,
+    codeUrl: resolvedWasm,
+    streamingAssetsUrl: repoBase + "StreamingAssets",
+    companyName: "DefaultCompany",
+    productName: "ExportedProject",
+    productVersion: "1.0",
+    showBanner: unityShowBanner,
+    // Saves are written to Application.persistentDataPath, which in WebGL is an in-memory
+    // IDBFS mount. Without this nothing is flushed to IndexedDB and every save is lost on
+    // reload - singleplayer included.
+    autoSyncPersistentDataPath: true,
+  };
+
+  if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    container.className = "unity-mobile";
+    canvas.className = "unity-mobile";
+  }
+
+  await new Promise(function (resolve, reject) {
+    var script = document.createElement("script");
+    script.src = resolvedLoader;
+    script.onload = resolve;
+    script.onerror = function () { reject(new Error("Failed to load " + loaderUrl)); };
+    document.body.appendChild(script);
+  });
+
+  var unityInstance = await createUnityInstance(canvas, config, function (progress) {
+    progressBarFull.style.width = (90 + progress * 10) + "%";
+  });
+
+  window.unityInstance = unityInstance;
+  loadingBar.style.display = "none";
+
+  objectUrls.forEach(function (u) { URL.revokeObjectURL(u); });
+  objectUrls = [];
+
+  window.addEventListener("keydown", function (e) {
+    if (e.key === "F" || e.key === "f") {
+      if (e.target === document.body || e.target === canvas) {
+        unityInstance.SetFullscreen(1);
+      }
+    }
+  });
+}
+
+boot().catch(function (err) {
+  showError("<b>Failed to start.</b><br>" + (err && err.message ? err.message : err));
+  console.error(err);
+});
+</script>
+</body>
+</html>

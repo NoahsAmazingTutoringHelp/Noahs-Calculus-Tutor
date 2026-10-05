@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Keep Talking and Nobody Explodes</title>
+    <script src="https://cdn.jsdelivr.net/gh/squidward5/ktane-webport@6e7ee2b2947d601c13571cffb70143174ac8cfd2/Build/UnityLoader.js"></script>
+    <style>
+        html,
+        body {
+            box-sizing: border-box;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            border: none;
+            overflow: hidden;
+            background: #181818;
+            color: #eee;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #menu {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box {
+            width: 500px;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            margin: 0 0 20px;
+            font-size: 34px;
+            font-weight: normal;
+        }
+
+        p {
+            color: #bbb;
+            line-height: 1.5;
+        }
+
+        #loadError {
+            color: #ff8080;
+        }
+
+        .buttons {
+            margin-top: 30px;
+        }
+
+        a,
+        button {
+            display: inline-block;
+            margin: 6px;
+            padding: 12px 22px;
+            border: 1px solid #555;
+            background: #2d2d2d;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            text-decoration: none;
+        }
+
+        a:hover,
+        button:hover {
+            background: #3b3b3b;
+        }
+
+        #unityContainer {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <div class="box">
+            <h1>Keep Talking and Nobody Explodes</h1>
+            <p>
+                Before playing, you will need the download manual for the game. You can download it by clicking the button below. Once you have the manual, click "Start Game" to begin.
+            </p>
+            <p>
+                IMPORTANT!!:
+                <strong>Make sure to put in the code <u>241</u> for the verification code on the loading screen.</strong>
+            </p>
+            <div class="buttons">
+                <a id="manualLink" href="https://cdn.jsdelivr.net/gh/squidward5/ktane-webport@6e7ee2b2947d601c13571cffb70143174ac8cfd2/BombDefusalManual.pdf">
+                    Download Manual
+                </a>
+                <button id="startGame">Start Game</button>
+            </div>
+            <label style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;color:#bbb;cursor:pointer;">
+                <input id="dontShowAgain" type="checkbox">
+                <span>Don't show again</span>
+            </label>
+
+            <p id="loadError" role="alert" aria-live="polite"></p>
+        </div>
+    </div>
+
+    <div id="unityContainer"></div>
+
+    <script>
+        var CDN_BASE = "https://cdn.jsdelivr.net/gh/squidward5/ktane-webport@6e7ee2b2947d601c13571cffb70143174ac8cfd2";
+        var DATA_REPOSITORY_COMMITS = [
+            "27a630f4fe5ff581a79046f85f581ea0ca402801",
+            "fd8040f83f258dad788f4d0385895fa2bc0d857c",
+            "3a205a93347e044ad674a78e68f0a8b87aa835f3",
+            "01f763cbc732898f6c580941da00c2d08a3cbf21",
+            "d3d5c009aa13d9e1c997e3889b04740db29c7c0d",
+            "4cc8a99a4936cf3b496f787a0829ebfa7099c996",
+            "0f5718e281ccf3085676284d9595417a16688bf8",
+            "71a927206deb2211e28f93160deee9c59e96c553"
+        ];
+        var STORAGE_KEY = "ktaneIntroHidden";
+        var DATA_CHUNK_COUNT = 16;
+        var DATA_CHUNK_SIZE = 16 * 1024 * 1024;
+        var DATA_TOTAL_SIZE = 262959329;
+
+        function shouldSkipIntro() {
+            try {
+                return localStorage.getItem(STORAGE_KEY) === "true";
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function saveIntroPreference() {
+            try {
+                localStorage.setItem(
+                    STORAGE_KEY,
+                    document.getElementById("dontShowAgain").checked ? "true" : "false"
+                );
+            } catch (error) {
+                // Storage can be unavailable in private or restricted browsing modes.
+            }
+        }
+
+        async function assembleUnityData() {
+            var chunks = await Promise.all(
+                Array.from({ length: DATA_CHUNK_COUNT }, async function (_, index) {
+                    var name = "data-" + String(index).padStart(3, "0") + ".bin";
+                    var repositoryNumber = Math.floor(index / 2) + 1;
+                    var repositoryCommit = DATA_REPOSITORY_COMMITS[repositoryNumber - 1];
+                    var chunkUrl = "https://cdn.jsdelivr.net/gh/squidward5/ktane-webport-data-" +
+                        repositoryNumber + "@" + repositoryCommit + "/" + name;
+                    var response = await fetch(chunkUrl);
+                    if (!response.ok) {
+                        throw new Error("Unity data chunk request failed with HTTP " + response.status + ": " + name);
+                    }
+
+                    var chunk = await response.arrayBuffer();
+                    var expectedSize = index === DATA_CHUNK_COUNT - 1
+                        ? DATA_TOTAL_SIZE - DATA_CHUNK_SIZE * (DATA_CHUNK_COUNT - 1)
+                        : DATA_CHUNK_SIZE;
+                    if (chunk.byteLength !== expectedSize) {
+                        throw new Error("Unity data chunk has an unexpected size: " + name);
+                    }
+                    return chunk;
+                })
+            );
+
+            var signature = new TextDecoder().decode(new Uint8Array(chunks[0], 0, 15));
+            if (signature !== "UnityWebData1.0") {
+                throw new Error("Unity data chunks have an invalid archive header.");
+            }
+
+            return URL.createObjectURL(new Blob(chunks, { type: "application/octet-stream" }));
+        }
+
+        async function startGame() {
+            saveIntroPreference();
+            if (window.__gameStarting || window.unityInstance) return;
+
+            window.__gameStarting = true;
+            document.getElementById("startGame").disabled = true;
+            document.getElementById("menu").style.display = "none";
+            document.getElementById("unityContainer").style.display = "block";
+
+            try {
+                var response = await fetch(CDN_BASE + "/Build/ktanefix.WebGL.json");
+                if (!response.ok) {
+                    throw new Error("Game config request failed with HTTP " + response.status);
+                }
+
+                var config = await response.json();
+                config.dataUrl = await assembleUnityData();
+                config.wasmCodeUrl = "https://squidward5.github.io/ktane-webport/Build/ktanefix.WebGL.wasm";
+                config.wasmFrameworkUrl = CDN_BASE + "/Build/ktanefix.WebGL.wasm.framework.unityweb";
+
+                window.__unityConfigUrl = URL.createObjectURL(
+                    new Blob([JSON.stringify(config)], { type: "application/json" })
+                );
+                window.unityInstance = UnityLoader.instantiate(
+                    "unityContainer",
+                    window.__unityConfigUrl,
+                    {
+                        Module: {
+                            resolveBuildUrl: function (assetUrl) {
+                                if (/^(https?|ftp|file):\/\//.test(assetUrl) || assetUrl.indexOf("blob:") === 0) {
+                                    return assetUrl;
+                                }
+                                if (/\.wasm(?:$|\?)/i.test(assetUrl)) {
+                                    return config.wasmCodeUrl;
+                                }
+                                return new URL("Build/" + assetUrl, window.location.href).href;
+                            },
+                            locateFile: function (fileName) {
+                                if (/\.wasm(?:$|\?)/i.test(fileName)) {
+                                    return config.wasmCodeUrl;
+                                }
+                                return new URL("Build/" + fileName, window.location.href).href;
+                            }
+                        },
+                        onerror: function (error) {
+                            console.error(error);
+                            window.unityInstance = null;
+                            showLoadError("The game could not start. Please check your connection and try again.");
+                        }
+                    }
+                );
+            } catch (error) {
+                console.error(error);
+                showLoadError("The game could not be loaded. Please check your connection and try again.");
+            } finally {
+                window.__gameStarting = false;
+                document.getElementById("startGame").disabled = false;
+            }
+        }
+
+        function showLoadError(message) {
+            document.getElementById("unityContainer").style.display = "none";
+            document.getElementById("menu").style.display = "flex";
+            document.getElementById("loadError").textContent = message;
+        }
+
+        document.getElementById("manualLink").addEventListener("click", function (event) {
+            if (this.getAttribute("href").includes("cdn.jsdelivr.net")) {
+                event.preventDefault();
+                window.open(this.href, "_blank", "noopener");
+            }
+        });
+
+        document.getElementById("dontShowAgain").checked = shouldSkipIntro();
+        document.getElementById("dontShowAgain").addEventListener("change", saveIntroPreference);
+        document.getElementById("startGame").addEventListener("click", startGame);
+
+        if (shouldSkipIntro()) {
+            startGame();
+        }
+    </script>
+</body>
+</html>

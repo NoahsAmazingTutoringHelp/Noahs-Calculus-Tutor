@@ -1,0 +1,752 @@
+<!doctype html>
+<html>
+  <head>
+    <base href="https://cdn.jsdelivr.net/gh/thirstygithub/Buddy@main/">
+    <script>
+        alert("The game has to load a few chunks, so if it's stuck at 0% just wait a little. Don't refresh or leave until fully loaded or it will take long again.");
+        // ── Fetch Interceptor for Split Unity Files ──
+        (function() {
+            const MANIFEST = {
+  "57f01ad15ff5308aa4cf52709941de32.data": {
+    "parts": 3,
+    "totalSize": 54016808
+  },
+  "f8d0a9b6d8d08e138ce5cac7d62b5286.wasm": {
+    "parts": 2,
+    "totalSize": 35003662
+  }
+};
+            const origFetch = window.fetch;
+            
+            window.fetch = async function(resource, init) {
+                let url = typeof resource === 'string' ? resource : resource.url;
+                let fileName = url.substring(url.lastIndexOf('/') + 1);
+                
+                // If Unity is requesting a file that we split, intercept it!
+                if (MANIFEST[fileName]) {
+                    console.log("[Interceptor] Intercepted Unity fetch for: " + fileName);
+                    const info = MANIFEST[fileName];
+                    const fullBuffer = new Uint8Array(info.totalSize);
+                    let loadedBytes = 0;
+                    
+                    // Download all parts sequentially and stitch them
+                    for (let i = 0; i < info.parts; i++) {
+                        console.log("[Interceptor] Downloading " + fileName + ".part" + i + " ...");
+                        const res = await origFetch(url + '.part' + i, init);
+                        if (!res.ok) throw new Error("Failed to fetch part " + i);
+                        
+                        const buf = new Uint8Array(await res.arrayBuffer());
+                        fullBuffer.set(buf, loadedBytes);
+                        loadedBytes += buf.length;
+                    }
+                    
+                    console.log("[Interceptor] Successfully stitched " + fileName + " in memory!");
+                    
+                    // Return a fake Response that looks exactly like the original file
+                    return new Response(fullBuffer, {
+                        status: 200,
+                        statusText: 'OK',
+                        headers: new Headers({
+                            'Content-Length': info.totalSize.toString(),
+                            'Content-Type': fileName.endsWith('.wasm') ? 'application/wasm' : 'application/octet-stream'
+                        })
+                    });
+                }
+                
+                // Otherwise, pass it through normally
+                return origFetch.apply(this, arguments);
+            };
+        })();
+
+        // Suppress benign missing screenshot errors
+        window.addEventListener('unhandledrejection', function(e) {
+            if(e.reason && e.reason.type === 'error') e.preventDefault();
+        });
+        
+        // Prevent console flooding which causes browser freeze!
+        const origWarn = console.warn;
+        console.warn = function(...args) {
+            if (typeof args[0] === 'string' && args[0].includes('Trying to get length of sound which is not loaded yet')) return;
+            origWarn.apply(console, args);
+        };
+    </script>
+
+       <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXHK7Q7G3Z"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PXHK7Q7G3Z');
+</script>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kick The Buddy - Poki</title>
+    <script>
+      window.config = {
+        loader: "unity-2020",
+        debug: false,
+        maxRatio: 24 / 9,
+        minRatio: 9 / 24,
+
+        title: "Kick The Buddy",
+        numScreenshots: 4,
+
+        unityVersion: "6000.1.17f1",
+        unityWebglBuildUrl: "",
+
+        fileSize: 45,
+        cachedDecompressedFileSizes: {
+          "28b3d1e66bd62209d17eda502289c7a4.loader.js": 8040,
+          "57f01ad15ff5308aa4cf52709941de32.data": 37003286,
+          "ce98e22b32ee0b3ac40e99c9eeb6b1aa.framework.js": 93289,
+          "f8d0a9b6d8d08e138ce5cac7d62b5286.wasm": 8470412,
+        },
+        metadata: {
+          poki_template_version: 1,
+          background_color: "#FFFFFF",
+          background_filename: "97e023a6c108e067d148cf5c5b57128e.jpg",
+          code_filename: "f8d0a9b6d8d08e138ce5cac7d62b5286.wasm",
+          company_name: "Playgendary",
+          data_filename: "57f01ad15ff5308aa4cf52709941de32.data",
+          development_player: "false",
+          framework_filename:
+            "ce98e22b32ee0b3ac40e99c9eeb6b1aa.framework.js",
+          height: "600",
+          loader_filename: "28b3d1e66bd62209d17eda502289c7a4.loader.js",
+          product_name: "Kick The Buddy",
+          product_version: "2.11.1",
+          splash_screen_style: "Light",
+          unity_version: "6000.1.17f1",
+          use_data_caching: "true",
+          use_threads: "false",
+          use_wasm: "true",
+          use_webgl_1_0: "false",
+          use_webgl_2_0: "true",
+          width: "960",
+        },
+      };
+    </script>
+    <!-- will be copied to the resulting head //-->
+  </head>
+  <body>
+    <script>
+(() => {
+	"use strict";
+	function t(t, n, o, r, e, c) {
+		return i(
+			(function (t, n) {
+				return (t << n) | (t >>> (32 - n));
+			})(i(i(n, t), i(r, c)), e),
+			o,
+		);
+	}
+	function n(n, o, r, e, i, c, s) {
+		return t((o & r) | (~o & e), n, o, i, c, s);
+	}
+	function o(n, o, r, e, i, c, s) {
+		return t((o & e) | (r & ~e), n, o, i, c, s);
+	}
+	function r(n, o, r, e, i, c, s) {
+		return t(o ^ r ^ e, n, o, i, c, s);
+	}
+	function e(n, o, r, e, i, c, s) {
+		return t(r ^ (o | ~e), n, o, i, c, s);
+	}
+	function i(t, n) {
+		const o = (65535 & t) + (65535 & n);
+		return (((t >> 16) + (n >> 16) + (o >> 16)) << 16) | (65535 & o);
+	}
+	let c, s;
+	try {
+		s = localStorage.getItem("savegame_idbfs_hash");
+	} catch (t) {}
+	function a(t) {
+		if (!s) return t;
+		try {
+			return t.replace(c, s);
+		} catch (n) {
+			return t;
+		}
+	}
+	try {
+		try {
+			const t = window.location.href.split("?")[0].replace(/\/[^/]*$/, "");
+			c = (function (t) {
+				for (var n, o = "0123456789ABCDEF", r = "", e = 0; e < t.length; e++)
+					((n = t.charCodeAt(e)),
+						(r += o.charAt((n >>> 4) & 15) + o.charAt(15 & n)));
+				return r;
+			})(
+				(function (t) {
+					for (var n = "", o = 0; o < 32 * t.length; o += 8)
+						n += String.fromCharCode((t[o >> 5] >>> (o % 32)) & 255);
+					return n;
+				})(
+					(function (t, c) {
+						((t[c >> 5] |= 128 << (c % 32)),
+							(t[14 + (((c + 64) >>> 9) << 4)] = c));
+						for (
+							var s = 1732584193,
+								a = -271733879,
+								u = -1732584194,
+								d = 271733878,
+								p = 0;
+							p < t.length;
+							p += 16
+						) {
+							const c = s,
+								l = a,
+								f = u,
+								y = d;
+							((a = e(
+								(a = e(
+									(a = e(
+										(a = e(
+											(a = r(
+												(a = r(
+													(a = r(
+														(a = r(
+															(a = o(
+																(a = o(
+																	(a = o(
+																		(a = o(
+																			(a = n(
+																				(a = n(
+																					(a = n(
+																						(a = n(
+																							a,
+																							(u = n(
+																								u,
+																								(d = n(
+																									d,
+																									(s = n(
+																										s,
+																										a,
+																										u,
+																										d,
+																										t[p + 0],
+																										7,
+																										-680876936,
+																									)),
+																									a,
+																									u,
+																									t[p + 1],
+																									12,
+																									-389564586,
+																								)),
+																								s,
+																								a,
+																								t[p + 2],
+																								17,
+																								606105819,
+																							)),
+																							d,
+																							s,
+																							t[p + 3],
+																							22,
+																							-1044525330,
+																						)),
+																						(u = n(
+																							u,
+																							(d = n(
+																								d,
+																								(s = n(
+																									s,
+																									a,
+																									u,
+																									d,
+																									t[p + 4],
+																									7,
+																									-176418897,
+																								)),
+																								a,
+																								u,
+																								t[p + 5],
+																								12,
+																								1200080426,
+																							)),
+																							s,
+																							a,
+																							t[p + 6],
+																							17,
+																							-1473231341,
+																						)),
+																						d,
+																						s,
+																						t[p + 7],
+																						22,
+																						-45705983,
+																					)),
+																					(u = n(
+																						u,
+																						(d = n(
+																							d,
+																							(s = n(
+																								s,
+																								a,
+																								u,
+																								d,
+																								t[p + 8],
+																								7,
+																								1770035416,
+																							)),
+																							a,
+																							u,
+																							t[p + 9],
+																							12,
+																							-1958414417,
+																						)),
+																						s,
+																						a,
+																						t[p + 10],
+																						17,
+																						-42063,
+																					)),
+																					d,
+																					s,
+																					t[p + 11],
+																					22,
+																					-1990404162,
+																				)),
+																				(u = n(
+																					u,
+																					(d = n(
+																						d,
+																						(s = n(
+																							s,
+																							a,
+																							u,
+																							d,
+																							t[p + 12],
+																							7,
+																							1804603682,
+																						)),
+																						a,
+																						u,
+																						t[p + 13],
+																						12,
+																						-40341101,
+																					)),
+																					s,
+																					a,
+																					t[p + 14],
+																					17,
+																					-1502002290,
+																				)),
+																				d,
+																				s,
+																				t[p + 15],
+																				22,
+																				1236535329,
+																			)),
+																			(u = o(
+																				u,
+																				(d = o(
+																					d,
+																					(s = o(
+																						s,
+																						a,
+																						u,
+																						d,
+																						t[p + 1],
+																						5,
+																						-165796510,
+																					)),
+																					a,
+																					u,
+																					t[p + 6],
+																					9,
+																					-1069501632,
+																				)),
+																				s,
+																				a,
+																				t[p + 11],
+																				14,
+																				643717713,
+																			)),
+																			d,
+																			s,
+																			t[p + 0],
+																			20,
+																			-373897302,
+																		)),
+																		(u = o(
+																			u,
+																			(d = o(
+																				d,
+																				(s = o(
+																					s,
+																					a,
+																					u,
+																					d,
+																					t[p + 5],
+																					5,
+																					-701558691,
+																				)),
+																				a,
+																				u,
+																				t[p + 10],
+																				9,
+																				38016083,
+																			)),
+																			s,
+																			a,
+																			t[p + 15],
+																			14,
+																			-660478335,
+																		)),
+																		d,
+																		s,
+																		t[p + 4],
+																		20,
+																		-405537848,
+																	)),
+																	(u = o(
+																		u,
+																		(d = o(
+																			d,
+																			(s = o(
+																				s,
+																				a,
+																				u,
+																				d,
+																				t[p + 9],
+																				5,
+																				568446438,
+																			)),
+																			a,
+																			u,
+																			t[p + 14],
+																			9,
+																			-1019803690,
+																		)),
+																		s,
+																		a,
+																		t[p + 3],
+																		14,
+																		-187363961,
+																	)),
+																	d,
+																	s,
+																	t[p + 8],
+																	20,
+																	1163531501,
+																)),
+																(u = o(
+																	u,
+																	(d = o(
+																		d,
+																		(s = o(
+																			s,
+																			a,
+																			u,
+																			d,
+																			t[p + 13],
+																			5,
+																			-1444681467,
+																		)),
+																		a,
+																		u,
+																		t[p + 2],
+																		9,
+																		-51403784,
+																	)),
+																	s,
+																	a,
+																	t[p + 7],
+																	14,
+																	1735328473,
+																)),
+																d,
+																s,
+																t[p + 12],
+																20,
+																-1926607734,
+															)),
+															(u = r(
+																u,
+																(d = r(
+																	d,
+																	(s = r(s, a, u, d, t[p + 5], 4, -378558)),
+																	a,
+																	u,
+																	t[p + 8],
+																	11,
+																	-2022574463,
+																)),
+																s,
+																a,
+																t[p + 11],
+																16,
+																1839030562,
+															)),
+															d,
+															s,
+															t[p + 14],
+															23,
+															-35309556,
+														)),
+														(u = r(
+															u,
+															(d = r(
+																d,
+																(s = r(s, a, u, d, t[p + 1], 4, -1530992060)),
+																a,
+																u,
+																t[p + 4],
+																11,
+																1272893353,
+															)),
+															s,
+															a,
+															t[p + 7],
+															16,
+															-155497632,
+														)),
+														d,
+														s,
+														t[p + 10],
+														23,
+														-1094730640,
+													)),
+													(u = r(
+														u,
+														(d = r(
+															d,
+															(s = r(s, a, u, d, t[p + 13], 4, 681279174)),
+															a,
+															u,
+															t[p + 0],
+															11,
+															-358537222,
+														)),
+														s,
+														a,
+														t[p + 3],
+														16,
+														-722521979,
+													)),
+													d,
+													s,
+													t[p + 6],
+													23,
+													76029189,
+												)),
+												(u = r(
+													u,
+													(d = r(
+														d,
+														(s = r(s, a, u, d, t[p + 9], 4, -640364487)),
+														a,
+														u,
+														t[p + 12],
+														11,
+														-421815835,
+													)),
+													s,
+													a,
+													t[p + 15],
+													16,
+													530742520,
+												)),
+												d,
+												s,
+												t[p + 2],
+												23,
+												-995338651,
+											)),
+											(u = e(
+												u,
+												(d = e(
+													d,
+													(s = e(s, a, u, d, t[p + 0], 6, -198630844)),
+													a,
+													u,
+													t[p + 7],
+													10,
+													1126891415,
+												)),
+												s,
+												a,
+												t[p + 14],
+												15,
+												-1416354905,
+											)),
+											d,
+											s,
+											t[p + 5],
+											21,
+											-57434055,
+										)),
+										(u = e(
+											u,
+											(d = e(
+												d,
+												(s = e(s, a, u, d, t[p + 12], 6, 1700485571)),
+												a,
+												u,
+												t[p + 3],
+												10,
+												-1894986606,
+											)),
+											s,
+											a,
+											t[p + 10],
+											15,
+											-1051523,
+										)),
+										d,
+										s,
+										t[p + 1],
+										21,
+										-2054922799,
+									)),
+									(u = e(
+										u,
+										(d = e(
+											d,
+											(s = e(s, a, u, d, t[p + 8], 6, 1873313359)),
+											a,
+											u,
+											t[p + 15],
+											10,
+											-30611744,
+										)),
+										s,
+										a,
+										t[p + 6],
+										15,
+										-1560198380,
+									)),
+									d,
+									s,
+									t[p + 13],
+									21,
+									1309151649,
+								)),
+								(u = e(
+									u,
+									(d = e(
+										d,
+										(s = e(s, a, u, d, t[p + 4], 6, -145523070)),
+										a,
+										u,
+										t[p + 11],
+										10,
+										-1120210379,
+									)),
+									s,
+									a,
+									t[p + 2],
+									15,
+									718787259,
+								)),
+								d,
+								s,
+								t[p + 9],
+								21,
+								-343485551,
+							)),
+								(s = i(s, c)),
+								(a = i(a, l)),
+								(u = i(u, f)),
+								(d = i(d, y)));
+						}
+						return Array(s, a, u, d);
+					})(
+						(function (t) {
+							for (var n = Array(t.length >> 2), o = 0; o < n.length; o++)
+								n[o] = 0;
+							for (o = 0; o < 8 * t.length; o += 8)
+								n[o >> 5] |= (255 & t.charCodeAt(o / 8)) << (o % 32);
+							return n;
+						})((u = t)),
+						8 * u.length,
+					),
+				),
+			).toLowerCase();
+		} catch (t) {}
+		const t = Object.getOwnPropertyDescriptor(
+			IDBCursor.prototype,
+			"primaryKey",
+		);
+		Object.defineProperty(IDBCursor.prototype, "primaryKey", {
+			get() {
+				return (function (t) {
+					return s && c ? t.replace(s, c) : t;
+				})(t.get.call(this));
+			},
+			configurable: !0,
+		});
+		const d = window.IDBObjectStore.prototype.put;
+		window.IDBObjectStore.prototype.put = function (...t) {
+			if ("/idbfs" === this.transaction.db.name) {
+				try {
+					s ||
+						((n = t[1]),
+						(s = n.split("/idbfs/")[1].split("/")[0]),
+						localStorage.setItem("savegame_idbfs_hash", s));
+				} catch (t) {}
+				const o = [...t];
+				return ((o[1] = a(t[1])), d.apply(this, o));
+			}
+			var n;
+			return d.apply(this, t);
+		};
+		const p = window.IDBObjectStore.prototype.get;
+		window.IDBObjectStore.prototype.get = function (...t) {
+			if ("/idbfs" === this.transaction.db.name) {
+				const n = [...t];
+				return ((n[0] = a(t[0])), p.apply(this, n));
+			}
+			return p.apply(this, t);
+		};
+	} catch (t) {}
+	var u;
+	const d = document.getElementsByTagName("script");
+	let p = d[d.length - 1].src.split("master-loader.js")[0];
+	const l = { unity: "unity.js", "unity-2020": "unity-2020.js" };
+	if (
+		(window.location.href.indexOf("pokiForceLocalLoader") >= 0 &&
+			((l.unity = "/unity/dist/unity.js"),
+			(l["unity-2020"] = "/unity-2020/dist/unity-2020.js"),
+			(p = "/loaders")),
+		!window.config)
+	)
+		throw Error("window.config not found");
+	const f = l[window.config.loader];
+	if (!f) throw Error(`Loader "${window.config.loader}" not found`);
+	if (!window.config.unityWebglLoaderUrl) {
+		const t = window.config.unityVersion
+				? window.config.unityVersion.split(".")
+				: [],
+			n = t[0],
+			o = t[1];
+		if ("2019" === n)
+			window.config.unityWebglLoaderUrl =
+				1 === o ? "UnityLoader.2019.1.js" : "UnityLoader.2019.2.js";
+		else window.config.unityWebglLoaderUrl = "UnityLoader.js";
+	}
+	
+    window.PokiSDK = new Proxy({}, {
+        get: function(target, prop) {
+            return function(...args) {
+                console.log("PokiSDK stub called: " + prop);
+                if (prop === 'init' || prop === 'commercialBreak') return Promise.resolve();
+                if (prop === 'rewardedBreak') return Promise.resolve(true);
+                return Promise.resolve("");
+            }
+        }
+    });
+
+    const unityScriptElem = document.createElement("script");
+    unityScriptElem.src = "https://cdn.jsdelivr.net/gh/thirstygithub/Buddy@main/" + f;
+    document.body.appendChild(unityScriptElem);
+
+})();
+
+</script>
+    <!-- will be copied to the resulting body //-->
+    <!-- will also be copied to the resulting body //-->
+  </body>
+</html>

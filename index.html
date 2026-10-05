@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Noahs Tutoring | Math</title>
+  <link href="cuh.png" id="siteFavicon" rel="icon" type="image/x-icon">
+  <link href="cuh.png" rel="shortcut icon">
+  <link href="cuh.png" rel="apple-touch-icon">
+  <meta content="#c27c15" name="theme-color">
+  <meta content="Noah's Tutoring Hub" property="og:site_name">
+  <meta content="Noah's Tutoring Hub | 400+ Unblocked Games & Lessons" property="og:title">
+  <meta
+    content="Access hundreds of unblocked games, educational tools, and math lessons. The ultimate hub for students!"
+    property="og:description">
+  <meta content="https://noahs-calculus-tutor.pages.dev/" property="og:url">
+  <meta content="website" property="og:type">
+  <meta
+    content="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/images/OG%20noahstutoring.png"
+    property="og:image">
+  <meta content="1200" property="og:image:width">
+  <meta content="630" property="og:image:height">
+  <meta content="Noah's Tutoring Hub - Unblocked Games & Educational Resources" property="og:image:alt">
+  <meta content="en_US" property="og:locale">
+  <meta content="summary_large_image" name="twitter:card">
+  <meta content="Noah's Tutoring Hub | 400+ Unblocked Games" name="twitter:title">
+  <meta content="The best collection of unblocked games and educational resources for students."
+    name="twitter:description">
+  <meta
+    content="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/refs/heads/master/images/OG%20noahstutoring.png"
+    name="twitter:image">
+  <meta content="Noah's Tutoring Hub Banner" name="twitter:image:alt">
+  <meta
+    content="Noah's Tutoring Hub - Access hundreds of unblocked games, math lessons, and educational resources. Perfect for students looking for fun learning tools."
+    name="description">
+  <meta content="unblocked games, tutoring, math help, educational games, student resources, online learning"
+    name="keywords">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+  <style>
+    .popup-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; display: none; align-items: center; justify-content: center; font-family: 'Courier New', monospace; }
+    .popup-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: fadeIn 0.3s ease; }
+    .popup-container { position: relative; width: min(450px, 90%); z-index: 100000; animation: popupSlideIn 0.4s cubic-bezier(0.2, 0.8, 0.2, 1.2); }
+    .popup-content { background: linear-gradient(145deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.98)); border: 2px solid var(--primary-orange); border-radius: 18px; padding: 0; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(var(--primary-orange-rgb), 0.4); overflow: hidden; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+    .popup-header { display: flex; align-items: center; padding: 18px 20px; border-bottom: 1px solid rgba(var(--primary-orange-rgb), 0.3); position: relative; }
+    .popup-title { color: var(--primary-orange); letter-spacing: 2px; font-size: 1.35rem; flex: 0 1 auto; text-align: center; text-shadow: 0 0 10px rgba(var(--primary-orange-rgb), 0.5); margin: 0 auto; }
+    .popup-body { padding: 22px 20px; color: var(--light-text); font-size: 1rem; line-height: 1.6; }
+    .popup-highlight { color: var(--primary-orange); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 8px rgba(var(--primary-orange-rgb), 0.5); }
+    .popup-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(var(--primary-orange-rgb), 0.4), transparent); margin: 18px 0; }
+    .popup-discord-text { color: var(--gray-text); margin-bottom: 15px; }
+    .popup-discord-btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 14px 18px; background: rgba(88, 101, 242, 0.15); border: 2px solid #5865F2; border-radius: 12px; color: #fff; font-size: 1rem; font-weight: bold; letter-spacing: 0.5px; text-decoration: none; transition: all 0.3s ease; cursor: none !important; margin: 8px 0; box-sizing: border-box; }
+    .popup-discord-btn i { font-size: 1.4rem; color: #5865F2; filter: drop-shadow(0 0 5px rgba(88, 101, 242, 0.5)); }
+    .popup-discord-btn:hover { background: rgba(88, 101, 242, 0.25); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3); border-color: #7983f5; }
+    .popup-live-btn { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 14px 18px; background: rgba(var(--primary-orange-rgb), 0.15); border: 2px solid var(--primary-orange); border-radius: 12px; color: var(--primary-orange); font-size: 1rem; font-weight: bold; letter-spacing: 0.5px; text-decoration: none; transition: all 0.3s ease; cursor: none !important; margin: 8px 0; box-sizing: border-box; }
+    .popup-live-btn i { font-size: 1.4rem; color: var(--primary-orange); filter: drop-shadow(0 0 5px rgba(var(--primary-orange-rgb), 0.5)); }
+    .popup-live-btn:hover { background: rgba(var(--primary-orange-rgb), 0.25); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(var(--primary-orange-rgb), 0.3); border-color: var(--accent-orange); }
+    .popup-footer { padding: 15px 20px 20px; text-align: center; }
+    .popup-continue-btn { background: rgba(var(--primary-orange-rgb), 0.1); border: 1px solid var(--primary-orange); border-radius: 50px; padding: 12px 24px; color: var(--primary-orange); font-size: 0.95rem; font-weight: bold; letter-spacing: 0.5px; cursor: none !important; transition: all 0.3s ease; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .popup-continue-btn i { transition: transform 0.3s ease; }
+    .popup-continue-btn:hover { background: rgba(var(--primary-orange-rgb), 0.2); box-shadow: 0 0 20px rgba(var(--primary-orange-rgb), 0.3); }
+    .popup-continue-btn:hover i { transform: translateX(5px); }
+    @keyframes popupSlideIn { 0% { opacity: 0; transform: scale(0.9) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @media (max-width: 480px) { .popup-header { padding: 15px; } .popup-title { font-size: 1.15rem; } .popup-body { padding: 18px 15px; font-size: 0.95rem; } .popup-discord-btn, .popup-live-btn { padding: 12px; font-size: 0.9rem; } }
+  </style>
+</head>
+
+<body>
+  <div id="staticPopup" class="popup-modal">
+    <div class="popup-overlay"></div>
+    <div class="popup-container">
+      <div class="popup-content">
+        <div class="popup-header">
+          <h2 class="popup-title">NOAHS TUTORING HUB STATIC</h2>
+        </div>
+        <div class="popup-body">
+          <p>Welcome to <span class="popup-highlight">Noahs Tutoring Hub Static</span> — this version is completely static, with most of the games from the live site.</p>
+          <p>This version does not have as many features as the live site and will hardly have any updates.</p>
+          <div class="popup-divider"></div>
+          <p class="popup-discord-text">If you want to use the real site, click the link below or find more in our Discord:</p>
+          <a href="https://discord.com/invite/UKUxQ5SA7N" target="_blank" rel="noopener noreferrer" class="popup-discord-btn">
+            <i class="fab fa-discord"></i> discord.gg/UKUxQ5SA7N
+          </a>
+          <a href="https://noahstutoring.academy" target="_blank" rel="noopener noreferrer" class="popup-live-btn">
+            <i class="fas fa-globe"></i> noahstutoring.academy
+          </a>
+        </div>
+        <div class="popup-footer">
+          <button class="popup-continue-btn" onclick="closeStaticPopup()">
+            Continue to this version <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="site-startup-loader" id="siteStartupLoader" aria-hidden="false">
+    <iframe class="site-startup-loader-frame" src="loader.html" title="Loading Noah's Tutoring"></iframe>
+  </div>
+  <div id="custom-scrollbar">
+    <div id="custom-scrollbar-track">
+      <div id="custom-scrollbar-thumb"></div>
+    </div>
+  </div>
+  <div id="custom-cursor"></div>
+  <div id="background-root">
+    <div id="starfield-layer"></div>
+    <canvas id="matrix-bg"></canvas>
+    <div id="paths-layer"></div>
+    <div id="background-glow"></div>
+    <div id="background-vignette"></div>
+  </div>
+  <div class="container" id="main-container">
+    <header>
+      <div class="top-bar">
+        <div class="logo-container" onclick="switchTab('lessons')" role="button" tabindex="0"
+          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();switchTab('lessons');}">
+          <img alt="Noah's Tutoring Hub" class="logo"
+            src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/logo.png">
+        </div>
+        <div class="top-nav-actions">
+          <div class="nav-tabs">
+            <div class="nav-tab active" id="lessonsTab" onclick="switchTab('lessons')">LESSONS</div>
+            <div class="nav-tab" id="settingsTab" onclick="switchTab('settings')">SETTINGS</div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section id="home-section">
+      <div class="home-hero">
+        <div class="home-logo-wrap" id="homeLogoWrap">
+          <img alt="Noah's Tutoring Hub" class="home-logo"
+            src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/logo.png">
+          <div class="home-logo-shine" id="homeLogoShine"></div>
+        </div>
+        <p class="home-subtitle"><span id="typing-quote"></span><span class="cursor">|</span></p>
+      </div>
+    </section>
+    <section id="all-lessons">
+      <h2>ALL LESSONS</h2>
+      <div class="search-container">
+        <input class="search-box" id="searchInput" placeholder="Search lessons..." type="text">
+        <div class="search-icon"><i class="fas fa-search"></i></div>
+      </div>
+      <div class="search-stats" id="searchStats"></div>
+      <div class="sorter-section">
+        <div class="sorter-wrapper">
+          <select class="sort-select" id="sortSelect">
+            <option value="default">[NEWEST]</option>
+            <option value="alphabetical">[A - Z]</option>
+            <option value="reverse">[Z - A]</option>
+            <option value="random">[RANDOMIZED]</option>
+          </select>
+          <div class="custom-arrow">▼</div>
+        </div>
+      </div>
+      <div class="lessons-grid" id="allLessonsGrid"></div>
+    </section>
+    <section id="settings-section">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title"><i class="fas fa-cog"></i> Settings</div>
+        </div>
+        <div class="modal-body">
+          <div class="setting-item setting-item-wide setting-theme">
+            <div class="setting-label">
+              <i class="fas fa-palette"></i> Theme Color
+            </div>
+            <div class="setting-description">
+              Choose a preset theme or create a custom one
+            </div>
+            <div class="theme-preview">
+              <div class="theme-option active" data-theme="default" onclick="selectPresetTheme('default')"
+                title="Default Orange"></div>
+              <div class="theme-option" data-theme="rainbow" onclick="selectPresetTheme('rainbow')" title="Rainbow">
+              </div>
+              <div class="theme-option" data-theme="cyber-green" onclick="selectPresetTheme('cyber-green')"
+                title="Cyber Green"></div>
+              <div class="theme-option" data-theme="ice-blue" onclick="selectPresetTheme('ice-blue')" title="Ice Blue">
+              </div>
+              <div class="theme-option" data-theme="solarized" onclick="selectPresetTheme('solarized')"
+                title="Solarized">
+              </div>
+              <div class="theme-option" data-theme="purple-haze" onclick="selectPresetTheme('purple-haze')"
+                title="Purple Haze"></div>
+              <div class="theme-option" data-theme="custom" onclick="selectPresetTheme('custom')" title="Custom Color">
+                <i class="fas fa-plus"
+                  style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; z-index: 2;"></i>
+              </div>
+            </div>
+            <div class="color-input-container" id="customColorInput" style="display: none;">
+              <div class="color-preview" id="colorPreview"></div><input class="color-input" id="customHexInput"
+                maxlength="7" placeholder="#c27c15" type="text"> <button class="apply-btn"
+                onclick="applyCustomTheme()">Apply Color</button>
+            </div>
+          </div>
+          <div class="setting-item setting-item-wide setting-background">
+            <div class="setting-label">
+              <i class="fas fa-layer-group"></i> Background
+            </div>
+            <div class="setting-description">
+              Select the animated background style.
+            </div>
+            <div class="background-options" id="backgroundOptions">
+              <button class="background-option" data-background="matrix"
+                onclick="setBackgroundStyle('matrix')">Matrix</button>
+              <button class="background-option" data-background="topography"
+                onclick="setBackgroundStyle('topography')">Topagraphy</button>
+              <button class="background-option" data-background="constellation"
+                onclick="setBackgroundStyle('constellation')">Constellation</button>
+              <button class="background-option" data-background="starfield"
+                onclick="setBackgroundStyle('starfield')">Starfield</button>
+            </div>
+          </div>
+          <div class="setting-item setting-cursor">
+            <div class="setting-label">
+              <i class="fas fa-mouse-pointer"></i> Custom Cursor
+            </div>
+            <div class="setting-description">
+              Choose your cursor style.
+            </div>
+            <select class="text-input" id="cursorStyleSelect" onchange="setCursorStyle(this.value)">
+              <option value="default">Default</option>
+              <option value="ring">Ring</option>
+              <option value="dot">Dot</option>
+              <option value="square">Square</option>
+              <option value="crosshair">Crosshair</option>
+            </select>
+          </div>
+          <div class="setting-item setting-inactive">
+            <div class="setting-label">
+              <i class="fas fa-window-maximize"></i> Inactive Tab Title & Icon
+            </div>
+            <div class="setting-description">
+              Set what appears when this tab is inactive (title + favicon).
+            </div><input class="text-input" id="customTitle" placeholder="Inactive tab title..." type="text"
+              value="Home">
+            <input class="text-input" id="customFavicon" placeholder="Inactive favicon URL..." type="text"
+              value="https://raw.githubusercontent.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/images/fruh.png">
+            <div class="settings-button-row">
+              <button class="apply-btn" onclick="applyInactiveTabSettings()"><i class="fas fa-check"></i>
+                Apply Settings</button> <button class="apply-btn btn-danger" onclick="revertFavicon(this)"><i
+                  class="fas fa-undo"></i>
+                Revert</button>
+            </div>
+          </div>
+          <div class="setting-item setting-logo">
+            <div class="setting-label">
+              <i class="fas fa-image"></i> Site Logo
+            </div>
+            <div class="setting-description">
+              Upload a custom logo for the main page
+            </div>
+            <div class="file-upload-container">
+              <div class="logo-preview" id="logoPreview">
+                <img alt="Logo Preview" src="" style="display: none;"> <i class="fas fa-image"
+                  style="color: var(--gray-text); font-size: 1.5rem;"></i>
+              </div><label class="file-btn"><i class="fas fa-upload"></i> Choose Logo <input accept="image/*"
+                  class="file-input" id="logoUpload" onchange="handleLogoUpload(event)" type="file"></label>
+            </div><button class="apply-btn" onclick="revertLogo(this)" style="margin-top: 10px; width: 100%;"><i
+                class="fas fa-undo"></i> Revert to Default Logo</button>
+          </div>
+          <div class="setting-item setting-ads">
+            <div class="setting-label">
+              <i class="fas fa-ad"></i> Disable Ads
+            </div>
+            <div class="setting-description">
+              Ads are currently disabled site-wide. This toggle remains for compatibility only.
+            </div><label class="toggle-switch"><input id="adToggle" onchange="toggleAds(this.checked)" type="checkbox">
+              <span class="toggle-slider"></span></label>
+          </div>
+          <div class="setting-item setting-import">
+            <div class="setting-label">
+              <i class="fas fa-database"></i> Export/Import Site Data
+            </div>
+            <div class="setting-description">
+              Export or import complete site data: settings, favorites, local storage, session storage, and cookies.
+            </div>
+            <div class="settings-button-row" style="margin-top: 15px;">
+              <button class="apply-btn" onclick="exportSettings()"><i class="fas fa-download"></i>
+                Export Data</button> <button class="apply-btn" onclick="importSettings()"><i class="fas fa-upload"></i>
+                Import Data</button>
+            </div>
+            <div class="file-upload-container" id="importFileContainer" style="display: none; margin-top: 15px;">
+              <input accept=".json,application/json" class="file-input" id="settingsFileInput" type="file"> <label
+                class="file-btn" for="settingsFileInput" style="flex: 1;"><i class="fas fa-file-import"></i> Select
+                Settings File</label>
+            </div>
+            <div id="settingsImportStatus"
+              style="margin-top: 10px; color: var(--accent-orange); font-size: 0.9rem; display: none;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="site-footer">
+      <div class="site-footer-left">
+        <p>© 2026 Noah's Tutoring Hub.</p>
+        <p>Site mostly coded by <a class="site-footer-link" href="https://1key.lol" target="_blank" rel="noopener noreferrer">1key</a>.</p>
+      </div>
+      <nav class="site-footer-center" aria-label="Legal">
+        <a class="site-footer-link site-footer-legal-link" href="/privacy">Privacy Policy</a>
+        <a class="site-footer-link site-footer-legal-link" href="/terms">Terms of Service</a>
+        <a class="site-footer-link site-footer-legal-link" href="/dmca">DMCA</a>
+      </nav>
+      <div class="site-footer-right">
+        <a aria-label="Discord" class="site-footer-link site-footer-icon" href="https://discord.gg/pCGQ8vrKza" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+        <a aria-label="GitHub" class="site-footer-link site-footer-icon" href="https://github.com/NoahsAmazingTutoringHelp" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+        <a aria-label="TikTok" class="site-footer-link site-footer-icon" href="https://www.tiktok.com/@noahstutoringhub" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+        <a aria-label="YouTube" class="site-footer-link site-footer-icon" href="https://www.youtube.com/@noahstutoringhub" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+      </div>
+    </footer>
+  </div>
+  <div class="game-page" id="gamePage">
+    <div class="game-browser">
+      <div class="game-tabbar">
+        <div class="game-session-meta">
+          <span class="game-session-title" id="gameSessionTitle">Select a lesson</span>
+        </div>
+        <div class="game-toolbar">
+          <button class="btn refresh-btn" onclick="refreshGame()" title="Reload Game"><i
+              class="fas fa-rotate-right"></i></button>
+          <button class="btn" onclick="downloadCurrentGame()" title="Download Game"><i
+              class="fas fa-download"></i></button>
+          <button class="btn" onclick="toggleFullscreen()" title="Fullscreen Game"><i
+              class="fas fa-expand"></i></button>
+          <button class="btn" onclick="exitGameBrowser()" title="Exit Browser"><i class="fas fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="game-view-stack" id="gameViewStack"></div>
+    </div>
+  </div>
+  <button id="backToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+  <div id="contextMenu">
+    <div class="context-menu-item" onclick="openSettings()"><i class="fas fa-cog"></i> <span>Settings</span> <span
+        class="menu-shortcut">Ctrl+Shift+S</span></div>
+    <div class="context-menu-item" onclick="window.location.reload()"><i class="fas fa-redo"></i> <span>Refresh</span>
+      <span class="menu-shortcut">F5</span></div>
+  </div>
+  <script src="scripts/starfield.js"></script>
+  <script src="js/games.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function showStaticPopup() {
+      const popup = document.getElementById('staticPopup');
+      if (popup) {
+        popup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        document.addEventListener('keydown', handleStaticPopupEscape);
+      }
+    }
+    function closeStaticPopup() {
+      const popup = document.getElementById('staticPopup');
+      if (popup) {
+        popup.style.display = 'none';
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', handleStaticPopupEscape);
+        localStorage.setItem('staticPopupShown', 'true');
+      }
+    }
+    function handleStaticPopupEscape(e) {
+      if (e.key === 'Escape') closeStaticPopup();
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!localStorage.getItem('staticPopupShown')) {
+        setTimeout(showStaticPopup, 3500);
+      }
+    });
+    document.addEventListener('click', function (e) {
+      const popup = document.getElementById('staticPopup');
+      if (!popup || popup.style.display !== 'flex') return;
+      if (e.target.classList.contains('popup-overlay')) closeStaticPopup();
+    });
+  </script>
+</body>
+
+</html>

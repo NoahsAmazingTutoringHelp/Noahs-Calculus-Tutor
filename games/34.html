@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+
+
+<!-- Ultimate Game Stash file--> 
+<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+
+
+
+
+<html lang="en-us">
+  <base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/repo-bad/">
+
+<head>  <!-- Page configuration. -->
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=yes" />
+  <title></title>
+  <link rel="shortcut icon" href="img/favicon.ico" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="manifest" href="json/manifest.webmanifest" />
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m, e, t, r, i, k, a) {
+      m[i] = m[i] || function() {
+        (m[i].a = m[i].a || []).push(arguments)
+      };
+      m[i].l = 1 * new Date();
+      for (var j = 0; j < document.scripts.length; j++) {
+        if (document.scripts[j].src === r) {
+          return;
+        }
+      }
+      k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+    })
+    (window, document, "script", "", "ym");
+
+    ym(100537562, "init", {
+      clickmap: true,
+      trackLinks: true,
+      accurateTrackBounce: true
+    });
+  </script>
+  <noscript>
+  </noscript>
+  <!-- /Yandex.Metrika counter -->
+  <script type="text/javascript">
+    function onRuntimeDataReady() {
+      console.log("runtimeData is ready");
+
+      document.title = runtimeData.productName;
+
+      let rotationLockScript = document.createElement("script");
+      rotationLockScript.src = "lib/rotationLock.js";
+      window.onload = () => {
+        rotationLock.create(runtimeData.rotationLockType);
+      };
+      document.head.appendChild(rotationLockScript);
+
+      if (runtimeData.debugMode == true) {
+        let erudaScript = document.createElement("script");
+        erudaScript.src = "lib/eruda.js";
+        erudaScript.onload = () => {
+          eruda.init();
+        };
+        document.head.appendChild(erudaScript);
+      }
+    }
+  </script>
+  <script type="text/javascript" src="lib/runtimeData2.js" onload="onRuntimeDataReady()"></script>
+</head>
+          <script>   
+      window.fileMergerConfig = {
+        files: [
+          { name: 'REPO-GameYG_Web_YandexGames.data', parts: 2 },
+          { name: 'REPO-GameYG_Web_YandexGames.wasm', parts: 2 },
+        ],
+        basePath: 'bin/',
+        debug: true
+      };
+    </script>
+
+    <script src="merge.js"></script>
+<body>
+  <!-- Game canvas. -->
+  <div id="unity-container">
+    <canvas id="unity-canvas" tabindex="-1"></canvas>
+    <div id="unity-loading-bar">
+      <div id="unity-logo"></div>
+      <div id="unity-progress-bar-empty">
+        <div id="unity-progress-bar-full"></div>
+      </div>
+    </div>
+  </div>
+  <!-- Banner advertisement. -->
+  <div id="banner-container"></div>
+  <!-- Version labels. -->
+  <script type="text/javascript">
+    document.body.style.backgroundImage = "url('img/" + runtimeData.backgroundTextureName + "')";
+    document.getElementById("unity-logo").style.backgroundImage = "url('img/" + runtimeData.iconTextureName + "')";
+  </script>
+  <!-- Memory diagnostics. -->
+  <link rel="stylesheet" href="css/diagnostics.css" />
+  <script src="lib/diagnostics.js"></script>
+  <script type="text/javascript">
+    let diagnosticsIcon = document.createElement('img');
+    diagnosticsIcon.id = 'diagnostics-icon';
+    diagnosticsIcon.src = 'img/diagnostics_128x128.png';
+    diagnosticsIcon.style.display = "none";
+    document.body.appendChild(diagnosticsIcon);
+  </script>
+  <!-- Application interface. -->
+  <script type="text/javascript" src="lib/application.js"></script>
+  <script type="text/javascript" src="lib/aspectRatio.js"></script>
+  <script type="text/javascript" src="lib/commonFixes.js"></script>
+  <script type="text/javascript">
+    if (runtimeData.wrapperScript == "") {
+      console.error("Wrapper script is not valid.");
+      application.initialize();
+    }
+    let script = document.createElement("script");
+    script.src = "lib/" + runtimeData.wrapperScript;
+    script.src += "?r=" + Math.random();
+    script.onload = () => {
+      if (typeof initializeWrapper === 'function') {
+        initializeWrapper();
+      } else {
+        console.error("Wrapper module not found.");
+        application.initialize();
+      }
+    };
+    document.body.appendChild(script); 
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+
+
+ 
+
+
+
+
+
+<base href="https://cdn.jsdelivr.net/gh/bubbls/UGS-Assets@main/tomb/">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>New Tab</title>
+  <link href="style.css" rel="stylesheet">
+  <style>body,html{margin:0;padding:0;height:100%;width:100%;overflow:hidden;background:#000}#gameContainer{width:100vw;height:100vh}</style>
+</head>
+<body dir="ltr">
+  <script src="UnityProgress.js"></script>
+  <script src="UnityLoader.js"></script>
+  <script>var gameInstance=UnityLoader.instantiate("gameContainer","totm.json",{onProgress:UnityProgress,Module:{onRuntimeInitialized:function(){UnityProgress(gameInstance,"complete")}}});</script>
+
+  <div class="webgl-content">
+    <div id="gameContainer"></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+    <title>8 Ball Billiards Classic</title>
+    <style>
+       html,body { background: #000000; margin: 0; padding: 0; overflow: hidden; width: 100%; height: 100%; }
+       #mygame { width: 100%; height: 100%; }
+    </style>
+    <script>
+       window.famobi_analytics = new Proxy({}, {
+           get: function() { return function() { return Promise.resolve(); }; }
+       });
+       var famobiBase = {
+           getVolume: function() { return 1; },
+           getOrientation: function() { return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait'; },
+           getBrandingButtonImage: function() { return "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; },
+           moreGamesLink: function() { return ""; },
+           onOrientationChange: function(cb) { window.addEventListener("resize", cb); },
+           localStorage: window.localStorage || {},
+           log: function() {},
+           config: { features: {}, aid: "offline" },
+           hasFeature: function(f) { return true; },
+           __ : function(str) { return str; },
+           menuConfig: {}
+       };
+       window.famobi = new Proxy(famobiBase, {
+           get: function(target, prop) {
+               if (prop in target) return target[prop];
+               return function(callback) {
+                   if (typeof callback === 'function') setTimeout(callback, 100);
+                   return Promise.resolve();
+               };
+           }
+       });
+       window.fenster = window;
+       window.fenster.subscribeToOffsetUpdates = function() {};
+    </script>
+</head>
+<body>
+    <div id="mygame"></div>
+    <script src="https://cdn.jsdelivr.net/gh/thirstygithub/shiny-disco@main/src/01phaser.js"></script>
+    <script>
+        var originalLoadImage = Phaser.Loader.prototype.image;
+        var originalLoadAudio = Phaser.Loader.prototype.audio;
+        var originalLoadSpritesheet = Phaser.Loader.prototype.spritesheet;
+        var originalLoadBitmapFont = Phaser.Loader.prototype.bitmapFont;
+        var originalLoadAtlasJSONHash = Phaser.Loader.prototype.atlasJSONHash;
+        var originalLoadAtlasJSONArray = Phaser.Loader.prototype.atlasJSONArray;
+        var originalLoadAtlas = Phaser.Loader.prototype.atlas;
+        var originalLoadJSON = Phaser.Loader.prototype.json;
+        var originalLoadXML = Phaser.Loader.prototype.xml;
+        var originalLoadText = Phaser.Loader.prototype.text;
+
+        var CDN = "https://cdn.jsdelivr.net/gh/thirstygithub/shiny-disco@main/";
+
+        function rewrite(url) {
+            if (typeof url === 'string' && url.startsWith('assets/')) {
+                return CDN + url.replace('assets/', '');
+            }
+            return url;
+        }
+
+        Phaser.Loader.prototype.image = function(key, url) {
+            return originalLoadImage.call(this, key, rewrite(url));
+        };
+        Phaser.Loader.prototype.audio = function(key, urls) {
+            if (Array.isArray(urls)) urls = urls.map(rewrite);
+            else urls = rewrite(urls);
+            return originalLoadAudio.call(this, key, urls);
+        };
+        Phaser.Loader.prototype.spritesheet = function(key, url, w, h, f, m, s) {
+            return originalLoadSpritesheet.call(this, key, rewrite(url), w, h, f, m, s);
+        };
+        Phaser.Loader.prototype.bitmapFont = function(key, textureURL, atlasURL, atlasData, xSpacing, ySpacing) {
+            return originalLoadBitmapFont.call(this, key, rewrite(textureURL), rewrite(atlasURL), atlasData, xSpacing, ySpacing);
+        };
+        Phaser.Loader.prototype.atlasJSONHash = function(key, textureURL, atlasURL, atlasData) {
+            return originalLoadAtlasJSONHash.call(this, key, rewrite(textureURL), rewrite(atlasURL), atlasData);
+        };
+        if (originalLoadAtlasJSONArray) {
+            Phaser.Loader.prototype.atlasJSONArray = function(key, textureURL, atlasURL, atlasData) {
+                return originalLoadAtlasJSONArray.call(this, key, rewrite(textureURL), rewrite(atlasURL), atlasData);
+            };
+        }
+        if (originalLoadAtlas) {
+            Phaser.Loader.prototype.atlas = function(key, textureURL, atlasURL, atlasData, format) {
+                return originalLoadAtlas.call(this, key, rewrite(textureURL), rewrite(atlasURL), atlasData, format);
+            };
+        }
+        if (originalLoadJSON) {
+            Phaser.Loader.prototype.json = function(key, url, overwrite) {
+                return originalLoadJSON.call(this, key, rewrite(url), overwrite);
+            };
+        }
+        if (originalLoadXML) {
+            Phaser.Loader.prototype.xml = function(key, url, overwrite) {
+                return originalLoadXML.call(this, key, rewrite(url), overwrite);
+            };
+        }
+        if (originalLoadText) {
+            Phaser.Loader.prototype.text = function(key, url, overwrite) {
+                return originalLoadText.call(this, key, rewrite(url), overwrite);
+            };
+        }
+    </script>
+</body>
+</html>

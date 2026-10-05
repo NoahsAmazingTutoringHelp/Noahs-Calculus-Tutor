@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>SUPERHOT</title>
+    <style>
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            height: 100%; 
+            overflow: hidden; 
+            background-color: #000000;
+            font-family: monospace;
+        }
+        #unity-container { 
+            width: 100vw !important; 
+            height: 100vh !important; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+        }
+        #unity-canvas { 
+            width: 100% !important; 
+            height: 100% !important; 
+            display: block;
+        }
+        #custom-loader {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        .progress-container {
+            width: 200px;
+            height: 4px;
+            background: #222222;
+            margin-bottom: 10px;
+        }
+        #progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #ffffff;
+            transition: width 0.1s linear;
+        }
+        #loader-status {
+            color: #ffffff;
+            font-size: 12px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        #credit-text {
+            color: #888888;
+            font-size: 10px;
+            margin-top: 5px;
+        }
+        #unity-error-banner {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #8b0000;
+            border: 1px solid #ff4d4d;
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            max-width: 90vw;
+            display: none;
+            z-index: 20;
+            white-space: pre-wrap;
+        }
+        #unity-footer {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 5;
+        }
+        #unity-fullscreen-button {
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: #eee;
+            user-select: none;
+        }
+        #unity-fullscreen-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+  </head>
+  <body>
+    <div id="unity-error-banner"></div>
+    <div id="unity-container">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+      <div id="custom-loader">
+        <div class="progress-container">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="loader-status">0%</div>
+        <div id="credit-text">credit to teaser.lua for the port</div>
+      </div>
+      <div id="unity-footer">
+        <div id="unity-fullscreen-button">Fullscreen</div>
+      </div>
+    </div>
+
+    <script>
+	alert("this game is big asf, if you are a chromebook or mobile device you will NOT be able to load 1 gig of game data. It only makes sense to load this game on a personal device with more than 3 gigs of total ram or else ur shit will just freeze")
+    </script> 
+
+    <script>
+      const REPO_PATH = "jmhq20120212-cmd/SuperHot-WebPort";
+      const COMMIT_REF = "main";
+
+      const CDN_BASES = [
+        `https://cdn.jsdelivr.net/gh/${REPO_PATH}@${COMMIT_REF}/`,
+        `https://raw.githubusercontent.com/${REPO_PATH}/${COMMIT_REF}/`,
+        `https://cdn.jsdelivr.net/gh/${REPO_PATH}@main/`,
+        `https://raw.githubusercontent.com/${REPO_PATH}/main/`
+      ];
+
+      const DATA_MANIFEST = "Build/data-manifest.json";
+      const DATA_FALLBACK_PARTS = (() => {
+        const arr = [];
+        for (let i = 0; i < 56; i++) {
+          arr.push(`Build/data-chunks/part-${String(i).padStart(3, "0")}.bin`);
+        }
+        return arr;
+      })();
+      const DATA_SIZE_HINT = 1040720398;
+      const FRAMEWORK_GZ = "Build/SuperHotWebPort.framework.js.gz";
+      const WASM_GZ = "Build/SuperHotWebPort.wasm.gz";
+      const LOADER_JS = "Build/SuperHotWebPort.loader.js";
+      const EMBEDDED_JS = "Build/embedded-resources.js";
+
+      const canvas = document.querySelector("#unity-canvas");
+      const customLoader = document.querySelector("#custom-loader");
+      const progressFill = document.querySelector("#progress-fill");
+      const loaderStatus = document.querySelector("#loader-status");
+      const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+      const errorBanner = document.querySelector("#unity-error-banner");
+
+      function updateProgress(percent) {
+        const p = Math.min(100, Math.max(0, Math.round(percent)));
+        progressFill.style.width = p + '%';
+        loaderStatus.innerText = p + '%';
+      }
+
+      function showError(msg) {
+        console.error(msg);
+        if (errorBanner) {
+          errorBanner.textContent = msg;
+          errorBanner.style.display = "block";
+        }
+      }
+
+      function sleep(ms) {
+        return new Promise(r => setTimeout(r, ms));
+      }
+
+      async function fetchBufferWithMirrors(relativePath) {
+        let lastError = null;
+        for (let b = 0; b < CDN_BASES.length; b++) {
+          const fullUrl = CDN_BASES[b] + relativePath;
+          for (let attempt = 1; attempt <= 2; attempt++) {
+            try {
+              const res = await fetch(attempt === 1 ? fullUrl : `${fullUrl}?t=${Date.now()}`);
+              if (res.ok) {
+                return await res.arrayBuffer();
+              }
+              if (res.status === 404 && b < CDN_BASES.length - 1) {
+                break;
+              }
+              lastError = new Error(`HTTP ${res.status} on ${fullUrl}`);
+            } catch (e) {
+              lastError = e;
+              await sleep(250 * attempt);
+            }
+          }
+        }
+        throw new Error(`Failed to load: ${relativePath} across all CDN mirrors. Last: ${lastError}`);
+      }
+
+      async function downloadAndMergePartsToBlob(relativePaths, totalTargetBytesHint, onChunkProgress) {
+        const parts = [];
+        let loadedBytes = 0;
+        const totalParts = relativePaths.length;
+
+        for (let i = 0; i < totalParts; i++) {
+          const relPath = relativePaths[i];
+          const buf = await fetchBufferWithMirrors(relPath);
+          parts.push(new Blob([buf], { type: "application/octet-stream" }));
+          loadedBytes += buf.byteLength;
+          const effectiveTotal = Math.max(totalTargetBytesHint, loadedBytes);
+          if (onChunkProgress) {
+            onChunkProgress((i + 1) / totalParts);
+          }
+          await sleep(10);
+        }
+        return new Blob(parts, { type: "application/octet-stream" });
+      }
+
+      async function gunzipBlobToBuffer(gzBlob) {
+        const ds = new DecompressionStream("gzip");
+        const stream = gzBlob.stream().pipeThrough(ds);
+        return await new Response(stream).arrayBuffer();
+      }
+
+      function cleanRelativePath(p) {
+        if (!p) return "";
+        let path = typeof p === "string" ? p : (p.path || p.file || p.url || p.name || "");
+        return path.replace(/^https?:\/\/[^\/]+\/[^\/]+\/[^\/]+(\/raw\/[^\/]+|\/gh\/[^\/]+@[^\/]+)?\//, '')
+                   .replace(/^\/+/, '');
+      }
+
+      async function loadGameDataMerged(onProgress) {
+        let relPaths = [];
+        try {
+          const res = await fetch(CDN_BASES[0] + DATA_MANIFEST);
+          if (res.ok) {
+            const manifest = await res.json();
+            const list = Array.isArray(manifest.parts) ? manifest.parts : (Array.isArray(manifest.files) ? manifest.files : (Array.isArray(manifest) ? manifest : []));
+            for (const item of list) {
+              const cleaned = cleanRelativePath(item);
+              if (cleaned) relPaths.push(cleaned);
+            }
+          }
+        } catch (e) {}
+
+        if (relPaths.length === 0) {
+          relPaths = DATA_FALLBACK_PARTS.slice();
+        }
+
+        const gzBlob = await downloadAndMergePartsToBlob(relPaths, DATA_SIZE_HINT, onProgress);
+        const rawBuf = await gunzipBlobToBuffer(gzBlob);
+        return URL.createObjectURL(new Blob([rawBuf], { type: "application/octet-stream" }));
+      }
+
+      async function loadFrameworkAndWasm(onProgress) {
+        const fwGzBuf = await fetchBufferWithMirrors(FRAMEWORK_GZ);
+        if (onProgress) onProgress(0.25);
+        const wasmGzBuf = await fetchBufferWithMirrors(WASM_GZ);
+        if (onProgress) onProgress(0.5);
+        
+        const fwRaw = await gunzipBlobToBuffer(new Blob([fwGzBuf]));
+        if (onProgress) onProgress(0.75);
+        const wasmRaw = await gunzipBlobToBuffer(new Blob([wasmGzBuf]));
+        if (onProgress) onProgress(1.0);
+
+        const fwUrl = URL.createObjectURL(new Blob([fwRaw], { type: "application/javascript" }));
+        const wasmUrl = URL.createObjectURL(new Blob([wasmRaw], { type: "application/wasm" }));
+        return { fwUrl, wasmUrl };
+      }
+
+      function loadEmbeddedResources() {
+        return new Promise(async (resolve) => {
+          try {
+            const buf = await fetchBufferWithMirrors(EMBEDDED_JS);
+            const url = URL.createObjectURL(new Blob([buf], { type: "application/javascript" }));
+            const s = document.createElement("script");
+            s.src = url;
+            s.onload = () => resolve(true);
+            s.onerror = () => resolve(false);
+            document.body.appendChild(s);
+          } catch (e) {
+            resolve(false);
+          }
+        });
+      }
+
+      async function bootSuperhot() {
+        try {
+          const dataBlobUrl = await loadGameDataMerged((ratio) => {
+            updateProgress(ratio * 55);
+          });
+
+          const { fwUrl, wasmUrl } = await loadFrameworkAndWasm((ratio) => {
+            updateProgress(55 + ratio * 15);
+          });
+
+          updateProgress(72);
+
+          const streamingAssetsUrl = CDN_BASES[1] + "StreamingAssets";
+
+          const config = {
+            dataUrl: dataBlobUrl,
+            frameworkUrl: fwUrl,
+            codeUrl: wasmUrl,
+            streamingAssetsUrl: streamingAssetsUrl,
+            companyName: "SUPERHOT_Team",
+            productName: "SUPERHOT",
+            productVersion: "1.0.21",
+            showBanner: (msg, type) => {
+              if (type === "error") showError(msg);
+            },
+            onRuntimeInitialized: function () {
+              try {
+                if (typeof SuperhotEmbeddedResources === "function") {
+                  SuperhotEmbeddedResources(this);
+                }
+              } catch (e) {}
+            },
+          };
+
+          await loadEmbeddedResources();
+
+          const loaderBuf = await fetchBufferWithMirrors(LOADER_JS);
+          const loaderBlob = new Blob([loaderBuf], { type: "application/javascript" });
+          const loaderUrl = URL.createObjectURL(loaderBlob);
+
+          const loaderScript = document.createElement("script");
+          loaderScript.src = loaderUrl;
+
+          loaderScript.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+              updateProgress(72 + progress * 28);
+            }).then((unityInstance) => {
+              customLoader.style.opacity = '0';
+              setTimeout(() => customLoader.style.display = 'none', 300);
+              fullscreenButton.onclick = () => {
+                unityInstance.SetFullscreen(1);
+              };
+            }).catch((err) => {
+              showError("Engine boot failed: " + err.message);
+            });
+          };
+
+          loaderScript.onerror = () => {
+            showError("Failed to initialize SuperHotWebPort.loader.js");
+          };
+
+          document.body.appendChild(loaderScript);
+        } catch (err) {
+          showError("Could not load SUPERHOT:\n" + err.message);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", bootSuperhot);
+    </script>
+  </body>
+</html>

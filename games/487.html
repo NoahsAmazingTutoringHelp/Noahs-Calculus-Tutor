@@ -1,0 +1,644 @@
+<!doctype html>
+
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#000000">
+<title>Endacopia</title>
+
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+
+<script>eruda.init();</script>
+
+<style>
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    min-width:100%;
+    min-height:100%;
+    overflow:hidden;
+    background:#000;
+}
+
+body{
+    font-family:"Lucida Console",Monaco,monospace;
+}
+
+.emscripten_border{
+    position:fixed!important;
+    left:0!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    width:100%!important;
+    height:100%!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    background:#000;
+}
+
+canvas.emscripten{
+    position:fixed!important;
+    left:0!important;
+    top:0!important;
+    right:0!important;
+    bottom:0!important;
+    width:100vw!important;
+    height:100vh!important;
+    min-width:100vw!important;
+    min-height:100vh!important;
+    max-width:none!important;
+    max-height:none!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    outline:0!important;
+    display:block!important;
+    background:#000;
+}
+
+#status{
+    position:fixed;
+    left:50%;
+    bottom:18px;
+    transform:translateX(-50%);
+    color:#aaa;
+    font-size:14px;
+    z-index:1000;
+    pointer-events:none;
+    text-align:center;
+}
+
+#loading{
+    position:fixed;
+    inset:0;
+    background:#000;
+    z-index:9999;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    text-align:center;
+}
+
+#loadingTitle{
+    font-size:24px;
+    margin-bottom:18px;
+}
+
+#loadingText{
+    color:#aaa;
+    font-size:14px;
+    max-width:90vw;
+}
+
+#progressOuter{
+    width:min(600px,80vw);
+    height:8px;
+    background:#222;
+    border-radius:4px;
+    overflow:hidden;
+    margin-top:18px;
+}
+
+#progressInner{
+    width:0%;
+    height:100%;
+    background:#fff;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="loading">
+    <div id="loadingTitle">Loading Endacopia...</div>
+    <div id="loadingText">Starting AGS...</div>
+
+<div id="progressOuter">
+    <div id="progressInner"></div>
+</div>
+
+</div>
+
+<div id="status">Starting...</div>
+
+<div class="emscripten_border">
+    <canvas
+        class="emscripten"
+        id="canvas"
+        tabindex="-1"
+        oncontextmenu="event.preventDefault()">
+    </canvas>
+</div>
+
+<script>
+
+var saved_games_path="/home/web_user/saved_games";
+var game_file="Endacopia.ags";
+var t_rs_id=0;
+
+/*
+ * jsDelivr repository containing the Endacopia game files.
+ */
+var GAME_BASE = "https://raw.githubusercontent.com/linkawaken1979-alt/endacopia-/refs/heads/main/Actual%20Game/";
+
+var loading=document.getElementById("loading");
+var loadingTitle=document.getElementById("loadingTitle");
+var loadingText=document.getElementById("loadingText");
+var progressInner=document.getElementById("progressInner");
+var statusElement=document.getElementById("status");
+
+function setLoading(text,percent){
+
+    loadingText.textContent=text;
+    statusElement.textContent=text;
+
+    if(typeof percent==="number"){
+        progressInner.style.width=
+            Math.max(0,Math.min(100,percent))+"%";
+    }
+}
+
+async function fetchFile(url){
+
+    var response=await fetch(
+        url,
+        {
+            cache:"no-store"
+        }
+    );
+
+    if(!response.ok){
+        throw new Error(
+            "Failed to load "+url+
+            " ("+response.status+")"
+        );
+    }
+
+    return new Uint8Array(
+        await response.arrayBuffer()
+    );
+}
+
+var splitFiles={
+    "Endacopia.ags":64,
+    "audio.vox":8
+};
+
+async function loadSplitFile(name,count){
+
+    var parts=[];
+    var totalSize=0;
+
+    for(var i=1;i<=count;i++){
+
+        var number=String(i).padStart(3,"0");
+        var filename=name+".part"+number;
+
+        var percent=((i-1)/count)*40;
+
+        setLoading(
+            "Loading "+filename+
+            " ("+i+"/"+count+")...",
+            percent
+        );
+
+        var data=await fetchFile(
+            GAME_BASE+
+            encodeURIComponent(filename)
+        );
+
+        parts.push(data);
+        totalSize+=data.length;
+    }
+
+    setLoading(
+        "Combining "+name+"...",
+        42
+    );
+
+    var combined=new Uint8Array(totalSize);
+    var offset=0;
+
+    for(var p=0;p<parts.length;p++){
+
+        combined.set(
+            parts[p],
+            offset
+        );
+
+        offset+=parts[p].length;
+    }
+
+    return combined;
+}
+
+async function loadNormalFile(name){
+
+    setLoading(
+        "Loading "+name+"...",
+        65
+    );
+
+    return await fetchFile(
+        GAME_BASE+
+        encodeURIComponent(name)
+    );
+}
+
+function putFile(name,data){
+
+    try{
+        Module.FS_unlink("/"+name);
+    }catch(e){}
+
+    Module.FS_createDataFile(
+        "/",
+        name,
+        data,
+        true,
+        true,
+        true
+    );
+
+    console.log(
+        "Installed:",
+        name,
+        data.length,
+        "bytes"
+    );
+}
+
+function mountSavedGamesDir(callback){
+
+    try{
+
+        try{
+            Module.FS_mkdir(
+                saved_games_path
+            );
+        }catch(e){}
+
+        Module.FS_mount(
+            IDBFS,
+            {},
+            saved_games_path
+        );
+
+        Module.FS_syncfs(
+            true,
+            function(error){
+
+                if(error){
+                    console.warn(
+                        "IDBFS:",
+                        error
+                    );
+                }
+
+                callback();
+            }
+        );
+
+    }catch(error){
+
+        console.warn(
+            "Save filesystem:",
+            error
+        );
+
+        callback();
+    }
+}
+
+function startGame(){
+
+    setLoading(
+        "Launching Endacopia...",
+        100
+    );
+
+    setTimeout(function(){
+
+        loading.style.display="none";
+        statusElement.style.display="none";
+
+        console.log(
+            "Starting:",
+            game_file
+        );
+
+        Module.callMain([
+            "/Endacopia.ags",
+            "--windowed"
+        ]);
+
+        resizeCanvas();
+
+    },100);
+}
+
+async function loadEndacopia(){
+
+    try{
+
+        var agsData=
+            await loadSplitFile(
+                "Endacopia.ags",
+                splitFiles["Endacopia.ags"]
+            );
+
+        setLoading(
+            "Endacopia.ags assembled.",
+            50
+        );
+
+        var audioData=
+            await loadSplitFile(
+                "audio.vox",
+                splitFiles["audio.vox"]
+            );
+
+        setLoading(
+            "audio.vox assembled.",
+            65
+        );
+
+        var configData=
+            await loadNormalFile(
+                "acsetup.cfg"
+            );
+
+        var speechData=
+            await loadNormalFile(
+                "sp_speechsounds.vox"
+            );
+
+        setLoading(
+            "Installing game files...",
+            80
+        );
+
+        putFile(
+            "Endacopia.ags",
+            agsData
+        );
+
+        putFile(
+            "audio.vox",
+            audioData
+        );
+
+        putFile(
+            "acsetup.cfg",
+            configData
+        );
+
+        putFile(
+            "sp_speechsounds.vox",
+            speechData
+        );
+
+        agsData=null;
+        audioData=null;
+        configData=null;
+        speechData=null;
+
+        mountSavedGamesDir(
+            function(){
+                startGame();
+            }
+        );
+
+    }catch(error){
+
+        console.error(
+            "Endacopia loading error:",
+            error
+        );
+
+        loadingTitle.textContent=
+            "Failed to load Endacopia";
+
+        setLoading(
+            error.message,
+            0
+        );
+    }
+}
+
+function resizeCanvas(){
+
+    var canvas=
+        document.getElementById("canvas");
+
+    if(!canvas)return;
+
+    var width=
+        window.innerWidth ||
+        document.documentElement.clientWidth;
+
+    var height=
+        window.innerHeight ||
+        document.documentElement.clientHeight;
+
+    canvas.style.position="fixed";
+    canvas.style.left="0px";
+    canvas.style.top="0px";
+    canvas.style.width="100vw";
+    canvas.style.height="100vh";
+
+    canvas.width=width;
+    canvas.height=height;
+
+    var parent=
+        canvas.parentElement;
+
+    if(parent){
+
+        parent.style.position="fixed";
+        parent.style.left="0px";
+        parent.style.top="0px";
+        parent.style.width="100vw";
+        parent.style.height="100vh";
+        parent.style.margin="0";
+        parent.style.padding="0";
+    }
+
+    try{
+        canvas.dispatchEvent(
+            new Event("resize")
+        );
+    }catch(e){}
+
+    console.log(
+        "Canvas:",
+        width+"x"+height
+    );
+}
+
+var Module={
+
+    arguments:[],
+
+    preRun:[],
+
+    postRun:[],
+
+    print:function(text){
+        console.log(text);
+    },
+
+    printErr:function(text){
+        console.error(text);
+    },
+
+    canvas:(function(){
+
+        var canvas=
+            document.getElementById("canvas");
+
+        canvas.addEventListener(
+            "webglcontextlost",
+            function(event){
+
+                alert(
+                    "WebGL context lost. Please reload the page."
+                );
+
+                event.preventDefault();
+
+            },
+            false
+        );
+
+        window.addEventListener(
+            "resize",
+            function(){
+
+                clearTimeout(t_rs_id);
+
+                t_rs_id=setTimeout(
+                    resizeCanvas,
+                    50
+                );
+
+            },
+            true
+        );
+
+        return canvas;
+
+    })(),
+
+    setStatus:function(text){
+
+        if(text){
+            statusElement.textContent=text;
+        }
+
+    },
+
+    totalDependencies:0,
+
+    monitorRunDependencies:function(left){
+
+        this.totalDependencies=
+            Math.max(
+                this.totalDependencies,
+                left
+            );
+
+    }
+};
+
+Module.postRun.push(
+    function(){
+
+        console.log(
+            "AGS engine initialized."
+        );
+
+        resizeCanvas();
+
+        loadEndacopia();
+
+    }
+);
+
+document.getElementById(
+    "canvas"
+).addEventListener(
+    "mouseenter",
+    function(){
+        window.focus();
+    }
+);
+
+document.getElementById(
+    "canvas"
+).addEventListener(
+    "click",
+    function(){
+        window.focus();
+    }
+);
+
+window.addEventListener(
+    "load",
+    function(){
+
+        window.focus();
+
+        setTimeout(
+            resizeCanvas,
+            50
+        );
+
+    }
+);
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizeCanvas,
+            250
+        );
+
+    }
+);
+
+window.onerror=function(
+    message,
+    source,
+    line,
+    column,
+    error
+){
+
+    console.error(
+        "Endacopia error:",
+        message,
+        source,
+        line,
+        column,
+        error
+    );
+
+};
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/gh/linkawaken1979-alt/endacopia-@main/ags.js"></script>
+
+</body>
+</html>
